@@ -1,6 +1,16 @@
 <ul>
   {% for item in site.menu %}
-    {% if item.title and item.url %}
+    {% if item.url == "/"%}
+      <li>
+        <a href="{{ site.url }}{{ item.url }}">{{ item.title }}</a>
+      </li>
+    {% endif %}
+    {% if item.url == "/contact"%}
+       <li>
+        <a href="{{ site.url }}{{ item.url }}">{{ item.title }}</a>
+       </li>
+    {% endif %}
+    {% if item.url == "/about"%}
       <li>
         <a href="{{ site.url }}{{ item.url }}">{{ item.title }}</a>
       </li>
