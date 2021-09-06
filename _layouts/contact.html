@@ -18,7 +18,7 @@ layout: page
   <div id="form" class="contact-form">
     <form accept-charset="UTF-8" method="POST" action="https://formspree.io/f/xrgrrywz" v-on:submit.prevent="validateBeforeSubmit" ref="contact">
       <fieldset>
-        <input type="hidden" name="_subject" value="{{ site.translations.contact.subject | default: 'Nuevo contacto!' }}" />
+        <input type="hidden" name="_subject" value="{{ site.translations.contact.subject | default: 'Nuevo mensaje!' }}" />
         <input type="hidden" name="_next" value="{{ site.url }}{{ site.sent_message_url }}" />
         <input type="hidden" name="_language" value="{{ site.language }}" />
 
