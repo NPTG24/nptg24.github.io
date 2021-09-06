@@ -25,6 +25,10 @@ disqus_username: NPTG24
 # See: https://formspree.io/
 formspree_form_id: xrgrrywz
 
+layout: default
+comments: true
+# other options
+
 
 # Social Media Settings
 # Remove the item if you don't need it
