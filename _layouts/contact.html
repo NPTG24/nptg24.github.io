@@ -16,7 +16,7 @@ layout: page
   <h2>{{ site.translations.contact.title | default: "Contacto" }}</h2>
 
   <div id="form" class="contact-form">
-    <form accept-charset="UTF-8" method="POST" action="felipe.canales.c@usach.cl" v-on:submit.prevent="validateBeforeSubmit" ref="contact">
+    <form accept-charset="UTF-8" method="POST" action="https://formspree.io/f/xrgrrywz" v-on:submit.prevent="validateBeforeSubmit" ref="contact">
       <fieldset>
         <input type="hidden" name="_subject" value="{{ site.translations.contact.subject | default: 'Nuevo contacto!' }}" />
         <input type="hidden" name="_next" value="{{ site.url }}{{ site.sent_message_url }}" />
