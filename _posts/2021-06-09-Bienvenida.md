@@ -1,5 +1,5 @@
 ---
-date: 2021-06-09T23:48:05.000Z
+date: 2021-09-06T23:48:05.000Z
 layout: post
 title: Bienvenid@ a mis apuntes =D
 subtitle: 'Felipe Canales Cayuqueo'
@@ -10,7 +10,8 @@ optimized_image: >-
   http://imgfz.com/i/pgxi3Yz.jpeg
 category: blog
 tags:
-  - welcome
+  - bienvenida
+  - bienvenido
   - blog
 author: Felipe Canales Cayuqueo
 paginate: true
