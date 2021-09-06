@@ -1,6 +1,6 @@
 <div class="recommendation">
     <div class="message">
-        <strong>{{ site.translations.recommendation.text | default: "Te recomiendo leer a continuación" }}</strong>
+        <strong>{{ site.translations.recommendation.text | default: "Te recomiendo leer esto a continuación" }}</strong>
         <div>
             <button>
                 <svg><use xlink:href="#icon-arrow-right"></use></svg>

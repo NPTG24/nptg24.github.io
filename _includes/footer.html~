@@ -22,6 +22,8 @@
       {% endif %}
     </p>
 
+    {% include links.html %}
+
     <p>
     <svg class="love"><use xlink:href="#icon-heart"></use></svg>By Felipe Canales Cayuqueo
     </p>
