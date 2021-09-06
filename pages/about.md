@@ -1,17 +1,12 @@
 ---
 layout: page
-title: About
+title: Sobre mí
 description: Some description.
 permalink: /about/
 ---
 
-<img class="img-rounded" src="/assets/img/uploads/profile.png" alt="Thiago Rossener" width="200">
+<img class="img-rounded" src="/assets/img/uploads/tenor.png" alt="Felipe Canales Cayuqueo" width="200">
 
-# About
+# Sobre mí
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Mi nombre es Felipe Canales Cayuqueo soy estudiante de Ciencia de la Computación de la Universidad Santiago de Chile desde el año 2018, durante estos útlimos años he descubierto el mundo de la ciberseguridad, principalmente el sector del hacking ético, el cual cada día que pasa parece crecer más y más. Es por esto que me ha interesado y me encantaría dedicarme al 100% a esto, pues es algo que me apasiona.
