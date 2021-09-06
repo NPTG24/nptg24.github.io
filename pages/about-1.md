@@ -7,7 +7,7 @@ permalink: /about/
 description: Some description.
 ---
 
-<img class="img-rounded" src="/assets/img/uploads/tenor.png" alt="Felipe Canales Cayuqueo" width="200">
+<img class="img-rounded" src="/assets/img/uploads/profile2.jpg" alt="Felipe Canales Cayuqueo" width="200">
 
 # Sobre mí
 
