@@ -1,6 +1,7 @@
 ---
 date: 2021-09-06T23:48:05.000Z
 layout: post
+comments: true
 title: Bienvenid@ a mis apuntes =D
 subtitle: 'Felipe Canales Cayuqueo'
 description: >-
