@@ -6,9 +6,9 @@ title: PATH Hijacking
 subtitle: 'y su explotación en un binario SIUD'
 description: >-
 image: >-
-  http://imgfz.com/i/UWCKliL.png
+  http://imgfz.com/i/xyCN3gM.png
 optimized_image: >-
- http://imgfz.com/i/UWCKliL.png
+ http://imgfz.com/i/xyCN3gM.png
 category: ciberseguridad
 tags:
   - permisos
