@@ -44,7 +44,7 @@ La pregunta aquí es ¿qué es r, w y x?, esto se responde con la siguiente tabl
 | w | Escritura(write) |
 | x | Ejecución(execution) |
 
-En el caso de los último dos pueden hacer:
+En el caso de los último dos se pueden entender mejor de la siguiente forma:
 
 | Letra | Archivos | Directorios |
 | :--------: | :-------: | :--------: |
