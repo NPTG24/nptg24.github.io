@@ -3,7 +3,7 @@ date: 2021-09-07T00:22:05.000Z
 layout: post
 comments: true
 title: Permisos en Linux
-subtitle: 'Y su identificadores'
+subtitle: 'y sus identificadores'
 description: >-
 image: >-
   http://imgfz.com/i/0RPpWCa.png
