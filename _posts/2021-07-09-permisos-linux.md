@@ -35,7 +35,7 @@ Las siguientes letras que se aprecian son las que asignan los permisos y se agru
 | :--------: | :-------: | :--------: |
 | rwx | rwx | rwx |
 
-La pregunta aquí es ¿qué es r, w y x?:
+La pregunta aquí es ¿qué es r, w y x?, esto se responde con la siguiente tabla:
 
 | Letra | Tipo de permiso |
 | :--------: | :-------: |
