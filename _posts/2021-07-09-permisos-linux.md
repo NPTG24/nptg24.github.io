@@ -29,7 +29,7 @@ Si comenzamos realizando un 	```$ls -l /ruta``` obtendremos algo como la imagen 
 | c | Carácteres especiales |
 | l | Enlace (link) |
 
-Las siguientes letras que se aprecian son las que asignan los permisos y se agrupan en grupos de 3 osea:
+Las siguientes letras que se aprecian son las que asignan los permisos y se agrupan en grupos de 3:
 
 | Propietario(User)[u] | Grupos[g] | Otros usuarios[o] |
 | :--------: | :-------: | :--------: |
