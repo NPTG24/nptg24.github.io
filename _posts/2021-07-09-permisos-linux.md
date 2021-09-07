@@ -93,6 +93,13 @@ Ahora que sabemos como transformar de binario a decimal podemos transformar los 
 | r-x r-- r-- | 101 100 100 | 5 | 4 | 4 | 544 |
 | rwx rwx rwx | 111 111 111 | 7 | 7 | 7 | 777 |
 
+Podemos concluir de la tabla que los valores siempre serán los mismos:
+```
+ r = 4
+ w = 2
+ x = 1
+```
+
 y para que sirve esto...Pues sirve para asignar de una manera más cómoda a través de ```chmod``` el cual es un comando en Linux para asignar permisos. Ejemplo:
 ```user
 Si queremos convertir el siguiente permiso al directorio:
