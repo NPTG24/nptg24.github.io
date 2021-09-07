@@ -6,9 +6,9 @@ title: Permisos SIUD
 subtitle: 'y su explotación'
 description: >-
 image: >-
-  https://github.com/NPTG24/nptg24.github.io/blob/master/assets/img/uploads/SUIDExplained.png
+  http://imgfz.com/i/Q8pIHbz.png
 optimized_image: >-
-  https://github.com/NPTG24/nptg24.github.io/blob/master/assets/img/uploads/SUIDExplained.png
+  http://imgfz.com/i/Q8pIHbz.png
 category: ciberseguridad
 tags:
   - permisos
