@@ -20,6 +20,7 @@ author: Felipe Canales Cayuqueo
 paginate: true
 ---
 Si comenzamos realizando un 	```$ls -l /ruta``` obtendremos algo como la imagen de arriba. La pregunta es que significa las letras de la izquierda, si observamos primero detectaremos que se muestra un primer carácter, el cual representa el tipo de archivo:
+
 | Letra | Tipo de archivo |
 | :--------: | :-------: |
 | - | Archivo común |
@@ -29,11 +30,13 @@ Si comenzamos realizando un 	```$ls -l /ruta``` obtendremos algo como la imagen 
 | l | Enlace (link) |
 
 Las siguientes letras que se aprecian son las que asignan los permisos y se agrupan en grupos de 3 osea:
+
 | Propietario(User)[u] | Grupos[g] | Otros usuarios[o] |
 | :--------: | :-------: | :--------: |
 | rwx | rwx | rwx |
 
 La pregunta aquí es ¿qué es r, w y x?:
+
 | Letra | Tipo de permiso |
 | :--------: | :-------: |
 | - | Sin permiso |
@@ -42,6 +45,7 @@ La pregunta aquí es ¿qué es r, w y x?:
 | x | Ejecución(execution) |
 
 En el caso de los último dos pueden hacer:
+
 | Letra | Archivos | Directorios |
 | :--------: | :-------: | :--------: |
 | w | Adquieren permisos para modificarlos | Adquieren permisos para crear archivos en estos |
