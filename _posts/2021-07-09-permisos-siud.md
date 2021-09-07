@@ -19,7 +19,7 @@ tags:
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
-Este tipo de permiso establece el ID de usuario del propietario, el cual se consigue agregando un 4 al momento de otorgar los permisos:
+Este tipo de permiso establece el ID de usuario del propietario de manera temporal, el cual se consigue agregando un 4 al momento de otorgar los permisos:
 ```
 Si antes se realizaba
 root> gmod 755 /usr/bind/find
