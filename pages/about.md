@@ -9,4 +9,4 @@ permalink: /about/
 
 # Sobre mí
 
-Mi nombre es Felipe Canales Cayuqueo soy estudiante de Ciencia de la Computación de la Universidad Santiago de Chile desde el año 2018, durante estos útlimos años he descubierto el mundo de la ciberseguridad, principalmente el sector del hacking ético, el cual cada día que pasa parece crecer más y más. Es por esto que me ha interesado y me encantaría dedicarme al 100% a esto, pues es algo que me apasiona.
+Mi nombre es Felipe Canales Cayuqueo soy estudiante de Ciencia de la Computación de la Universidad Santiago de Chile desde el año 2018, durante estos últimos años he descubierto el mundo de la ciberseguridad, principalmente el sector del hacking ético, el cual cada día que pasa parece crecer más y más. Es por esto que me ha interesado y me encantaría dedicarme al 100% a esto, pues es algo que me apasiona.
