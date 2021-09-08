@@ -42,3 +42,9 @@ root
 >https://gtfobins.github.io/gtfobins/find/
 
 Esto pasa debido a que a user se le asigna de manera temporal el permiso de root (propietario), y en el caso mostrado se abre una shell aprovechando la vulnerabilidad.
+
+Para encontrar ficheros con permisos SIUD, se puede con el siguiente comando:
+
+```
+find / -perm -4000 -exec ls -l {} \; 2>/dev/null
+```
