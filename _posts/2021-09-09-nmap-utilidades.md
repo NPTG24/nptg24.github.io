@@ -86,7 +86,7 @@ Parámetros usados:
 | -p | Para seleccionar que puertos se quieren escanear. |
 | -oN | Guarda un archivo de texto con el escaneo en targeted. |
 
-NMAP cuenta con una series de scripts ya definidos que si queremos ver de manera ordenada se podría realizar lo siguiente:
+NMAP cuenta con una series de scripts ya definidos que si queremos ver con sus respectivas categorías se podría realizar lo siguiente:
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
@@ -96,16 +96,16 @@ NMAP cuenta con una series de scripts ya definidos que si queremos ver de manera
 └──╼ locate .nse | xargs grep "categories"
 ```
 
-Si se quieren ver las categorias que hay:
+Si se quieren ver las categorias que hay de una manera ordenada:
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
 └──╼ locate .nse | xargs grep "categories" | grep -oP'".*?"' | sort -u
 ```
 
-Y esto se ocupa de la siguiente forma por ejemplo:
+Un ejemplo de como se ocupan este tipo de scripts es lo siguiente:
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
 └──╼ nmap -p445 10.x.x.xxx --script "vuln and safe" -oN smbScan
 ```
-Recordar que se pueden combinar las categorias como en el ejemplo. Y para ver el manual realizar ```man nmap```
+Recordar que se pueden combinar las categorias como en el ejemplo. Y para ver el manual de NMAP realizar ```man nmap```
 
