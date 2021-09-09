@@ -86,7 +86,7 @@ Parámetros usados:
 | -p | Para seleccionar que puertos se quieren escanear. |
 | -oN | Guarda un archivo de texto con el escaneo en targeted. |
 
-Recordar ahora si queremos ver los scripts de nmap de manera ordenada se podría realizar lo siguiente:
+NMAP cuenta con una series de scripts ya definidos que si queremos ver de manera ordenada se podría realizar lo siguiente:
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
