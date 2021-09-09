@@ -1,0 +1,111 @@
+---
+date: 2021-09-09T00:22:05.000Z
+layout: post
+comments: true
+title: NMAP
+subtitle: 'y algunas de sus utilidades'
+description: >-
+image: >-
+  http://imgfz.com/i/R63q8CT.jpeg
+optimized_image: >-
+  http://imgfz.com/i/R63q8CT.jpeg
+category: ciberseguridad
+tags:
+  - nmap
+  - linux
+  - enumeración
+  - ciberseguridad
+  - hacking
+author: Felipe Canales Cayuqueo
+paginate: true
+---
+
+Nmap ("Network Mapper") es un código abierto y gratuito utilidad para el descubrimiento de redes y la auditoría de seguridad. Muchos administradores de sistemas y redes también lo encuentran útil para tareas como el inventario de la red, la gestión de los programas de actualización del servicio y la supervisión del tiempo de actividad del host o del servicio. Nmap utiliza paquetes de IP sin procesar de formas novedosas para determinar qué hosts están disponibles en la red, qué servicios (nombre y versión de la aplicación) ofrecen esos hosts, qué sistemas operativos (y versiones de SO) están ejecutando, qué tipo de filtros de paquetes / firewalls están en uso y decenas de otras características. Fue diseñado para escanear rápidamente redes grandes, pero funciona bien contra hosts únicos. Nmap se ejecuta en todos los principales sistemas operativos de computadoras, y los paquetes binarios oficiales están disponibles para Linux, Windows y Mac OS X.
+>https://nmap.org/
+
+Como enumerar los 65535 puertos de una maquina, para ver los que están abiertos
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap 10.x.x.xxx -p- --open -T5 -v -n -oG allPorts
+```
+
+Parámetros usados:
+
+| Parámetro | Utilidad |
+| :--------: | :-------: |
+| -p- | Para indicar que escanee todos los puertos. |
+| --open | Para indicar los puertos abiertos. |
+| -T | Para indicar la velocidad, el cual va desde 0 hasta 5, en donde 5 es lo más rápido y ruidoso (en entorno controlado es recomendado). |
+| -v | Va reportando los puertos durante el proceso. |
+| -n | No aplicar resolución DNS. (Esto es para ahorrar tiempo en el escaneo) |
+| -oG | Los resultados se exportan en grepeable al fichero allPorts. |
+
+Para ver los puertos abiertos de manera cómoda se puede ocupar lo siguiente:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ cat allPorts | grep -oP '\d{1,5}/open'
+22/open
+80/open
+```
+
+Maneras para agilizar nuestros escaneos en el caso de que sea lento con el método anterior:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap -sS --open -vvv -n -Pn -p- 10.x.x.xxx -oG allPorts
+```
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap -sS --min-rate 5000 --open -vvv -n -Pn -p- 10.x.x.xxx -oG allPorts
+```
+
+| Parámetro | Utilidad |
+| :--------: | :-------: |
+| -sS | Realiza un escaneo TCP SYN. |
+| --min-rate | Indica cuantos paquetes por segundo emite durante el escaneo. |
+| -vvv | Triple verbose(-v). |
+| -Pn | No aplica descubrimiento de host a través del protocolo de resolución de direcciones(ARP). |
+
+
+Ahora si queremos detectar la versión y servicio que corren en los puertos:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap -sC -sV -p22,80 10.x.x.xxx -oN targeted
+```
+
+Parámetros usados:
+
+| Parámetro | Utilidad |
+| :--------: | :-------: |
+| -sC | Es un atajo para --script default que ejecutará todos los scripts NSE en la categoría predeterminada. |
+| -sV | Detecta la versión. |
+| -p | Para seleccionar que puertos se quieren escanear. |
+| -oN | Guarda un archivo de texto con el escaneo en targeted. |
+
+Recordar ahora si queremos ver los scripts de nmap de manera ordenada se podría realizar lo siguiente:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ updatedb
+
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ locate .nse | xargs grep "categories"
+```
+
+Si se quieren ver las categorias que hay:
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ locate .nse | xargs grep "categories" | grep -oP'".*?"' | sort -u
+```
+
+Y esto se ocupa de la siguiente forma por ejemplo:
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap -p445 10.x.x.xxx --script "vuln and safe" -oN smbScan
+```
+Recordar que se pueden combinar las categorias como en el ejemplo. Y para ver el manual realizar ```man nmap```
+
