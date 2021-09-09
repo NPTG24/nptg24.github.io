@@ -39,7 +39,7 @@ Parámetros usados:
 | -T | Para indicar la velocidad, el cual va desde 0 hasta 5, en donde 5 es lo más rápido y ruidoso (en entorno controlado es recomendado). |
 | -v | Va reportando los puertos durante el proceso. |
 | -n | No aplicar resolución DNS. (Esto es para ahorrar tiempo en el escaneo) |
-| -oG | Los resultados se exportan en grepeable al fichero allPorts. |
+| -oG | Los resultados se exportan en formato grepeable al fichero allPorts. |
 
 Para ver los puertos abiertos de manera cómoda se puede ocupar lo siguiente:
 
