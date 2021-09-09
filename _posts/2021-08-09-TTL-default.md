@@ -51,3 +51,10 @@ Versión corta...
 | 64 | Linux/Unix |
 | 128 | Windows |
 | 254 | Solaris/AIX |
+
+Para saber el TTL de una máquina se puede realizar lo siguiente:
+
+```bash
+┌─[root@kali]─[/home/user/demo]
+└──╼ ping -c 1 <ip-address>
+```
