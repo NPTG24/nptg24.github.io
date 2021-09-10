@@ -119,5 +119,5 @@ En el caso de filtrar por "Lines", en vez de una H se reemplaza por una L e incl
 ┌─[root@kali]─[/Documents/machines/demo/]
 └──╼ wfuzz -c -t 400 --hc=404 --sl=9 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt http://10.10.10.112/FUZZ
 ```
- Y así se sucesivamente...
+ Y así sucesivamente...
  Para abrir el manual de Wfuzz```man wfuzz```.
