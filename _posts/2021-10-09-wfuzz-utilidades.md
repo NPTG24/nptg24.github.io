@@ -120,4 +120,22 @@ En el caso de filtrar por "Lines", en vez de una H se reemplaza por una L e incl
 └──╼ wfuzz -c -t 400 --hc=404 --sl=9 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt http://10.10.10.112/FUZZ
 ```
  Y así sucesivamente...
+ 
+ Si queremos agregar una wordlist con extensiones se puede realizar lo siguiente:
+ primero creamos una wordlist con las extensiones que nosotros queremos
+ ```bash
+┌─[root@kali]─[/Documents/machines/demo/]
+└──╼ nano extensions.txt
+```
+```extensions.txt
+txt
+php
+html
+```
+Ahora lo podemos ejecutar de la siguiente forma:
+```bash
+┌─[root@kali]─[/Documents/machines/demo/]
+└──╼ wfuzz -c -L -t 400 --hc=404 --hh=7561 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -w extensions.txt http://10.10.10.112/FUZZ.FUZ2Z
+```
+ Se puede apreciar que en el final se agregó un ```.FUZ2Z```, si por ejemplo añadimos otro wordlist, pues se tendrá también que agregar en este caso con un 3 otro ```.FUZ3Z```.
  Para abrir el manual de Wfuzz```man wfuzz```.
