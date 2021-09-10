@@ -138,4 +138,4 @@ Ahora lo podemos ejecutar de la siguiente forma:
 └──╼ wfuzz -c -L -t 400 --hc=404 --hh=7561 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -w extensions.txt http://10.10.10.112/FUZZ.FUZ2Z
 ```
  Se puede apreciar que en el final se agregó un ```.FUZ2Z```, si por ejemplo añadimos otro wordlist, pues se tendrá también que agregar en este caso con un 3 otro ```.FUZ3Z```.
- Para abrir el manual de Wfuzz```man wfuzz```.
+  Para abrir el manual de Wfuzz```man wfuzz```.
