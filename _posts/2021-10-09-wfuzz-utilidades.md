@@ -122,8 +122,9 @@ En el caso de filtrar por "Lines", en vez de una H se reemplaza por una L e incl
  Y así sucesivamente...
  
  Si queremos agregar una wordlist con extensiones se puede realizar lo siguiente:
- primero creamos una wordlist con las extensiones que nosotros queremos
+ 
  ```bash
+ Primero creamos una wordlist con las extensiones que nosotros queremos
 ┌─[root@kali]─[/Documents/machines/demo/]
 └──╼ nano extensions.txt
 ```
