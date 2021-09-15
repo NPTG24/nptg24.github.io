@@ -101,7 +101,7 @@ Podemos concluir de la tabla que los valores siempre serán los mismos:
 ```
 
 y para que sirve esto...Pues sirve para asignar de una manera más cómoda a través de ```chmod``` el cual es un comando en Linux para asignar permisos. Ejemplo:
-```user
+```bash
 Si queremos convertir el siguiente permiso al directorio:
 
 [drwxr--r--]
@@ -116,7 +116,7 @@ Daría como permisos al directorio exactamente lo mismo [drwxr-xr-x]
 ```
 
 También tenemos otra serie de privilegios especiales como por ejemplo, el caso de ```chattr``` que nos permite controlar permisos avanzados:
-```user
+```bash
 user> chattr +i -V apuntes.txt
 ---
 Flags of apuntes.txt set as ----i---------------
