@@ -71,7 +71,7 @@ ID           Response   Lines    Word       Chars       Payload
 000001080:   301        9 L      35 W       417 Ch      "external"                     
 000001490:   301        9 L      35 W       415 Ch      "config"                       
 000002808:   301        9 L      35 W       424 Ch      "about"              
-000010825:   200        9 L      35 W       2385 Ch      "admin"                       
+000010825:   200        9 L      35 W       2385 Ch     "admin"                       
 000095524:   200        52 L     308 W      2863 Ch     "server-status"                
 
 Total time: 0
@@ -139,4 +139,4 @@ Ahora lo podemos ejecutar de la siguiente forma:
 └──╼ wfuzz -c -L -t 400 --hc=404 --hh=7561 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -w extensions.txt http://10.10.10.112/FUZZ.FUZ2Z
 ```
  Se puede apreciar que en el final se agregó un ```.FUZ2Z```, si por ejemplo añadimos otro wordlist, pues se tendrá también que agregar en este caso con un 3 otro ```.FUZ3Z```.
-  Para abrir el manual de Wfuzz```man wfuzz```.
+  Para abrir el manual de Wfuzz se ocupa ```man wfuzz```.
