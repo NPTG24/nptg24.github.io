@@ -1,5 +1,5 @@
 ---
-date: 2021-09-09T00:22:05.000Z
+date: 2021-09-20T00:00:00.000Z
 layout: post
 comments: true
 title: Tratamiento de la TTY
