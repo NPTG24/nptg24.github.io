@@ -31,12 +31,14 @@ El modelo OSI se puede entender como un lenguaje universal de comunicación entr
 Este está dividido por niveles los que están diseñados para realizar funciones específicas, que se relacionan tanto con el anterior como el posterior en su escala. Estos son:
 
 ## Niveles OSI orientados a red
+
 | Capa | Función | Ejemplo |
 | :--------: | :-------: | :-------: |
 | 1.Física | Se encarga de los elementos físicos de la conexión, gestionando los procedimientos a nivel electrónico para que la cadena de bits de información viaje desde el transmisor al receptor sin recibir ningún tipo de alteración. | En cuanto a la transmisión tenemos cables de pares trenzados, cable coaxial, fibra óptica, etc. Una norma es la ISO 2110. |
 | 2.Enlace de datos | Proporciona los medios para establecer la comunicación de los elementos físicos, ocupándose del direccionamiento físico de los datos, el acceso al medio y la detección de errores durante la transmisión. | Switch, Router(que reciba y envíe datos desde un transmisor a un receptor).  Protocolo concido es el IEEE 802(LAN) e IEEE 802.11(WiFi). | 
 | 3.Red | Identifica el enrutamiento entre las redes conectadas, haciendo que los datos puedan llegar desde el transmisor al receptor siendo capaz de realizar conmutaciones y encaminamientos necesarios para que el mensaje llegue. | Protocolo IP. |
 | 4.Transporte | Este nivel se encarga de realizar el transporte de datos que se encuentran dentro del paquete de transmisión desde el origen a su destino. Esto se realiza de forma independiente al tipo de red que haya detectado el nivel inferior. La unidad de información o PDU antes vista, también le llamamos Datagrama si trabaja con el protocolo UDP orientado al envío sin conexión, o Segmento, si trabaja con el protocolo TCP orientado a la conexión. | Puertos lógicos como el 80, 443, etc. |
+
 ```
 TCP => Responde a las siglas Transfer Control Protocol y es el más habitual por tratarse de un protocolo de transporte ‘orientado a conexión’. Esto quiere decir que el protocolo TCP está diseñado no solo para transmitir una determinada información entre un dispositivo y otro, sino también para verificar la correcta recepción de la información transmitida entre un dispositivo y otro, o, dicho de otro modo, es un protocolo para manejar conexiones de extremo a extremo. Es el complemento ideal para el protocolo IP porque los datagramas del protocolo IP no están diseñados para establecer un sistema recíproco de verificación entre los dispositivos que intercambian la información. Da soporte a los protocolos HTTP, SMTP, SSH y FTP.
 ```
@@ -48,6 +50,7 @@ UDP => Responde a las siglas User Diagram Protocol y funciona de manera similar 
 ![UDP](http://imgfz.com/i/UiSD9Im.gif)
 
 ### Diferencias
+
 | Parámetro | TCP | UDP |
 | :--------: | :-------: | :-------: |
 | Seguridad. | Alta | Más baja |
@@ -58,6 +61,7 @@ UDP => Responde a las siglas User Diagram Protocol y funciona de manera similar 
 | Acuse de recibo. | Sí. | Solo el checksum(detectar cambios accidentales). |
 
 ## Niveles OSI orientados a aplicación
+
 | Capa | Función | Ejemplo |
 | :--------: | :-------: | :-------: |
 | 5.Sesión | Controla y mantiene activo el enlace entre las máquinas que están transmitiendo información, para que se encuentre establecida la conexión hasta que finalice la transmisión.  | Mapeo de la dirección de sesión (Pasa a direcciones de transportes). |
@@ -75,4 +79,3 @@ Si una persona está recibiendo una respuesta para una página web desde un serv
 
 ## Resumen
 ![OSI](http://imgfz.com/i/1nWNShK.png)
-
