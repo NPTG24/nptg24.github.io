@@ -146,5 +146,10 @@ Ahora lo podemos ejecutar de la siguiente forma:
 ┌─[root@kali]─[/Documents/machines/demo/]
 └──╼ wfuzz -c -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --hc 400,404,302 -H "Host: FUZZ.forge.htb" -u http://forge.htb -t 200
 ```
+WFUZZ en Local File Inclusion(LFI):
 
+ ```bash
+┌─[root@kali]─[/Documents/machines/demo/]
+└──╼ wfuzz -c --hc=404 -w /usr/share/wordlists/SecLists/Fuzzing/LFI/LFI-Jhaddix.txt -u "http://10.10.10.249/admin../admin_staging/index.php?page=../../../../../../FUZZ"
+```
 Para abrir el manual de Wfuzz se ocupa ```man wfuzz```.
