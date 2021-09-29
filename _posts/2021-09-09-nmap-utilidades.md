@@ -14,7 +14,6 @@ tags:
   - nmap
   - linux
   - enumeración
-  - ciberseguridad
   - hacking
 author: Felipe Canales Cayuqueo
 paginate: true
