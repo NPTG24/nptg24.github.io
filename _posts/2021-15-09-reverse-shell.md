@@ -13,7 +13,6 @@ category: ciberseguridad
 tags:
   - explotación
   - linux
-  - ciberseguridad
   - hacking
 author: Felipe Canales Cayuqueo
 paginate: true
