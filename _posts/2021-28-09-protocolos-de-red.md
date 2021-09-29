@@ -41,7 +41,7 @@ Estos tienen la siguiente estrcuctura:
 
 * Área de datos(payload): es la información que se quiere trasladar en tiempo real. Podría ser algo así como parte de un mensaje de correo electrónico o el contenido de un archivo durante la descarga.
 
-* Cola(trailer): Además de los dos anteriores incluir este último que incluye código de detección de errores.
+* Cola(trailer): además de los dos anteriores incluir este último que incluye código de detección de errores.
 
 # Capa de acceso al medio (físico)
 
