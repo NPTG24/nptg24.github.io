@@ -15,7 +15,11 @@ tags:
   - IP
   - ARP
   - ICMP
-  - 
+  - FTP
+  - SSH
+  - SMTP
+  - DNS
+  - HTTP
   - TCP
   - UDP
   - redes
@@ -23,7 +27,21 @@ author: Felipe Canales Cayuqueo
 paginate: true
 ---
 
-Parecería que para integrar un equipo a una red de ordenadores bastaría con interconectarlos entre sí con ayuda de un cable de LAN, pero los sistemas informáticos no tienen la capacidad de intercambiar paquetes de datos sin ayuda, y no pueden, por ello, establecer ninguna conexión de datos. Esta tarea le corresponde a los protocolos de red, que, en conjunto con sus respectivas familias de protocolo, actúan en la llamada capa de mediación o de red, el nivel 3 en el [modelo OSI](https://nptg24.github.io/modelo-osi/), aunque en este caso veremos más capas.
+Parecería que para integrar un equipo a una red de ordenadores bastaría con interconectarlos entre sí con ayuda de un cable de LAN, pero los sistemas informáticos no tienen la capacidad de intercambiar paquetes de datos sin ayuda, y no pueden, por ello, establecer ninguna conexión de datos. Esta tarea le corresponde a los protocolos de red, que, en conjunto con sus respectivas familias de protocolo, actúan en la llamada capa de mediación o de red, el nivel 3 en el [modelo OSI](https://nptg24.github.io/modelo-osi/). Antes de pasar con los protocolos es bueno entender que es un paquete de red.
+
+# Paquete de red
+
+El objetivo principal de la creación de redes es intercambiar información entre computadoras en red; esta información es transportada por paquetes. Los paquetes no son más que flujos de bits que se ejecutan como señales eléctricas en medios físicos utilizados para la transmisión de datos. Dichos medios pueden ser un cable en una LAN o el aire en una red WiFi. Estas señales eléctricas se interpretan luego como bits (0,1) que componen la información.
+
+Estos tienen la siguiente estrcuctura:
+
+![packets](http://imgfz.com/i/VdvqcNG.png)
+
+* Cabecera(header): tiene una estructura específica de protocolo, esto asegura que el host receptor pueda interpretar correctamente la carga útil y manejar la comunicación general.
+
+* Área de datos(payload): es la información que se quiere trasladar en tiempo real. Podría ser algo así como parte de un mensaje de correo electrónico o el contenido de un archivo durante la descarga.
+
+* Cola(trailer): Además de los dos anteriores incluir este último que incluye código de detección de errores.
 
 # Capa de acceso al medio (físico)
 
