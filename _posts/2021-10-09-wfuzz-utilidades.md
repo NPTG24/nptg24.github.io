@@ -15,7 +15,6 @@ tags:
   - linux
   - fuzzing
   - enumeración
-  - ciberseguridad
   - hacking
 author: Felipe Canales Cayuqueo
 paginate: true
