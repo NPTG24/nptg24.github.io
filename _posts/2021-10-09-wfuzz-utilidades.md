@@ -14,6 +14,9 @@ tags:
   - wfuzz
   - linux
   - fuzzing
+  - fuerzabruta
+  - diccionario
+  - wordlists
   - enumeración
   - hacking
 author: Felipe Canales Cayuqueo
