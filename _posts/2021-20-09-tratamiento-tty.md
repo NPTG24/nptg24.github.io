@@ -14,7 +14,6 @@ tags:
   - post-intrusión
   - linux
   - TTY
-  - ciberseguridad
   - hacking
 author: Felipe Canales Cayuqueo
 paginate: true
