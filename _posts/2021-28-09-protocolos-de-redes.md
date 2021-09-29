@@ -21,8 +21,10 @@ tags:
   - DNS
   - HTTP
   - TCP
+  - POP3
+  - Telnet
   - UDP
-  - redes
+  - Puertos
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
