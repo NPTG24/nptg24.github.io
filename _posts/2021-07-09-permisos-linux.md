@@ -14,7 +14,6 @@ tags:
   - permisos
   - linux
   - GNU
-  - ciberseguridad
   - hacking
 author: Felipe Canales Cayuqueo
 paginate: true
