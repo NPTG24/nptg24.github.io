@@ -15,7 +15,6 @@ tags:
   - capas
   - TCP
   - UDP
-  - redes
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
