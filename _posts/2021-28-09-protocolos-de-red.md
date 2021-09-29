@@ -122,7 +122,7 @@ Es el conjunto de reglas para transferir archivos, como texto, imágenes, sonido
 
 Las versiones del protocolo HTTP (o "versiones HTTP") comúnmente utilizadas en Internet son [HTTP / 1.0](https://datatracker.ietf.org/doc/html/rfc1945), que es un protocolo anterior que incluye menos funciones, y [HTTP / 1.1](https://datatracker.ietf.org/doc/html/rfc2616), que es un protocolo posterior que incluye más funciones. El cliente y el servidor pueden utilizar diferentes versiones del protocolo HTTP. Tanto el cliente como el servidor deben indicar la versión HTTP de su solicitud o respuesta en la primera línea de su mensaje.
 
->Los vínculos adjuntos en HTTP 1.0 y 1.1, corresponden a los documentos de solicitud de comentarios de Internet Society e IETF (Internet Engineering Task Force) (conocidos como RFC), quienes proporcionan las definiciones oficiales para el protocolo HTTP
+>Los vínculos adjuntos en HTTP 1.0 y 1.1, corresponden a los documentos de solicitud de comentarios de Internet Society e IETF (Internet Engineering Task Force) (conocidos como RFC), quienes proporcionan las definiciones oficiales para el protocolo HTTP.
 
 A través del protocolo HTTP, los recursos se intercambian entre los dispositivos del cliente y los servidores a través de Internet. Los dispositivos cliente envían solicitudes a los servidores de los recursos necesarios para cargar una página web; los servidores envían respuestas al cliente para cumplir con las solicitudes. Las solicitudes y respuestas comparten subdocumentos, como datos sobre imágenes, texto, diseños de texto, etc., que un navegador web cliente reúne para mostrar el archivo completo de la página web.
 
