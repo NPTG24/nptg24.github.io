@@ -181,6 +181,7 @@ El protocolo funciona en el modelo cliente-servidor, lo que significa que la con
 # Puertos de protocolos
 
 Puertos usados por la capa de transporte (TCP/UDP). 
+
 | Protocolo | Puerto |
 | :--------: | :-------: |
 | FTP | 21/TCP |
