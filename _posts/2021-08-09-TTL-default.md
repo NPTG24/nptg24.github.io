@@ -2,7 +2,7 @@
 date: 2021-09-08T05:22:05.000Z
 layout: post
 comments: true
-title: valores TTL
+title: Valores TTL
 subtitle: 'comunes'
 description: >-
 image: >-
