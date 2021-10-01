@@ -65,9 +65,9 @@ En síntesis, se encarga de la resolución de direcciones (encontrar la direcci�
 
 Es un protocolo , o conjunto de reglas, para enrutar y direccionar paquetes de datos para que puedan viajar a través de las redes y llegar al destino correcto. La información de IP se adjunta a cada paquete y esta información ayuda a los enrutadores a enviar paquetes al lugar correcto. A cada dispositivo o dominio que se conecta a Internet se le asigna una dirección IP y, a medida que los paquetes se dirigen a la dirección IP adjunta, los datos llegan a donde se necesitan. Una vez que los paquetes llegan a su destino, se manejan de manera diferente dependiendo del protocolo de transporte que se use en combinación con IP. Los protocolos de transporte más comunes son TCP y UDP.
 
-La cuarta versión de IP (IPv4 para abreviar) se introdujo en 1983. Sin embargo, así como hay un número limitado de permutaciones posibles para los números de matrícula de automóviles y deben reformatearse periódicamente, el suministro de direcciones IPv4 disponibles se ha agotado. Las direcciones IPv6 tienen muchos más caracteres y, por lo tanto, más permutaciones; sin embargo, IPv6 aún no se ha adoptado por completo y la mayoría de los dominios y dispositivos todavía tienen direcciones IPv4. 
+La cuarta versión de IP ([IPv4](https://nptg24.github.io/ipv4/) para abreviar) se introdujo en 1983. Sin embargo, así como hay un número limitado de permutaciones posibles para los números de matrícula de automóviles y deben reformatearse periódicamente, el suministro de direcciones [IPv4](https://nptg24.github.io/ipv4/) disponibles se ha agotado. Las direcciones IPv6 tienen muchos más caracteres y, por lo tanto, más permutaciones; sin embargo, IPv6 aún no se ha adoptado por completo y la mayoría de los dominios y dispositivos todavía tienen direcciones [IPv4](https://nptg24.github.io/ipv4/). 
 
-El punto débil de este protocolo es que tiene una pila de protocolos muy extensa; las funciones de seguridad no están implementadas desde el principio (IPv4).
+El punto débil de este protocolo es que tiene una pila de protocolos muy extensa; las funciones de seguridad no están implementadas desde el principio ([IPv4](https://nptg24.github.io/ipv4/)).
 
 En síntesis, se encarga del enrutamiento y el direccionamiento.
 
