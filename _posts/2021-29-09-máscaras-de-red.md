@@ -13,7 +13,7 @@ category: redes
 tags:
   - Máscara
   - Subred
-  - prerfijo
+  - prefijo
   - Cisco
 author: Felipe Canales Cayuqueo
 paginate: true
