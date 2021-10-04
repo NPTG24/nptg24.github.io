@@ -113,4 +113,30 @@ Podemos encontrar los puntos de acceso realizando lo siguiente:
 └──╼ tshark -r Captura-01.cap -Y "wlan.fc.type_subtype==28" 2>/dev/null
 ```
 
+# Otro ejemplo de uso con WiFi
+
+```bash
+┌─[root@kali]─[/Documents/WiFi/]
+└──╼ airdecap-ng -e Testing -p Hello123 Captura-01.cap
+
+┌─[root@kali]─[/Documents/WiFi/]
+└──╼ tshark -r Captura-01-dec.cap -Y "http" 2>/dev/null
+
+┌─[root@kali]─[/Documents/WiFi/]
+└──╼ tshark -r Captura-01-dec.cap -Y "dns" 2>/dev/null
+
+┌─[root@kali]─[/Documents/WiFi/]
+└──╼ tshark -r Captura-01-dec.cap -Y "http.request.method==POST" 2>/dev/null
+
+#Para ver el contenido
+
+┌─[root@kali]─[/Documents/WiFi/]
+└──╼ tshark -r Captura-01-dec.cap -Y "http.request.method==POST" -Tjson 2>/dev/null
+
+#Otra forma una vez encontramos credenciales
+
+┌─[root@kali]─[/Documents/WiFi/]
+└──╼ tshark -r Captura-01-dec.cap -Y "http.request.method==POST" -Tfields -e http.file_data 2>/dev/null
+```
+
 >Recordar que todos estos filtros se pueden realizar en WireShark.
