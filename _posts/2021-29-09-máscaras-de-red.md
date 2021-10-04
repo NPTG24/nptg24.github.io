@@ -2,7 +2,7 @@
 date: 2021-09-29T23:59:05.000Z
 layout: post
 comments: true
-title: Tabla de máscaras de red
+title: Tabla de máscaras de red y clases
 subtitle: 'y sus prefijos'
 description: >-
 image: >-
@@ -14,6 +14,7 @@ tags:
   - Máscara
   - Subred
   - prefijo
+  - clases
   - Cisco
 author: Felipe Canales Cayuqueo
 paginate: true
