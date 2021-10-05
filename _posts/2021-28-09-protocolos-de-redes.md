@@ -214,3 +214,4 @@ Puertos usados por la capa de transporte (TCP/UDP).
 | IMAP | 143/TCP |
 | HTTPS/SSL | 443/TCP |
 | microsoft-ds | 445/TCP |
+| RDP | 3389/TCP |
