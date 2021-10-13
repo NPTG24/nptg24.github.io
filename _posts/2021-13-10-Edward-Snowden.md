@@ -166,7 +166,7 @@ Snowden argumentó que tenía una obligación moral para actuar. Justificó sus 
 
 * Snowden no respetó su acuerdo de confidencialidad. Sin embargo esto puede ser defendido con lo siguiente: "Los profesionales de la Informática deben proteger la confidencialidad, excepto en los casos en que encuentren evidencias de la violación de una ley, de los reglamentos de la organización o del Código". El problema de esto es que decidió revelar esta información con periodistas y a todo el público(1.7 ACM).
 
-## Fuentes
+## Referencias
 
 * [National Security Agency (NSA) definition, Andy Patrizio, Mayo 2021](https://searchsecurity.techtarget.com/definition/National-Security-Agency)
 
