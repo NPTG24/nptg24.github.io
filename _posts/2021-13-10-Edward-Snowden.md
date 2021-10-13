@@ -19,7 +19,7 @@ tags:
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
-```
+~~~
 Laura, 
 
 En esta etapa, no puedo ofrecer nada más que mi palabra. Soy un empleado del gobierno de alto nivel en la comunidad de inteligencia. Espero comprendas que contactar contigo es extremadamente de alto riesgo y que estás dispuesta a aceptar las siguientes precauciones antes de compartir más. Esto no te será una pérdida de tiempo. 
@@ -27,7 +27,7 @@ En esta etapa, no puedo ofrecer nada más que mi palabra. Soy un empleado del go
 Lo siguiente suena complejo, pero sólo debería tomar minutos completarlo para alguien técnico. Me gustaría confirmar fuera del correo elctrónico que las claves que intercambiamos no fueron interceptadas y reemplazadas por tus supervisores. Por favor, confirma que nunca nadie ha tenido una copia de tu clave privada y que ésta usa una frase de contraseña segura. Asume que tu adversario es capaz de conjeturar un billón de veces por segundo. Si el dispositivo en que almacenas la clave privada e introduces tu contraseña, ha sido hackeado, es trivial para descifrar nuestras comunicaciones. Comprende que los pasos anteriores no son a prueba de balas, y son destinados sólo a darnos un respiro. Al final, si publicas la fuente material, yo probablemente seré implicado inmediatamente. Esto no debe disuadirte de emitir la información que te daré. Gracias, y ten cuidado.
 
 CITIZENFOUR
-```
+~~~
 
 ## El inicio de todo
 
