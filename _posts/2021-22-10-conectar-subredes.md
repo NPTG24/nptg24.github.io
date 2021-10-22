@@ -19,6 +19,8 @@ paginate: true
 ---
 Tenemos los siguientes datos:
 
+>Para ver tabla completa moverse con las flechas del teclado. En caso de estar en un dispositivo móvil o similar, simplemente deslize.
+
 | Subred | Dirección IP | Dirección inicial disponible | Dirección final disponible | Dirección broadcast | Máscara |
 | :--------: | :--------: | :-------: | :-------: | :-------: | :-------: |
 | 1 | 192.168.16.32/27 | 192.168.16.33 | 192.168.16.62 | 192.168.16.63 | 255.255.255.224 |
