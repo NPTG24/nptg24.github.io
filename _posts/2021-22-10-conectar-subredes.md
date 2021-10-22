@@ -26,7 +26,7 @@ Tenemos los siguientes datos:
 | 1 | 192.168.16.32/27 | 192.168.16.33 | 192.168.16.62 | 192.168.16.63 | 255.255.255.224 |
 | 2 | 192.168.16.64/27 | 192.168.16.65 | 192.168.16.94 | 192.168.16.95 | 255.255.255.224 |
 
-Primero queremos comunicar las [subredes](https://nptg24.github.io/subredes/) dadas, y lo haremos conectando un router (1841) a ambos switches:
+Primero queremos comunicar las [subredes](https://nptg24.github.io/subredes/) dadas, y lo haremos conectando un router (1841) a ambos switches con un cable de cobre directo y por medio de sus respectivos "Fast Ethernet" (el switch 1 al FastEthernet0/0 y el switch 2 al FastEthernet0/1):
 
 ![1](http://imgfz.com/i/q2mIHzv.png)
 
