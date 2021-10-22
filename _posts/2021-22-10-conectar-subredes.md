@@ -36,7 +36,7 @@ Ahora configuramos cada PC con sus respectivas direcciones IPv4 de ambas subrede
 
 ![3](http://imgfz.com/i/Ts5MuEv.png)
 
-Una vez asignamos todas las direcciones de los PCs, configuramos el router a través de su ```CLI```, asignando como dirección IP sus respectivas puertas de enlace y como máscara la que corresponda a su conexión "Fast Ethernet":
+Y así sucesivamente hasta que asignemos todas las direcciones de los PCs. Ahora configuramos el router a través de su ```CLI```, asignando como dirección IP sus respectivas puertas de enlace y como máscara la que corresponda a su conexión "Fast Ethernet":
 
 ```cli
 Router>en
