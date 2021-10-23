@@ -152,7 +152,7 @@ En la actualidad, Edward Snowden ha obtenido el permiso de residencia permanente
 
 Snowden argumentó que tenía una obligación moral para actuar. Justificó sus acciones como “soplón” declarando que tenía el deber de “informar al público sobre aquello que se hace en su nombre y aquello que se hace en su contra.” De acuerdo a Snowden, las violaciones de privacidad hechas por el gobierno tenían que ser expuestas sin importar la legalidad. Pero a través de la ética surgen diversos problemas:
 
-* La NSA contiene datos de diversos usuarios y estos deben tener la responsabilidad adecuada de conservarlos y protegerlos.
+* La NSA contiene datos de diversos usuarios y estos deben tener la responsabilidad adecuada de conservarlos y protegerlos(2.9 ACM).
 
 * El problema es que la NSA no debió conocer ninguna información de personas que nunca han compartido sus datos de manera pública, a no ser que esta sea por una investigación solicitada por un tribunal. Es decir no respetó la privacidad(1.6 ACM).
 
