@@ -142,7 +142,7 @@ Ahora lo podemos ejecutar de la siguiente forma:
 ```
  Se puede apreciar que en el final se agregó un ```.FUZ2Z```, si por ejemplo añadimos otro wordlist, pues se tendrá también que agregar en este caso con un 3 otro ```.FUZ3Z```.
  
- Para encontrar los hosts virtuales, se realiza lo siguiente:
+ Para encontrar subdominios, se realiza lo siguiente:
  
  ```bash
 ┌─[root@kali]─[/Documents/machines/demo/]
