@@ -104,7 +104,12 @@ Si se quieren ver las categorias que hay de una manera ordenada:
 Un ejemplo de como se ocupan este tipo de scripts es lo siguiente:
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
-└──╼ nmap -p445 10.x.x.xxx --script "vuln and safe" -oN smbScan
+└──╼ nmap -p445 10.x.x.yyy --script "vuln and safe" -oN smbScan
 ```
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap --script http-enum -p80 10.x.x.yyy -oN webScan 
+```
+ 
 Recordar que se pueden combinar las categorias como en el ejemplo. Y para ver el manual de NMAP realizar ```man nmap```
 
