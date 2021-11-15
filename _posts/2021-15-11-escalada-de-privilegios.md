@@ -2,8 +2,8 @@
 date: 2021-11-15T01:14:05.000Z
 layout: post
 comments: true
-title: Escalada de privilegios
-subtitle: 'para acceso a root'
+title: Escalar privilegios
+subtitle: 'para obtener acceso a root'
 description: >-
 image: >-
   http://imgfz.com/i/pLYBOku.png
@@ -27,7 +27,7 @@ De este modo, cuando tu, o cualquier programa, quiera llevar a cabo una acción 
 
 Una manera de escalar privilegios es a través del siguiente comando:
 
-```go
+```bash
 ┌─[user@user]─[/]
 └──╼ sudo -l
 ```
@@ -38,7 +38,7 @@ y ahí aparecerá un binario en el cuál podremos obtener acceso root siguiendo 
 
 Otra manera es buscando en /usr/bin, algún binario que contenga un permiso cuyo carácter sea ```s``` en lugar de ```x```.
 
-```go
+```bash
 ┌─[user@user]─[/]
 └──╼ ls -l /usr/bin/passwd
 -rwsr-xr-x 1 root root 45420 May 17  2017 /usr/bin/passwd
@@ -46,7 +46,7 @@ Otra manera es buscando en /usr/bin, algún binario que contenga un permiso cuyo
 
 Ahora también podemos buscar todos los binarios SUID a través de ```find```, con el siguiente comando:
 
-```go
+```bash
 ┌─[user@user]─[/]
 └──╼ find / -type f -user root -perm -4000 2>/dev/null
 /var/htb/bin/emergency
