@@ -72,7 +72,7 @@ Ahora también podemos buscar todos los binarios SUID a través de ```find```, c
 /bin/umount
 ```
 
-## Puertos abiertos en la maquina
+## Puertos abiertos en la máquina
 
 ```bash
 ┌─[user@user]─[/]
@@ -82,4 +82,4 @@ LISTEN    0         128                0.0.0.0:23               0.0.0.0:*       
 LISTEN    0         4096             127.0.0.1:631              0.0.0.0:*                                                                                       
 LISTEN    0         4096                 [::1]:631                 [::]:*                                                                                       
 ```
-
+En este caso hay una página web en la máquina la cual podremos visualizar por medio de [chisel](https://github.com/jpillora/chisel).
