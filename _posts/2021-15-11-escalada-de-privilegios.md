@@ -72,3 +72,14 @@ Ahora también podemos buscar todos los binarios SUID a través de ```find```, c
 /bin/umount
 ```
 
+## Puertos abiertos en la maquina
+
+```bash
+┌─[user@user]─[/]
+└──╼ ss -lnpt
+State     Recv-Q    Send-Q       Local Address:Port        Peer Address:Port    Process                                                                         
+LISTEN    0         128                0.0.0.0:23               0.0.0.0:*        users:(("python3",pid=829,fd=3))                                               
+LISTEN    0         4096             127.0.0.1:631              0.0.0.0:*                                                                                       
+LISTEN    0         4096                 [::1]:631                 [::]:*                                                                                       
+```
+
