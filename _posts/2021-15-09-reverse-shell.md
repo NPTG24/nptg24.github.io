@@ -40,7 +40,9 @@ paginate: true
 ```
 
 ## PHP
-En PHP se puede ingresar un archivo malicioso que devuelva una [reverse shell](https://download1510.mediafire.com/fvfmudo0p5gg/a3i5v7urr7cp6gw/php-reverse-shell-1.0.tar.gz).
+En PHP se puede ingresar un archivo malicioso que devuelva una reverse shell.
+
+>[Descarga archivo aquí](https://download1510.mediafire.com/fvfmudo0p5gg/a3i5v7urr7cp6gw/php-reverse-shell-1.0.tar.gz)
 
 ### Ejemplo de uso
 En burpsuite se podría ocupar en ataques como Shellshock, por ejemplo:
