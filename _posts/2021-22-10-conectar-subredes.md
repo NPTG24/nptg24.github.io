@@ -43,7 +43,6 @@ Ahora configuramos el router a través de su ```CLI```, asignando como direcció
 ```cli
 Router>en
 Router#configure terminal
-Router(config)#configure terminal
 Router(config)#interface FastEthernet0/0
 Router(config-if)#ip address 192.168.16.33 255.255.255.224
 Router(config-if)#no shutdown
