@@ -110,6 +110,20 @@ Un ejemplo de como se ocupan este tipo de scripts es lo siguiente:
 ┌─[root@kali]─[/home/user/demo/nmap]
 └──╼ nmap --script http-enum -p80 10.x.x.yyy -oN webScan 
 ```
- 
-Recordar que se pueden combinar las categorias como en el ejemplo. Y para ver el manual de NMAP realizar ```man nmap```
+
+Para intentar evadir el firewall en un puerto que aparece como ```filtered``` o simplemente no aparece se puede realizar lo siguiente:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap --mtu 8 10.x.x.yyy
+```
+
+Para escanear los 65535 puertos
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap --mtu 8 -p- 10.x.x.yyy
+```
+El ```mtu``` establece la unidad máxima de transmisión y este creará paquetes con tamaño basado en el número que le daremos, el cual debe ser múltiplo de 8 (8,16, 24,32,etc), como en este caso se le asigna 8, entonces nmap creará paquetes de 8 bytes, causando una confusión en el firewall. 
+
+Recordar que se pueden combinar las categorias como en algunos ejemplos mostrados. Y para ver el manual de NMAP realizar ```man nmap```
 
