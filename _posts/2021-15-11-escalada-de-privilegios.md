@@ -14,7 +14,7 @@ tags:
   - escalada
   - privilegios
   - root
-  - NT authority system
+  - NTauthoritysystem
   - hacking
 author: Felipe Canales Cayuqueo
 paginate: true
