@@ -111,7 +111,7 @@ Un ejemplo de como se ocupan este tipo de scripts es lo siguiente:
 └──╼ nmap --script http-enum -p80 10.x.x.yyy -oN webScan 
 ```
 
-Para intentar evadir el firewall en un puerto que aparece como ```filtered``` o simplemente no aparece se puede realizar lo siguiente:
+Para intentar evadir el firewall en un puerto que aparece como ```filtered``` o simplemente no aparece, se puede realizar lo siguiente:
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
