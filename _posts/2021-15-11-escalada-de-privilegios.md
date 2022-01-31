@@ -3,7 +3,7 @@ date: 2021-11-15T01:14:05.000Z
 layout: post
 comments: true
 title: Escalar privilegios
-subtitle: 'para obtener acceso a root'
+subtitle: 'para obtener acceso a root o a NT authority system'
 description: >-
 image: >-
   http://imgfz.com/i/pLYBOku.png
