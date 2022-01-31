@@ -14,6 +14,7 @@ tags:
   - escalada
   - privilegios
   - root
+  - NT authority system
   - hacking
 author: Felipe Canales Cayuqueo
 paginate: true
@@ -22,6 +23,8 @@ paginate: true
 El usuario root en Linux es el usuario que posee mayor nivel de privilegios. De hecho, es el único que tiene privilegios sobre todo el sistema en su globalidad, así como el responsable de las tareas administrativas.
 
 De este modo, cuando tu, o cualquier programa, quiera llevar a cabo una acción que requiera permisos de superusuario, de alguna manera se les tendrá que conceder o denegar estos privilegios. Pero la pregunta es si soy un usuario común, ¿puedo ser root, sin necesidad de contraseña?. La respuesta es que si con ciertos pasos que veremos a continuación aprovechando las vulnerabilidades que dejan los usuarios administradores.
+
+#Linux
 
 ## Sudo
 
@@ -108,3 +111,54 @@ Aquí podríamos escalar privilegios a través de ```Python```, siguiendo los pa
 └──╼ whoami
 root
 ```
+
+# Windows
+
+En el caso de Windows se podría realizar a través de ```systeminfo```, para así poder averiguar vulnerabilidades del sistema:
+
+```
+C:\>systeminfo
+systeminfo
+
+Host Name:                 ARCTIC
+OS Name:                   Microsoft Windows Server 2008 R2 Standard 
+OS Version:                6.1.7600 N/A Build 7600
+OS Manufacturer:           Microsoft Corporation
+OS Configuration:          Standalone Server
+OS Build Type:             Multiprocessor Free
+Registered Owner:          Windows User
+Registered Organization:   
+Product ID:                00477-001-0000421-84900
+Original Install Date:     22/3/2017, 11:09:45   
+System Boot Time:          29/12/2017, 3:34:21   
+System Manufacturer:       VMware, Inc.
+System Model:              VMware Virtual Platform
+System Type:               x64-based PC
+Processor(s):              2 Processor(s) Installed.
+                           [01]: Intel64 Family 6 Model 63 Stepping 2 GenuineIntel ~2600 Mhz
+                           [02]: Intel64 Family 6 Model 63 Stepping 2 GenuineIntel ~2600 Mhz
+BIOS Version:              Phoenix Technologies LTD 6.00, 5/4/2016
+Windows Directory:         C:\Windows
+System Directory:          C:\Windows\system32
+Boot Device:               \Device\HarddiskVolume1
+System Locale:             el;Greek
+Input Locale:              en-us;English (United States)
+Time Zone:                 (UTC+02:00) Athens, Bucharest, Istanbul
+Total Physical Memory:     1.024 MB
+Available Physical Memory: 88 MB
+Virtual Memory: Max Size:  2.048 MB
+Virtual Memory: Available: 1.085 MB
+Virtual Memory: In Use:    963 MB
+Page File Location(s):     C:\pagefile.sys
+Domain:                    HTB
+Logon Server:              N/A
+Hotfix(s):                 N/A
+Network Card(s):           1 NIC(s) Installed.
+                           [01]: Intel(R) PRO/1000 MT Network Connection
+                                 Connection Name: Local Area Connection
+                                 DHCP Enabled:    No
+                                 IP address(es)
+                                 [01]: 10.10.10.11
+```
+
+![1](http://imgfz.com/i/rFQc3RH.png)
