@@ -24,7 +24,7 @@ El usuario root en Linux es el usuario que posee mayor nivel de privilegios. De 
 
 De este modo, cuando tu, o cualquier programa, quiera llevar a cabo una acción que requiera permisos de superusuario, de alguna manera se les tendrá que conceder o denegar estos privilegios. Pero la pregunta es si soy un usuario común, ¿puedo ser root, sin necesidad de contraseña?. La respuesta es que si con ciertos pasos que veremos a continuación aprovechando las vulnerabilidades que dejan los usuarios administradores.
 
-#Linux
+# Linux
 
 ## Sudo
 
