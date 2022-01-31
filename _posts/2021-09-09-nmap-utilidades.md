@@ -22,7 +22,9 @@ paginate: true
 Nmap ("Network Mapper") es un código abierto y gratuito que sirve para el descubrimiento de redes y auditorías de seguridad. Muchos administradores de sistemas y redes también lo encuentran útil para tareas como el inventario de la red, la gestión de los programas de actualización del servicio y la supervisión del tiempo de actividad del host o del servicio. Nmap utiliza paquetes de IP sin procesar de formas novedosas para determinar qué hosts están disponibles en la red, qué servicios (nombre y versión de la aplicación) ofrecen esos hosts, qué sistemas operativos (y versiones de SO) están ejecutando, qué tipo de filtros de paquetes / firewalls están en uso y decenas de otras características. Fue diseñado para escanear rápidamente redes grandes, pero funciona bien contra hosts únicos. Este contiene múltiples utilidades, en donde algunas de ellas son las siguientes:
 >https://nmap.org/
 
-Como enumerar los 65535 puertos de una maquina, para ver los que están abiertos
+### Escaneo general
+
+Para enumerar los 65535 puertos de una maquina y así ver los que están abiertos, se realiza lo siguiente:
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
@@ -68,6 +70,7 @@ Maneras para agilizar nuestros escaneos en el caso de que sea lento con el méto
 | -vvv | Triple verbose(-v). |
 | -Pn | No aplica descubrimiento de host a través del protocolo de resolución de direcciones(ARP). |
 
+## Escaneo de versiones
 
 Ahora si queremos detectar la versión y servicio que corren en los puertos:
 
@@ -75,6 +78,8 @@ Ahora si queremos detectar la versión y servicio que corren en los puertos:
 ┌─[root@kali]─[/home/user/demo/nmap]
 └──╼ nmap -sC -sV -p22,80 10.x.x.xxx -oN targeted
 ```
+
+Se pueden resumir el ```-sC``` y ```-sV``` en ```-sCV```.
 
 Parámetros usados:
 
@@ -84,6 +89,8 @@ Parámetros usados:
 | -sV | Detecta la versión. |
 | -p | Para seleccionar que puertos se quieren escanear. |
 | -oN | Guarda un archivo de texto con el escaneo en targeted. |
+
+## Scripts de NMAP para detección de vulnerabilidades
 
 NMAP cuenta con una series de scripts ya definidos que si queremos ver con sus respectivas categorías se podría realizar lo siguiente:
 
@@ -111,6 +118,8 @@ Un ejemplo de como se ocupan este tipo de scripts es lo siguiente:
 └──╼ nmap --script http-enum -p80 10.x.x.yyy -oN webScan 
 ```
 
+## Evasión de firewall
+
 Para intentar evadir el firewall en un puerto que aparece como ```filtered``` o simplemente no aparece, se puede realizar lo siguiente:
 
 ```bash
@@ -124,6 +133,13 @@ Para escanear los 65535 puertos
 └──╼ nmap --mtu 8 -p- 10.x.x.yyy
 ```
 El ```mtu``` establece la unidad máxima de transmisión y este creará paquetes con tamaño basado en el número que le daremos, el cual debe ser múltiplo de 8 (8,16, 24,32,etc), como en este caso se le asigna 8, entonces nmap creará paquetes de 8 bytes, causando una confusión en el firewall. 
+
+## Escaneo puertos UDP
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap 10.x.x.xxx -sUV -p- --open -Pn -v -n -oG allPortsUDP
+```
 
 Recordar que se pueden combinar las categorias como en algunos ejemplos mostrados. Y para ver el manual de NMAP realizar ```man nmap```
 
