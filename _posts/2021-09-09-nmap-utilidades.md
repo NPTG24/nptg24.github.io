@@ -134,7 +134,7 @@ Para escanear los 65535 puertos
 ```
 El ```mtu``` establece la unidad máxima de transmisión y este creará paquetes con tamaño basado en el número que le daremos, el cual debe ser múltiplo de 8 (8,16, 24,32,etc), como en este caso se le asigna 8, entonces nmap creará paquetes de 8 bytes, causando una confusión en el firewall. 
 
-## Escaneo puertos UDP
+## Escaneo de puertos UDP
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
