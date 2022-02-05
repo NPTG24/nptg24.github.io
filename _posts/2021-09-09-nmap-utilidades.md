@@ -109,10 +109,26 @@ Si se quieren ver las categorias que hay de una manera ordenada:
 ```
 
 Un ejemplo de como se ocupan este tipo de scripts es lo siguiente:
+
+* Analizar vulnerabilidades:
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
-└──╼ nmap -p445 10.x.x.yyy --script "vuln and safe" -oN smbScan
+└──╼ nmap -p445 10.x.x.yyy --script vuln -oN vulnScan
 ```
+
+* Analizar vulnerabilidades y ejecución de scripts no intrusivos:
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap -p445 10.x.x.yyy --script "vuln and safe" -oN vulnsafeScan
+```
+
+* Analizar las versiones de TLS y los tipos de cifrado en SSL:
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap -p443 10.x.x.yyy --script ssl-enum-ciphers -oN tlsScan
+```
+
+* Analizar directorios principales de un entorno web:
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
 └──╼ nmap --script http-enum -p80 10.x.x.yyy -oN webScan 
