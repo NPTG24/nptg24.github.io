@@ -90,6 +90,13 @@ Parámetros usados:
 | -p | Para seleccionar que puertos se quieren escanear. |
 | -oN | Guarda un archivo de texto con el escaneo en targeted. |
 
+## Escaneo de puertos UDP
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap 10.x.x.xxx -sUV -p- --open -Pn -v -n -oG allPortsUDP
+```
+
 ## Scripts de NMAP para detección de vulnerabilidades
 
 NMAP cuenta con una series de scripts ya definidos que si queremos ver con sus respectivas categorías se podría realizar lo siguiente:
@@ -149,13 +156,6 @@ Para escanear los 65535 puertos
 └──╼ nmap --mtu 8 -p- 10.x.x.yyy
 ```
 El ```mtu``` establece la unidad máxima de transmisión y este creará paquetes con tamaño basado en el número que le daremos, el cual debe ser múltiplo de 8 (8,16, 24,32,etc), como en este caso se le asigna 8, entonces nmap creará paquetes de 8 bytes, causando una confusión en el firewall. 
-
-## Escaneo de puertos UDP
-
-```bash
-┌─[root@kali]─[/home/user/demo/nmap]
-└──╼ nmap 10.x.x.xxx -sUV -p- --open -Pn -v -n -oG allPortsUDP
-```
 
 Recordar que se pueden combinar las categorias como en algunos ejemplos mostrados. Y para ver el manual de NMAP realizar ```man nmap```
 
