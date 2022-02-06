@@ -114,10 +114,12 @@ root
 
 # Windows
 
+## Información del sistema
+
 En el caso de Windows se podría realizar a través de ```systeminfo```, para así poder averiguar vulnerabilidades del sistema:
 
 ```
-C:\>systeminfo
+C:\> systeminfo
 systeminfo
 
 Host Name:                 ARCTIC
@@ -162,3 +164,53 @@ Network Card(s):           1 NIC(s) Installed.
 ```
 
 ![1](http://imgfz.com/i/rFQc3RH.png)
+
+## Permisos de usuario
+
+Se pueden ver que privilegios tiene el usuario a través del siguiente comando:
+
+```
+C:\> whoami /priv
+```
+
+## Local Group
+
+A través de ver en que grupo se encuentra el usuario se pueden encontrar vías potenciales para escalar privilegios:
+
+```
+C:\> net user <user>
+```
+
+Ejemplo:
+
+```
+C:\> net user svc-printer
+User name                    svc-printer
+Full Name                    SVCPrinter
+Comment                      Service Account for Printer
+User's comment
+Country/region code          000 (System Default)
+Account active               Yes
+Account expires              Never
+
+Password last set            5/26/2021 1:15:13 AM
+Password expires             Never
+Password changeable          5/27/2021 1:15:13 AM
+Password required            Yes
+User may change password     Yes
+
+Workstations allowed         All
+Logon script
+User profile
+Home directory
+Last logon                   10/16/2021 10:01:36 AM
+
+Logon hours allowed          All
+
+Local Group Memberships      *Print Operators      *Remote Management Use
+                             *Server Operators
+Global Group memberships     *Domain Users
+The command completed successfully.
+```
+Al ver que el usuario está en el grupo ```Server Operators```, se encuentra una vía donde poder realizar la escalada de privilegio.
+
