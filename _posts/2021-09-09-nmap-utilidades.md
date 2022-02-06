@@ -96,6 +96,24 @@ Parámetros usados:
 ┌─[root@kali]─[/home/user/demo/nmap]
 └──╼ nmap 10.x.x.xxx -sUV -p- --open -Pn -v -n -oG allPortsUDP
 ```
+## Escaneo de listado
+
+Si se requiere escanear un listado como por ejemplo el siguiente:
+```
+# cat list.txt
+
+192.168.10.1
+192.168.10.100
+192.168.10.101
+```
+
+Realizamos lo siguiente:
+```
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap -sCV -p- --open -Pn -v -n -iL list.txt -oN listScan
+```
+
+
 
 ## Scripts de NMAP para detección de vulnerabilidades
 
