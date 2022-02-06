@@ -212,5 +212,5 @@ Local Group Memberships      *Print Operators      *Remote Management Use
 Global Group memberships     *Domain Users
 The command completed successfully.
 ```
-Al ver que el usuario está en el grupo ```Server Operators```, se encuentra una vía donde poder realizar la escalada de privilegio.
+Al ver que el usuario está en el grupo ```Server Operators```, se encuentra una vía donde poder realizar la escalada de privilegio a través de ```binPath```.
 
