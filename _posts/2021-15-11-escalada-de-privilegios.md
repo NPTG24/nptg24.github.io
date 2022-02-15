@@ -34,8 +34,17 @@ Una manera de escalar privilegios es a través del siguiente comando:
 ┌─[user@user]─[/]
 └──╼ sudo -l
 ```
-
 y ahí aparecerá un binario en el cuál podremos obtener acceso root siguiendo los pasos que nos indican en [GTFOBins](https://gtfobins.github.io/).
+
+## Información del sistema
+
+```bash
+┌─[user@user]─[/]
+└──╼ uname -a
+Linux 3.2.0-23-generic #36-Ubuntu SMP Tue Apr 10 20:39:51 UTC 2012 x86_64 x86_64 x86_64 GNU/Linux
+```
+Y a través de esto, podemos encontrar vulnerabilidades para escalar privilegios en el sistema.
+
 
 ## SUID
 
