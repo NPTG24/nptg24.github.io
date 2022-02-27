@@ -42,15 +42,6 @@ Parámetros usados:
 | -n | No aplicar resolución DNS. (Esto es para ahorrar tiempo en el escaneo) |
 | -oG | Los resultados se exportan en formato grepeable al fichero allPorts. |
 
-Para ver los puertos abiertos de manera cómoda se puede ocupar lo siguiente:
-
-```bash
-┌─[root@kali]─[/home/user/demo/nmap]
-└──╼ cat allPorts | grep -oP '\d{1,5}/open'
-22/open
-80/open
-```
-
 Maneras para agilizar nuestros escaneos en el caso de que sea lento con el método anterior:
 
 ```bash
@@ -69,6 +60,72 @@ Maneras para agilizar nuestros escaneos en el caso de que sea lento con el méto
 | --min-rate | Indica cuantos paquetes por segundo emite durante el escaneo. |
 | -vvv | Triple verbose(-v). |
 | -Pn | No aplica descubrimiento de host a través del protocolo de resolución de direcciones(ARP). |
+
+Para ver los puertos abiertos de manera cómoda se puede ocupar lo siguiente:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ cat allPorts | grep -oP '\d{1,5}/open'
+22/open
+80/open
+```
+
+## Copiar puertos
+
+En el caso de que hubieran varios puertos abiertos que retrasen el escaneo, se puede ocupar la siguiente función:
+
+```bash
+function extractPorts(){
+	ports="$(cat $1 | grep -oP '\d{1,5}/open' | awk '{print $1}' FS='/' | xargs | tr ' ' ',')"
+	ip_address="$(cat $1 | grep -oP '\d{1,3}\.\d{1,3}\.\d{1,3}\.\d{1,3}' | sort -u | head -n 1)"
+	echo -e "\n[*] Extracting information...\n" > extractPorts.tmp
+	echo -e "\t[*] IP Address: $ip_address"  >> extractPorts.tmp
+	echo -e "\t[*] Open ports: $ports\n"  >> extractPorts.tmp
+	echo $ports | tr -d '\n' | xclip -sel clip
+	echo -e "[*] Ports copied to clipboard\n"  >> extractPorts.tmp
+	cat extractPorts.tmp; rm extractPorts.tmp
+}
+```
+
+```extractPorts``` se debe pegar en el siguiente directorio:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nano ~/.bashrc
+```
+
+En algunos casos debe ser en este directorio:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nano ~/.zshrc
+```
+
+Para el funcionamiento de esta función se debe instalar ```xclip``` realizando lo siguiente:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ sudo apt-get -y install xclip
+```
+
+```extractPorts``` se ocupa de la siguiente forma, destacando que el nmap de puertos debe ser siempre en formato ```-oG```:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ extractPorts <nombre de fichero oG>
+
+#En nuestro caso sería
+
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ extractPorts allPorts
+
+[*] Extracting information...
+
+	[*] IP Address: 10.x.x.xxx
+	[*] Open ports: 22,80
+
+[*] Ports copied to clipboard
+```
 
 ## Escaneo de versiones
 
