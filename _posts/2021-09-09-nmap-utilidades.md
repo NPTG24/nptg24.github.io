@@ -56,7 +56,7 @@ Parámetros usados:
 | -n | No aplicar resolución DNS. (Esto es para ahorrar tiempo en el escaneo) |
 | -oG | Los resultados se exportan en formato grepeable al fichero allPorts. |
 
-Maneras para agilizar nuestros escaneos en el caso de que sea lento con el método anterior:
+Maneras para agilizar nuestros escaneos en el caso de que sea lento con el método anterior, destacando que en entornos reales genera bastante ruido:
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
