@@ -24,11 +24,25 @@ Nmap ("Network Mapper") es un código abierto y gratuito que sirve para el descu
 
 ## Escaneo general
 
+Para enumerar los 1000 puertos más comunes y ver los puertos abiertos:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap 10.x.x.xxx -n -Pn --open -oG allPorts
+```
+
 Para enumerar los 65535 puertos de una maquina y así ver los que están abiertos, se realiza lo siguiente:
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
-└──╼ nmap 10.x.x.xxx -p- --open -T5 -v -n -oG allPorts
+└──╼ nmap 10.x.x.xxx -p- --open -v -n -Pn -oG allPorts
+```
+
+O también se podría controlar la velocidad de escaneo con el parámetro ```-T```:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap 10.x.x.xxx -p- --open -T5 -v -n -Pn -oG allPorts
 ```
 
 Parámetros usados:
