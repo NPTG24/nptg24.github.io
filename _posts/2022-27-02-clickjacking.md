@@ -6,9 +6,9 @@ title: Clickjacking
 subtitle: 'comprobar vulnerabilidad'
 description: >-
 image: >-
-  http://imgfz.com/i/0iKnB5f.gif
+  http://imgfz.com/i/YeTFDBR.png
 optimized_image: >-
-  http://imgfz.com/i/0iKnB5f.gif
+  http://imgfz.com/i/YeTFDBR.png
 category: ciberseguridad
 tags:
   - jack
