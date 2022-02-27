@@ -30,7 +30,7 @@ Ahora se abre el index.html en nuestro navegador favorito:
 
 ![openfile](http://imgfz.com/i/WQp3rhi.png)
 
-Como se aprecia se podrán arrastrar aquellos que dicen "Drag me", es simplemente para comprobar de mejor forma el clickjacking. Ahora para comprobar si una página es vulnerable o no debemos ingresar el link en URL.
+Como se aprecia se podrán arrastrar aquellos que dicen "Drag me", es simplemente para comprobar de mejor forma el clickjacking. Ahora para comprobar si una página es vulnerable o no debemos ingresar el link en URL y hacer clic en "Load".
 
 ![novuln](http://imgfz.com/i/5RfXL2M.png)
 
