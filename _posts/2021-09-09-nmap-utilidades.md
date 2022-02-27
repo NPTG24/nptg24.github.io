@@ -72,7 +72,7 @@ Para ver los puertos abiertos de manera cómoda se puede ocupar lo siguiente:
 
 ## Copiar puertos
 
-En el caso de que hubieran varios puertos abiertos que retrasen el escaneo, se puede ocupar la siguiente función:
+En el caso de que hubieran varios puertos abiertos y para evitar el estar copiando 1 a 1 los puertos, se puede ocupar la siguiente función:
 
 ```bash
 function extractPorts(){
