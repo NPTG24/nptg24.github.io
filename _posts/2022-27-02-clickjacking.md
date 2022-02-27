@@ -20,7 +20,7 @@ tags:
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
-Es un ataque basado en la interfaz, el cual utilizar múltiples capas transparentes u opacas para engañar a un usuario para que haga clic en un botón o enlace en otra página, básicamente el atacante estará "secuestrando" clics destinados a la página real y enrutándolos a otra página, muy probablemente propiedad de otra aplicación, dominio o ambos.
+Es un ataque basado en la interfaz, el cual utiliza múltiples capas transparentes u opacas para engañar a un usuario para que haga clic en un botón o enlace en otra página, básicamente el atacante estará "secuestrando" clics destinados a la página real y enrutándolos a otra página, muy probablemente propiedad de otra aplicación, dominio o ambos.
 
 Esta vulnerabilidad se puede comprobar a través de la herramienta [Jack](https://github.com/sensepost/jack), la cual se inicia a través de un index.html del repositorio.
 
