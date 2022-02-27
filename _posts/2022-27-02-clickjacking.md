@@ -38,4 +38,4 @@ Si no aparece nada en pantalla como es este caso significa que no es vulnerable 
 
 ![vuln](http://imgfz.com/i/gl9YntT.png)
 
-La página cargará y se mostrará en pantalla. Para evitar este tipo de ataques, en el sitio vulnerable se debe incluir un encabezado HTTP x-frame-options que evite que el contenido de su sitio se cargue en un marco (etiqueta) o iframe (etiqueta). Además de validar que el sitio se encuentre protegido ante soluciones "Web Application Firewall" (WAF)
+La página cargará y se mostrará en pantalla, es decir, es vulnerable. Para evitar este tipo de ataques, en el sitio vulnerable se debe incluir un encabezado HTTP x-frame-options que evite que el contenido de su sitio se cargue en un marco (etiqueta) o iframe (etiqueta). Además de validar que el sitio se encuentre protegido ante soluciones "Web Application Firewall" (WAF)
