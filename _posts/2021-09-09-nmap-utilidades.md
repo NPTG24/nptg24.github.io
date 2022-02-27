@@ -165,7 +165,8 @@ Si se requiere escanear un listado como por ejemplo el siguiente:
 ```
 
 Realizamos lo siguiente, a través de ```-iL```:
-```
+
+```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
 └──╼ nmap -sCV -p- --open -Pn -v -n -iL list.txt -oN listScan
 ```
