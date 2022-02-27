@@ -32,7 +32,7 @@ Ahora se abre el index.html en nuestro navegador favorito:
 
 Como se aprecia se podrán arrastrar aquellos que dicen "Drag me", es simplemente para comprobar de mejor forma el clickjacking. Ahora para comprobar si una página es vulnerable o no debemos ingresar el link en URL.
 
-![novuln](http://imgfz.com/i/Kh3QFjL.png)
+![novuln](http://imgfz.com/i/5RfXL2M.png)
 
 Si no aparece nada en pantalla como es este caso significa que no es vulnerable a clickjacking. Ahora si es vulnerable pasará lo siguiente:
 
