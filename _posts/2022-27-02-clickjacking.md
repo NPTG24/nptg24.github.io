@@ -1,5 +1,5 @@
 ---
-date: 2022-02-27T17:23:12.000Z
+date: 2022-02-27T20:47:12.000Z
 layout: post
 comments: true
 title: Clickjacking
