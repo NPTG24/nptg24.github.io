@@ -13,12 +13,15 @@ category: ciberseguridad
 tags:
   - extracción
   - enumeración
-  - información
   - dnsenum
   - dns
   - ping
   - whois
-  - 
+  - theharvester
+  - whatweb
+  - waf
+  - mantra
+  - traceroute
   - Hacking
 author: Felipe Canales Cayuqueo
 paginate: true
