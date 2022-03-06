@@ -119,4 +119,4 @@ Para esto se recomienda leer el artículo de [Wfuzz](https://nptg24.github.io/wf
 ## Otras herramientas
 
 * [CentralOps](https://centralops.net/): página web de información general recomendada.
-* [OWASP Mantra](https://sourceforge.net/projects/getmantra/): es un navegador especialmente diseñado para pruebas de seguridad de aplicaciones web.
+* [OWASP Mantra](https://www.kali.org/tools/owasp-mantra-ff/): es un navegador especialmente diseñado para pruebas de seguridad de aplicaciones web.
