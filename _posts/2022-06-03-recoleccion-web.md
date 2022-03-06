@@ -105,7 +105,7 @@ Con el parámetro ```-f``` se pueden guardar los resultados en un archivo .html.
 
 ## Detección de WAF
 
-Un WAF es un firewall de aplicaciones web ayuda a proteger las aplicaciones web filtrando y monitoreando el tráfico HTTP entre una aplicación web e Internet. Este crea una defensa contra una variedad de vectores de ataque.
+Un WAF es un firewall de aplicaciones web que ayuda a proteger las aplicaciones web filtrando y monitoreando el tráfico HTTP entre una aplicación web e Internet. Este crea una defensa contra una variedad de vectores de ataque.
 
 ```bash
 ┌─[root@kali]─[/home/user/]
