@@ -53,6 +53,7 @@ También se pueden obtener los saltos que se tienen desde nuestra IP hasta llega
 ┌─[root@kali]─[/home/user/]
 └──╼ whatweb -v <dirección web>
 ```
+
 | Parámetro | Utilidad |
 | :--------: | :-------: |
 | -v | Muestra la salida de forma más detallada. |
@@ -60,6 +61,7 @@ También se pueden obtener los saltos que se tienen desde nuestra IP hasta llega
 ## Detección de datos de servidor whois
 
 Whois se trata de una lista de registros de Internet ampliamente utilizada que identifica quién posee un dominio y cómo ponerse en contacto con ellos.
+
 ```bash
 ┌─[root@kali]─[/home/user/]
 └──╼ whois <dirección web>
