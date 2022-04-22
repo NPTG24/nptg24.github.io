@@ -222,6 +222,12 @@ Permanent MAC: 00:cf:ba:91:36:9e (ALFA, INC.)
 ┌─[root@kali]─[/Documents/WiFi/]
 └──╼ airodump-ng -c 5 -w nombre --bssid D8:5D:4C:FF:CC:5A wlan0mon 
 ```
+### Modificar canal
+
+```bash
+┌─[root@kali]─[/Documents/WiFi/]
+└──╼ iwconfig wlan0mon channel 11
+```
 
 ## Ataque de deautenticación dirigido
 
