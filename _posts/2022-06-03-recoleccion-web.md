@@ -82,7 +82,7 @@ Esto se realiza a través de un script Perl multiproceso para enumerar la inform
 
 ## Obtención de correos electrónicos
 
-Desde google una manera sencilla es realizando la siguiente busqueda:
+Desde google una manera sencilla es realizando la siguiente búsqueda:
 
 ```
 "@example.com" -example.com
