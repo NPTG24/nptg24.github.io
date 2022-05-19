@@ -91,7 +91,7 @@ Una vez detectamos algunos que nos sirva (en este caso ```/usr/bin/passwd```), p
 └──╼ openssl passwd -1 -salt root root
 $1$root$9gr5KxwuEdiI80GtIzd.U0
 ```
-Lo que recibimos anteriormente lo copiamos y lo pegamos en ```/etc/passwd```
+Lo que recibimos anteriormente lo copiamos y lo reemplazamos por la ```x``` que aparece en root del ```/etc/passwd```
 
 ```bash
 ┌─[user@user]─[/]
