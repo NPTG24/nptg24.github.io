@@ -206,6 +206,45 @@ Aquí podríamos escalar privilegios a través de ```Python```, siguiendo los pa
 root
 ```
 
+## Contraseñas en la configuración web
+
+Se pueden encontrar credenciales válidas a través del directorio de la configuración de un servidor web:
+
+```bash
+user@linux:~/myapi/config$ grep -r -i password
+grep -r -i password
+environments/production/database.json:        "password": "${process.env.DATABASE_PASSWORD || ''}",
+environments/development/database.json:        "password": "#J!:F9Zt2u"
+environments/staging/database.json:        "password": "${process.env.DATABASE_PASSWORD || ''}",
+
+
+user@linux:~/myapi/config$ cat environments/development/database.json
+cat environments/development/database.json
+{
+  "defaultConnection": "default",
+  "connections": {
+    "default": {
+      "connector": "strapi-hook-bookshelf",
+      "settings": {
+        "client": "mysql",
+        "database": "strapi",
+        "host": "127.0.0.1",
+        "port": 3306,
+        "username": "developer",
+        "password": "#J!:F9Zt2u"
+      },
+      "options": {}
+    }
+  }
+}
+
+
+user@linux:~/myapi/config$ mysql -udeveloper -p
+mysql -u developer -p
+Enter password: #J!:F9Zt2u
+```
+
+
 # Windows
 
 ## Información del sistema
