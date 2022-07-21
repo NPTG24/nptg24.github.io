@@ -248,6 +248,24 @@ Nmap done: 1 IP address (1 host up) scanned in 178.24 seconds
 └──╼ xsltproc Targeted -o target.html
 ```
 
+## Detección de banners
+
+A veces nmap puede perder alguna información, sin embargo, si realizamos lo siguiente podemos obtener información adicional en el escaneo:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap 10.10.10.5 -p- -sV -Pn -n --disable-arp-ping --packet-trace
+Starting Nmap 7.80 ( https://nmap.org ) at 2020-06-16 20:10 CEST
+<SNIP>
+NSOCK INFO [0.4200s] nsock_trace_handler_callback(): Callback: READ SUCCESS for EID 18 [10.10.10.5:25] (35 bytes): 220 inlane ESMTP Postfix (Ubuntu)..
+Service scan match (Probe NULL matched with NULL line 3104): 10.10.10.5:25 is smtp.  Version: |Postfix smtpd|||
+NSOCK INFO [0.4200s] nsock_iod_delete(): nsock_iod_delete (IOD #1)
+...
+```
+
+En este caso se detecta Linux Ubuntu como distribución.
+
+
 ## Scripts de NMAP para detección de vulnerabilidades
 
 NMAP cuenta con una series de scripts ya definidos que si queremos ver con sus respectivas categorías se podría realizar lo siguiente:
