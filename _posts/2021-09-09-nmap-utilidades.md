@@ -185,7 +185,68 @@ Realizamos lo siguiente, a través de ```-iL```:
 └──╼ nmap -sCV -p- --open -Pn -v -n -iL list.txt -oN listScan
 ```
 
+## Ver informe HTML
 
+Para ver un informe como el siguiente:
+
+![html](/images/nmap-html.png)
+
+Se debe realizar lo siguiente:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap -sVC 10.10.10.5 -p22,80,110,139,143,445,31337 -T5 -oX Targeted
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-21 05:02 EDT
+Nmap scan report for 10.10.10.5
+Host is up (0.14s latency).
+
+PORT      STATE SERVICE     VERSION
+22/tcp    open  ssh         OpenSSH 7.2p2 Ubuntu 4ubuntu2.10 (Ubuntu Linux; protocol 2.0)
+| ssh-hostkey: 
+|   2048 71:c1:89:90:7f:fd:4f:60:e0:54:f3:85:e6:35:6c:2b (RSA)
+|   256 e1:8e:53:18:42:af:2a:de:c0:12:1e:2e:54:06:4f:70 (ECDSA)
+|_  256 1a:cc:ac:d4:94:5c:d6:1d:71:e7:39:de:14:27:3c:3c (ED25519)
+80/tcp    open  http        Apache httpd 2.4.18 ((Ubuntu))
+|_http-server-header: Apache/2.4.18 (Ubuntu)
+|_http-title: Apache2 Ubuntu Default Page: It works
+110/tcp   open  pop3        Dovecot pop3d
+|_pop3-capabilities: CAPA UIDL SASL RESP-CODES AUTH-RESP-CODE PIPELINING TOP
+139/tcp   open  netbios-ssn Samba smbd 3.X - 4.X (workgroup: WORKGROUP)
+143/tcp   open  imap        Dovecot imapd
+|_imap-capabilities: more SASL-IR ID capabilities Pre-login OK IMAP4rev1 listed IDLE LOGIN-REFERRALS post-login LITERAL+ have LOGINDISABLEDA0001 ENABLE
+445/tcp   open  netbios-ssn Samba smbd 4.3.11-Ubuntu (workgroup: WORKGROUP)
+31337/tcp open  Elite?
+Service Info: Host: NIX-NMAP-DEFAULT; OS: Linux; CPE: cpe:/o:linux:linux_kernel
+
+Host script results:
+|_clock-skew: mean: -38m02s, deviation: 1h09m16s, median: 1m56s
+| smb-security-mode: 
+|   account_used: guest
+|   authentication_level: user
+|   challenge_response: supported
+|_  message_signing: disabled (dangerous, but default)
+|_nbstat: NetBIOS name: NIX-NMAP-DEFAUL, NetBIOS user: <unknown>, NetBIOS MAC: <unknown> (unknown)
+| smb2-security-mode: 
+|   3.1.1: 
+|_    Message signing enabled but not required
+| smb2-time: 
+|   date: 2022-07-21T09:07:36
+|_  start_date: N/A
+| smb-os-discovery: 
+|   OS: Windows 6.1 (Samba 4.3.11-Ubuntu)
+|   Computer name: nix-nmap-default
+|   NetBIOS computer name: NIX-NMAP-DEFAULT\x00
+|   Domain name: \x00
+|   FQDN: nix-nmap-default
+|_  System time: 2022-07-21T11:07:36+02:00
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 178.24 seconds
+
+
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ xsltproc Targeted -o target.html
+```
 
 ## Scripts de NMAP para detección de vulnerabilidades
 
