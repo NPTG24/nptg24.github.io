@@ -263,8 +263,33 @@ NSOCK INFO [0.4200s] nsock_iod_delete(): nsock_iod_delete (IOD #1)
 ...
 ```
 
-En este caso se detecta Linux Ubuntu como distribución.
+En este caso se detecta Linux Ubuntu como distribución. Aunque también tenemos otra forma de obtener información que es por medio de ```tcpdump``` y ```netcat```.
 
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ tcpdump -i tun0 host 10.129.124.226           
+tcpdump: verbose output suppressed, use -v[v]... for full protocol decode
+listening on tun0, link-type RAW (Raw IP), snapshot length 262144 bytes
+23:32:46.202998 IP 10.10.14.99.51982 > 10.129.124.226.31337: Flags [S], seq 4264028568, win 64240, options [mss 1460,sackOK,TS val 3178733957 ecr 0,nop,wscale 7], length 0
+23:32:46.339591 IP 10.129.124.226.31337 > 10.10.14.99.51982: Flags [S.], seq 3947683085, ack 4264028569, win 28960, options [mss 1337,sackOK,TS val 220297 ecr 3178733957,nop,wscale 7], length 0
+23:32:46.339623 IP 10.10.14.99.51982 > 10.129.124.226.31337: Flags [.], ack 1, win 502, options [nop,nop,TS val 3178734094 ecr 220297], length 0
+23:32:52.470973 IP 10.10.14.99.51982 > 10.129.124.226.31337: Flags [P.], seq 1:2, ack 1, win 502, options [nop,nop,TS val 3178740225 ecr 220297], length 1
+23:32:52.607053 IP 10.129.124.226.31337 > 10.10.14.99.51982: Flags [.], ack 2, win 227, options [nop,nop,TS val 221864 ecr 3178740225], length 0
+23:33:06.499472 IP 10.129.124.226.31337 > 10.10.14.99.51982: Flags [P.], seq 1:32, ack 2, win 227, options [nop,nop,TS val 225337 ecr 3178740225], length 31
+23:33:06.499492 IP 10.10.14.99.51982 > 10.129.124.226.31337: Flags [.], ack 32, win 502, options [nop,nop,TS val 3178754254 ecr 225337], length 0
+23:33:06.499863 IP 10.129.124.226.31337 > 10.10.14.99.51982: Flags [P.], seq 32:78, ack 2, win 227, options [nop,nop,TS val 225337 ecr 3178740225], length 46
+23:33:06.499872 IP 10.10.14.99.51982 > 10.129.124.226.31337: Flags [.], ack 78, win 502, options [nop,nop,TS val 3178754254 ecr 225337], length 0
+23:33:16.543052 IP 10.10.14.99.51982 > 10.129.124.226.31337: Flags [F.], seq 2, ack 78, win 502, options [nop,nop,TS val 3178764297 ecr 225337], length 0
+23:33:16.678983 IP 10.129.124.226.31337 > 10.10.14.99.51982: Flags [F.], seq 78, ack 3, win 227, options [nop,nop,TS val 227882 ecr 3178764297], length 0
+23:33:16.679034 IP 10.10.14.99.51982 > 10.129.124.226.31337: Flags [.], ack 79, win 502, options [nop,nop,TS val 3178764433 ecr 227882], length 0
+```
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nc -nv 10.129.124.226 31337
+(UNKNOWN) [10.129.124.226] 31337 (?) open
+
+220 HTB{flag}
+```
 
 ## Scripts de NMAP para detección de vulnerabilidades
 
