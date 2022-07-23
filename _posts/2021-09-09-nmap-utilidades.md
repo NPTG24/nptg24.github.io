@@ -444,11 +444,11 @@ El ```mtu``` establece la unidad máxima de transmisión y este creará paquetes
 
 ### Señuelos
 
-Por medio de la opción ```-D```, Nmap genera varias direcciones IP aleatorias insertadas en el encabezado de IP para disfrazar el origen del paquete enviado. Con este método, podemos generar aleatoriamente ( RND) un número específico (por ejemplo: 5) de direcciones IP.
+Por medio de la opción ```-D```, Nmap genera varias direcciones IP aleatorias insertadas en el encabezado de IP para disfrazar el origen del paquete enviado. Con este método, podemos generar aleatoriamente (RND) un número específico (por ejemplo: 5) de direcciones IP.
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
-└──╼ nmap 10.10.10.5 -p 80 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5
+└──╼ nmap 10.10.10.5 -p8132 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5
 ```
 
 ### Proxy DNS
@@ -457,7 +457,7 @@ Se puede  usar TCP port 53 como puerto de origen por medio de ```--source-port``
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
-└──╼ nmap 10.10.10.5 -p81332 -sS -Pn -n --disable-arp-ping --packet-trace --source-port 53
+└──╼ nmap 10.10.10.5 -p8132 -sS -Pn -n --disable-arp-ping --packet-trace --source-port 53
 ```
 
 Recordar que se pueden combinar las categorias como en algunos ejemplos mostrados. Y para ver el manual de NMAP realizar ```man nmap```
