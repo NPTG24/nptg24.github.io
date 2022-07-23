@@ -404,7 +404,7 @@ Otro medio de detectar un puerto abierto, es por medio de ```netcat```:
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
-└──╼ nmap -Pn -n -p80 -T5 10.129.2.47 --disable-arp-ping -sV
+└──╼ nmap -Pn -n -p8132 -T5 10.129.2.47 --disable-arp-ping -sV
 Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-23 19:28 EDT
 Nmap scan report for 10.129.2.47
 Host is up.
