@@ -339,6 +339,66 @@ Un ejemplo de como se ocupan este tipo de scripts es lo siguiente:
 
 Para intentar evadir el firewall en un puerto que aparece como ```filtered``` o simplemente no aparece, se puede realizar lo siguiente:
 
+### IP de origen diferente
+
+Si realizamos un escaneo normal, podemos ver que la dirección IP contiene puertos filtrados:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap 10.129.125.126 -n -Pn -T5 -p-                           
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-23 04:37 EDT
+Warning: 10.129.125.126 giving up on port because retransmission cap hit (2).
+Nmap scan report for 10.129.125.126
+Host is up (0.15s latency).
+Not shown: 64256 closed tcp ports (reset), 1276 filtered tcp ports (no-response)
+PORT      STATE SERVICE
+22/tcp    open  ssh
+80/tcp    open  http
+10001/tcp open  scp-config
+
+Nmap done: 1 IP address (1 host up) scanned in 597.92 seconds
+```
+
+Ahora para este proceso debemos ver que dirección de IP de origen distinta tenemos disponible:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap -sn 10.129.0.0/16                  
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-23 05:24 EDT
+Nmap scan report for 10.129.0.1
+Host is up (0.14s latency).
+Nmap scan report for 10.129.2.47
+Host is up (0.14s latency).
+Nmap scan report for 10.129.42.198
+Host is up (0.14s latency).
+Nmap scan report for 10.129.43.4
+Host is up (0.14s latency).
+Nmap scan report for 10.129.43.22
+Host is up (0.14s latency).
+```
+
+Y procedemos a suplantar con alguna disponible:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap 10.129.125.126 -n -Pn -T5 -p445 -O -S 10.129.42.198 -e tun0
+Nmap scan report for 10.129.125.126
+Host is up (0.14s latency).
+
+PORT    STATE SERVICE
+445/tcp open  microsoft-ds
+Warning: OSScan results may be unreliable because we could not find at least 1 open and 1 closed port
+Aggressive OS guesses: Linux 4.15 - 5.6 (95%), Linux 5.3 - 5.4 (95%), Linux 2.6.32 (95%), Linux 5.0 - 5.3 (95%), Linux 3.1 (95%), Linux 3.2 (95%), AXIS 210A or 211 Network Camera (Linux 2.6.17) (94%), ASUS RT-N56U WAP (Linux 3.4) (93%), Linux 3.16 (93%), Linux 5.0 - 5.4 (93%)
+No exact OS matches for host (test conditions non-ideal).
+Network Distance: 2 hops
+
+OS detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 2 IP addresses (2 hosts up) scanned in 5.91 seconds
+
+```
+
+### mtu
+
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
 └──╼ nmap --mtu 8 10.x.x.yyy
