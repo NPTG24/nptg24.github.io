@@ -351,10 +351,11 @@ Warning: 10.129.125.126 giving up on port because retransmission cap hit (2).
 Nmap scan report for 10.129.125.126
 Host is up (0.15s latency).
 Not shown: 64256 closed tcp ports (reset), 1276 filtered tcp ports (no-response)
-PORT      STATE SERVICE
-22/tcp    open  ssh
-80/tcp    open  http
-10001/tcp open  scp-config
+PORT      STATE    SERVICE
+22/tcp    open     ssh
+80/tcp    open     http
+445/tcp   filtered microsoft-ds
+10001/tcp open     scp-config
 
 Nmap done: 1 IP address (1 host up) scanned in 597.92 seconds
 ```
