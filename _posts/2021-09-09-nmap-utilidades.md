@@ -397,6 +397,34 @@ Nmap done: 2 IP addresses (2 hosts up) scanned in 5.91 seconds
 
 ```
 
+### Netcat
+
+Otro medio de detectar un puerto abierto, es por medio de ```netcat```:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap -Pn -n -p80 -T5 10.129.2.47 --disable-arp-ping -sV
+Starting Nmap 7.92 ( https://nmap.org ) at 2022-07-23 19:28 EDT
+Nmap scan report for 10.129.2.47
+Host is up.
+
+PORT      STATE      SERVICE VERSION
+8132/tcp  filtered   ibm-db2
+
+Service detection performed. Please report any incorrect results at https://nmap.org/submit/ .
+Nmap done: 1 IP address (1 host up) scanned in 1.35 seconds
+```
+
+Ahora si nos conectamos por medio de netcat, este nos devuelve si el puerto se encuentra abierto o cerrado:
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nc -nv -p 53 10.129.2.47 8132 
+(UNKNOWN) [10.129.2.47] 8132 (?) open
+```
+
+En este caso nos devuleve que se encuentra abierto este puerto seleccionado.
+
 ### mtu
 
 ```bash
@@ -405,11 +433,31 @@ Nmap done: 2 IP addresses (2 hosts up) scanned in 5.91 seconds
 ```
 
 Para escanear los 65535 puertos
+
 ```bash
 ┌─[root@kali]─[/home/user/demo/nmap]
 └──╼ nmap --mtu 8 -p- 10.x.x.yyy
 ```
+
 El ```mtu``` establece la unidad máxima de transmisión y este creará paquetes con tamaño basado en el número que le daremos, el cual debe ser múltiplo de 8 (8,16, 24,32,etc), como en este caso se le asigna 8, entonces nmap creará paquetes de 8 bytes, causando una confusión en el firewall. 
+
+### Señuelos
+
+Por medio de la opción ```-D```, Nmap genera varias direcciones IP aleatorias insertadas en el encabezado de IP para disfrazar el origen del paquete enviado. Con este método, podemos generar aleatoriamente ( RND) un número específico (por ejemplo: 5) de direcciones IP.
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap 10.10.10.5 -p 80 -sS -Pn -n --disable-arp-ping --packet-trace -D RND:5
+```
+
+### Proxy DNS
+
+Se puede  usar TCP port 53 como puerto de origen por medio de ```--source-port``` para nuestros escaneos. Si el administrador usa el firewall para controlar este puerto y no filtra IDS/IPS correctamente, nuestros paquetes TCP serán confiables y pasarán.
+
+```bash
+┌─[root@kali]─[/home/user/demo/nmap]
+└──╼ nmap 10.10.10.5 -p81332 -sS -Pn -n --disable-arp-ping --packet-trace --source-port 53
+```
 
 Recordar que se pueden combinar las categorias como en algunos ejemplos mostrados. Y para ver el manual de NMAP realizar ```man nmap```
 
