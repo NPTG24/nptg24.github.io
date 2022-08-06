@@ -96,6 +96,8 @@ Esto se realiza a través de un script Perl multiproceso para enumerar la inform
 └──╼ dnsenum <dirección web>
 ```
 
+>Página recomendada: [Robtex](https://www.robtex.com/dns-lookup/)
+
 ## Consulta de registros A
 
 ```
@@ -123,10 +125,6 @@ Otra opción es por medio de ```dig```:
 ┌──(root㉿kali)-[/home/user/]
 └─# dig a facebook.com @1.1.1.1
 ```
-
-
-
->Página recomendada: [Robtex](https://www.robtex.com/dns-lookup/)
 
 ## Obtención de correos electrónicos
 
