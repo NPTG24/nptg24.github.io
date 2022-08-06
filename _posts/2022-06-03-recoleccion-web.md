@@ -15,6 +15,9 @@ tags:
   - enumeración
   - dnsenum
   - dns
+  - dnsrecords
+  - dig
+  - nslookup
   - ping
   - whois
   - theharvester
@@ -32,6 +35,7 @@ La extracción de información web es una técnica para extraer grandes cantidad
 
 * [Wappalyzer](https://www.wappalyzer.com/): es una extensión del navegador que descubre las tecnologías utilizadas en los sitios web. Detecta sistemas de administración de contenido, tiendas web, servidores web, marcos de JavaScript, herramientas de análisis y muchos más.
 * [IP Address and Domain Information](https://dnslytics.com/browser-extensions-addons-accelerators): esta extensión muestra información detallada acerca de cada dirección IP, nombre de dominio y proveedor.
+* [Shodan](https://chrome.google.com/webstore/detail/shodan/jjalcfnidlmpjhdfepjhjbhnhkbgleap): La extensión de Shodan le dice dónde está alojado el sitio web (país, ciudad), quién es el propietario de la IP y qué otros servicios/puertos están abiertos.
 * [Netcraft](https://www.netcraft.com/apps/browser/): es una herramienta que permite una fácil búsqueda de información relacionada con los sitios que visita y brinda protección contra el phishing y JavaScript malicioso, incluido el ciberdelito relacionado con el coronavirus(Esta extensión da problemas con ciertos buscadores).
 
 ## Obtención IP de dominio
@@ -58,6 +62,20 @@ También se pueden obtener los saltos que se tienen desde nuestra IP hasta llega
 | :--------: | :-------: |
 | -v | Muestra la salida de forma más detallada. |
 
+## DNS Records
+
+| Registro DNS | Descripción |
+| :--------: | :-------: |
+| A | Devuelve como resultado una dirección IPv4 del dominio solicitado. |
+| AAA | Devuelve una dirección IPv6 del dominio solicitado. |
+| MX | Devuelve los servidores de correo responsables como resultado. |
+| NS | Devuelve los servidores DNS (nameservers) del dominio. |
+| TXT | 	Este registro puede contener diversa información. El "all-rounder" se puede utilizar, por ejemplo, para validar Google Search Console o validar certificados SSL. Además, las entradas SPF y DMARC están configuradas para validar el tráfico de correo y protegerlo del spam. |
+| CNAME | Este registro sirve como un alias. Si el dominio www.google.com debe apuntar a la misma IP, y creamos un registro A para uno y un registro CNAME para el otro. |
+| PTR | El registro PTR funciona al revés. Convierte direcciones IP en nombres de dominio válidos. |
+| SOA | Proporciona información sobre la "DNS Zone" correspondiente. |
+
+
 ## Detección de datos de servidor whois
 
 Whois se trata de una lista de registros de Internet ampliamente utilizada que identifica quién posee un dominio y cómo ponerse en contacto con ellos.
@@ -77,6 +95,36 @@ Esto se realiza a través de un script Perl multiproceso para enumerar la inform
 ┌─[root@kali]─[/home/user/]
 └──╼ dnsenum <dirección web>
 ```
+
+## Consulta de registros A
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# nslookup <dirección web>
+```
+Otra opción es por medio de ```dig```:
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# dig google.com @8.8.8.8
+```
+
+### Subdominios
+
+Para consultar registros A en subdominios, se debe realizar lo siguiente:
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# nslookup -query=A <dirección web>
+```
+Otra opción es por medio de ```dig```:
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# dig a facebook.com @1.1.1.1
+```
+
+
 
 >Página recomendada: [Robtex](https://www.robtex.com/dns-lookup/)
 
