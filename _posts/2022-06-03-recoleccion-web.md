@@ -82,7 +82,7 @@ Whois se trata de una lista de registros de Internet ampliamente utilizada que i
 
 ```bash
 ┌─[root@kali]─[/home/user/]
-└──╼ whois <dirección web>
+└──╼ whois <dirección web o dirección IP>
 
 ## No todas las direcciones cuentan con servidor whois
 ```
@@ -124,6 +124,58 @@ Otra opción es por medio de ```dig```:
 ```
 ┌──(root㉿kali)-[/home/user/]
 └─# dig a facebook.com @1.1.1.1
+```
+
+## Consulta de registros PTR
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# nslookup -query=PTR <dirección IP>
+```
+Otra opción es por medio de ```dig```:
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# dig -X 31.13.92.36 @1.1.1.1
+```
+
+## Consulta de registros TXT
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# nslookup -query=MX facebook.com
+```
+Otra opción es por medio de ```dig```:
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# dig mx facebook.com @1.1.1.1
+```
+
+## Consulta de registros TXT
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# nslookup -query=TXT google.com
+```
+Otra opción es por medio de ```dig```:
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# dig txt google.com @8.8.8.8
+```
+
+## Consulta de cualquier registro existente
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# nslookup -query=ANY facebook.com
+```
+Otra opción es por medio de ```dig```:
+
+```
+┌──(root㉿kali)-[/home/user/]
+└─# dig any google.com @8.8.8.8
 ```
 
 ## Obtención de correos electrónicos
