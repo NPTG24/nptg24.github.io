@@ -100,13 +100,13 @@ Esto se realiza a través de un script Perl multiproceso para enumerar la inform
 
 ## Consulta de registros A
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# nslookup <dirección web>
 ```
 Otra opción es por medio de ```dig```:
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# dig google.com @8.8.8.8
 ```
@@ -115,65 +115,66 @@ Otra opción es por medio de ```dig```:
 
 Para consultar registros A en subdominios, se debe realizar lo siguiente:
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# nslookup -query=A <dirección web>
 ```
 Otra opción es por medio de ```dig```:
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# dig a facebook.com @1.1.1.1
 ```
 
 ## Consulta de registros PTR
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# nslookup -query=PTR <dirección IP>
 ```
 Otra opción es por medio de ```dig```:
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# dig -x 31.13.92.36 @1.1.1.1
 ```
 
 ## Consulta de registros MX
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# nslookup -query=MX facebook.com
 ```
 Otra opción es por medio de ```dig```:
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# dig mx facebook.com @1.1.1.1
 ```
 
 ## Consulta de registros TXT
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# nslookup -query=TXT google.com
 ```
+
 Otra opción es por medio de ```dig```:
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# dig txt google.com @8.8.8.8
 ```
 
 ## Consulta de cualquier registro existente
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# nslookup -query=ANY facebook.com
 ```
 Otra opción es por medio de ```dig```:
 
-```
+```bash
 ┌──(root㉿kali)-[/home/user/]
 └─# dig any google.com @8.8.8.8
 ```
@@ -182,7 +183,7 @@ Otra opción es por medio de ```dig```:
 
 Desde google una manera sencilla es realizando la siguiente búsqueda:
 
-```
+```bash
 "@example.com" -example.com
 ```
 
@@ -200,6 +201,8 @@ Aunque una manera más completa de realizarlo es por medio de la herramienta ```
 | -b | Se selecciona el buscador. |
 
 Con el parámetro ```-f``` se pueden guardar los resultados en un archivo .html.
+
+>Página recomendada: [Hunter.io](https://hunter.io/)
 
 ## Detección de WAF
 
