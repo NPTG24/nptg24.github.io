@@ -213,6 +213,61 @@ Un WAF es un firewall de aplicaciones web que ayuda a proteger las aplicaciones 
 └──╼ wafw00f <dirección web>
 ```
 
+## Sonar Search
+
+Es la base de datos DNS de Rapid7 en la que se puede buscar fácilmente a través de una API ultrarrápida dominios disponibles en milisegundos.
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ apt install jq 
+```
+
+### Encontrar todos los subdominios
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ curl -s https://sonar.omnisint.io/subdomains/facebook.com | jq -r '.[]' | sort -u -o subdomains.txt
+```
+
+### Buscar todos los dominios de nivel superior (TLDs)
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ curl -s https://sonar.omnisint.io/tlds/facebook.com | jq -r '.[]' | sort -u -o tlds.txt
+```
+
+### Buscar todos los resultados de todos los TLDs
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ curl -s https://sonar.omnisint.io/all/facebook.com | jq -r '.[]' | sort -u -o all.txt
+```
+
+### Otras opciones
+
+| Dirección | Utilidad |
+| :--------: | :-------: |
+| /reverse/{ip} | Búsqueda inversa de DNS en la dirección IP. |
+| /reverse/{ip}/{mask} | Búsqueda DNS inversa de un rango CIDR. |
+
+>Página web: [omnisint.io](https://omnisint.io/)
+
+## Subdominios por certificados
+
+Otra forma de extraer subdominios es por medio de los certificados SSL/TLS. Para esto nos puede servir [crt.sh](https://crt.sh/). En dónde una manera es por medio de su motor de búsqueda y otro es por medio de ```curl```:
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ curl -s "https://crt.sh/?q=facebook.com&output=json" | jq -r '.[] | "\(.name_value)\n\(.common_name)"' | sort -u -o subdomains.txt
+```
+
+Por medio de ```openSSL``` sería de la siguiente forma:
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ └──╼ openssl s_client -ign_eof 2>/dev/null <<<$'HEAD / HTTP/1.0\r\n\r' -connect "facebook.com:443" | openssl x509 -noout -text -in - | grep 'DNS' | sed -e 's|DNS:|\n|g' -e 's|^\*.*||g' | tr -d ',' | sort -u
+```
+
 ## Obtención de directorios
 
 Para esto se recomienda leer el artículo de [Wfuzz](https://nptg24.github.io/wfuzz-utilidades/).
