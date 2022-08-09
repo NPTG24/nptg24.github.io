@@ -136,10 +136,10 @@ Otra opción es por medio de ```dig```:
 
 ```
 ┌──(root㉿kali)-[/home/user/]
-└─# dig -X 31.13.92.36 @1.1.1.1
+└─# dig -x 31.13.92.36 @1.1.1.1
 ```
 
-## Consulta de registros TXT
+## Consulta de registros MX
 
 ```
 ┌──(root㉿kali)-[/home/user/]
