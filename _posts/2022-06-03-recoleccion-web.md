@@ -51,16 +51,8 @@ También se pueden obtener los saltos que se tienen desde nuestra IP hasta llega
 ┌─[root@kali]─[/home/user/]
 └──╼ traceroute <dirección web>
 ```
-## Detección de tecnologías
 
-```bash
-┌─[root@kali]─[/home/user/]
-└──╼ whatweb -v <dirección web>
-```
-
-| Parámetro | Utilidad |
-| :--------: | :-------: |
-| -v | Muestra la salida de forma más detallada. |
+# Identificación pasiva
 
 ## DNS Records
 
@@ -204,15 +196,6 @@ Con el parámetro ```-f``` se pueden guardar los resultados en un archivo .html.
 
 >Página recomendada: [Hunter.io](https://hunter.io/)
 
-## Detección de WAF
-
-Un WAF es un firewall de aplicaciones web que ayuda a proteger las aplicaciones web filtrando y monitoreando el tráfico HTTP entre una aplicación web e Internet. Este crea una defensa contra una variedad de vectores de ataque.
-
-```bash
-┌─[root@kali]─[/home/user/]
-└──╼ wafw00f <dirección web>
-```
-
 ## Sonar Search
 
 Es la base de datos DNS de Rapid7 en la que se puede buscar fácilmente a través de una API ultrarrápida dominios disponibles en milisegundos.
@@ -266,6 +249,29 @@ Por medio de ```openSSL``` sería de la siguiente forma:
 ```bash
 ┌─[root@kali]─[/home/user/]
 └──╼ └──╼ openssl s_client -ign_eof 2>/dev/null <<<$'HEAD / HTTP/1.0\r\n\r' -connect "facebook.com:443" | openssl x509 -noout -text -in - | grep 'DNS' | sed -e 's|DNS:|\n|g' -e 's|^\*.*||g' | tr -d ',' | sort -u
+```
+
+# Identificación activa
+
+## Detección de tecnologías
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ whatweb -v <dirección web>
+```
+
+| Parámetro | Utilidad |
+| :--------: | :-------: |
+| -v | Muestra la salida de forma más detallada. |
+
+
+## Detección de WAF
+
+Un WAF es un firewall de aplicaciones web que ayuda a proteger las aplicaciones web filtrando y monitoreando el tráfico HTTP entre una aplicación web e Internet. Este crea una defensa contra una variedad de vectores de ataque.
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ wafw00f <dirección web>
 ```
 
 ## Obtención de directorios
