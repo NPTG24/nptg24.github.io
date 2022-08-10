@@ -253,6 +253,19 @@ Por medio de ```openSSL``` sería de la siguiente forma:
 
 # Identificación activa
 
+## Ver encabezado
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ curl -I "http://${TARGET}"
+```
+
+## Tipos de valores de cookies
+
+* .RED:ASPSESSIONID<RANDOM>=<COOKIE_VALUE>
+* PHP:PHPSESSID=<COOKIE_VALUE>
+* JAVA:JSESSION=<COOKIE_VALUE>
+
 ## Detección de tecnologías
 
 ```bash
@@ -268,6 +281,11 @@ Por medio de ```openSSL``` sería de la siguiente forma:
 ## Detección de WAF
 
 Un WAF es un firewall de aplicaciones web que ayuda a proteger las aplicaciones web filtrando y monitoreando el tráfico HTTP entre una aplicación web e Internet. Este crea una defensa contra una variedad de vectores de ataque.
+  
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ apt install wafw00f -y
+```
 
 ```bash
 ┌─[root@kali]─[/home/user/]
@@ -282,3 +300,5 @@ Para esto se recomienda leer el artículo de [Wfuzz](https://nptg24.github.io/wf
 
 * [CentralOps](https://centralops.net/): página web de información general recomendada.
 * [OWASP Mantra](https://www.kali.org/tools/owasp-mantra-ff/): es un navegador especialmente diseñado para pruebas de seguridad de aplicaciones web.
+* [Aquatone](https://github.com/michenriksen/aquatone): es una herramienta para la inspección visual de sitios web en una gran cantidad de hosts y es conveniente para obtener rápidamente una visión general de la superficie de ataque basada en HTTP. 
+  
