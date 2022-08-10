@@ -276,7 +276,8 @@ Por medio de ```openSSL``` sería de la siguiente forma:
 | Parámetro | Utilidad |
 | :--------: | :-------: |
 | -v | Muestra la salida de forma más detallada. |
-
+  
+Para obtener más información pruebe agregar los parámetros ```-a3``` o ```-a4```.
 
 ## Detección de WAF
 
