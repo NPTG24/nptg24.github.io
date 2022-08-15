@@ -293,7 +293,7 @@ Un WAF es un firewall de aplicaciones web que ayuda a proteger las aplicaciones 
 └──╼ wafw00f <dirección web>
 ```
 
-## Identificar de nombres de servidores
+## Identificar nombres de servidores
 
 ```bash
 ┌─[root@kali]─[/home/user/]
