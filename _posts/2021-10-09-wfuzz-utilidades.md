@@ -144,10 +144,18 @@ Ahora lo podemos ejecutar de la siguiente forma:
  
  Para encontrar subdominios, se realiza lo siguiente:
  
- ```bash
+```bash
 ┌─[root@kali]─[/Documents/machines/demo/]
 └──╼ wfuzz -c -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt --hc 400,404,302 -H "Host: FUZZ.forge.htb" -u http://forge.htb -t 200
 ```
+
+Ahora si queremos visualizar el contenido del subdominio, realizamos lo siguiente:
+
+ ```bash
+┌─[root@kali]─[/Documents/machines/demo/]
+└──╼ curl -s http://192.168.10.10 -H "Host: test.com"
+```
+
 WFUZZ en Local File Inclusion(LFI):
 
  ```bash
