@@ -110,10 +110,10 @@ Si ahora se quiere ver un código de estado especifico, se puede hacer a través
 └──╼ wfuzz -c -t 400 --sc=200 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt http://10.10.10.112/FUZZ
 ```
 
-También se puede dar el caso de querer filtrar por carácteres(Ch), y esto se hace a través del comando ```--sh```:
+También se puede dar el caso de querer filtrar por carácteres(Ch), y esto se hace a través del comando ```--hh```:
 ```bash
 ┌─[root@kali]─[/Documents/machines/demo/]
-└──╼ wfuzz -c -t 400 --sh=2385 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt http://10.10.10.112/FUZZ
+└──╼ wfuzz -c -t 400 --hh=2385 -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt http://10.10.10.112/FUZZ
 ```
 
 En el caso de filtrar por "Lines", en vez de una H se reemplaza por una L e incluso recordar que se pueden combinar los tipos de filtros. Por ejemplo:
