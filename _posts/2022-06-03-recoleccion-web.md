@@ -248,7 +248,7 @@ Por medio de ```openSSL``` sería de la siguiente forma:
 
 ```bash
 ┌─[root@kali]─[/home/user/]
-└──╼ └──╼ openssl s_client -ign_eof 2>/dev/null <<<$'HEAD / HTTP/1.0\r\n\r' -connect "facebook.com:443" | openssl x509 -noout -text -in - | grep 'DNS' | sed -e 's|DNS:|\n|g' -e 's|^\*.*||g' | tr -d ',' | sort -u
+└──╼ openssl s_client -ign_eof 2>/dev/null <<<$'HEAD / HTTP/1.0\r\n\r' -connect "facebook.com:443" | openssl x509 -noout -text -in - | grep 'DNS' | sed -e 's|DNS:|\n|g' -e 's|^\*.*||g' | tr -d ',' | sort -u
 ```
 
 # Identificación activa
