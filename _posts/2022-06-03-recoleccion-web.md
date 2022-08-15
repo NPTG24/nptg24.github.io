@@ -299,6 +299,12 @@ Un WAF es un firewall de aplicaciones web que ayuda a proteger las aplicaciones 
 ┌─[root@kali]─[/home/user/]
 └──╼ nslookup -type=NS <dirección web>
 ```
+Con ```dig``` se realiza lo siguiente:
+  
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ dig ns test.com @10.129.114.183
+```
   
 ## Prueba de transferencia de zona
   
