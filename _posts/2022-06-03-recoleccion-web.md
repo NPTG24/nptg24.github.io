@@ -312,7 +312,20 @@ Con ```dig``` se realiza lo siguiente:
 ┌─[root@kali]─[/home/user/]
 └──╼ nslookup -type=any -type=AXFR <dirección web> <nombre de servidor>
 ```
-  
+Con ```dig``` se realiza lo siguiente:
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ dig axfr test.com @10.129.14.128
+```
+
+## Detección de subdominios por fuerza bruta
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ dnsenum --dnsserver 10.129.129.221 --enum -p 0 -s 0 -o subdomains.txt -f /usr/share/wordlists/SecLists/Discovery/DNS/fierce-hostlist.txt dev.inlanefreight.htb
+```
+
 ## Obtención de directorios
 
 Para esto se recomienda leer el artículo de [Wfuzz](https://nptg24.github.io/wfuzz-utilidades/).
