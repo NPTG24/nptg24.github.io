@@ -153,7 +153,7 @@ Ahora si queremos visualizar el contenido del subdominio, realizamos lo siguient
 
  ```bash
 ┌─[root@kali]─[/Documents/machines/demo/]
-└──╼ curl -s http://192.168.10.10 -H "Host: test.com"
+└──╼ curl -s http://forge.htb -H "Host: test.forge.htb"
 ```
 
 WFUZZ en Local File Inclusion(LFI):
