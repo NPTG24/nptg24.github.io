@@ -293,6 +293,20 @@ Un WAF es un firewall de aplicaciones web que ayuda a proteger las aplicaciones 
 └──╼ wafw00f <dirección web>
 ```
 
+## Identificar de nombres de servidores
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ nslookup -type=NS <dirección web>
+```
+  
+## Prueba de transferencia de zona
+  
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ nslookup -type=any -type=AXFR <dirección web> <nombre de servidor>
+```
+  
 ## Obtención de directorios
 
 Para esto se recomienda leer el artículo de [Wfuzz](https://nptg24.github.io/wfuzz-utilidades/).
@@ -301,5 +315,4 @@ Para esto se recomienda leer el artículo de [Wfuzz](https://nptg24.github.io/wf
 
 * [CentralOps](https://centralops.net/): página web de información general recomendada.
 * [OWASP Mantra](https://www.kali.org/tools/owasp-mantra-ff/): es un navegador especialmente diseñado para pruebas de seguridad de aplicaciones web.
-* [Aquatone](https://github.com/michenriksen/aquatone): es una herramienta para la inspección visual de sitios web en una gran cantidad de hosts y es conveniente para obtener rápidamente una visión general de la superficie de ataque basada en HTTP. 
-  
+* [Aquatone](https://github.com/michenriksen/aquatone): es una herramienta para la inspección visual de sitios web en una gran cantidad de hosts y es conveniente para obtener rápidamente una visión general de la superficie de ataque basada en HTTP.
