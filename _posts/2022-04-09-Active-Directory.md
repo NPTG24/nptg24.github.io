@@ -1050,7 +1050,7 @@ rpcclient $> queryuser 0x458
 
 ## ldapdomaindump
 
-Otra forma de obtener información de usuario de manera ordenada por HTML es con ```ldapdomaindump.py```:
+Otra forma de obtener información de usuarios de manera ordenada es con ```ldapdomaindump.py```, pues este generará archivos en formato HTML:
 
 ```bash
 ┌──(root㉿kali)-[/AD]
