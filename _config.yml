@@ -1,12 +1,18 @@
 # Site Settings
 name: NPTG
-title: Apuntes sobre hacking y redes.
-description: Esta página contiene información sobre ciberseguridad y redes. Por Felipe Canales Cayuqueo.
+title: NPTG | Apuntes sobre hacking y redes
+description: Esta página contiene información sobre ciberseguridad y redes abordando por ejemplo diversas técnicas de pentesting. Por Felipe Canales Cayuqueo.
 tags:
   - blog
   - ciberseguridad
   - redes
   - hacking
+  - pentesting
+  - pentester
+  - malware
+  - seguridad
+  - ethical
+  - cybersecurity
   - hacker
 show_hero: true
 menu:
