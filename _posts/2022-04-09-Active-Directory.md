@@ -1048,7 +1048,7 @@ rpcclient $> queryuser 0x458
 	logon_hrs[0..21]...
 ```
 
-## LDAP
+## ldapdomaindump
 
 Otra forma de obtener información de usuario de manera ordenada por HTML es con ```ldapdomaindump.py```:
 
