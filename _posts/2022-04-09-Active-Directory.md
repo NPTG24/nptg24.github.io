@@ -12,7 +12,6 @@ optimized_image: >-
 category: ciberseguridad
 tags:
   - AD
-  - 445
   - SMBClient
   - smbmap
   - crackmapexec
