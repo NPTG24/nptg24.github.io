@@ -326,7 +326,7 @@ Responder es un envenenador LLMNR, NBT-NS y MDNS. Responderá a consultas espec�
 
 En esta situación como el samba no está firmado, no se logra validar la legitimidad del origen, por lo que podremos interceptar las comunicaciones por SMB.
 
-Ahora por medio de tareas automatizada realizadas en los recursos compartidos a nivel de red podemos recibir hashes NTLMv2, que luego podemos intentar crackear. Esto se produce porque engañamos al servidor para que se autentique contra ti, simulando ser el recurso buscado:
+Ahora por medio de tareas automatizadas realizadas en los recursos compartidos a nivel de red podemos recibir hashes NTLMv2, que luego podemos intentar crackear. Esto se produce porque engañamos al servidor para que se autentique contra ti, simulando ser el recurso buscado:
 
 ```bash
 ┌──(root㉿kali)-[/AD]
