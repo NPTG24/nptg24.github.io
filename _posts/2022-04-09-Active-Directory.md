@@ -1082,7 +1082,7 @@ Y podremos ver la información desde nuestro navegador:
 
 ![ldapdomainchrome](/images/ldapdomainchrome.png)
 
-Y podemos ver la opción deseada, por ejemplo los usuarios:
+Luego al seleccionar alguno de los .HTML podremos ver la información que nos muestra, por ejemplo los usuarios:
 
 ![ldapdomainusers](/images/ldapdomainusers.png)
 
