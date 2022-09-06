@@ -706,6 +706,6 @@ Una vez terminado, revisamos el ejecutable.
 example.exe  LICENSE  Modules  osslsigncode  phantom-evasion.py  README.md  Setup
 ```
 
-Y como podemos ver este al momento de subirse a la máquina objetivo, estando el Windows Defender habilitado, este último no lo borra:
+Y como podemos ver que ```example.exe``` al momento de subirse a la máquina objetivo, estando el Windows Defender habilitado, no se borra:
 
 ![phantomexample](/images/example.exe.png)
