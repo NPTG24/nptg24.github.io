@@ -2199,3 +2199,14 @@ Microsoft Windows [Versi�n 10.0.14393]
 C:\Windows\Temp\test> 
 ```
 
+### Conexión por RDP
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─  rdesktop -u "" -a 16 <host>
+```
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─  rdesktop -u "" -p "" -a 16 <host>
+```
