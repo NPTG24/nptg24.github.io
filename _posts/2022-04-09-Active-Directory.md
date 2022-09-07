@@ -118,7 +118,7 @@ También podremos extraer los mismos resultados en ```crackmapexec```:
 
 ```bash
 ┌──(root㉿kali)-[/AD]
-└─ NPTG@htb[/htb]$ crackmapexec smb 10.1.1.32 --shares -u '' -p ''
+└─ crackmapexec smb 10.1.1.32 --shares -u '' -p ''
 
 SMB         10.1.1.32   445    PC-FELIPE           [*] Windows 10.0 Build 19041 x64 (name:PC-FELIPE) (domain:felipecorp.local) (signing:False) (SMBv1:False)
 SMB         10.1.1.32   445    PC-FELIPE           [+] \: 
