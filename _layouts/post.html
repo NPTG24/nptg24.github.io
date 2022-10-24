@@ -25,8 +25,12 @@
                     <img src="{{ page.image }}" alt="Featured image" class="post-cover">
                 {% endif %}
                 
-
-                <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" />
+                <div
+                 data-lyket-type="like"
+                 data-lyket-namespace="testing-widget"
+                 data-lyket-id="everybody-like-now"
+                />
+                
 
 
                 {% include pagination-post.html progressBar=true %}
