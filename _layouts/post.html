@@ -24,6 +24,14 @@
                 {% if page.image and paginator.activated == nil %}
                     <img src="{{ page.image }}" alt="Featured image" class="post-cover">
                 {% endif %}
+                
+                <div
+                  data-lyket-type="like"
+                  data-lyket-namespace="blogger"
+                  data-lyket-id="blogger-like-button"
+                />
+
+                <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" />
 
                 {% include pagination-post.html progressBar=true %}
 
@@ -32,6 +40,7 @@
                 {{ content }}
 
                 {% include pagination-post.html %}
+                
             </article>
 
             {% if site.two_columns_layout %}
