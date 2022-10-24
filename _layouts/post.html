@@ -58,13 +58,6 @@
                 </aside>
             {% endif %}
         </section>
-        
-        {% if page.applause_button %}
-            <applause-button
-            color={{ site.accent_color | default:'rgb(79,177,186)' }}
-            url={{ site.url }}{{ page.url }} >
-            </applause-button>
-        {% endif %}
 
         <!-- Add time bar only for pages without pagination -->
         {% if paginator.activated == nil and site.show_time_bar == true %}
