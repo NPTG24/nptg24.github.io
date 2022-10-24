@@ -25,6 +25,39 @@
                     <img src="{{ page.image }}" alt="Featured image" class="post-cover">
                 {% endif %}
                 
+             
+                
+                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+                <style>
+                .fa {
+                  font-size: 50px;
+                  cursor: pointer;
+                  user-select: none;
+                }
+
+                .fa:hover {
+                  color: darkblue;
+                }
+
+                </style>
+                <script>
+                function clickCounter() {
+                  if (typeof(Storage) !== "undefined") {
+                    if (localStorage.clickcount) {
+                      localStorage.clickcount = Number(localStorage.clickcount)+1;
+                    } else {
+                      localStorage.clickcount = 1;
+                    }
+                    document.getElementById("result").innerHTML = localStorage.clickcount ;
+                  } else {
+                    document.getElementById("result").innerHTML = "...";
+                  }
+                }
+                </script>
+
+
+                <i onclick="clickCounter()" type="button" class="fa fa-thumbs-up" <div id="result"> </div> </i>
+                
                 <div
                  data-lyket-type="like"
                  data-lyket-namespace="blogger"
