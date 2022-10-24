@@ -24,15 +24,6 @@
                 {% if page.image and paginator.activated == nil %}
                     <img src="{{ page.image }}" alt="Featured image" class="post-cover">
                 {% endif %}
-                
-                <div
-                 data-lyket-type="like"
-                 data-lyket-namespace="blogger"
-                 data-lyket-id="blogger-like-button"
-                ></div>
-
-                <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_8336763e590c9458a9815f9e3a6181" ></script>
-
 
                 {% include pagination-post.html progressBar=true %}
 
@@ -45,7 +36,14 @@
                 
             </article>
 
-            {% if site.two_columns_layout %}       
+            {% if site.two_columns_layout %} 
+                <div
+                 data-lyket-type="like"
+                 data-lyket-namespace="blogger"
+                 data-lyket-id="blogger-like-button"
+                ></div>
+                <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_8336763e590c9458a9815f9e3a6181" ></script>
+            
                 <aside class="see-also">
                     <h2>{{ site.translations.text.see_also | default: "Ver también" }}</h2>
                     <ul>
