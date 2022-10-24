@@ -24,6 +24,15 @@
                 {% if page.image and paginator.activated == nil %}
                     <img src="{{ page.image }}" alt="Featured image" class="post-cover">
                 {% endif %}
+                
+                <div
+                 data-lyket-type="like"
+                 data-lyket-namespace="testing-widget"
+                 data-lyket-id="everybody-like-now"
+                ></div>
+
+                <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" ></script>
+
 
                 {% include pagination-post.html progressBar=true %}
 
@@ -105,6 +114,7 @@
             {% assign author_urls = author_urls | append: '"https://www.linkedin.com/in/' | append: author.linkedin_username | append: '",' %}
         {% endif %}
         {% if page.math %}
+        
         <script>
             MathJax = {
                 tex: {
