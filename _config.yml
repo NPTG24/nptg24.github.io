@@ -85,15 +85,6 @@ paginate_content:
     single:
       is_generated: true
 
-# Likes
-defaults:
-  # You can use the following to enable comments on all posts.
-  - scope:
-      type:            posts
-    values:
-      # https://applause-button.com/
-      applause_button:       true
-
 # SASS
 sass:
   style: compressed
