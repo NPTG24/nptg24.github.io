@@ -33,15 +33,11 @@
 
                 {% include pagination-post.html %}
                 
+                {% include like.html %}
+                
             </article>
 
-            {% if site.two_columns_layout %}
-                <div
-                    data-lyket-type="like"
-                    data-lyket-namespace="blogger"
-                     data-lyket-id="blogger-like-button"
-                />
-                <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" />        
+            {% if site.two_columns_layout %}       
                 <aside class="see-also">
                     <h2>{{ site.translations.text.see_also | default: "Ver también" }}</h2>
                     <ul>
@@ -81,6 +77,7 @@
         {% if site.show_modal_on_exit %}
             {% include modal.html title="Don't go yet!" subtitle="You may also like..." closed=true showOnExit=true %}
         {% endif %}
+        
 
         {% include subscription.html %}
         {% include author.html %}
