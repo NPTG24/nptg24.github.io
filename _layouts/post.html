@@ -1,4 +1,5 @@
 <!DOCTYPE html>
+import { ClapButton } from '@lyket/react';
 <html lang="{{ site.language }}" class="no-js">
     {% include head.html %}
     <body class="has-push-menu">
@@ -25,11 +26,7 @@
                     <img src="{{ page.image }}" alt="Featured image" class="post-cover">
                 {% endif %}
                 
-                <div
-                 data-lyket-type="like"
-                 data-lyket-namespace="testing-widget"
-                 data-lyket-id="everybody-like-now"
-                />
+                 <ClapButton id={slug} namespace="blog-posts" />
                 
 
 
@@ -113,7 +110,6 @@
             {% assign author_urls = author_urls | append: '"https://www.linkedin.com/in/' | append: author.linkedin_username | append: '",' %}
         {% endif %}
         {% if page.math %}
-        <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" />
         <script>
             MathJax = {
                 tex: {
