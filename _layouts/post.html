@@ -50,7 +50,7 @@
                     }
                     document.getElementById("result").innerHTML = localStorage.clickcount ;
                   } else {
-                    document.getElementById("result").innerHTML = "...";
+                    document.getElementById("result").innerHTML = "Infinito";
                   }
                 }
                 </script>
@@ -58,12 +58,6 @@
 
                 <i onclick="clickCounter()" type="button" class="fa fa-thumbs-up" <div id="result"> </div> </i>
                 
-                <div
-                 data-lyket-type="like"
-                 data-lyket-namespace="blogger"
-                 data-lyket-id="blogger-like-button"
-                ></div>
-                <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=pt_8336763e590c9458a9815f9e3a6181" ></script>
 
                 {% include pagination-post.html progressBar=true %}
 
