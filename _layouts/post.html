@@ -36,6 +36,12 @@
             </article>
 
             {% if site.two_columns_layout %}
+                <div
+                    data-lyket-type="like"
+                    data-lyket-namespace="blogger"
+                     data-lyket-id="blogger-like-button"
+                />
+                <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" />        
                 <aside class="see-also">
                     <h2>{{ site.translations.text.see_also | default: "Ver también" }}</h2>
                     <ul>
@@ -160,12 +166,5 @@
             "keywords": [{{ page.tags | join: '","' | append: '"' | prepend: '"' }}]
         }
         </script>
-        <div
-         data-lyket-type="like"
-         data-lyket-namespace="blogger"
-         data-lyket-id="blogger-like-button"
-         />
-
-    <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" />        
     </body>
 </html>
