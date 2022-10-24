@@ -28,14 +28,6 @@
                 {% include pagination-post.html progressBar=true %}
 
                 {% include toc.html %}
-                
-                <div
-                  data-lyket-type="like"
-                  data-lyket-namespace="blogger"
-                  data-lyket-id="blogger-like-button"
-                />
-
-                <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" />
 
                 {{ content }}
 
@@ -168,5 +160,12 @@
             "keywords": [{{ page.tags | join: '","' | append: '"' | prepend: '"' }}]
         }
         </script>
+        <div
+         data-lyket-type="like"
+         data-lyket-namespace="blogger"
+         data-lyket-id="blogger-like-button"
+         />
+
+    <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" />        
     </body>
 </html>
