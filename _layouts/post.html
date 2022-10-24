@@ -24,10 +24,6 @@
                 {% if page.image and paginator.activated == nil %}
                     <img src="{{ page.image }}" alt="Featured image" class="post-cover">
                 {% endif %}
-
-                {% include pagination-post.html progressBar=true %}
-
-                {% include toc.html %}
                 
                 <div
                  data-lyket-type="like"
@@ -37,6 +33,11 @@
 
                 <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" />
 
+
+                {% include pagination-post.html progressBar=true %}
+
+                {% include toc.html %}
+                
                 {{ content }}
 
                 {% include pagination-post.html %}
