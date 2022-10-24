@@ -1,5 +1,4 @@
 <!DOCTYPE html>
-import { ClapButton } from '@lyket/react';
 <html lang="{{ site.language }}" class="no-js">
     {% include head.html %}
     <body class="has-push-menu">
@@ -25,9 +24,7 @@ import { ClapButton } from '@lyket/react';
                 {% if page.image and paginator.activated == nil %}
                     <img src="{{ page.image }}" alt="Featured image" class="post-cover">
                 {% endif %}
-                
-                 <ClapButton id={slug} namespace="blog-posts" />
-                
+
 
 
                 {% include pagination-post.html progressBar=true %}
