@@ -32,8 +32,7 @@
                 {{ content }}
 
                 {% include pagination-post.html %}
-                
-                {% include like.html %}
+             
                 
             </article>
 
@@ -57,6 +56,12 @@
                                 </a>
                             </li>
                         {% endfor %}
+                        <div
+                         data-lyket-type="like"
+                         data-lyket-namespace="blogger"
+                         data-lyket-id="blogger-like-button"
+                        />       
+                        <script src="https://unpkg.com/@lyket/widget@latest/dist/lyket.js?apiKey=acc0dbccce8e557db5ebbe6d605aaa" /> 
                     </ul>
                 </aside>
             {% endif %}
