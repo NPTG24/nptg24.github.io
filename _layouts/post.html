@@ -27,7 +27,7 @@
                 
              
                 
-                <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+               <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
                 <style>
                 .fa {
                   font-size: 50px;
@@ -41,20 +41,29 @@
 
                 </style>
                 <script>
+                let clicked = false;
                 function clickCounter() {
-                  if (typeof(Storage) !== "undefined") {
+                  if (typeof(Storage) !== "undefined" && !clicked) {
                     if (localStorage.clickcount) {
                       localStorage.clickcount = Number(localStorage.clickcount)+1;
+                      clicked = true;
                     } else {
                       localStorage.clickcount = 1;
+                      clicked = true;
                     }
                     document.getElementById("result").innerHTML = localStorage.clickcount ;
-                  } else {
-                    document.getElementById("result").innerHTML = "Infinito";
-                  }
+                    clicked = true;
+                  } 
+                }
+
+                function getClick() {
+                    if (!clicked) {
+                        clicked = true;
+                    }
                 }
                 </script>
-
+                </head>
+                <body>
 
                 <i onclick="clickCounter()" type="button" class="fa fa-thumbs-up" <div id="result"> </div> </i>
                 
