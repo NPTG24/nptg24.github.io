@@ -16,6 +16,8 @@ tags:
   - exploit
   - vulnerabilidad
   - war
+  - default
+  - credentials
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
