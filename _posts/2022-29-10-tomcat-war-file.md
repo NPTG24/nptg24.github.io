@@ -6,9 +6,9 @@ title: Subir archivo malicioso en tomcat
 subtitle: 'WAR file'
 description: >-
 image: >-
-    http://imgfz.com/i/rbPl7wv.png
+    http://imgfz.com/i/OXbyI2Y.png
 optimized_image: >-
-    http://imgfz.com/i/rbPl7wv.png
+    http://imgfz.com/i/OXbyI2Y.png
 category: ciberseguridad
 tags: 
   - linux
