@@ -70,7 +70,7 @@ Ahora dentro del "manager app" nos dirigimos a la sección "archivo WAR a desple
 
 ![tomcat1](/images/tomcat.png)
 
-Y seleccionamos el archivo ```reverse.war``` y ahora seleccionamos desplegar:
+Y seleccionamos el archivo ```reverse.war``` para desplegar:
 
 ![tomcat2](/images/tomcatwarupload.png)
 
