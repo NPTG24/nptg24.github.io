@@ -15,5 +15,10 @@
         <a href="{{ site.url }}{{ item.url }}">{{ item.title }}</a>
       </li>
     {% endif %}
+   {% if item.url == "/matrix-risk.html"%}
+      <li>
+        <a href="{{ site.url }}{{ item.url }}">{{ item.title }}</a>
+      </li>
+    {% endif %}
   {% endfor %}
 </ul>
