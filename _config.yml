@@ -22,10 +22,8 @@ menu:
     url: /about
   - title: Contacto
     url: /contact
-  - title: Matriz
+  - title: Matriz de riesgo (PYME)
     url: /matrix-risk.html
-  - title: Feed
-    url: /feed.xml
 email: felipe.canales.c@usach.cl
 # See: https://disqus.com/
 disqus_username: NPTG24
