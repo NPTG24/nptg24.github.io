@@ -1,0 +1,1012 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <title>Matriz de riesgos</title>
+    <script type="text/javascript" src="js/function.js"></script>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+ 
+  <form class="container">
+    <h1>Evaluación de riesgos</h1>
+    <caption>Este es un análisis de riesgos automatizado enfocado en los controles de la normativa ISO 27001:2022. El objetivo de este análisis es obtener una medida de la criticidad de exposición de la PYME en términos de seguridad de la información. Para cada control, se ha considerado la puntuación en relación al caso más crítico, por lo que la severidad del impacto siempre será igual o mayor que su probabilidad. Para ello, se calculará y se obtendrá un promedio teniendo en cuenta los valores de la siguiente tabla:</caption>
+    <table class="table-responsive">
+      <tr>
+        <th>Criticidad</th>
+        <th>Promedio</th>
+      </tr>
+      <tr>
+        <td>Nula</td>
+        <td>0 - 0</td>
+      </tr>
+      <tr>
+        <td>Baja</td>
+        <td>0.1 - 3.9</td>
+      </tr>
+      <tr>
+        <td>Media</td>
+        <td>4.0 - 6.9</td>
+      </tr>
+      <tr>
+        <td>Alta</td>
+        <td>7.0 - 8.9</td>
+      </tr>
+      <tr>
+        <td>Crítica</td>
+        <td>9.0 - 10.0</td>
+      </tr>
+    </table>
+    <div class="row">
+      <div class="column">
+        <label class="my-1 mr-2">¿Se cuenta con políticas de seguridad de la información en la organización?</label>
+        <select class="custom-select custom-select-sm">
+          <option selected disabled value="">Selecciona una opción</option>
+          <option value="1">Si</option>
+          <option value="10">No</option>
+          <option value="0">No aplica</option>
+        </select>
+      </div>
+
+      <div class="column">
+        <label class="my-1 mr-2">¿Se cuenta con roles y responsabilidades de seguridad de la información?</label>
+        <select class="custom-select custom-select-sm">
+          <option selected disabled value="">Selecciona una opción</option>
+          <option value="2">Si</option>
+          <option value="8">No</option>
+          <option value="0">No aplica</option>
+        </select>
+      </div>
+
+      <div class="column">
+        <label class="my-1 mr-2">¿La organización se asegura de segregar funciones en su sistema de información y que no haya conflictos de intereses entre las personas que tienes acceso a la información o sistemas?</label>
+        <select class="custom-select custom-select-sm">
+          <option selected disabled value="">Selecciona una opción</option>
+          <option value="2">Si</option>
+          <option value="8">No</option>
+          <option value="0">No aplica</option>
+        </select>
+      </div>
+
+    <div class="column">
+      <label class="my-1 mr-2">¿La dirección exige a los empleados aplicar las políticas de seguridad de la información establecidos por la organización?</label>
+      <select class="custom-select custom-select-sm">
+        <option selected disabled value="">Selecciona una opción</option>
+        <option value="2">Si</option>
+        <option value="8">No</option>
+        <option value="0">No aplica</option>
+      </select>
+    </div>
+
+    <div class="column">
+      <label class="my-1 mr-2">¿Existe contacto con las autoridades ante incidentes cibernéticos?</label>
+      <select class="custom-select custom-select-sm">
+        <option selected disabled value="">Selecciona una opción</option>
+        <option value="1">Si</option>
+        <option value="5">No</option>
+        <option value="0">No aplica</option>
+      </select>
+    </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Existe contacto con especialistas de ciberseguridad?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La información relativa a amenazas de seguridad de la información es recopilada y analizada para producir inteligencia sobre amenazas?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="5">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se cuenta con una metodología de seguridad de la información en la gestión de proyectos?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="9">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los recursos y otros activos asociados para el tratamiento de la información están claramente identificados y en un inventario?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="4">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se identifican, documentan e implementan reglas de uso aceptable de la información y de los activos para su tratamiento?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="4">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">Si un empleado finaliza su empleo o contrato, ¿devuelve todos los activos que fueron entregados por la organización?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La información de la organización se clasifica en términos legales de sensibilidad y criticidad ante revelación o modificación no autorizada?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="4">Si</option>
+      <option value="9">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La organización cuenta con procedimientos para etiquetar la información de acuerdo con un esquema de clasificación adoptado?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="4">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se establecen normas, procedimientos o acuerdos de transferencia de información dentro de la organización y otras partes?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Hay limitaciones de acceso a los recursos que contienen información de la organización?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se cuenta con algún método de identificación de personas que acceden a información de activos en la organización?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Existe un proceso formal de gestión para la información secreta de autenticación?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los derechos de acceso se proporcionan, revisan, modifican y eliminan de acuerdo a las políticas y reglas de la organización?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se definen procesos y procedimientos para gestionar los riesgos de seguridad asociados al uso de los productos o servicios del proveedor?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+  
+  <div class="column">
+    <label class="my-1 mr-2">¿Son establecidos y acordados los requisitos de seguridad con cada proveedor en función del tipo de relación con el mismo?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+  
+  <div class="column">
+    <label class="my-1 mr-2">¿Son definidos y aplicados procesos y procedimientos para gestionar los riesgos de seguridad asociados a los productos y servicios TIC?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+  
+  <div class="column">
+    <label class="my-1 mr-2">¿La organización supervisa, revisa, evalúa y gestiona periódicamente los cambios de las prácticas de seguridad y los servicios de los proveedores?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los procesos de adquisición, uso, gestión y salida de los servicios de la nube son establecidos de acuerdo con los requisitos de seguridad de la información de la organización?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Existe una planificación y preparación para gestionar los incidentes de seguridad de la información definiendo y estableciendo procesos, funciones y responsabilidades?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La organización tiene mecanismos para evaluar los incidentes de seguridad de la información?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se responde a los incidentes de seguridad de la información conforme a la documentación?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los conocimientos de los incidentes de seguridad de la información son utilizados para reforzar y mejorar los controles de seguridad de la información?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Existen procedimientos para la identificación, recogida y conservación de pruebas sobre incidentes de seguridad de la información?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La organización tiene planificación para mantener la seguridad de la información a un nivel adecuado durante alguna interrupción?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Las TIC son planificadas, aplicadas, mantenidas y probadas en función de los objetivos de continuidad de las actividades?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los requisitos legales, estatutarios, reglamentarios y contractuales relevantes para la seguridad de la información son identificados, documentados y se mantienen actualizados?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La organización aplica los procedimientos para proteger los derechos de propiedad intelectual?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los registros son protegidos contra pérdidas, destrucción, falsificación, acceso no autorizado y divulgación no autorizada?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Son identificados y se cumplen los requisitos relativos a la preservación de la privacidad y protección de PII de acuerdo a leyes, reglamentos aplicables y los requisitos contractuales?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿El enfoque de la organización para la gestión de la seguridad y su aplicación, incluidas las personas, los procesos y las tecnologías, son revisadas de forma independiente en intervalos planificados?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="9">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se revisa periódicamente el cumplimiento de la política de seguridad, las reglas y las normas?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se documentan y mantienen procedimientos operacionales y se ponen a disposición de todos los usuario que los necesiten?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="4">Si</option>
+      <option value="6">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Las comprobaciones de los antecedentes de todos los candidatos se llevan a cabo antes de su incorporación teniendo en cuenta las leyes, reglamentos y normas éticas?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se establecen términos y condiciones en seguridad de la información en los contratos de trabajo?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se cuenta con capacitación o concienciación periódica sobre las políticas de seguridad de la información de la organización?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La organización cuenta con acciones frente a empleados que hayan provocado alguna brecha de seguridad?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="4">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se cuenta con responsabilidades y obligaciones en seguridad de la información después de una finalización de contrato?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="5">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se identifican los acuerdos y documento de confidencialidad o no divulgación?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se aplican medidas de seguridad en la organización en relación al teletrabajo?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se tiene un mecanismo para que el personal notifique eventos de seguridad de la información?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se protegen físicamente las áreas que contienen información sensible por medio de perímetros de seguridad?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Las áreas seguras se encuentran protegidas físicamente por controles de entrada y salida?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Las oficinas, despachos y recursos cuentan con seguridad física?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La organización es vigilada continuamente para evitar accesos físicos no autorizados?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se cuenta con controles frente a daños estructurales ocasionados por el hombre o desastres naturales?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La organización cuenta con procedimientos para trabajar en áreas seguras?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="4">Si</option>
+      <option value="6">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se encuentran definidas y aplicadas reglas de escritorio limpio para documentos y medios de almacenamiento extraíble?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="4">Si</option>
+      <option value="6">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los equipos se encuentran situados en lugares que reducen los riesgos ambientales y amenazas, como también los accesos no autorizados?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se aplican medidas de seguridad en los equipos situados fuera de las instalaciones de la organización?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se cuenta con gestión de los medios de almacenamiento a lo largo de su ciclo de vida (adquisición, uso, transporte y eliminación)?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los equipos se encuentran protegidos contra fallos de alimentación y otras alteraciones?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">El cableado eléctrico y de telecomunicaciones que transmite datos o de soporte a los servicios de información, ¿se encuentra protegido?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los equipos (por ejemplo, computadores) reciben mantenimiento correcto que asegure su disponibilidad e integridad?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La organización utiliza medidas de eliminación o sobrescritura segura de datos sensibles y programas informáticos con licencia antes de la eliminación o reutilización de los equipos que los contienen?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+  
+ <div class="column">
+    <label class="my-1 mr-2">¿Cuentan con protección de la información de los dispositivos de punto final de usuario? (Por ejemplo, computadores)</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="4">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La asignación y uso de los privilegios de acceso se encuentra restringida y controlada?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se restringe el acceso a la información y a las funciones en aplicaciones según el rol en la organización?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se administra adecuadamente el acceso de lectura y escritura al código fuente, herramientas de desarrollo y las bibliotecas de software?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se aplican procedimientos para una autenticación segura en sus tecnologías?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se supervisa y ajusta la utilización de recursos, así como realizar proyecciones de los requisitos futuros de capacidad, que garantizan el rendimiento requerido del sistema?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se implementa y respalda la protección contra el malware mediante la conciencia adecuada del usuario?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se obtiene información, se evalúa la exposición y se toman medidas con respecto a las vulnerabilidades técnicas de los sistemas de información en uso?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Las configuraciones de hardware, software, servicios y redes son establecidas, documentadas, aplicadas, controladas y revisadas?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La información almacenada en los sistemas de información, dispositivos o cualquier otro son eliminados cuando ya no son necesarios?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿El enmascaramiento de datos es utilizado de acuerdo con la política de la organización, teniendo en cuenta la legislación?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">En los sistemas, redes y otros dispositivos que procesen, almacenen o transmitan información sensible, ¿se le han aplicado medidas de prevención ante fuga de datos?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se realizan y verifican periódicamente copias de seguridad de la información, del software y del sistema?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Las instalaciones de procesamiento de la información se implementaron con la redundancia suficiente para cumplir los requisitos de disponibilidad?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se producen, almacenan, protegen y analizan registros que recogen actividades, excepciones, fallos y otros eventos relevantes?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se supervisan las redes, los sistemas y las aplicaciones para detectar comportamientos anómalos y se toman medidas adecuadas para evaluar posibles incidentes de seguridad de la información?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los relojes de todos los sistemas de tratamiento de la información se encuentran sincronizados con una única fuente de tiempo precisa y acordada?</label> <!--AQUIIIIIIIII-->
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="5">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se restringe y controla el uso de utilidades que puedan ser capaces de invalidar los controles de sistema y de la aplicación?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se implementan procedimiento y medidas para gestionar de forma segura la instalación de software en los sistemas operativos?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Las redes son gestionadas y controladas para proteger la información de los sistemas y aplicaciones?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Son identificados, aplicados y controlados los mecanismos de seguridad, los niveles y requisitos del servicio de red?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los servicios de información, los usuarios y los sistemas de información están segregados en distintas redes?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se gestiona el acceso a sitios web externos para reducir la exposición a contenidos maliciosos?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se encuentran definidas e implementadas reglas para el uso eficaz de la criptografía?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="3">Si</option>
+      <option value="6">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Están establecidas políticas de seguridad para el desarrollo de aplicaciones y sistemas?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los requisitos de seguridad son identificados, específicos y aprobados cuando se desarrollan o adquieren aplicaciones?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+  
+  <div class="column">
+    <label class="my-1 mr-2">¿Se establecen, documentan y mantienen los principios para la ingeniería de sistemas seguros?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se aplican principios de codificación segura en el desarrollo de software?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se definen y aplican las pruebas de seguridad durante el desarrollo de software?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La organización dirige, controla y revisa el desarrollo de sistemas subcontratados?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Los entornos de desarrollo, prueba y producción se encuentran separados y protegidos?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="10">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Son controlados en la organización los cambios, los procesos de negocios, instalaciones de tratamiento de la información y los sistemas que afectan la seguridad de la información?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿La información de las pruebas de seguridad es seleccionada, protegida y gestionada adecuadamente?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="1">Si</option>
+      <option value="9">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <div class="column">
+    <label class="my-1 mr-2">¿Se tiene una planificación para la protección de los sistemas durante las pruebas de auditoría?</label>
+    <select class="custom-select custom-select-sm">
+      <option selected disabled value="">Selecciona una opción</option>
+      <option value="2">Si</option>
+      <option value="8">No</option>
+      <option value="0">No aplica</option>
+    </select>
+  </div>
+
+  <button type='button' id="botonEnviar" style="width: 100px; margin-top: 10px;padding: 8px;font-size:24px; margin: auto;">Enviar</button>
+</div>
+
+
+  </body>
+  </html>
+  </form>
+
+  <div class="container2" style="height:50vh; width:80vw; margin: auto; right: 0; left: 0;">
+    <canvas id="myChart"></canvas>
+  </div> 
+
+  <script type="text/javascript" src="./functions.js"></script>
+  <script type="text/javascript" src="./chart.js"></script>
+    <!--<select class="form-control" aria-label=".form-select-sm example" id="lc" name="lc" onchange="">
+      <option selected value="">Choose...</option>
+      <option value="10">Si</option>
+      <option value="5">No</option>
+    </select>-->
+
+
+    <!-- <label class="my-1 mr-2" for="inlineFormCustomSelectPref">Preference</label>
+    <select class="custom-select my-1 mr-sm-2" id="inlineFormCustomSelectPref">
+      <option selected>Choose...</option>
+      <option value="1">One</option>
+      <option value="2">Two</option>
+      <option value="3">Three</option>
+    </select> -->
+  
+    <!-- <div class="custom-control custom-checkbox my-1 mr-sm-2">
+      <input type="checkbox" class="custom-control-input" id="customControlInline">
+      <label class="custom-control-label" for="customControlInline">Remember my preference</label>
+    </div> -->
+  
+  <!--</form>
+  <div class="container">
+    <canvas class="myChart" id="myChart" height="100"></canvas>
+  </div> 
+<body>
