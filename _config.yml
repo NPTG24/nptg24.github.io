@@ -18,10 +18,12 @@ show_hero: true
 menu:
   - title: Home
     url: /
-  - title: About
+  - title: Sobre mí
     url: /about
-  - title: Contact
+  - title: Contacto
     url: /contact
+  - title: Matriz de riesgo (PYME)
+    url: /matrix-risk.html
   - title: Feed
     url: /feed.xml
 email: felipe.canales.c@usach.cl
