@@ -354,6 +354,12 @@ Una vez que un atacante sabe que una máquina tiene el servicio File Server en e
 C:\Users\lab>NET VIEW <IP>
 ```
 
+Y una forma de conectarse a un directorio es por medio del siguiente comando:
+
+```cmd
+C:\Users\lab>NET USE \\<IP>\IPC$ '' /u:''
+```
+
 >Otra herramienta que actúa de la misma forma pero para Linux es ```nmblookup```.
 
 ## SMB Relay Clásico
