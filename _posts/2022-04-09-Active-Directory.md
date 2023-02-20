@@ -20,6 +20,7 @@ tags:
   - Cracking
   - Dumpear
   - SAM
+  - nbtstat
   - Responder
   - ntlmrelayx
   - LDAP
