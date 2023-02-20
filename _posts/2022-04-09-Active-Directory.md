@@ -51,7 +51,16 @@ Directorio Activo es un servicio de directorio para entornos empresariales de Wi
 
 A continuación se presentan algunas técnicas de ataques simulando un entorno empresarial:
 
-## Enumeración
+## Enumeración (Null Session Attack)
+
+Un ataque de sesión nula explota una vulnerabilidad de autenticación para los recursos compartidos administrativos de Windows; esto permite a un atacante conectarse a un recurso compartido local o remoto sin autenticación. Las sesiones nulas son explotables remotamente; esto significa que los atacantes pueden utilizar sus ordenadores para atacar una máquina Windows vulnerable. Además, este ataque puede utilizarse para llamar a APIs remotas y llamadas a procedimientos remotos. Debido a estos factores, los ataques de sesión nula han tenido un gran impacto en los ecosistemas Windows.
+
+Los ataques de sesión nula se pueden utilizar para enumerar mucha información. Los atacantes pueden robar información sobre:
+
+* Contraseñas.
+* Usuarios del sistema.
+* Grupos del sistema.
+* Procesos del sistema en ejecución.
 
 Para verificar recursos compartidos se puede realizar lo siguiente:
 
