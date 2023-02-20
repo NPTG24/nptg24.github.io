@@ -329,6 +329,49 @@ Enumeración de usuarios (forma ordenada) con ```rpcclient```:
         group_rid:      0x201
 ```
 
+Otra forma de enumerar es con ```enum4linux```, en donde se debe tener en consideración los siguientes parámetros:
+
+* Enumeración simple:
+
+	```bash
+	┌──(root㉿kali)-[/AD]
+	└─ enum4linux -a <IP>
+	```
+
+* Obtener información de ```nbtstat``` (el cual se explica más abajo):
+
+	```bash
+	┌──(root㉿kali)-[/AD]
+	└─ enum4linux -n <IP>
+	```
+
+* Obtener información de las políticas de contraseñas establecidas:
+
+	```bash
+	┌──(root㉿kali)-[/AD]
+	└─ enum4linux -P <IP>
+	```
+
+* Enumerar recursos compartidos del sistema:
+
+	```bash
+	┌──(root㉿kali)-[/AD]
+	└─ enum4linux -S <IP>
+	```
+
+* Realizar Fuerza Bruta, para la detección de recursos compartidos:
+
+	```bash
+	┌──(root㉿kali)-[/AD]
+	└─ enum4linux -s <diccionario de direcciones> <IP>
+	```
+	
+* Realizar una enumeración avanzada, es decir, la herramienta intentará recuperar la mayor cantidad de información posible:
+
+	```bash
+	┌──(root㉿kali)-[/AD]
+	└─ enum4linux -A <IP>
+	```
 
 ### Enumeración con Windows
 
