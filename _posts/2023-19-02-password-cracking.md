@@ -147,3 +147,7 @@ Si queremos seleccionar ciertos usuarios, podemos incorporar el parámetro ```-u
 ┌─[root@kali]─[/home/user/cracking]
 └──╼ john --wordlist=miDiccionario -users=test,test2 crackme 
 ```
+
+La seguridad de una contraseña depende en gran medida de su complejidad y longitud. Cuanto más larga y compleja sea la contraseña, más difícil será para un atacante descifrarla mediante técnicas de cracking.
+
+Sin embargo, incluso las contraseñas fuertes pueden ser vulnerables si se utilizan técnicas de ataque adecuadas, como el uso de diccionarios y la ingeniería social para adivinar contraseñas basadas en información personal del usuario. 
