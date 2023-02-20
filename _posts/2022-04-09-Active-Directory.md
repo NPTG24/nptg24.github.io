@@ -455,6 +455,19 @@ Session completed.
 
 ```
 
+## Cracking con Hashcat
+
+```cmd
+C:\hashcat>hashcat.exe -m 5600 hashes.txt ../rockyou2021.txt --force
+```
+
+## Armado de hash
+
+Hay ocasiones en que se debe armar la estructura del hash, considerando lo siguiente:
+
+* NLTM -> [Username]::[Domain name]:[Lan Manager Response]:[NTLM Response]:[NTLM Server Challenge]
+* NTLMv2 -> [Username]::[Domain name]:[NTLM Server Challenge]:[NTProofStr]:[Rest of NTLMv2 Response]
+
 ## Verificación de administrador con crackmapexec
 
 Con ```crackmapexec``` podemos verificar en cual equipo contamos con permisos de administrador:
