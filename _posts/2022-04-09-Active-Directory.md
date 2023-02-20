@@ -332,7 +332,7 @@ Enumeración de usuarios (forma ordenada) con ```rpcclient```:
 
 ### Enumeración con Windows
 
-En Windows, para enumeración base véase la herramienta de enumeración [Enum](https://packetstormsecurity.com/search/?q=win32+enum&s=files), en la cual se pueden considerar los siguiente parámetros:
+En Windows, para enumeración base la herramienta de enumeración [Enum](https://packetstormsecurity.com/search/?q=win32+enum&s=files), en la cual se pueden considerar los siguiente parámetros:
 
 * Para enumerar recursos compartidos:
 	```cmd
@@ -350,12 +350,13 @@ En Windows, para enumeración base véase la herramienta de enumeración [Enum](
 	C:\Users\lab>enum -P <IP>
 	```
 
-
 Otra forma de ver recursos compartidos es por medio de ```nbtstat```, en donde se debe tener en consideración lo siguiente:
 
 ```cmd
 C:\Users\lab>nbtstat -A <IP>
 ```
+
+> Véase en Windows la herramienta [Winfo](https://packetstormsecurity.com/search/?q=winfo&s=files), que con el parámetro ```-n``` automatiza la explotación de un null session.
 
 * La primera línea de la tabla nos suele indicar el nombre de la máquina que funciona en la dirección IP introducida.
 
