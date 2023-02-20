@@ -43,6 +43,13 @@ Es una herramienta de descifrado de contraseñas escrita para sistemas operativo
 └──╼ john --list=formats
 ```
 
+Destacar que john cuenta con una serie de herramientas de extracción de hash, como por ejemplo de un documento Word:
+
+```bash
+┌─[root@kali]─[/home/user/cracking]
+└──╼ /usr/share/john/office2john.py MS_Word_Document.docx > hash
+```
+
 ### Hashcat (Windows)
 
 Es una herramienta de cracking de contraseñas basada en GPU, lo que significa que utiliza la potencia de procesamiento de la tarjeta gráfica de un ordenador para probar una gran cantidad de contraseñas en poco tiempo. Es un programa diseñado específicamente para realizar ataques de fuerza bruta y diccionario, con el objetivo de descifrar contraseñas encriptadas.
