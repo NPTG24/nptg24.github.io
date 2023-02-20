@@ -332,7 +332,7 @@ Enumeración de usuarios (forma ordenada) con ```rpcclient```:
 
 ### Enumeración con Windows
 
-Para enumeración base véase la herramienta de enumeración [Enum](https://packetstormsecurity.com/search/?q=win32+enum&s=files), en la cual se pueden considerar los siguiente parámetros:
+En Windows, para enumeración base véase la herramienta de enumeración [Enum](https://packetstormsecurity.com/search/?q=win32+enum&s=files), en la cual se pueden considerar los siguiente parámetros:
 
 * Para enumerar recursos compartidos:
 	```cmd
@@ -351,7 +351,7 @@ Para enumeración base véase la herramienta de enumeración [Enum](https://pack
 	```
 
 
-Para Windows, se recomienda el uso de ```nbtstat``` para la detección de recursos compartidos, en donde se debe tener en consideración lo siguiente:
+Otra forma de ver recursos compartidos es por medio de ```nbtstat```, en donde se debe tener en consideración lo siguiente:
 
 ```cmd
 C:\Users\lab>nbtstat -A <IP>
@@ -359,15 +359,15 @@ C:\Users\lab>nbtstat -A <IP>
 
 * La primera línea de la tabla nos suele indicar el nombre de la máquina que funciona en la dirección IP introducida.
 
-* El tipo de registro <00> nos indica que ese nombre es una estación de trabajo.
+* El tipo de registro ```<00>``` nos indica que ese nombre es una estación de trabajo.
 
-* El tipo "UNIQUE" nos dice que este ordenador debe tener asignada una sola dirección IP.
+* El tipo ```UNIQUE``` nos dice que este ordenador debe tener asignada una sola dirección IP.
 
 * Una línea contiene el grupo de trabajo o el dominio al que está unido el ordenador.
 
-* Los registros de tipo <20> nos indican que el servicio de compartición de archivos está en funcionamiento en el equipo; esto significa que podemos intentar obtener más información sobre él.
+* Los registros de tipo ```<20>``` nos indican que el servicio de compartición de archivos está en funcionamiento en el equipo; esto significa que podemos intentar obtener más información sobre él.
 
-Una vez que un atacante sabe que una máquina tiene el servicio File Server en ejecución, puede enumerar los recursos compartidos utilizando el comando NET VIEW.
+Una vez que un atacante sabe que una máquina tiene el servicio File Server en ejecución, puede enumerar los recursos compartidos utilizando el comando ```NET VIEW```.
 
 ```cmd
 C:\Users\lab>NET VIEW <IP>
