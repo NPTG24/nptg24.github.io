@@ -329,6 +329,30 @@ Enumeración de usuarios (forma ordenada) con ```rpcclient```:
 ```
 
 
+### Enumeración con Windows
+
+Para Windows, se recomienda el uso de ```nbtstat```, tnen donde se debe tener en consideración lo siguiente:
+
+```cmd
+C:\Users\lab>nbtstat -A <IP>
+```
+
+* La primera línea de la tabla nos suele indicar el nombre de la máquina que funciona en la dirección IP introducida.
+
+* El tipo de registro <00> nos indica que ese nombre es una estación de trabajo.
+
+* El tipo "UNIQUE" nos dice que este ordenador debe tener asignada una sola dirección IP.
+
+* Una línea contiene el grupo de trabajo o el dominio al que está unido el ordenador.
+
+* Los registros de tipo <20> nos indican que el servicio de compartición de archivos está en funcionamiento en el equipo; esto significa que podemos intentar obtener más información sobre él.
+
+Una vez que un atacante sabe que una máquina tiene el servicio File Server en ejecución, puede enumerar los recursos compartidos utilizando el comando NET VIEW.
+
+```cmd
+C:\Users\lab>NET VIEW <IP>
+```
+
 ## SMB Relay Clásico
 
 Responder es un envenenador LLMNR, NBT-NS y MDNS. Responderá a consultas específicas de NBT-NS (NetBIOS Name Service) según el sufijo de su nombre. De forma predeterminada, la herramienta solo responderá a la solicitud del servicio del servidor de archivos, que es para SMB.
