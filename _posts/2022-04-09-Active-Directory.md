@@ -63,6 +63,33 @@ Los ataques de sesión nula se pueden utilizar para enumerar mucha información.
 * Grupos del sistema.
 * Procesos del sistema en ejecución.
 
+### Nmap
+
+Nmap tiene varios scripts predefinidos que se pueden utilizar para la enumeración del protocolo SMB. Estos scripts automatizan gran parte del proceso de enumeración y pueden proporcionar información valiosa sobre los servidores o sistemas que utilizan SMB. Algunos de ellos son:
+
+* Enumerar recursos compartidos:
+
+	```bash
+	┌──(root㉿kali)-[/AD]
+	└─ nmap --script smb-enum-shares.nse -p445 <IP>
+	```
+	
+* Enumerar usuarios:
+
+	```bash
+	┌──(root㉿kali)-[/AD]
+	└─ nmap --script smb-enum-users.nse -p445 <IP>
+	```
+
+* Intenta adivinar las combinaciones de nombre de usuario/contraseña:
+
+	```bash
+	┌──(root㉿kali)-[/AD]
+	└─ nmap --script smb-brute.nse -p445 <IP>
+	```
+
+### SMBClient
+
 Para verificar recursos compartidos se puede realizar lo siguiente, en donde con ```-N``` obliga a la herramienta a no pedir contraseña y con ```-L``` permite ver qué servicios están disponibles en el objetivo:
 
 ```bash
@@ -106,6 +133,8 @@ smb: \> !cat important.txt
 [] …	
 ```
 
+### SMBMap
+
 Otra forma de ver recursos compartidos es por medio de ```smbmap```:
 
 ```bash
@@ -123,6 +152,8 @@ Otra forma de ver recursos compartidos es por medio de ```smbmap```:
         notes                                                   NO ACCESS       CheckIT
         IPC$                                                    NO ACCESS       IPC Service (DEVSM)
 ```
+
+### CrackMapExec
 
 También podremos extraer los mismos resultados en ```crackmapexec```:
 
@@ -151,6 +182,8 @@ SMB         10.1.1.35       445    DC-COMPANY       [*] Windows Server 2016 Data
 SMB         10.1.1.32       445    PC-FELIPE        [*] Windows 10.0 Build 19041 x64 (name:PC-FELIPE) (domain:felipecorp.local) (signing:False) (SMBv1:False)
 SMB         10.1.1.33       445    PC-USER2         [*] Windows 10.0 Build 19041 x64 (name:PC-USER2) (domain:felipecorp.local) (signing:False) (SMBv1:False)
 ```
+
+### RPCClient
 
 Otra forma de enumerar es por medio de ```rpcclient```, quien nos ofrece muchas solicitudes con las que podemos ejecutar ciertas funciones en el servidor SMB con el fin de obtener información sobre el activo y todo esto bajo el usuario anonymous. 
 
@@ -329,6 +362,8 @@ Enumeración de usuarios (forma ordenada) con ```rpcclient```:
         group_rid:      0x201
 ```
 
+### Enum4linux
+
 Otra forma de enumerar es con ```enum4linux```, en donde se debe tener en consideración los siguientes parámetros:
 
 * Enumeración simple:
@@ -372,6 +407,28 @@ Otra forma de enumerar es con ```enum4linux```, en donde se debe tener en consid
 	┌──(root㉿kali)-[/AD]
 	└─ enum4linux -A <IP>
 	```
+
+### Samrdump.py
+
+El script samrdump.py de Impacket es una herramienta de línea de comandos que se utiliza para extraer información de la base de datos SAM de un sistema Windows. El SAM (Security Accounts Manager) es una base de datos local que se utiliza para almacenar información de cuentas de usuario y contraseñas en sistemas Windows.
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─ samrdump.py <IP>
+```
+
+O también si se tuvieran credenciales válidas:
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─ samrdump.py <domain>/<user>:<Password/Password Hash>@<Target IP Address>
+```
+
+El script samrdump.py utiliza el protocolo de red Server Message Block (SMB) para conectarse al sistema objetivo y extraer la información del SAM. Algunos de los datos que se pueden extraer con samrdump.py incluyen:
+
+	* Lista de usuarios y sus identificadores de seguridad (SID).
+	* Información de la cuenta de usuario, como la fecha de creación, la fecha de última modificación y la fecha de la última vez que se inició sesión.
+	* Los hashes NTLM y LM de las contraseñas de los usuarios.
 
 ### Enumeración con Windows
 
