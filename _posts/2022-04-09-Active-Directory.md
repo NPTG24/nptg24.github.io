@@ -354,6 +354,8 @@ Una vez que un atacante sabe que una máquina tiene el servicio File Server en e
 C:\Users\lab>NET VIEW <IP>
 ```
 
+>Otra herramienta que actúa de la misma forma pero para Linux es ```nmblookup```.
+
 ## SMB Relay Clásico
 
 Responder es un envenenador LLMNR, NBT-NS y MDNS. Responderá a consultas específicas de NBT-NS (NetBIOS Name Service) según el sufijo de su nombre. De forma predeterminada, la herramienta solo responderá a la solicitud del servicio del servidor de archivos, que es para SMB.
