@@ -63,7 +63,7 @@ Los ataques de sesión nula se pueden utilizar para enumerar mucha información.
 * Grupos del sistema.
 * Procesos del sistema en ejecución.
 
-Para verificar recursos compartidos se puede realizar lo siguiente:
+Para verificar recursos compartidos se puede realizar lo siguiente, en donde con ```-N``` obliga a la herramienta a no pedir contraseña y con ```-L``` permite ver qué servicios están disponibles en el objetivo:
 
 ```bash
 ┌──(root㉿kali)-[/AD]
