@@ -133,6 +133,8 @@ smb: \> !cat important.txt
 [] …	
 ```
 
+>Para saltar la contraseña, se puede indicar directamente con el parámetro ```-N```
+
 ### SMBMap
 
 Otra forma de ver recursos compartidos es por medio de ```smbmap```:
