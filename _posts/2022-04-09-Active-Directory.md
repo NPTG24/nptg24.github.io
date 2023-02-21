@@ -133,7 +133,7 @@ smb: \> !cat important.txt
 [] …	
 ```
 
->Para saltar la contraseña, se puede indicar directamente con el parámetro ```-N```
+>Para saltar la contraseña, se puede indicar directamente con el parámetro ```-N```.
 
 ### SMBMap
 
