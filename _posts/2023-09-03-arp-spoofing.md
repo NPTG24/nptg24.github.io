@@ -173,7 +173,7 @@ Wireshark puede utilizarse para capturar y analizar paquetes de red, lo que lo c
    pop.request.command == "USER" || pop.request.command == "PASS"
   ```
 
-> El símbolo "||" se utiliza como operador lógico para combinar varios filtros en una sola expresión.
+> El símbolo ```||``` se utiliza como operador lógico para combinar varios filtros en una sola expresión.
 
 * Filtrar por credenciales IMAP
 
