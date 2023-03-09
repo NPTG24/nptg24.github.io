@@ -54,7 +54,7 @@ paginate: true
 ### PHP
 En PHP se puede ingresar un archivo malicioso que devuelva una reverse shell.
 
->[Descarga archivo aquí](http://www.mediafire.com/file/a3i5v7urr7cp6gw/php-reverse-shell-1.0.tar.gz/file)
+>[Descarga archivo aquí](http://www.mediafire.com/file/a3i5v7urr7cp6gw/php-reverse-shell-1.0.tar.gz/file){:target="_blank"}
 
 Para testear ejecución remota de comandos:
 
