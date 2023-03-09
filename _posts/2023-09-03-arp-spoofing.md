@@ -79,85 +79,85 @@ Wireshark puede utilizarse para capturar y analizar paquetes de red, lo que lo c
 * Filtrar por IP
 
   ```
-  ip.addr == 192.168.16.35
+   ip.addr == 192.168.16.35
   ```
 
 * Filtrar por IP de destino
 
   ```
-  ip.dst == 192.168.16.35
+   ip.dst == 192.168.16.35
   ```
 
 * Filtrar por rangos de IP
 
   ```
-  ip.addr >= 192.168.16.33 and ip.addr <= 192.168.16.62
+   ip.addr >= 192.168.16.33 and ip.addr <= 192.168.16.62
   ```
 
 * Filtrar por puerto TCP
 
   ```
-  tcp.port == 1433
+   tcp.port == 1433
   ```
 
 * Filtrar por puerto UDP
 
   ```
-  udp.port == 161
+   udp.port == 161
   ```
 
 * Filtrar por puerto de destino
 
   ```
-  tcp.dstport == 80
+   tcp.dstport == 80
   ```
 
 * Filtrar por dirección IP y puerto
 
   ```
-  ip.addr == 192.168.16.35 and tcp.port == 80
+   ip.addr == 192.168.16.35 and tcp.port == 80
   ```
 
 * Filtrar por dirección MAC
 
   ```
-  eth.addr == 00:60:f4:23:18:c3
+   eth.addr == 00:60:f4:23:18:c3
   ```
 
 * Filtrar por consultas o credenciales SQL Server
 
   ```
-  tds
+   tds
   ```
 
 * Filtrar para encontrar hashes kerberos
 
   ```
-  kerberos
+   kerberos
   ```
 
 * Filtrar por cookies
 
   ```
-  http.cookie
+   http.cookie
   ```
 
 * Filtrar para encontrar hashes NTLM y NTLMv2
 
   ```
-  ntlmssp
+   ntlmssp
   ```
 
 * Filtrar contraseñas por el protocolo HTTP
 
   ```
-  http contains password
+   http contains password
   ```
 
 * Otra forma de filtrar contraseñas por HTTP
 
   ```
-  http.request.method == "POST"
+   http.request.method == "POST"
   ```
 
 > El filtro "contains" se utiliza para mostrar sólo los paquetes que contienen una cadena de texto específica en su contenido o en alguna de sus cabeceras.
@@ -165,13 +165,13 @@ Wireshark puede utilizarse para capturar y analizar paquetes de red, lo que lo c
 * Filtrar por el community string en SNMP
 
   ```
-  snmp.community
+   snmp.community
   ```
 
 * Filtrar por credenciales POP
 
   ```
-  pop.request.command == "USER" || pop.request.command == "PASS"
+   pop.request.command == "USER" || pop.request.command == "PASS"
   ```
 
 > El símbolo "||" se utiliza como operador lógico para combinar varios filtros en una sola expresión.
@@ -179,13 +179,13 @@ Wireshark puede utilizarse para capturar y analizar paquetes de red, lo que lo c
 * Filtrar por credenciales IMAP
 
   ```
-  imap.request contains "login"
+   imap.request contains "login"
   ```
 
 * Filtrar por credenciales SMTP
 
   ```
-  smtp.req.command == "AUTH"
+   smtp.req.command == "AUTH"
   ```
 
 Estos son algunos ejemplos de como usar el filtrado de Wireshark, destacando que la utilización de operadores lógicos permite construir expresiones de filtro más complejas y específicas, lo que facilita la tarea de encontrar la información deseada en una sesión de captura de paquetes. Además la utilización de filtros puede ayudar a reducir el ruido y el volumen de datos que se capturan en una sesión de captura de paquetes, lo que permite al usuario enfocarse en la información específica que está buscando.
