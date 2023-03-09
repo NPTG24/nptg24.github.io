@@ -33,15 +33,15 @@ Como punto de partida debemos comprender lo siguiente:
 
 Para identificar la dirección MAC de un host en la misma red, los ordenadores utilizan el Protocolo de Resolución de Direcciones (ARP por sus siglas en inglés) enviando una solicitud de ARP broadcast. Esta solicitud se envía a todas las direcciones MAC de la red local, incluida la dirección MAC FF:FF:FF:FF:FF:FF, que es conocida como la dirección de difusión (broadcast) a nivel de capa de enlace.
 
-![arp1](/images/arp1.png)
+[![arp1](/images/arp1.png)](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/arp1.png)
 
 Una vez que el dispositivo objetivo recibe la solicitud de ARP broadcast, responde con su dirección MAC, que el dispositivo solicitante puede utilizar para establecer una conexión con el dispositivo objetivo.
 
-![arp2](/images/arp2.png)
+[![arp2](/images/arp2.png)](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/arp2.png)
 
 Al completar la resolución de la dirección MAC, los hosts guardan la dirección de destino en su tabla de caché ARP.
 
-![arp3](/images/arp3.png)
+[![arp3](/images/arp3.png)](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/arp3.png)
 ### Habilitar enrutamiento de paquetes
 
 Por defecto, un sistema Linux está configurado para no enrutar paquetes IP (IP forwarding) entre interfaces de red. Esto significa que los paquetes que llegan a una interfaz de red no se envían automáticamente a otra interfaz de red. Para habilitarlo se debe realizar con el siguiente comando:
@@ -60,7 +60,7 @@ Si un atacante encuentra la forma de manipular la caché ARP, también podrá re
 
 Primero el atacante de suplantación de ARP pretende ser ambos lados de un canal de comunicación de red (en la misma red que la víctima). El objetivo principal del ataque es hacer creer a la víctima que la dirección MAC del atacante es la dirección MAC del gateway, y viceversa. De esta forma, el atacante puede interceptar todo el tráfico entre la víctima y el gateway, y manipularlo a su antojo.
 
-![arp7](/images/arp7.png)
+[![arp7](/images/arp7.png)](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/arp7.png)
 
 El proceso de ARP Spoofing comienza con el atacante enviando paquetes ARP falsificados a la red. Estos paquetes anuncian que la dirección MAC del atacante es la dirección MAC del gateway, o de cualquier otro dispositivo en la red. Los dispositivos de la red actualizan su tabla ARP con la información proporcionada por el atacante, lo que permite al atacante interceptar y manipular el tráfico de la víctima. El atacante puede utilizar esta técnica para robar información, realizar ataques de Man-in-the-Middle (MitM) o Denegación de Servicio (DoS). En este caso, se utiliza la herramienta "arpspoof" para enviar paquetes ARP falsificados desde la interfaz de red "tap0". El parámetro "-t" especifica la dirección IP de la víctima, mientras que el parámetro "-r" especifica la dirección IP del gateway o router.
 
@@ -69,7 +69,7 @@ El proceso de ARP Spoofing comienza con el atacante enviando paquetes ARP falsif
 └──╼ arpspoof -i tap0 -t 192.168.16.35 -r 192.168.16.33
 ```
 
-![arp9](/images/arp9.png)
+[![arp9](/images/arp9.png)](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/arp9.png)
 
 ### Wireshark
 
