@@ -3,7 +3,7 @@ date: 2023-03-09T04:22:05.000Z
 layout: post
 comments: true
 title: ARP Spoofing (Poisoning)
-subtitle: 'Filtros para descubrimiento'
+subtitle: 'y uso de Wireshark'
 description: >-
 image: >-
     http://imgfz.com/i/nPtSm8s.png
