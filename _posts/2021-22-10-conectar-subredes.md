@@ -28,13 +28,13 @@ Tenemos los siguientes datos:
 
 Primero queremos comunicar las [subredes](https://nptg24.github.io/subredes/) dadas, y lo haremos conectando un router (1841) a ambos switches con un cable de cobre directo y por medio de sus respectivos "Fast Ethernet" (el switch 1 al FastEthernet0/0 y el switch 2 al FastEthernet0/1):
 
-![1](http://imgfz.com/i/q2mIHzv.png)
+[![1rot](/images/1rot.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/1rot.png)
 
 Ahora configuramos cada PC con sus respectivas direcciones IPv4 de ambas subredes, en dónde la primera dirección disponible lo consideraremos como el "default gateway" o puerta de enlace.
 
-![2](http://imgfz.com/i/XyxMDBw.png)
+[![2rot](/images/2rot.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/2rot.png)
 
-![3](http://imgfz.com/i/Ts5MuEv.png)
+[![rot3](/images/rot3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/rot3.png)
 
 Y así sucesivamente hasta que asignemos todas las direcciones de los PCs. Para revisar con mejor detalle las asignaciones respectivas de IPv4 recomiendo revisar el artículo de [subredes](https://nptg24.github.io/subredes/).
 
@@ -53,11 +53,11 @@ Router(config-if)#no shutdown
 
 Finalmente para comunicar ambas subredes, necesitamos realizar un ping desde las PCs de la subred 1 con cada una de las PCs de la subred 2:
 
-![PC14](http://imgfz.com/i/bsZKydu.png)
-![PC15](http://imgfz.com/i/X9vMLHG.png)
-![PC16](http://imgfz.com/i/uafVcAM.png)
-![PC17](http://imgfz.com/i/pBFj1lh.png)
+[![4rot](/images/4rot.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/4rot.png)
+[![5rot](/images/5rot.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/5rot.png)
+[![rot6](/images/rot6.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/rot6.png)
+[![6rot](/images/6rot.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/6rot.png)
 
 Y así sucesivamente el PC0 deberá realizar el mismo proceso, al igual que el PC2 y el PC3 en este caso, o sea deberán realizar un ping cada una a los PCs 4,5,6 y 7. Y una vez terminado todo, ambas subredes se podrán comunicar.
 
-![ICMP](http://imgfz.com/i/yJd4SkB.png)
+[![testrot](/images/testrot.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/testrot.png)
