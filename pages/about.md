@@ -9,4 +9,6 @@ permalink: /about/
 
 # Sobre mí
 
-Mi nombre es Felipe Canales Cayuqueo soy estudiante de Ciencia de la Computación de la Universidad Santiago de Chile desde el año 2018, durante estos últimos años he descubierto el mundo de la ciberseguridad, principalmente el sector del hacking ético, el cual cada día que pasa parece crecer más y más. Es por esto que me ha interesado y me encantaría dedicarme al 100% a esto, pues es algo que me apasiona.
+Soy un experto en ciberseguridad con experiencia en el campo de la seguridad informática. He trabajado en EY realizando análisis de vulnerabilidades y hacking ético, así como presentaciones con clientes. Además, he brindado servicios de forma independiente, llevando a cabo auditorías de protección de datos y hacking ético a PYMEs en Chile. Mi experiencia académica también se extiende a la seguridad informática, ya que fui ayudante de redes en la Universidad de Santiago de Chile. Actualmente, me desempeño en el área de ciberseguridad en CleverIT, donde continúo desarrollando mis habilidades y conocimientos en el campo. Además, cuento con certificaciones del sector, lo que me permite estar al día con las últimas tendencias y mejores prácticas en ciberseguridad.
+
+Valoro altamente el trabajo en equipo y me esfuerzo por crear un ambiente colaborativo en el que todos puedan aportar sus habilidades y conocimientos para lograr un objetivo común. Estoy comprometido en brindar soluciones eficaces y estratégicas para proteger los activos digitales de los clientes y mejorar la gestión técnica-comercial.
