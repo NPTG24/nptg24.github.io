@@ -119,7 +119,7 @@ Archive:  user_backup.zip
 
 ┌─[root@kali]─[/home/user/zip]
 └──╼ ls
-hash  id_rsa  id_rsa.pub  my_password.txt  user_backup.zip
+easysysinfo.c  hash  id_rsa  id_rsa.pub  my_password.txt  user_backup.zip
 
 ```
 
