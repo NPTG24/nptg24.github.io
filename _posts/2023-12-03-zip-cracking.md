@@ -12,10 +12,10 @@ optimized_image: >-
 category: ciberseguridad
 tags: 
   - hacking
-  - Wireshark
   - hashcat
   - john
   - zip2john
+  - winrar
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
