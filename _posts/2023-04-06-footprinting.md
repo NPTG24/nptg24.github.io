@@ -697,7 +697,7 @@ En SNMPv1 y SNMPv2c, el community string se utiliza como un mecanismo simple de 
 
 Por medio de WireShark podemos filtrar por ```snmp``` y detectaremos la community string en texto claro:
 
-[![arp2](/images/communitystring.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/communitystring.png)
+[![snmp](/images/communitystring.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/communitystring.png)
 
 También podemos realizar un ataque por diccionario por medio de ```onesixtyone``` de la siguiente forma:
 
