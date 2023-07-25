@@ -3,7 +3,7 @@ date: 2023-07-25T20:00:05.000Z
 layout: post
 comments: true
 title: Local File Inclusion
-subtitle: 'Uso de wrappers'
+subtitle: 'ejecución remota de comandos y wrappers'
 description: >-
 image: >-
     http://imgfz.com/i/yZDLQir.png
