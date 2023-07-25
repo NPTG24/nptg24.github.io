@@ -30,15 +30,15 @@ La vulnerabilidad LFI ocurre cuando una aplicación web utiliza la entrada del u
 
 Para realizar la comprobación de LFI se puede realizar lo siguiente:
 
-[!lfi2](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi2.png){:target="_blank"}
+[![lfi2](/images/lfi2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi2.png)
 
 De esta manera, no solo se puede comprobar la existencia de la vulnerabilidad, sino que también se puede descubrir información sobre los usuarios del sistema.
 
-[!lfi3](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi3.png){:target="_blank"}
+[![lfi3](/images/lfi3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi3.png)
 
 Si no nos permite acceder al ```/etc/passwd``` o queremos probar el acceso a otros directorios o archivos, podemos realizar un fuzzing para verificar el alcance de la siguiente forma con ```wfuzz```, ```gobuster```, entre otros:
 
-[!lfi4](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi4.png){:target="_blank"}
+[![lfi4](/images/lfi4.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi4.png)
 
 > Se pueden probar otros diccionarios como el de [Seclist](https://github.com/danielmiessler/SecLists).
 
@@ -69,11 +69,11 @@ Permission denied, please try again.
 
 Una vez realizamos este proceso, podremos ejecutar comandos de la siguiente forma:
 
-[!lfi5](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi5.png){:target="_blank"}
+[![lfi5](/images/lfi5.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi5.png)
 
 Por medio del siguiente siguiente código en php se puede devolver una shell interactiva a nuestra máquina atacante. 
 
-[!lfi6](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi6.png){:target="_blank"}
+[![lfi6](/images/lfi6.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi6.png)
 
 
 ```bash
@@ -82,7 +82,7 @@ Por medio del siguiente siguiente código en php se puede devolver una shell int
 listening on [any] 443 ...                
 ```
 
-[!lfi7](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi7.png){:target="_blank"}
+[![lfi7](/images/lfi7.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi7.png)
 
 
 ```bash
@@ -154,7 +154,7 @@ En el contexto de la programación, un "wrapper" o envoltorio es un tipo de func
 php://filter/convert.base64-encode/resource=<archivo>
 ```
 
-[!lfi1](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi1.png){:target="_blank"}
+[![lfi1](/images/lfi1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi1.png)
 
 
 ## Recomendaciones
