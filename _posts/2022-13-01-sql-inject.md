@@ -580,7 +580,7 @@ Luego al hacer un "follow redirection" podemos confirmar la inyección exitosa.
 
 [![sqlinjectrce4](/images/sqlinjectrce4.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectrce4.png)
 
-Para recibir una shell inversa debemos realizar convertir el siguiente comando en base64: 
+Para recibir una shell inversa debemos convertir el siguiente comando en base64: 
 
 ```bash
 ┌─[root@kali]─[/home/user/demo/]
