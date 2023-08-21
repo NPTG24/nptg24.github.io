@@ -6,9 +6,9 @@ title: Valores TTL
 subtitle: 'comunes'
 description: >-
 image: >-
-  http://imgfz.com/i/zCIjBYW.png
+  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/ttl.png
 optimized_image: >-
-  http://imgfz.com/i/zCIjBYW.png
+  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/ttl.png
 category: ciberseguridad
 tags:
   - ping
