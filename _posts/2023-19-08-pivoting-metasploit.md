@@ -23,6 +23,7 @@ tags:
   - handler
   - route
   - routing
+  - proxy
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
