@@ -139,4 +139,4 @@ Podemos encontrar los puntos de acceso realizando lo siguiente:
 └──╼ tshark -r Captura-01-dec.cap -Y "http.request.method==POST" -Tfields -e http.file_data 2>/dev/null
 ```
 
->Recordar que todos estos filtros se pueden realizar en WireShark.
+>Recordar que todos estos filtros se pueden realizar desde WireShark.
