@@ -6,9 +6,9 @@ title: Tratamiento de la TTY
 subtitle: 'tras la intrusión'
 description: >-
 image: >-
-  http://imgfz.com/i/XR8vuUG.png
+  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/stty.png
 optimized_image: >-
-  http://imgfz.com/i/XR8vuUG.png
+  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/stty.png
 category: ciberseguridad
 tags:
   - post-intrusión
