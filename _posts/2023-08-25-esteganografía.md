@@ -81,11 +81,11 @@ Steghide es una herramienta de esteganografía especializada en la ocultación d
 └──╼ apt install steghide     
 ```
 
-Con el siguiente comando podremos incrustar el contenido del archivo de texto "code.txt" dentro de la imagen "hackerman.jpg". 
+Con el siguiente comando podremos incrustar el contenido del archivo de texto "hackerman.txt" dentro de la imagen "hackerman.jpg". 
 
 ```bash
 ┌─[root@kali]─[/home/user/Stegnography]
-└──╼ steghide embed -cf hackerman.jpg -ef code.txt
+└──╼ steghide embed -cf hackerman.jpg -ef hackerman.txt
 ```
 
 [![hackerman](/images/hackerman.jpg){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/hackerman.jpg)
