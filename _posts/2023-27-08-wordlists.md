@@ -14,6 +14,8 @@ tags:
   - hacking
   - cewl
   - crunch
+  - wordlists
+  - diccionarios
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
