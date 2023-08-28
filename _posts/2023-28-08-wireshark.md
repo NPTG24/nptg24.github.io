@@ -144,7 +144,7 @@ El filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` en Wireshark se utiliza pa
 
 #### Cómo determinar cuántas máquinas están enviando paquetes SYN
 
-1. **Ir a Estadísticas de Direcciones IPv4 (Go to statistics IPv4 addresses)**: Esta es una funcionalidad en Wireshark que te permite ver estadísticas relacionadas con direcciones IPv4.
+1. **Ir a Estadísticas de Direcciones IPv4 (Statistics IPv4 addresses)**: Esta es una funcionalidad en Wireshark que te permite ver estadísticas relacionadas con direcciones IPv4.
   
 2. **Origen y Destino (Source and Destination)**: En esta sección, puedes ver las direcciones IP de origen y destino del tráfico capturado.
 
