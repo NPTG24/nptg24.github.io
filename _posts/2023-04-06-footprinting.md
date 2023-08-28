@@ -732,6 +732,8 @@ Su uso se realiza de la siguiente forma:
 └─ snmpwalk -v2c -c public 10.1.1.10
 ```
 
+> Otra opción a snmpwalk es la siguiente: snmp-check 10.1.1.10 -p 161 -c public
+
 | Parámetros | Descripción |
 | ---------- | ----------- |
 | `-v` | Especifica la versión de SNMP a utilizar. En este caso, se utiliza SNMPv2c. También se pueden -v1 y -v3. |
