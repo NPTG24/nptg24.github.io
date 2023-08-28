@@ -656,7 +656,7 @@ Este ataque de fuerza bruta es el más rápido de todos.
 
 ```bash
 ┌─[root@kali]─[/opt/xerosploit]
-└──╼ python xerosplooit.py
+└──╼ python xerosploit.py
 
 Xero => scan
 
