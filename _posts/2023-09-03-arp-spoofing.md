@@ -3,7 +3,7 @@ date: 2023-03-09T04:22:05.000Z
 layout: post
 comments: true
 title: ARP Spoofing (Poisoning)
-subtitle: 'y uso de Wireshark'
+subtitle: 'Con la herramienta arpspoof'
 description: >-
 image: >-
     http://imgfz.com/i/nPtSm8s.png
@@ -12,8 +12,8 @@ optimized_image: >-
 category: ciberseguridad
 tags: 
   - hacking
-  - Wireshark
   - redes
+  - arpspoof
   - mitm
   - intermediario
   - man-in-the-middle
@@ -71,123 +71,6 @@ El proceso de ARP Spoofing comienza con el atacante enviando paquetes ARP falsif
 
 [![arp9](/images/arp9.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/arp9.png)
 
-### Wireshark
-
-Wireshark puede utilizarse para capturar y analizar paquetes de red, lo que lo convierte en una herramienta útil para realizar un ataque de ARP Spoofing. Al utilizar Wireshark para capturar los paquetes ARP en la red, el atacante puede analizarlos para obtener información sobre las direcciones MAC y las direcciones IP de los dispositivos de la red y el tráfico de la red, lo que permite obtener información sensible, como nombres de usuario, contraseñas, hashes, cookies de sesión, entre otros datos. Algunas opciones de filtros a considerar son los siguientes:
-
-* Filtrar por IP
-
-  ```
-   ip.addr == 192.168.16.35
-  ```
-
-* Filtrar por IP de destino
-
-  ```
-   ip.dst == 192.168.16.35
-  ```
-
-* Filtrar por rangos de IP
-
-  ```
-   ip.addr >= 192.168.16.33 and ip.addr <= 192.168.16.62
-  ```
-
-* Filtrar por puerto TCP
-
-  ```
-   tcp.port == 1433
-  ```
-
-* Filtrar por puerto UDP
-
-  ```
-   udp.port == 161
-  ```
-
-* Filtrar por puerto de destino
-
-  ```
-   tcp.dstport == 80
-  ```
-
-* Filtrar por dirección IP y puerto
-
-  ```
-   ip.addr == 192.168.16.35 and tcp.port == 80
-  ```
-
-* Filtrar por dirección MAC
-
-  ```
-   eth.addr == 00:60:f4:23:18:c3
-  ```
-
-* Filtrar por consultas o credenciales SQL Server
-
-  ```
-   tds
-  ```
-
-* Filtrar para encontrar hashes kerberos
-
-  ```
-   kerberos
-  ```
-
-* Filtrar por cookies
-
-  ```
-   http.cookie
-  ```
-
-* Filtrar para encontrar hashes NTLM y NTLMv2
-
-  ```
-   ntlmssp
-  ```
-
-* Filtrar contraseñas por el protocolo HTTP
-
-  ```
-   http contains password
-  ```
-
-* Otra forma de filtrar contraseñas por HTTP
-
-  ```
-   http.request.method == "POST"
-  ```
-
-> El filtro "contains" se utiliza para mostrar sólo los paquetes que contienen una cadena de texto específica en su contenido o en alguna de sus cabeceras.
-
-* Filtrar por el community string en SNMP
-
-  ```
-   snmp.community
-  ```
-
-* Filtrar por credenciales POP
-
-  ```
-   pop.request.command == "USER" || pop.request.command == "PASS"
-  ```
-
-> El símbolo ```||``` se utiliza como operador lógico para combinar varios filtros en una sola expresión.
-
-* Filtrar por credenciales IMAP
-
-  ```
-   imap.request contains "login"
-  ```
-
-* Filtrar por credenciales SMTP
-
-  ```
-   smtp.req.command == "AUTH"
-  ```
-
-Estos son algunos ejemplos de como usar el filtrado de Wireshark, destacando que la utilización de operadores lógicos permite construir expresiones de filtro más complejas y específicas, lo que facilita la tarea de encontrar la información deseada en una sesión de captura de paquetes. Además la utilización de filtros puede ayudar a reducir el ruido y el volumen de datos que se capturan en una sesión de captura de paquetes, lo que permite al usuario enfocarse en la información específica que está buscando.
 
 ### Recomendación
 
