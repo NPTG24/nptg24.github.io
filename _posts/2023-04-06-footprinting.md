@@ -732,7 +732,7 @@ Su uso se realiza de la siguiente forma:
 └─ snmpwalk -v2c -c public 10.1.1.10
 ```
 
-> Otra opción a snmpwalk son las siguientes:
+> Otra opción a snmpwalk es con la siguiente herramienta:
 > 1) snmp-check 10.1.1.10 -p 161 -c public
 > 2) snmp-check -v2c -c public 10.1.1.10
 
