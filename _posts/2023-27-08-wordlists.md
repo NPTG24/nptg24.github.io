@@ -1,5 +1,5 @@
 ---
-date: 2023-08-28T04:15:05.000Z
+date: 2023-08-27T04:15:05.000Z
 layout: post
 comments: true
 title: Creación de diccionarios
