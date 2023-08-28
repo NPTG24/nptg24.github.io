@@ -138,11 +138,11 @@ Wireshark es un analizador de protocolos de red de código abierto que se utiliz
 
 ## DDoS y DoS
 
-### Filtro para Identificar Paquetes SYN
+### Filtro para identificar paquetes SYN
 
 El filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` en Wireshark se utiliza para identificar paquetes TCP con el bit SYN establecido y el bit ACK no establecido. Estos paquetes son típicamente el primer paso en el establecimiento de una conexión TCP.
 
-#### Cómo Determinar Cuántas Máquinas Están Enviando Paquetes SYN
+#### Cómo determinar cuántas máquinas están enviando paquetes SYN
 
 1. **Ir a Estadísticas de Direcciones IPv4 (Go to statistics IPv4 addresses)**: Esta es una funcionalidad en Wireshark que te permite ver estadísticas relacionadas con direcciones IPv4.
   
@@ -150,13 +150,13 @@ El filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` en Wireshark se utiliza pa
 
 3. **Aplicar el Filtro Dado (Then you can apply the filter given)**: Una vez que estés en la sección de estadísticas de direcciones IPv4, puedes aplicar el filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` para identificar cuántas máquinas diferentes están intentando iniciar conexiones TCP.
 
-### Para Determinar Qué Máquina Podría Estar Realizando un Ataque DoS
+### Para determinar qué máquina podría estar realizando un ataque DoS
 
 Aplicar el filtro `tcp.flags.syn == 1` te mostrará todos los paquetes con el bit SYN establecido, independientemente del estado del bit ACK. Si observas una gran cantidad de estos paquetes provenientes de una sola dirección IP, podría ser un indicador de un intento de ataque de Denegación de Servicio (DoS).
 
 ### Ejemplo de análisis de tráfico en Wireshark para identificación de ataques
 
-#### Identificación de Ataque DoS (Denegación de Servicio)
+#### Identificación de ataque DoS (Denegación de Servicio)
 
 Aplicamos el filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` y observamos el siguiente comportamiento:
 
@@ -173,7 +173,7 @@ Aplicamos el filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` y observamos el 
 **Dirección IP Atacante en el Caso DoS**: La dirección IP `10.0.0.1` es un fuerte indicador de que esta máquina podría estar llevando a cabo un ataque de DoS.
 
 
-#### Identificación de Ataque DDoS (Ataque Distribuido de Denegación de Servicio)
+#### Identificación de ataque DDoS (Ataque Distribuido de Denegación de Servicio)
 
 Aplicamos el mismo filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` y observamos el siguiente comportamiento:
 
