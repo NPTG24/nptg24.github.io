@@ -148,7 +148,7 @@ El filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` en Wireshark se utiliza pa
   
 2. **Origen y Destino (Source and Destination)**: En esta sección, puedes ver las direcciones IP de origen y destino del tráfico capturado.
 
-3. **Aplicar el Filtro Dado (Then you can apply the filter given)**: Una vez que estés en la sección de estadísticas de direcciones IPv4, puedes aplicar el filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` para identificar cuántas máquinas diferentes están intentando iniciar conexiones TCP.
+3. **Aplicar el filtro dado**: Una vez que estés en la sección de estadísticas de direcciones IPv4, puedes aplicar el filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` para identificar cuántas máquinas diferentes están intentando iniciar conexiones TCP.
 
 ### Para determinar qué máquina podría estar realizando un ataque DoS
 
@@ -170,7 +170,7 @@ Aplicamos el filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` y observamos el 
 
 - La dirección IP `10.0.0.1` ha enviado una cantidad inusualmente alta de paquetes SYN. 
 
-**Dirección IP Atacante en el Caso DoS**: La dirección IP `10.0.0.1` es un fuerte indicador de que esta máquina podría estar llevando a cabo un ataque de DoS.
+**Dirección IP atacante en el caso DoS**: La dirección IP `10.0.0.1` es un fuerte indicador de que esta máquina podría estar llevando a cabo un ataque de DoS.
 
 
 #### Identificación de ataque DDoS (Ataque Distribuido de Denegación de Servicio)
@@ -189,7 +189,7 @@ Aplicamos el mismo filtro `tcp.flags.syn == 1 and tcp.flags.ack == 0` y observam
 
 - Varios hosts están enviando una cantidad elevada de paquetes SYN. 
 
-**Número Total de Máquinas Atacantes en el Caso DDoS**: Podemos identificar 4 direcciones IP (`192.168.1.2`, `192.168.1.3`, `10.0.0.1`, `172.16.0.1`) que están enviando una cantidad elevada de paquetes SYN, lo que podría indicar un ataque DDoS en el que múltiples máquinas están involucradas.
+**Número total de máquinas atacantes en el caso DDoS**: Podemos identificar 4 direcciones IP (`192.168.1.2`, `192.168.1.3`, `10.0.0.1`, `172.16.0.1`) que están enviando una cantidad elevada de paquetes SYN, lo que podría indicar un ataque DDoS en el que múltiples máquinas están involucradas.
 
 **Nota**: Estos son solo indicadores y no pruebas concluyentes de actividad maliciosa. Se requieren análisis adicionales para determinar la intención detrás de estos paquetes.
 
