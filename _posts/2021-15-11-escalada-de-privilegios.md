@@ -642,6 +642,18 @@ The command completed successfully.
 ```
 Al ver que el usuario está en el grupo ```Server Operators```, se encuentra una vía donde poder realizar la escalada de privilegio a través de ```binPath```.
 
+## Creación de nueva cuenta
+
+Ejecutar comando para crear un nuevo usuario llamado "Test".
+
+```
+C:\> net user Test /add
+```
+
+```
+C:\> net user Test * /add
+```
+
 ## Añadir una cuenta al grupo de Administradores
 
 El siguiente caso tiene como objetivo añadir un usuario local al grupo "Administrators" en una máquina con Windows.
@@ -649,4 +661,5 @@ El siguiente caso tiene como objetivo añadir un usuario local al grupo "Adminis
 ```
 C:\> net localgroup Administrators <user> /Add
 ```
+
 
