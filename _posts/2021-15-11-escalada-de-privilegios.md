@@ -644,7 +644,7 @@ Al ver que el usuario está en el grupo ```Server Operators```, se encuentra una
 
 ## Creación de nueva cuenta
 
-Ejecutar comando para crear un nuevo usuario llamado "Test".
+Ejecutar comando para crear un nuevo usuario llamado "Test". Cualquiera de las siguiente opciones sirve, en el caso del ```*``` es para escribir una contraseña.
 
 ```
 C:\> net user Test /add
