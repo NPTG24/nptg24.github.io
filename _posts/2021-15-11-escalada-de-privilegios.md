@@ -608,6 +608,7 @@ A través de ver en que grupo se encuentra el usuario se pueden encontrar vías 
 C:\> net user <user>
 ```
 
+
 Ejemplo:
 
 ```
@@ -640,4 +641,12 @@ Global Group memberships     *Domain Users
 The command completed successfully.
 ```
 Al ver que el usuario está en el grupo ```Server Operators```, se encuentra una vía donde poder realizar la escalada de privilegio a través de ```binPath```.
+
+## Añadir una cuenta al grupo de Administradores
+
+El siguiente caso tiene como objetivo añadir un usuario local al grupo "Administrators" en una máquina con Windows.
+
+```
+C:\> net localgroup Administrators <user> /Add
+```
 
