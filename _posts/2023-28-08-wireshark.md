@@ -136,6 +136,12 @@ Wireshark es un analizador de protocolos de red de código abierto que se utiliz
    smtp.req.command == "AUTH"
   ```
 
+* Filtrar por el protocolo de mensajeria MQTT (IoT)
+
+  ```
+   mqtt
+  ```
+
 ## DDoS y DoS
 
 ### Filtro para identificar paquetes SYN
