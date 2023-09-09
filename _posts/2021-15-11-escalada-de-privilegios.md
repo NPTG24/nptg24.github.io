@@ -300,6 +300,9 @@ mysql -u developer -p
 Enter password: #J!:F9Zt2u
 ```
 
+## Historial
+
+El comando ```history``` en un shell de Linux como Bash (Bourne-Again SHell) muestra un historial de los comandos que has ejecutado previamente. Este historial se almacena en un archivo en tu directorio de inicio, generalmente denominado ```.bash_history```. En ocasiones es posible visualizar contraseñas o información sensible que nos permita escalar privilegios.
 
 # Windows
 
@@ -661,5 +664,3 @@ El siguiente caso tiene como objetivo añadir un usuario local al grupo "Adminis
 ```
 C:\> net localgroup Administrators <user> /Add
 ```
-
-
