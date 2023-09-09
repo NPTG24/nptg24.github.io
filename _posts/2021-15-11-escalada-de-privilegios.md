@@ -89,6 +89,21 @@ root
 
 Y finalmente obtenemos acceso como usuario root, por lo que el programa funciona correctamente.
 
+### Find para CTF
+
+En las competencias Capture The Flag (CTF) de seguridad informática, el tiempo suele ser un factor crítico. Si tienes permiso para ejecutar ```find``` con ```sudo```, entonces podrás buscar a través de sistemas de archivos y también ejecutar comandos sobre los archivos encontrados. A continuación se presentan opciones de uso:
+
+```bash
+┌─[user@user]─[/]
+└──╼ sudo find / -name "root.txt"
+```
+
+```bash
+┌─[user@user]─[/]
+└──╼ sudo find . -name "root.txt"
+```
+
+Una vez encontrado, con el comando ```cat``` y la ubicación del archivo root.txt, podremos visualizarlo.
 
 ## Información del sistema
 
@@ -303,6 +318,7 @@ Enter password: #J!:F9Zt2u
 ## Historial
 
 El comando ```history``` en un shell de Linux como Bash (Bourne-Again SHell) muestra un historial de los comandos que has ejecutado previamente. Este historial se almacena en un archivo en tu directorio de inicio, generalmente denominado ```.bash_history```. En ocasiones es posible visualizar contraseñas o información sensible que nos permita escalar privilegios.
+
 
 # Windows
 
