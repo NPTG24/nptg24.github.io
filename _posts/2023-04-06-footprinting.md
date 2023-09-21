@@ -120,7 +120,7 @@ El script rpcinfo NSE recupera una lista de todos los servicios RPC actualmente 
 
 ```bash
 ┌──(root㉿kali)-[/nfs]
-└─ showmount -e 10.1..1.10
+└─ showmount -e 10.1.1.10
 Export list for 10.1.1.10:
 /home/user    *
 /var/www/html *
