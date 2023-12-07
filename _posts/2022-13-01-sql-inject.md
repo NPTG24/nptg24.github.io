@@ -631,6 +631,13 @@ www-data@validation:/var/www/html$
 
 Con esa contraseña obtenida es posible acceder al usuario root con ```su root```.
 
+### Otros
+
+* Obtener versión en Oracle
+    ```sql
+    ' UNION SELECT banner, NULL FROM v$version--
+    ```
+    
 ### Recomendaciones
 
 * Utilizar parámetros en lugar de construir consultas dinámicamente es una de las mejores maneras de evitar una inyección SQL. Los parámetros permiten que los datos sean separados del código, lo que impide que los atacantes inyecten código malicioso en las consultas.
