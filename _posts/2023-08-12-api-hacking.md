@@ -1,5 +1,5 @@
 ---
-date: 2023-08-12T06:50:05.000Z
+date: 2023-12-08T06:50:05.000Z
 layout: post
 comments: true
 title: API Hacking
