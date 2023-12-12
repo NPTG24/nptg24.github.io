@@ -631,7 +631,7 @@ www-data@validation:/var/www/html$
 
 Con esa contraseña obtenida es posible acceder al usuario root con ```su root```.
 
-### Resumen (considerando 3 columnas)
+### Resumen con UNION (considerando 3 columnas)
 
 #### Consultar versión
 
