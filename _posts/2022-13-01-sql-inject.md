@@ -631,13 +631,13 @@ www-data@validation:/var/www/html$
 
 Con esa contraseña obtenida es posible acceder al usuario root con ```su root```.
 
-### Resumen con UNION (considerando 3 columnas)
+### Resumen con UNION (considerando 2 columnas)
 
 #### Consultar versión
 
 * SQL Server
     ```sql
-    ' UNION SELECT NULL, @@VERSION, NULL-- 
+    ' UNION SELECT @@VERSION, NULL-- 
     ```
 * MySQL
     ```sql
