@@ -648,7 +648,7 @@ SMB         10.1.1.32       445    PC-FELIPE        [+] felipecorp.local\fcanale
 
 
 ┌──(root㉿kali)-[/AD]
-└─ crackmapexec smb 10.1.1.0/24 -u 'Administrador' -p 'Password3'
+└─ crackmapexec smb 10.1.1.0/24 -u 'Administrador' -p 'P\@\$\$w0rd\!'
 SMB         10.1.1.32       445    PC-FELIPE        [*] Windows 10.0 Build 19041 x64 (name:PC-FELIPE) (domain:felipecorp.local) (signing:False) (SMBv1:False)
 SMB         10.1.1.35       445    DC-COMPANY       [*] Windows Server 2016 Datacenter Evaluation 14393 x64 (name:DC-COMPANY) (domain:felipecorp.local) (signing:True) (SMBv1:True)
 SMB         10.1.1.33       445    PC-USER2         [*] Windows 10.0 Build 19041 x64 (name:PC-USER2) (domain:felipecorp.local) (signing:False) (SMBv1:False)
