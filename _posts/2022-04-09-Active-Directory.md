@@ -2380,10 +2380,43 @@ C:\Windows\Temp\test>
 
 ```bash
 ┌──(root㉿kali)-[/AD]
-└─  rdesktop -u "" -a 16 <host>
+└─ rdesktop -u "" -a 16 <host>
 ```
 
 ```bash
 ┌──(root㉿kali)-[/AD]
-└─  rdesktop -u "" -p "" -a 16 <host>
+└─ rdesktop -u "" -p "" -a 16 <host>
 ```
+
+#### Para generar una carpeta compartida
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─ rdesktop -u "victor" -p "pass@123" -d "INLANEFREIGHT" localhost:3300 -r disk:linux='/home/user/pivoting'
+```
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─ xfreerdp /u:"htb-student" /p:"Academy_student_AD\!" /v:10.129.207.85 /drive:academia,./
+```
+
+### Consultar política de contraseñas
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─ crackmapexec smb <host> -u <usuario> -p <contraseña> --pass-pol
+```
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─ ldapsearch -h <host> -x -b "DC=Dominio,DC=LOCAL" -s sub "*" | grep -m 1 -B 10 pwdHistoryLength
+```
+
+```bash
+rpcclient $> getdompwinfo
+```
+
+```cmd
+C:\Users\lab> net accounts
+```
+
