@@ -2428,11 +2428,20 @@ rpcclient $> getdompwinfo
 C:\Users\lab> net accounts
 ```
 
-### Kerbrute
+### Otras formas de consultar usuarios
 
 ```bash
 ┌──(root㉿kali)-[/AD]
 └─ kerbrute userenum -d <domain> --dc <host> /wordlist 
 ```
 
+```bash
+┌──(root㉿kali)-[/AD]
+└─ ldapsearch -h <host> -x -b "DC=Dominio,DC=LOCAL" -s sub "(&(objectclass=user))"  | grep sAMAccountName: | cut -f2 -d" "
+```
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─ enum4linux -U <host> | grep "user:" | cut -f2 -d"[" | cut -f1 -d"]"
+```
 
