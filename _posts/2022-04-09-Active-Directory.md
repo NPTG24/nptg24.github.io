@@ -364,6 +364,14 @@ Enumeración de usuarios (forma ordenada) con ```rpcclient```:
         group_rid:      0x201
 ```
 
+Con ```crackmapexec``` también es posible enumerar usuarios de la siguiente forma:
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─ crackmapexec smb <host> --users
+```
+
+
 ### Enum4linux
 
 Otra forma de enumerar es con ```enum4linux```, en donde se debe tener en consideración los siguientes parámetros:
@@ -2419,4 +2427,12 @@ rpcclient $> getdompwinfo
 ```cmd
 C:\Users\lab> net accounts
 ```
+
+### Kerbrute
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─ kerbrute userenum -d <domain> --dc <host> /wordlist 
+```
+
 
