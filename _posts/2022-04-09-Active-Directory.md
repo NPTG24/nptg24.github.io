@@ -364,6 +364,24 @@ Enumeración de usuarios (forma ordenada) con ```rpcclient```:
         group_rid:      0x201
 ```
 
+Otros comandos útiles para enumerar los grupos del dominio son:
+
+```bash
+rpcclient $> enumdomgroups
+
+rpcclient $> querygroupmem 0xff0
+	rid:[0x771] attr:[0x7]
+	rid:[0x772] attr:[0x7]
+	rid:[0x773] attr:[0x7]
+	rid:[0x774] attr:[0x7]
+	rid:[0x775] attr:[0x7]
+	rid:[0x776] attr:[0x7]
+	rid:[0x777] attr:[0x7]
+	rid:[0x778] attr:[0x7]
+	rid:[0x779] attr:[0x7]
+	rid:[0x77a] attr:[0x7]
+```
+
 Con ```crackmapexec``` también es posible enumerar usuarios de la siguiente forma:
 
 ```bash
@@ -2443,5 +2461,12 @@ C:\Users\lab> net accounts
 ```bash
 ┌──(root㉿kali)-[/AD]
 └─ enum4linux -U <host> | grep "user:" | cut -f2 -d"[" | cut -f1 -d"]"
+```
+
+### Detectar usuarios conectados
+
+```bash
+┌──(root㉿kali)-[/AD]
+└─ crackmapexec smb <host> -u <usuario> -p <contraseña> --loggedon-users
 ```
 
