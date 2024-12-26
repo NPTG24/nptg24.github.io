@@ -460,7 +460,104 @@ El script samrdump.py utiliza el protocolo de red Server Message Block (SMB) par
 
 ### Enumeración con Windows
 
-En Windows, para enumeración base la herramienta de enumeración [Enum](https://packetstormsecurity.com/search/?q=win32+enum&s=files), en la cual se pueden considerar los siguiente parámetros:
+En Windows, tenemos ciertos comandos básicos que nos permiten obtener información del entorno.
+
+| **Comando**                                   | **Descripción**                                                                 |
+|-----------------------------------------------|---------------------------------------------------------------------------------|
+| `hostname`                                    | Imprime el nombre de la PC.                                                    |
+| `[System.Environment]::OSVersion.Version`     | Imprime la versión del sistema operativo y el nivel de revisión.               |
+| `wmic qfe get Caption,Description,HotFixID,InstalledOn` | Imprime los parches y revisiones aplicadas al host.                             |
+| `ipconfig /all`                               | Imprime el estado y las configuraciones del adaptador de red.                  |
+| `set`                                         | Muestra una lista de variables de entorno para la sesión actual (CMD).         |
+| `echo %USERDOMAIN%`                           | Muestra el nombre del dominio al que pertenece el host (CMD).                  |
+| `echo %logonserver%`                          | Imprime el nombre del controlador de dominio con el que el host se registra (CMD). |
+| `systeminfo`                                  | Muestra información detallada del sistema, incluyendo procesador y memoria.    |
+| `netstat -an`                                 | Muestra las conexiones de red activas y sus estados.                           |
+| `tasklist`                                    | Imprime una lista de todos los procesos en ejecución en el sistema.            |
+
+
+Para obtener información de la red podemos realizar los siguiente comandos:
+
+| **Comando de red**                            | **Descripción**                                                                 |
+|-----------------------------------------------|---------------------------------------------------------------------------------|
+| `arp -a`                                      | Enumera todos los hosts conocidos almacenados en la tabla ARP.                 |
+| `ipconfig /all`                               | Imprime la configuración del adaptador para el host. Podemos averiguar el segmento de red desde aquí. |
+| `route print`                                 | Muestra la tabla de enrutamiento (IPv4 e IPv6) que identifica las redes conocidas y las rutas de capa tres compartidas con el host. |
+| `netsh advfirewall show allprofiles`          | Muestra el estado del firewall del host. Podemos determinar si está activo y filtrando el tráfico. |
+| `ping <dirección>`                            | Verifica la conectividad con un host remoto enviando paquetes ICMP.            |
+| `tracert <dirección>`                         | Rastrea la ruta hacia un host remoto mostrando los saltos intermedios.         |
+| `nslookup <dominio>`                          | Resuelve el nombre de dominio a una dirección IP y viceversa.                  |
+| `net view`                                    | Enumera los recursos compartidos en la red local.                              |
+| `Get-NetIPAddress` (PowerShell)               | Muestra las direcciones IP configuradas en el host, con detalles adicionales.  |
+| `nslookup -type=SRV _ldap._tcp.dc._msdcs.<dominio>` | Obtiene la IP del controlador de dominio (DC) consultando el servicio LDAP.    |
+
+Windows Management Instrumentation (WMI) es una infraestructura basada en Windows diseñada para administrar datos y operaciones en sistemas operativos Windows. Proporciona una interfaz consistente que permite a los administradores y desarrolladores acceder a información del sistema, supervisar eventos y realizar tareas administrativas tanto en hosts locales como remotos.
+
+| **Comando WMI**                               | **Descripción**                                                                |
+|-----------------------------------------------|--------------------------------------------------------------------------------|
+| `wmic qfe get Caption,Description,HotFixID,InstalledOn` | Imprime el nivel del parche y la descripción de las revisiones aplicadas.      |
+| `wmic computersystem get Name,Domain,Manufacturer,Model,Username,Roles /format:List` | Muestra información básica del host para incluir cualquier atributo dentro de la lista. |
+| `wmic process list /format:list`              | Una lista de todos los procesos en el host.                                    |
+| `wmic ntdomain list /format:list`             | Muestra información sobre el dominio y los controladores de dominio.          |
+| `wmic useraccount list /format:list`          | Muestra información sobre todas las cuentas locales y cualquier cuenta de dominio que haya iniciado sesión en el dispositivo. |
+| `wmic group list /format:list`                | Información sobre todos los grupos locales.                                    |
+| `wmic sysaccount list /format:list`           | Vuelca información sobre cualquier cuenta del sistema que se esté utilizando como cuentas de servicio. |
+| `wmic logicaldisk get Name,FileSystem,FreeSpace,Size` | Muestra información sobre los discos lógicos, incluyendo espacio disponible y tamaño total. |
+| `wmic product get Name,Version,Vendor`        | Lista los programas instalados en el host, con información de versión y proveedor. |
+| `wmic nic get Name,MACAddress,NetEnabled`     | Recupera información sobre las interfaces de red, incluyendo direcciones MAC y estado habilitado. |
+| `wmic os get Caption,OSArchitecture,Version,LastBootUpTime` | Muestra detalles sobre el sistema operativo, como arquitectura, versión y última vez que se inició. |
+
+## Comandos de Red para Enumeración de Información del Dominio
+
+Los comandos de red pueden ser herramientas poderosas para enumerar información del dominio. Permiten consultar tanto el host local como los hosts remotos de manera similar a las capacidades ofrecidas por WMI. Con estos comandos, se puede obtener información detallada como:
+
+- Usuarios locales y de dominio
+- Grupos
+- Anfitriones
+- Usuarios específicos en grupos
+- Controladores de dominio
+- Requisitos de contraseña
+
+>Consideraciones importantes:
+Es esencial tener en cuenta que los comandos de red pueden ser monitoreados por soluciones EDR (Endpoint Detection and Response). Estas herramientas pueden alertar rápidamente sobre actividades sospechosas, como la ejecución de comandos en cuentas o unidades organizativas específicas. Por ejemplo, comandos como `whoami` o `net localgroup administrators` ejecutados desde cuentas no esperadas podrían activar alertas y delatar nuestra ubicación.
+
+### Tabla de Comandos de Red Útiles
+
+| **Comando**                                  | **Descripción**                                                                 |
+|----------------------------------------------|---------------------------------------------------------------------------------|
+| `net accounts`                               | Información sobre los requisitos de contraseña.                                |
+| `net accounts /domain`                       | Política de contraseñas y bloqueos.                                            |
+| `net group /domain`                          | Información sobre grupos de dominios.                                          |
+| `net group "Domain Admins" /domain`          | Lista de usuarios con privilegios de administrador de dominio.                 |
+| `net group "domain computers" /domain`       | Lista de PCs conectadas al dominio.                                            |
+| `net group "Domain Controllers" /domain`     | Lista de cuentas de PC de controladores de dominio.                            |
+| `net group <domain_group_name> /domain`      | Usuario que pertenece al grupo.                                                |
+| `net groups /domain`                         | Lista de grupos de dominios.                                                   |
+| `net localgroup`                             | Todos los grupos disponibles.                                                  |
+| `net localgroup administrators /domain`      | Enumera los usuarios que pertenecen al grupo de administradores dentro del dominio. |
+| `net localgroup Administrators`              | Información sobre un grupo (administradores).                                  |
+| `net localgroup administrators [username] /add` | Agregar usuario a administradores.                                            |
+| `net share`                                  | Consultar acciones actuales.                                                   |
+| `net user <ACCOUNT_NAME> /domain`            | Obtener información sobre un usuario dentro del dominio.                       |
+| `net user /domain`                           | Listar todos los usuarios del dominio.                                         |
+| `net user %username%`                        | Información sobre el usuario actual.                                           |
+| `net use x: \\computer\share`                | Montar el recurso compartido localmente.                                       |
+| `net view`                                   | Obtener una lista de computadoras.                                             |
+| `net view /all /domain[:domainname]`         | Acciones en los dominios.                                                      |
+| `net view \\computer /ALL`                   | Lista de acciones de una computadora.                                          |
+| `net view /domain`                           | Lista de PCs del dominio.                                                      |
+
+Para obtener información extra de las cuentas de usuario se puede realizar lo siguiente:
+
+```powershell
+Get-ADGroupMember -Identity "Domain Admins" -Recursive | ForEach-Object {
+    Get-ADUser -Identity $_ -Properties DisplayName, Description, EmailAddress, Title, Department
+} | Select-Object DisplayName, SamAccountName, EmailAddress, Title, Department, Description
+
+```
+
+
+Otra forma de enumeración es ocupando de base la herramienta [Enum](https://packetstormsecurity.com/search/?q=win32+enum&s=files), en la cual se pueden considerar los siguiente parámetros:
 
 * Para enumerar recursos compartidos:
 	```cmd
@@ -509,6 +606,8 @@ C:\Users\lab>NET USE \\<IP>\IPC$ '' /u:''
 ```
 
 >Otra herramienta que actúa de la misma forma pero para Linux es ```nmblookup```.
+
+
 
 ## SMB Relay Clásico
 
