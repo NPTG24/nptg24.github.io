@@ -507,7 +507,7 @@ Windows Management Instrumentation (WMI) es una infraestructura basada en Window
 | `wmic nic get Name,MACAddress,NetEnabled`     | Recupera información sobre las interfaces de red, incluyendo direcciones MAC y estado habilitado. |
 | `wmic os get Caption,OSArchitecture,Version,LastBootUpTime` | Muestra detalles sobre el sistema operativo, como arquitectura, versión y última vez que se inició. |
 
-## Comandos de Red para Enumeración de Información del Dominio
+#### Comandos de Red para Enumeración de Información del Dominio
 
 Los comandos de red pueden ser herramientas poderosas para enumerar información del dominio. Permiten consultar tanto el host local como los hosts remotos de manera similar a las capacidades ofrecidas por WMI. Con estos comandos, se puede obtener información detallada como:
 
