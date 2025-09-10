@@ -70,14 +70,19 @@ También se pueden obtener los saltos que se tienen desde nuestra IP hasta llega
 
 ## Detección de datos de servidor whois
 
-Whois se trata de una lista de registros de Internet ampliamente utilizada que identifica quién posee un dominio y cómo ponerse en contacto con ellos.
+Los datos de WHOIS constituyen una fuente clave de información en la fase de reconocimiento durante un pentest. Permiten obtener detalles críticos sobre la huella digital de una organización y detectar posibles vulnerabilidades:
+
+* Los registros pueden mostrar nombres, correos y teléfonos de administradores de dominio, útiles para ataques de phishing.
+
+* Información técnica como name servers e IPs que pueden revelar la arquitectura del objetivo y potenciales puntos de entrada.
+
+* Revisar cambios en registros pasados para rastrear modificaciones de propiedad, contactos o configuraciones, dando una visión de la evolución del dominio.
 
 ```bash
 ┌─[root@kali]─[/home/user/]
 └──╼ whois <dirección web o dirección IP>
-
-## No todas las direcciones cuentan con servidor whois
 ```
+> No todas las direcciones cuentan con servidor whois
 
 ## Enumeración de DNS
 
