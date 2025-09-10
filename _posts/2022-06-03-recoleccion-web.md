@@ -6,9 +6,9 @@ title: Recolección de información de páginas web
 subtitle: 'herramientas'
 description: >-
 image: >-
-  http://imgfz.com/i/TNjFwpm.jpeg
+  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/webreco.png
 optimized_image: >-
-  http://imgfz.com/i/TNjFwpm.jpeg
+  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/webreco.png
 category: ciberseguridad
 tags:
   - extracción
