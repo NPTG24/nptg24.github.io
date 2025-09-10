@@ -87,8 +87,8 @@ Los datos de WHOIS constituyen una fuente clave de información en la fase de re
 ## Enumeración de DNS
 
 El DNS (Domain Name System) es como una guía de direcciones para Internet. En lugar de que tengamos que memorizar largas secuencias de números (direcciones IP), el DNS se encarga de traducir los nombres de dominio que usamos a diario (por ejemplo, www.example.com
-) en esos códigos numéricos (192.0.2.1) que entienden los computadores.
-De esta forma, cada vez que escribes una dirección web, el DNS hace la conversión en segundo plano y te dirige al sitio correcto, facilitando la navegación y el acceso a los servicios en línea.
+) en las direcciones IPs.
+De esta forma, cada vez que escribes una dirección web, el DNS hace la conversión en segundo plano y te dirige al sitio correcto, facilitando la navegación y el acceso a los servicios en línea. Los registros DNS pueden revelar una gran cantidad de información, incluidos subdominios, servidores de correo y registros de servidores de nombres.
 
 Su enumeración se puede realizar a través de un script Perl multiproceso para obtener la información de DNS de un dominio y descubrir bloques de IP no contiguos. El objetivo principal es recopilar la mayor cantidad de información posible sobre un dominio.
 
