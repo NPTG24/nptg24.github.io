@@ -99,7 +99,9 @@ Su enumeración se puede realizar a través de un script Perl multiproceso para 
 
 Si deseas asignar nombres de host a direcciones IP, puedes realizarlo tanto en ```C:\Windows\System32\drivers\etc\hosts``` para windows como ```/etc/hosts``` para linux.
 
-## Consulta de registros A
+## Herramientas DNS
+
+Tenemos dos herramientas muy conocidas la primera es ```nslookup``` la cual sirve para comprobaciones rápidas de resolución de dominio y registros del servidor de correo. La segunda es el comando ```dig``` (Domain Information Groper) es una herramienta flexible y potente que permite consultar servidores DNS y obtener distintos tipos de registros relacionados con un dominio.
 
 ```bash
 ┌──(root㉿kali)-[/home/user/]
@@ -112,9 +114,8 @@ Otra opción es por medio de ```dig```:
 └─# dig google.com @8.8.8.8
 ```
 
-### Subdominios
 
-Para consultar registros A en subdominios, se debe realizar lo siguiente:
+### Consulta de registros A
 
 ```bash
 ┌──(root㉿kali)-[/home/user/]
@@ -127,7 +128,7 @@ Otra opción es por medio de ```dig```:
 └─# dig a facebook.com @1.1.1.1
 ```
 
-## Consulta de registros PTR
+### Consulta de registros PTR
 
 ```bash
 ┌──(root㉿kali)-[/home/user/]
@@ -140,7 +141,7 @@ Otra opción es por medio de ```dig```:
 └─# dig -x 31.13.92.36 @1.1.1.1
 ```
 
-## Consulta de registros MX
+### Consulta de registros MX
 
 ```bash
 ┌──(root㉿kali)-[/home/user/]
@@ -153,7 +154,7 @@ Otra opción es por medio de ```dig```:
 └─# dig mx facebook.com @1.1.1.1
 ```
 
-## Consulta de registros TXT
+### Consulta de registros TXT
 
 ```bash
 ┌──(root㉿kali)-[/home/user/]
@@ -167,7 +168,7 @@ Otra opción es por medio de ```dig```:
 └─# dig txt google.com @8.8.8.8
 ```
 
-## Consulta de cualquier registro existente
+### Consulta de cualquier registro existente
 
 ```bash
 ┌──(root㉿kali)-[/home/user/]
@@ -316,6 +317,8 @@ Con ```dig``` se realiza lo siguiente:
 ```
   
 ## Prueba de transferencia de zona
+
+Una transferencia de zona consiste en copiar todos los registros de un dominio y sus subdominios desde un servidor DNS a otro, con el fin de mantener coherencia y redundancia. El problema surge cuando esta función no está protegida: un atacante puede descargar el archivo completo de la zona y obtener de inmediato la lista de subdominios, direcciones IP y otros datos sensibles.
   
 ```bash
 ┌─[root@kali]─[/home/user/]
@@ -333,6 +336,13 @@ Con ```dig``` se realiza lo siguiente:
 ```bash
 ┌─[root@kali]─[/home/user/]
 └──╼ dnsenum --dnsserver 10.129.129.221 --enum -p 0 -s 0 -o subdomains.txt -f /usr/share/wordlists/SecLists/Discovery/DNS/fierce-hostlist.txt dev.inlanefreight.htb
+```
+
+También otra opción es con gobuster.
+
+```bash
+┌─[root@kali]─[/home/user/]
+└──╼ gobuster vhost -u http://<target_IP_address> -w <wordlist_file> --append-domain -k
 ```
 
 ## Obtención de directorios
