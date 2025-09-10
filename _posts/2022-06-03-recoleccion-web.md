@@ -86,14 +86,18 @@ Los datos de WHOIS constituyen una fuente clave de información en la fase de re
 
 ## Enumeración de DNS
 
-Esto se realiza a través de un script Perl multiproceso para enumerar la información de DNS de un dominio y descubrir bloques de IP no contiguos . El objetivo principal es recopilar la mayor cantidad de información posible sobre un dominio.
+El DNS (Domain Name System) es como una guía de direcciones para Internet. En lugar de que tengamos que memorizar largas secuencias de números (direcciones IP), el DNS se encarga de traducir los nombres de dominio que usamos a diario (por ejemplo, www.example.com
+) en esos códigos numéricos (192.0.2.1) que entienden los computadores.
+De esta forma, cada vez que escribes una dirección web, el DNS hace la conversión en segundo plano y te dirige al sitio correcto, facilitando la navegación y el acceso a los servicios en línea.
+
+Su enumeración se puede realizar a través de un script Perl multiproceso para obtener la información de DNS de un dominio y descubrir bloques de IP no contiguos. El objetivo principal es recopilar la mayor cantidad de información posible sobre un dominio.
 
 ```bash
 ┌─[root@kali]─[/home/user/]
 └──╼ dnsenum <dirección web>
 ```
 
->Página recomendada: [Robtex](https://www.robtex.com/dns-lookup/)
+Si deseas asignar nombres de host a direcciones IP, puedes realizarlo tanto en ```C:\Windows\System32\drivers\etc\hosts``` para windows como ```/etc/hosts``` para linux.
 
 ## Consulta de registros A
 
