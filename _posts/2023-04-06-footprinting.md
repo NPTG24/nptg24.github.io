@@ -6,9 +6,9 @@ title: "Enumeración basada en el host"
 subtitle: 'footprinting'
 description: >-
 image: >-
-  http://imgfz.com/i/USJprIG.jpeg
+  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/foot.png
 optimized_image: >-
-  http://imgfz.com/i/USJprIG.jpeg
+  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/foot.png
 category: ciberseguridad
 tags:
   - FTP
