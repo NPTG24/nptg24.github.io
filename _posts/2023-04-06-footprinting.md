@@ -852,9 +852,9 @@ El puerto predeterminado que utiliza MS SQL Server para las conexiones es el 143
 └─ nmap 10.1.1.10 --script ms-sql-info,ms-sql-empty-password,ms-sql-xp-cmdshell,ms-sql-config,ms-sql-ntlm-info,ms-sql-tables,ms-sql-hasdbaccess,ms-sql-dac,ms-sql-dump-hashes --script-args mssql.instance-port=1433,mssql.username=sa,mssql.password=,mssql.instance-name=MSSQLSERVER -sV -p 1433
 ```
 
-### Conexión de forma remotar al servidor MSSQL
+### Conexión de forma remota al servidor MSSQL
 
-Si se tienen las credenciales válidas, es posible interactuar con las bases de datos usando T-SQL, por medio de ```mssqlclient.py``` de Impacket.
+Si se tienen las credenciales válidas, es posible interactuar con las bases de datos por medio de ```mssqlclient.py``` de Impacket.
 
 #### Conexión simple
 
@@ -871,6 +871,14 @@ Si se tienen las credenciales válidas, es posible interactuar con las bases de 
 ```
 
 > -windows-auth indica que se debe utilizar la autenticación de Windows para conectarse al servidor MSSQL. Esto significa que el script intentará utilizar las credenciales actuales de Windows para autenticarse con el servidor MSSQL.
+
+Para realizar ejecución remota de comandos se debe ejecutar lo siguiente tras la conexión.
+
+```
+enable_xp_cmdshell
+xp_cmdshell whoami
+xp_cmdshell ipconfig
+```
 
 ### Consultas (Ejemplos prácticos)
 
