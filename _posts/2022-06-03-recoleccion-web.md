@@ -36,7 +36,6 @@ La extracción de información web es una técnica para extraer grandes cantidad
 * [Wappalyzer](https://www.wappalyzer.com/): es una extensión del navegador que descubre las tecnologías utilizadas en los sitios web. Detecta sistemas de administración de contenido, tiendas web, servidores web, marcos de JavaScript, herramientas de análisis y muchos más.
 * [IP Address and Domain Information](https://dnslytics.com/browser-extensions-addons-accelerators): esta extensión muestra información detallada acerca de cada dirección IP, nombre de dominio y proveedor.
 * [Shodan](https://chrome.google.com/webstore/detail/shodan/jjalcfnidlmpjhdfepjhjbhnhkbgleap): La extensión de Shodan le dice dónde está alojado el sitio web (país, ciudad), quién es el propietario de la IP y qué otros servicios/puertos están abiertos.
-* [Netcraft](https://www.netcraft.com/apps/browser/): es una herramienta que permite una fácil búsqueda de información relacionada con los sitios que visita y brinda protección contra el phishing y JavaScript malicioso, incluido el ciberdelito relacionado con el coronavirus (esta extensión da problemas con ciertos buscadores).
 
 ## Obtención IP de dominio
 
