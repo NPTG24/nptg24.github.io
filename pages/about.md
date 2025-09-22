@@ -9,8 +9,14 @@ permalink: /about/
 
 # Sobre mí
 
-Soy un apasionado por la ciberseguridad con experiencia en el campo de red team o ethical hacking. Mi experiencia profesional incluye trabajar en la startup CleverIT, donde desarrollé mis habilidades y conocimientos en ciberseguridad. También he trabajado en EY realizando análisis de vulnerabilidades y hacking ético, así como presentaciones con clientes. Además, he brindado servicios de forma independiente, llevando a cabo auditorías de protección de datos y hacking ético a PYMEs en Chile.
+En el mundo de la ciberseguridad nunca hay una jornada igual a la anterior. A lo largo de mi carrera he tenido la oportunidad de explorar diferentes áreas del ethical hacking y del compliance, combinando la parte más técnica con los desafíos normativos que enfrentan las organizaciones hoy en día.
 
-Mi experiencia académica también se extiende a la seguridad informática, ya que fui ayudante de redes en la Universidad de Santiago de Chile. Actualmente, me desempeño como Ethical Hacker en Deloitte, donde continúo desarrollando mis habilidades y conocimientos en el campo. Además, cuento con certificaciones del sector, lo que me permite estar al día con las últimas tendencias y mejores prácticas en ciberseguridad.
+He participado en auditorías de pentesting para aplicaciones web, móviles y APIs, aplicando la metodología de OWASP, además de evaluar infraestructuras como Active Directory (AD) y redes de tecnología operacional (OT). También he estado involucrado en proyectos relacionados con ISO 27001 y la protección de datos, lo que me ha permitido ver la seguridad desde una perspectiva integral.
 
-Valoro altamente el trabajo en equipo y me esfuerzo por crear un ambiente colaborativo en el que todos puedan aportar sus habilidades y conocimientos para lograr un objetivo común. Estoy comprometido en brindar soluciones eficaces y estratégicas para proteger los activos digitales de los clientes y mejorar la gestión técnica-comercial.
+Uno de los momentos más enriquecedores de mi camino fue presentar en la 8.8 Computer Security Conference, donde mostré cómo es posible vulnerar una red interna sin necesidad de estar conectado directamente a ella. Fue una experiencia desafiante, pero también motivadora, que reafirmó mi pasión por enfrentar problemas complejos y buscar soluciones creativas.
+
+Mi trabajo me ha llevado a colaborar con sectores muy diversos: financiero, banca, energía, telecomunicaciones, transporte, retail, bienes raíces, organismos gubernamentales y también con PYMEs. Cada proyecto ha sido un nuevo aprendizaje, con realidades y necesidades distintas, lo que me ha enseñado a adaptar la estrategia y mantener la mente abierta.
+
+Más allá de lo técnico, creo firmemente en la importancia del trabajo en equipo. La ciberseguridad no es un esfuerzo individual, sino un engranaje donde cada persona aporta su experiencia para construir soluciones sólidas. Mi objetivo siempre ha sido crear un entorno colaborativo, donde se combinen conocimientos y habilidades para proteger de forma eficaz los activos digitales de los clientes.
+
+En definitiva, mi camino en la ciberseguridad ha sido una mezcla de curiosidad, aprendizaje constante y compromiso con ayudar a que las organizaciones estén mejor preparadas frente a las amenazas. Y lo mejor es que esto apenas comienza: en este campo, siempre hay algo nuevo que descubrir.
