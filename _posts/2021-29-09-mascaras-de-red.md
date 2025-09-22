@@ -20,7 +20,7 @@ author: Felipe Canales Cayuqueo
 paginate: true
 ---
 
-# Tabla
+## Tabla
 
 | Máscara de red     | Prefijo | Representación binaria                  |
 | :----------------: | :-----: | :-------------------------------------- |
@@ -58,7 +58,7 @@ paginate: true
 | 128.0.0.0          | /1      | 10000000.00000000.00000000.00000000     |
 | 0.0.0.0            | /0      | 00000000.00000000.00000000.00000000     |
 
-# Clases
+## Clases
 
 | Clase | Bits | IP Subred | IP Broadcast | Máscara en decimal | Prefijo | N° de Redes | N° de Host |
 | :--------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: | :-------: |
