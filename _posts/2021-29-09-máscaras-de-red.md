@@ -3,7 +3,7 @@ date: 2021-09-29T23:59:05.000Z
 layout: post
 comments: true
 title: Tabla de máscaras de red y clases
-subtitle: 'y sus prefijos'
+subtitle: 'con representación binaria'
 description: >-
 image: >-
   https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/tablared.png
