@@ -2,7 +2,7 @@
 date: 2023-01-13T00:50:05.000Z
 layout: post
 comments: true
-title: SQL Inject
+title: SQL Injection
 subtitle: 'tipos de inyecciones'
 description: >-
 image: >-
