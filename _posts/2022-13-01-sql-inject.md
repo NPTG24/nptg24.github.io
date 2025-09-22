@@ -6,9 +6,9 @@ title: SQL Inject
 subtitle: 'tipos de inyecciones'
 description: >-
 image: >-
-    http://imgfz.com/i/IUcxZsb.png
+    https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/sqli.png
 optimized_image: >-
-    http://imgfz.com/i/IUcxZsb.png
+    https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/sqli.png
 category: ciberseguridad
 tags: 
   - hacking
