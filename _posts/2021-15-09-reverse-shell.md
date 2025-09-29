@@ -6,9 +6,9 @@ title: Reverse Shell
 subtitle: 'y como obtener acceso'
 description: >-
 image: >-
-  http://imgfz.com/i/8lyF7VZ.jpeg
+  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/revshell.png
 optimized_image: >-
-  http://imgfz.com/i/8lyF7VZ.jpeg
+  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/revshell.png
 category: ciberseguridad
 tags:
   - explotación
