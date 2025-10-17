@@ -3,7 +3,7 @@ date: 2023-07-25T20:00:05.000Z
 layout: post
 comments: true
 title: Local File Inclusion
-subtitle: 'ejecución remota de comandos y wrappers'
+subtitle: 'wrappers y ejecución remota de comandos'
 description: >-
 image: >-
     http://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/lfifondo.png
