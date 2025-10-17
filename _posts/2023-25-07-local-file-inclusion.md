@@ -6,9 +6,9 @@ title: Local File Inclusion
 subtitle: 'ejecución remota de comandos y wrappers'
 description: >-
 image: >-
-    http://imgfz.com/i/yZDLQir.png
+    http://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/lfifondo.png
 optimized_image: >-
-    http://imgfz.com/i/yZDLQir.png
+    http://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/lfifondo.png
 category: ciberseguridad
 tags: 
   - hacking
