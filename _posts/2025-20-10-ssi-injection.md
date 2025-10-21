@@ -71,4 +71,9 @@ Esta directiva permite la inclusión de archivos en el directorio raíz web.
 <!--#include virtual="index.html" -->
 ```
 
+### Recomendaciones
+
+Las principales medidas de prevención frente a la inyección SSI consisten en que los desarrolladores valíden y desinfecten rigurosamente toda entrada del usuario, especialmente aquella que pueda insertarse en archivos procesados por el servidor. También deben configurar el servidor web para limitar el uso de SSI únicamente a ciertas extensiones o directorios autorizados, reduciendo así la superficie de ataque. Además, es recomendable restringir o deshabilitar directivas peligrosas como exec cuando no sean estrictamente necesarias, y aplicar políticas de configuración seguras que impidan la ejecución o inclusión de código no autorizado dentro de las páginas servidas.
+
+
 
