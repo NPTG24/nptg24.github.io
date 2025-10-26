@@ -6,9 +6,9 @@ title: "Command Injections"
 subtitle: 'ejecución de comandos en el sistema'
 description: >-
 image: >-
-  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/commandlogo.png
+  /images/commandlogo.png
 optimized_image: >-
-  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/commandlogo.png
+  /images/commandlogo.png
 category: ciberseguridad
 tags:
   - web
