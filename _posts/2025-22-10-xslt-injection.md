@@ -6,9 +6,9 @@ title: "eXtensible Stylesheet Language Transformation Injection"
 subtitle: 'XSLT'
 description: >-
 image: >-
-  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/xsltlogo.png
+  /images/xsltlogo.png
 optimized_image: >-
-  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/xsltlogo.png
+  /images/xsltlogo.png
 category: ciberseguridad
 tags:
   - web
