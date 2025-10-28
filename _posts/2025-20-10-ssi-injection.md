@@ -6,9 +6,9 @@ title: "Server-Side Includes Injection"
 subtitle: 'SSI'
 description: >-
 image: >-
-  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/ssilogo.png
+  /images/ssilogo.png
 optimized_image: >-
-  https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/ssilogo.png
+  /images/ssilogo.png
 category: ciberseguridad
 tags:
   - web
