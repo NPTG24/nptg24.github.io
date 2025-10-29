@@ -6,9 +6,9 @@ title: API Hacking
 subtitle: 'vulnerabilidades de OWASP'
 description: >-
 image: >-
-    https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/apiimage.png
+    /images/apiimage.png
 optimized_image: >-
-    https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/apiimage.png
+    /images/apiimage.png
 category: ciberseguridad
 tags: 
   - hacking
