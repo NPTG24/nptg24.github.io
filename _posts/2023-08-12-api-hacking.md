@@ -462,6 +462,16 @@ En las respuestas aparece un código de estado 200 que contiene JWT y confirma c
 
 [![apibrutepassword8](/images/apibrutepassword8.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/apibrutepassword8.png)
 
+
+### Fuerza Bruta a 2FA (otp)
+
+La autenticación de dos factores (2FA), especialmente mediante el uso de One-Time Passwords (OTP), es un método de seguridad avanzado donde se requieren dos formas de identificación distintas para acceder a una cuenta o servicio. Los OTPs son códigos que se generan para una sola sesión o transacción, añadiendo una capa adicional de seguridad al proceso de autenticación. Sin embargo, los sistemas basados en OTP pueden ser vulnerables a ataques de fuerza bruta, donde un atacante intenta sistemáticamente adivinar el código correcto. Herramientas como ```wfuzz``` permiten probar la resistencia de estos sistemas contra ataques de fuerza bruta, mediante la generación y prueba rápida de múltiples combinaciones de OTP.
+
+```bash
+┌─[root@kali]─[/home/user/api]
+└──╼ wfuzz -d '{"email":"test@test.com","otp":"FUZZ","password":"joA8Za*owFGeXZZr"}' -H 'Content-Type: application/json' -w /usr/share/wordlists/SecLists/Fuzzing/4-digits-0000-9999.txt -u http://crapi.io/identity/api/auth/v3/check-otp --hc 500,404
+```
+
 ### JWT análisis
 
 Para realizar un análisis de referencia de un JWT, simplemente use jwt_tool junto con su JWT capturado para ver información similar al depurador de JWT. 
@@ -706,34 +716,6 @@ Finalmente, se utiliza ```jwt_tool.py``` para manipular un token JWT, especifica
 └──╼ ./jwt_tool.py eyJhbGciOiJSUzI1NiJ9.eyJzdWIiOiJ2dWxuQGJydXRlLmNvbSIsInJvbGUiOiJ1c2VyIiwiaWF0IjoxNjg3MjMzNzIwLCJleHAiOjE2ODc4Mzg1MjB9.hdNMJ_TMh0F2Iawe5GT1fbniniPc-jV2q6umvDSa8fTC5TMNMzO-X9xIy6SBWU3gWaiLidGcJHixKLUgFOpPMvk0DzIVMQZNWjfp_w80nueVBnnav6X8vbHiWDdUKOTWogYDlZ5AJufgeLiQVQcJ-usTpdAH2u9TXRhW6HNKhflDxO5PyUsC3fYObxJl0xyR7L9jsuNr7gPkozk9oY52otTu3aCru8vBQM_D7B7CtBOFRTztxuZHy8z-dI6MSU2GdIF8Ko03EgBmRW-mAl_zFLr4dF2uAJL_LZUK1FfBtIgYbfqriK10ftOSNSiTvko50_5QsN1zib6E6Huthq2NUQ -S hs256 -k /home/nptg/Documents/API/public.pem              
 ```
 
-
-### Fuerza Bruta a 2FA (otp)
-
-La autenticación de dos factores (2FA), especialmente mediante el uso de One-Time Passwords (OTP), es un método de seguridad avanzado donde se requieren dos formas de identificación distintas para acceder a una cuenta o servicio. Los OTPs son códigos que se generan para una sola sesión o transacción, añadiendo una capa adicional de seguridad al proceso de autenticación. Sin embargo, los sistemas basados en OTP pueden ser vulnerables a ataques de fuerza bruta, donde un atacante intenta sistemáticamente adivinar el código correcto. Herramientas como ```wfuzz``` permiten probar la resistencia de estos sistemas contra ataques de fuerza bruta, mediante la generación y prueba rápida de múltiples combinaciones de OTP.
-
-```bash
-┌─[root@kali]─[/home/user/api]
-└──╼ wfuzz -d '{"email":"test@test.com","otp":"FUZZ","password":"joA8Za*owFGeXZZr"}' -H 'Content-Type: application/json' -w /usr/share/wordlists/SecLists/Fuzzing/4-digits-0000-9999.txt -u http://crapi.io/identity/api/auth/v3/check-otp --hc 500,404
-```
-
-### Broken Object Level Authorization (BOLA)
-
-Esta es una vulnerabilidad también conocida como Insecure Direct Object Reference (IDOR) que permite solicitar datos de otros usuarios sin verificar de forma adecuada y segura que un usuario tenga propiedad y permiso para ver dicho recurso.
-
-En este caso se identifica un parámetro ```report_id``` en donde podemos ver el reporte de un mecánico automotriz perteneciente a mi perfil.
-
-[![api1](/images/api1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/api1.png)
-
-[![api2](/images/api2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/api2.png)
-
-Sin embargo cuando cambiamos el ```report_id``` a 2 por ejemplo, comenzamos a ver información de otros usuarios.
-
-[![api3](/images/api3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/api3.png)
-
-[![api4](/images/api4.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/api4.png)
-
-De esta forma podemos ir iterando entre distintos valores para obtener más información de los usuarios.
-
 ### Mass Assignment
 
 La vulnerabilidad de asignación masiva ocurre cuando una aplicación web asigna automáticamente valores de usuario a propiedades o variables sin una adecuada filtración o verificación. Este tipo de vulnerabilidad puede ser explotada por un atacante para modificar datos críticos o ganar acceso no autorizado.
@@ -797,6 +779,25 @@ En este caso, un atacante podría modificar la consulta para, en lugar de pedir 
 Cuando identificamos el parámetro inyectable procedemos a realizar la solicitud hacía la dirección de prueba de [webhook](https://webhook.site) y como se puede apreciar al enviar la petición recibimos como respuesta la información que dejamos previamente definido en [webhook](https://webhook.site).
 
 [![apissrf3](/images/apissrf3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/apissrf3.png)
+
+
+### Broken Object Level Authorization (BOLA)
+
+Esta es una vulnerabilidad también conocida como Insecure Direct Object Reference (IDOR) que permite solicitar datos de otros usuarios sin verificar de forma adecuada y segura que un usuario tenga propiedad y permiso para ver dicho recurso.
+
+En este caso se identifica un parámetro ```report_id``` en donde podemos ver el reporte de un mecánico automotriz perteneciente a mi perfil.
+
+[![api1](/images/api1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/api1.png)
+
+[![api2](/images/api2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/api2.png)
+
+Sin embargo cuando cambiamos el ```report_id``` a 2 por ejemplo, comenzamos a ver información de otros usuarios.
+
+[![api3](/images/api3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/api3.png)
+
+[![api4](/images/api4.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/master/images/api4.png)
+
+De esta forma podemos ir iterando entre distintos valores para obtener más información de los usuarios.
 
 
 ### Inyecciones
