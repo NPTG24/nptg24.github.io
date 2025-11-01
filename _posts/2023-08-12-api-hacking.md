@@ -799,6 +799,7 @@ Sin embargo cuando cambiamos el ```report_id``` a 2 por ejemplo, comenzamos a ve
 
 De esta forma podemos ir iterando entre distintos valores para obtener más información de los usuarios.
 
+La diferencia entre Broken Object Level Authorization (BOLA) y Broken Function Level Authorization (BFLA) es que en el caso de BOLA, el usuario está autorizado a interactuar con el punto final vulnerable, mientras que en el caso de BFLA, el usuario no lo es.
 
 ### Inyecciones
 
