@@ -316,7 +316,7 @@ Drupalgeddon son un grupo de vulnerabilidades que permiten ejecución remota de 
     print ('\nCheck: '+target+'exploit.php')
     ```
 
-    Para finalmente ejecutar nuevamente el exploit y ejecutar comandos a nivel de sistema.
+    Para finalmente ejecutar nuevamente el exploit y dirigirnos a la shell.
 
     ```
     ┌──(root㉿nptg)-[/drupal/]
