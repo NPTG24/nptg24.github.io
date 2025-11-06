@@ -338,7 +338,7 @@ Drupalgeddon son un grupo de vulnerabilidades que permiten ejecución remota de 
 
 * [CVE-2018-7602](https://github.com/oways/SA-CORE-2018-004/): Drupalgeddon 3 es una vulnerabilidad crítica de ejecución remota de código (RCE). Afecta a múltiples subsistemas del núcleo de Drupal 7.x y 8.x, y permite que un atacante remoto autenticado ejecute código arbitrario en el servidor que aloja el sitio.
 
-    Para esto necesitamos cumplir ciertas condiciones como obtener una sesión guardando al cookie. En este caso capturaremos la petición con burpsuite tras realizar el login para poder recibir esta información.
+    Para esto necesitamos cumplir ciertas condiciones como obtener una sesión y copiarnos la cookie. En este caso capturaremos la petición con burpsuite tras realizar el login para poder recibir esta información.
 
     [![drupal11](/images/drupal11.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/drupal11.png)
 
