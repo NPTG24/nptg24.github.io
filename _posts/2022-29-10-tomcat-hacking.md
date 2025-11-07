@@ -172,7 +172,7 @@ C:\Program Files (x86)\Apache Software Foundation\Tomcat 10.0>
 
 ### CVE-2020-1938 (LFI)
 
-[Ghostcat](https://github.com/YDHCUI/CNVD-2020-10487-Tomcat-Ajp-lfi) es una vulnerabilidad sin autenticación que permite devolver archivos arbitrarios desde cualquier lugar de la aplicación web, es decir un (LFI). Todas las versiones de Tomcat anteriores a 9.0.31, 8.5.51 y 7.0.100 son vulnerables.
+[Ghostcat](https://github.com/YDHCUI/CNVD-2020-10487-Tomcat-Ajp-lfi) es una vulnerabilidad sin autenticación que permite devolver archivos arbitrarios desde cualquier lugar de la aplicación web, es decir un (LFI). Todas las versiones de Tomcat anteriores a 9.0.31, 8.5.51 y 7.0.100 son vulnerables. Se debe considerar que el exploit solo puede leer archivos y carpetas dentro de la carpeta de la aplicación web, lo que significa que archivos como /etc/passwd no se podrán visualizar.
 
 Dentro de las carpetas del servidor web hay ciertos archivos que son interesantes y se podrían aprovechar de visitar al explotar esta vulnerabilidad:
 
