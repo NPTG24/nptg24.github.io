@@ -48,11 +48,11 @@ reverse_shell_splunk/bin/rev.py
 reverse_shell_splunk/bin/run.bat
 ```
 
-Como ya tenemos el archivo tar nos vamos a explorar en splunk, luego a Splunk Apps.
+Con el archivo tar listo, accedemos a Splunk y abrimos la sección Splunk Apps.
 
 [![splunk2](/images/splunk2.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/splunk2.png)
 
-Una vez ahí podemos irnos a la parte superior para seleccionar "Manage Apps".
+Dentro de esa sección, en la parte superior, seleccionamos Manage Apps.
 
 [![splunk3](/images/splunk3.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/splunk3.png)
 
@@ -64,7 +64,7 @@ Ahora podremos instalar la aplicación maliciosa.
 
 [![splunk6](/images/splunk6.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/splunk6.png)
 
-Como tenemos seleccionado el archivo, antes de subirlo debemos ponernos a la escucha en el puerto que configuramos anteriormente.
+Con el archivo preparado para subir, iniciamos un listener en el puerto configurado previamente.
 
 ```
 ┌──(root㉿nptg)-[/splunk]
@@ -72,7 +72,7 @@ Como tenemos seleccionado el archivo, antes de subirlo debemos ponernos a la esc
 listening on [any] 4646 ...
 ```
 
-Finalmente hacemos seleccionamos la opción "Upload" e inmediatamente recibimos la shell inversa en nuestro netcat.
+Finalmente, al pulsar Upload, se recibe de inmediato la conexión inversa en el listener (netcat).
 
 [![splunk7](/images/splunk7.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/splunk7.png)
 
@@ -112,3 +112,4 @@ https://127.0.0.1:8000/en-US/splunkd/__raw/services/server/info/server-info?outp
 Splunk Web (Splunk 4.2.x, versiones anteriores a la 4.2.5) contiene una falla en ```mappy.py``` que no restringe correctamente el uso del comando ```mappy``` para acceder a clases de Python. Como resultado, un administrador remoto autenticado puede ejecutar código arbitrario aprovechando el módulo ```sys``` en una petición dirigida a la aplicación ```Search```, la técnica puede llevarse a cabo mediante un ataque de tipo CSRF.
 
 Cuenta con un módulo en metasploit llamado ```Splunk Search Remote Code Execution``` o bien un script en Python en [exploitdb](https://www.exploit-db.com/exploits/18245) que lo combina con otras tres vulnerabilidades.
+
