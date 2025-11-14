@@ -121,7 +121,7 @@ Para ello nos pondremos a la escucha en algún puerto específico.
 listening on [any] 4646 ...
 ```
 
-Posteriormente ejecutaremos el exploit.
+Posteriormente ejecutaremos el exploit considerando que se debe modificar la IP y el puerto por el del atacante.
 
 ```
 ┌──(root㉿nptg)-[/gitlab]
