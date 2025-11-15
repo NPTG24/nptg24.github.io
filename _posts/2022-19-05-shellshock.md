@@ -27,11 +27,44 @@ paginate: true
 El ataque Shellshock es una vulnerabilidad de ejecución remota de comandos, es decir, se basa en una falla de seguridad en el shell Bash (GNU Bash hasta la versión 4.3) que ejecuta incorrectamente los comandos finales cuando importa una definición de función almacenada en una variable de entorno. Para empezar intentaremos reconocer la vulnerabilidad:
 
 * Una manera es observando el código fuente de la página, la cual nos puede entregar pistas sobre el directorio ```cgi-bin```:
-
-
-[![shellshockvuln](/images/shellshockvuln.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/shellshockvuln.png)
   
-* Una vez detectado podemos realizar fuzzing para ver que hay tras el directorio ```cgi-bin``` (en algunos casos el directorio puede ser ```/cgi```) para ello debemos considerar las extensiones ```.cgi```, ```.sh```, ```.pl```, ```.py```, ```.bat```, ```.cmd```, entre otros:
+    [![shellshockvuln](/images/shellshockvuln.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/shellshockvuln.png)
+
+* Otra forma es realizando una enumeración de directorios:
+
+    ```bash
+    ┌─[root@kali]─[/shellshock]
+    └──╼ffuf -w /usr/share/wordlists/OneListForAll/onelistforallshort.txt -u http://10.129.205.27/FUZZ -k -fc 400,404,414 -t 100 -c 
+    
+            /'___\  /'___\           /'___\       
+           /\ \__/ /\ \__/  __  __  /\ \__/       
+           \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+            \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+             \ \_\   \ \_\  \ \____/  \ \_\       
+              \/_/    \/_/   \/___/    \/_/       
+    
+           v2.1.0-dev
+    ________________________________________________
+    
+     :: Method           : GET
+     :: URL              : http://10.129.205.27/FUZZ
+     :: Wordlist         : FUZZ: /usr/share/wordlists/OneListForAll/onelistforallshort.txt
+     :: Follow redirects : false
+     :: Calibration      : false
+     :: Timeout          : 10
+     :: Threads          : 100
+     :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+     :: Filter           : Response status: 400,404,414
+     :: Filter           : Response size: 10918
+    ________________________________________________
+    
+    icons/small             [Status: 301, Size: 320, Words: 20, Lines: 10, Duration: 150ms]
+    icons/apache_pb.gif     [Status: 200, Size: 4463, Words: 56, Lines: 26, Duration: 148ms]
+    cgi-bin/.htaccess.save  [Status: 403, Size: 278, Words: 20, Lines: 10, Duration: 148ms]
+    cgi-bin/                [Status: 403, Size: 278, Words: 20, Lines: 10, Duration: 148ms]
+    ```
+  
+Una vez detectado podemos realizar fuzzing para ver que hay tras el directorio ```cgi-bin``` (en algunos casos el directorio puede ser ```/cgi```) para ello debemos considerar las extensiones ```.cgi```, ```.sh```, ```.pl```, ```.py```, ```.bat```, ```.cmd```, entre otros:
 
 ```bash
 ┌─[root@kali]─[/shellshock]
