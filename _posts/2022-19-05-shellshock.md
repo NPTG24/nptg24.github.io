@@ -89,11 +89,43 @@ Filtered Requests: 441118
 Requests/sec.: 0
 ```
 
+Con la herramienta ```ffuf``` se realizaría de la siguiente forma:
 
+```bash
+┌──(root㉿nptg)-[/home/…/Documentos/HTB/Academy/CBBH]
+└─# ffuf -w /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt -u http://10.129.205.27/cgi-bin/FUZZ -e .cgi,.sh,.bat,.cmd -k -fc 400,404,414 -fs 278 -t 100 -c
+
+        /'___\  /'___\           /'___\       
+       /\ \__/ /\ \__/  __  __  /\ \__/       
+       \ \ ,__\\ \ ,__\/\ \/\ \ \ \ ,__\      
+        \ \ \_/ \ \ \_/\ \ \_\ \ \ \ \_/      
+         \ \_\   \ \_\  \ \____/  \ \_\       
+          \/_/    \/_/   \/___/    \/_/       
+
+       v2.1.0-dev
+________________________________________________
+
+ :: Method           : GET
+ :: URL              : http://10.129.205.27/cgi-bin/FUZZ
+ :: Wordlist         : FUZZ: /usr/share/wordlists/dirbuster/directory-list-2.3-medium.txt
+ :: Extensions       : .cgi .sh .bat .cmd 
+ :: Follow redirects : false
+ :: Calibration      : false
+ :: Timeout          : 10
+ :: Threads          : 100
+ :: Matcher          : Response status: 200-299,301,302,307,401,403,405,500
+ :: Filter           : Response status: 400,404,414
+ :: Filter           : Response size: 278
+________________________________________________
+
+access.cgi              [Status: 200, Size: 0, Words: 1, Lines: 1, Duration: 159ms]
+```
+
+> El parámetro ```-fs``` se adapta en base a la respuesta de cada web para evitar falsos positivos.
 
 ### Verificación de vulnerabilidad
 
-Procedemos a verificar la vulnerabilidad por medio de nmap, en mi caso voy a ocupar ```shell.sh```, sin embargo podría ocupar ```backup.cgi```, ```admin.cgi```, entre otros que estuvieran disponibles:
+Procedemos a verificar la vulnerabilidad del primer caso (con wfuzz) por medio de nmap, en mi caso voy a ocupar ```shell.sh```, sin embargo podría ocupar ```backup.cgi```, ```admin.cgi```, entre otros que estuvieran disponibles:
 
 ```bash
 ┌─[root@kali]─[/shellshock]
