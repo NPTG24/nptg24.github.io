@@ -31,7 +31,7 @@ El ataque Shellshock es una vulnerabilidad de ejecución remota de comandos, es 
 
 [![shellshockvuln](/images/shellshockvuln.png){:target="_blank"}](https://raw.githubusercontent.com/NPTG24/nptg24.github.io/refs/heads/master/images/shellshockvuln.png)
   
-* Una vez detectado podemos realizar fuzzing para ver que hay tras el directorio ```cgi-bin``` (en algunos casos el directorio puede ser ```/cgi```) para ello debemos considerar las extensiones ```.cgi```, ```.sh```, ```.pl```, ```.py```, ```.bat``` y ```.cmd```:
+* Una vez detectado podemos realizar fuzzing para ver que hay tras el directorio ```cgi-bin``` (en algunos casos el directorio puede ser ```/cgi```) para ello debemos considerar las extensiones ```.cgi```, ```.sh```, ```.pl```, ```.py```, ```.bat```, ```.cmd```, entre otros:
 
 ```bash
 ┌─[root@kali]─[/shellshock]
