@@ -24,7 +24,7 @@ author: Felipe Canales Cayuqueo
 paginate: true
 ---
 
-El ataque Shellshock es una vulnerabilidad de ejecución remota de comandos, es decir, se basa en el hecho de que bash o cmd ejecuta incorrectamente los comandos finales cuando importa una definición de función almacenada en una variable de entorno. Para empezar intentaremos reconocer la vulnerabilidad:
+El ataque Shellshock es una vulnerabilidad de ejecución remota de comandos, es decir, se basa en una falla de seguridad en el shell Bash (GNU Bash hasta la versión 4.3) que ejecuta incorrectamente los comandos finales cuando importa una definición de función almacenada en una variable de entorno. Para empezar intentaremos reconocer la vulnerabilidad:
 
 * Una manera es observando el código fuente de la página, la cual nos puede entregar pistas sobre el directorio ```cgi-bin```:
 
