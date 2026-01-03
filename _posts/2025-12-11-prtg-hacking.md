@@ -19,7 +19,15 @@ author: Felipe Canales Cayuqueo
 paginate: true
 ---
 
-PRTG Network Monitor es una herramienta de monitoreo de red desarrollada por Paessler AG que permite supervisar en tiempo real el estado y rendimiento de dispositivos, servidores, aplicaciones y servicios dentro de una infraestructura TI. Utiliza protocolos como SNMP, WMI, NetFlow y HTTP para recopilar métricas sobre el uso del ancho de banda, la carga del CPU, la disponibilidad de servicios y otros indicadores críticos. Su interfaz gráfica facilita la visualización de alertas y paneles personalizados, lo que ayuda a los administradores a detectar fallos o cuellos de botella de forma temprana y a mantener la estabilidad y eficiencia de la red. Normalmente se puede encontrar en puertos web comunes como 80, 443 u 8080 en donde las credenciales por defecto son ```prtgadmin:prtgadmin``` o también se pueden buscar credenciales débiles.
+PRTG Network Monitor es una herramienta de monitoreo de red desarrollada por Paessler AG que permite supervisar en tiempo real el estado y el rendimiento de dispositivos, servidores, aplicaciones y servicios dentro de una infraestructura TI. Utiliza protocolos como SNMP, WMI, NetFlow y HTTP para recopilar métricas relacionadas con el uso de ancho de banda, la carga de CPU, la disponibilidad de servicios y otros indicadores críticos. Su interfaz gráfica facilita la visualización mediante alertas y paneles personalizados, lo que ayuda a los administradores a detectar fallos o cuellos de botella de manera temprana y a mantener la estabilidad y eficiencia de la red.  
+
+Normalmente, PRTG puede encontrarse expuesto en puertos web comunes como 80, 443 u 8080, donde pueden existir credenciales por defecto como ```prtgadmin:prtgadmin```. Otra forma es encontrar credenciales débiles o incluso recuperar contraseñas a través de un error interno que provoca que algunas de ellas quedaran almacenadas en texto claro dentro de archivos de respaldo de configuración. Algunos ejemplos de estos archivos son:
+
+- C:\ProgramData\Paessler\PRTG Network Monitor\PRTG Configuration.old  
+- C:\ProgramData\Paessler\PRTG Network Monitor\PRTG Configuration.nul  
+- C:\ProgramData\Paessler\PRTG Network Monitor\PRTG Configuration.old.bak  
+- C:\ProgramData\Paessler\PRTG Network Monitor\PRTG Configuration.dat  
+
 
 ### CVE-2018-9276
 
