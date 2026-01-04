@@ -2,8 +2,8 @@
 date: 2021-11-15T01:14:05.000Z
 layout: post
 comments: true
-title: Escalar privilegios
-subtitle: 'para obtener acceso a root o a NT authority system'
+title: Escalada de privilegios
+subtitle: 'En Linux y Windows'
 description: >-
 image: >-
   /images/privlogo.png
