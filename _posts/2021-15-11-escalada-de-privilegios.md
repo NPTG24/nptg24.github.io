@@ -26,6 +26,200 @@ De este modo, cuando tu, o cualquier programa, quiera llevar a cabo una acción 
 
 # Linux
 
+Es importante destacar que existen herramientas que permiten identificar posibles vectores de escalada de privilegios. Algunos ejemplos de estos casos son:
+
+* [LinEnum](https://github.com/rebootuser/LinEnum).
+* [LinPEAS](https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS).
+
+## Información del sistema
+
+Conocer la distribución (Ubuntu, Debian, FreeBSD, Fedora, SUSE, Red Hat, CentOS, etc.) te dará una idea de los tipos de herramientas que pueden estar disponibles. Esto también identificaría la versión del sistema operativo, para la cual puede haber exploits públicos disponibles.
+
+```bash
+┌─[user@user]─[/]
+└──╼ cat /etc/os-release
+```
+
+## Información del kernel
+
+Al igual que con la versión del sistema operativo, puede haber exploits públicos que apunten a una vulnerabilidad en una versión específica del kernel. Los exploits del kernel pueden provocar inestabilidad del sistema o incluso un bloqueo total. Tenga cuidado al ejecutarlos en cualquier sistema de producción y asegúrese de comprender completamente el exploit y las posibles ramificaciones antes de ejecutar uno.
+
+```bash
+┌─[user@user]─[/]
+└──╼ uname -a
+Linux 3.2.0-23-generic #36-Ubuntu SMP Tue Apr 10 20:39:51 UTC 2012 x86_64 x86_64 x86_64 GNU/Linux
+```
+
+## Información adicional sobre el host
+
+```bash
+┌─[user@user]─[/]
+└──╼ lscpu
+```
+
+## Usuarios con carpeta en el directorio home
+
+Es necesario enumerar cada uno de estos directorios para ver si alguno de los usuarios del sistema está almacenando datos confidenciales o archivos que contengan contraseñas. También para tener claro usuarios potenciales para algún movimiento lateral. También es importante verificar las claves SSH de todos los usuarios, ya que podrían usarse para lograr persistencia en el sistema, potencialmente para escalar privilegios o para ayudar con el pivoteo y el reenvío de puertos a la máquina atacante.
+
+```bash
+┌─[user@user]─[/]
+└──╼ ls -al /home
+```
+
+## PATH
+
+A continuación, es útil revisar la variable PATH del usuario actual, ya que define los directorios donde el sistema busca los ejecutables cada vez que se ejecuta un comando. Por ejemplo, cuando se escribe `id`, el sistema localiza y ejecuta el binario correspondiente, que normalmente se encuentra en `/usr/bin/id`. Si la variable PATH está mal configurada (por ejemplo, incluye directorios inseguros o controlables por el usuario), puede ser aprovechada para ejecutar binarios maliciosos y escalar privilegios.
+
+Ejemplo:
+
+```bash
+┌─[user@user]─[/]
+└──╼ echo $PATH
+/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+```
+
+En este caso, el sistema buscará los comandos en los directorios listados y los ejecutará en ese orden. Si un directorio inseguro aparece antes que los directorios estándar, podría ejecutarse un archivo malicioso con el mismo nombre que un comando legítimo.
+
+
+## Variables de entorno
+
+También podemos consultar todas las variables de entorno configuradas para nuestro usuario actual, podemos encontrar por ejemplo una contraseña.
+
+```bash
+┌─[user@user]─[/]
+└──╼ env
+SHELL=/bin/sh
+MB_DB_PASS=
+HOSTNAME=35c2683c50d0
+LANGUAGE=en_US:en
+MB_JETTY_HOST=0.0.0.0
+JAVA_HOME=/opt/java/openjdk
+MB_DB_FILE=//metabase.db/metabase.db
+PWD=/
+LOGNAME=metabase
+MB_EMAIL_SMTP_USERNAME=
+HOME=/home/metabase
+LANG=en_US.UTF-8
+META_USER=metalytics
+META_PASS=An4lytics_ds20223#
+MB_EMAIL_SMTP_PASSWORD=
+USER=metabase
+SHLVL=2
+MB_DB_USER=
+FC_LANG=en-US
+LD_LIBRARY_PATH=/opt/java/openjdk/lib/server:/opt/java/openjdk/lib:/opt/java/openjdk/../lib
+LC_CTYPE=en_US.UTF-8
+MB_LDAP_BIND_DN=
+LC_ALL=en_US.UTF-8
+MB_LDAP_PASSWORD=
+PATH=/opt/java/openjdk/bin:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+MB_DB_CONNECTION_URI=
+JAVA_VERSION=jdk-11.0.19+7
+_=/usr/bin/env
+```
+
+En este caso se detectó la credencial ```An4lytics_ds20223#```.
+
+## Detección de unidades y recursos compartidos.
+
+Para obtener información sobre otros dispositivos del sistema como discos duros, unidades USB, etc, podemos usar la herramienta ```lsblk```. Si descubrimos algo es posible que podramos montar alguna de las unidades disponibles.
+
+```bash
+┌─[user@user]─[/]
+└──╼ lsblk
+NAME                      MAJ:MIN RM  SIZE RO TYPE MOUNTPOINT
+loop0                       7:0    0   55M  1 loop /snap/core18/1705
+loop1                       7:1    0   69M  1 loop /snap/lxd/14804
+loop2                       7:2    0   47M  1 loop /snap/snapd/16292
+loop3                       7:3    0  103M  1 loop /snap/lxd/23339
+loop4                       7:4    0   62M  1 loop /snap/core20/1587
+loop5                       7:5    0 55.6M  1 loop /snap/core18/2538
+sda                         8:0    0   20G  0 disk 
+├─sda1                      8:1    0    1M  0 part 
+├─sda2                      8:2    0    1G  0 part /boot
+└─sda3                      8:3    0   19G  0 part 
+  └─ubuntu--vg-ubuntu--lv 253:0    0   18G  0 lvm  /
+sr0                        11:0    1  908M  0 rom                                                                                  
+```
+
+Podemos detectar credenciales para unidades montadas de la siguiente forma:
+
+```bash
+┌─[user@user]─[/]
+└──╼ cat /etc/fstab                                                                           
+```
+
+## Información de trabajos de impresiones
+
+Es posible encontrar información de impresoras conectadas al sistema y detectar trabajos de impresiones activas o en cola para obtener algún tipo de información confidencial.
+
+```bash
+┌─[user@user]─[/]
+└──╼ lpstat                                                                             
+```
+
+## Posibles hashes en /etc/passwd
+
+Ocasionalmente, veremos hashes de contraseñas directamente en el /etc/passwd archivo. Este archivo es legible por todos los usuarios y, al igual que con los hashes en el /etc/shadow archivo, estos pueden estar sujetos a un ataque de descifrado de contraseñas, a veces este fallo se puede dar en dispositivos y enrutadores integrados.
+
+```bash
+┌─[user@user]─[/]
+└──╼ cat /etc/passwd                                                                             
+```
+
+## Grupos
+
+Cada usuario en los sistemas Linux está asignado a un grupo o grupos específicos y, por lo tanto, recibe privilegios especiales.
+
+```bash
+┌─[user@user]─[/]
+└──╼ cat /etc/group                                                                             
+```
+
+El archivo enumera todos los grupos del sistema. Luego podemos usar la herramienta ```getent``` para enumerar miembros de cualquier grupo interesante.
+
+```bash
+┌─[user@user]─[/]
+└──╼ getent group sudo                                                                             
+```
+
+## Detección de archivos ocultos
+
+Muchas carpetas y archivos se mantienen ocultos en un sistema Linux para que no sean obvios y se evita la edición accidental.
+
+```bash
+┌─[user@user]─[/]
+└──╼ find / -type f -name ".*" -exec ls -l {} \; 2>/dev/null | grep htb-student
+
+-rw-r--r-- 1 htb-student htb-student 3771 Nov 27 11:16 /home/htb-student/.bashrc
+-rw-rw-r-- 1 htb-student htb-student 180 Nov 27 11:36 /home/htb-student/.wget-hsts
+-rw------- 1 htb-student htb-student 387 Nov 27 14:02 /home/htb-student/.bash_history
+-rw-r--r-- 1 htb-student htb-student 807 Nov 27 11:16 /home/htb-student/.profile
+-rw-r--r-- 1 htb-student htb-student 0 Nov 27 11:31 /home/htb-student/.sudo_as_admin_successful
+-rw-r--r-- 1 htb-student htb-student 220 Nov 27 11:16 /home/htb-student/.bash_logout
+-rw-rw-r-- 1 htb-student htb-student 162 Nov 28 13:26 /home/htb-student/.notes                                                                             
+```
+
+También es posible enumerar los directorios ocultos.
+
+```bash
+┌─[user@user]─[/]
+└──╼ find / -type d -name ".*" -ls 2>/dev/null                                                                          
+```
+
+## Puertos abiertos en la máquina
+
+```bash
+┌─[user@user]─[/]
+└──╼ ss -lnpt
+State     Recv-Q    Send-Q       Local Address:Port        Peer Address:Port    Process                                                                         
+LISTEN    0         128                0.0.0.0:23               0.0.0.0:*        users:(("python3",pid=829,fd=3))                                               
+LISTEN    0         4096             127.0.0.1:631              0.0.0.0:*                                                                                       
+LISTEN    0         4096                 [::1]:631                 [::]:*                                                                                       
+```
+
+En este caso hay una página web en la máquina la cual podremos visualizar por medio de [chisel](https://github.com/jpillora/chisel).
+
 ## Sudo
 
 Una manera de escalar privilegios es a través del siguiente comando:
@@ -104,16 +298,6 @@ En las competencias Capture The Flag (CTF) de seguridad informática, el tiempo 
 ```
 
 Una vez encontrado, con el comando ```cat``` y la ubicación del archivo root.txt, podremos visualizarlo.
-
-## Información del sistema
-
-```bash
-┌─[user@user]─[/]
-└──╼ uname -a
-Linux 3.2.0-23-generic #36-Ubuntu SMP Tue Apr 10 20:39:51 UTC 2012 x86_64 x86_64 x86_64 GNU/Linux
-```
-Y a través de esto, podemos encontrar vulnerabilidades para escalar privilegios en el sistema.
-
 
 ## SUID
 
@@ -239,18 +423,6 @@ Contraseña: root
 └──╼ whoami
 root
 ```
-
-## Puertos abiertos en la máquina
-
-```bash
-┌─[user@user]─[/]
-└──╼ ss -lnpt
-State     Recv-Q    Send-Q       Local Address:Port        Peer Address:Port    Process                                                                         
-LISTEN    0         128                0.0.0.0:23               0.0.0.0:*        users:(("python3",pid=829,fd=3))                                               
-LISTEN    0         4096             127.0.0.1:631              0.0.0.0:*                                                                                       
-LISTEN    0         4096                 [::1]:631                 [::]:*                                                                                       
-```
-En este caso hay una página web en la máquina la cual podremos visualizar por medio de [chisel](https://github.com/jpillora/chisel).
 
 ## Binarios
 
