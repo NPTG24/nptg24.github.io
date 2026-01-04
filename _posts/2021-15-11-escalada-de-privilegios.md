@@ -371,7 +371,6 @@ Network Card(s):           1 NIC(s) Installed.
                                  [01]: 10.10.10.11
 ```
 
-![1](http://imgfz.com/i/rFQc3RH.png)
 
 ## Windows-Exploit-Suggester
 
