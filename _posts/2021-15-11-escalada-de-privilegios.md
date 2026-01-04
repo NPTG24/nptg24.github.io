@@ -120,6 +120,15 @@ _=/usr/bin/env
 
 En este caso se detectó la credencial ```An4lytics_ds20223#```.
 
+## Historial de bash
+
+El comando ```history``` en un shell de Linux como Bash (Bourne-Again SHell) muestra un historial de los comandos que has ejecutado previamente. Este historial se almacena en un archivo en tu directorio de inicio, generalmente denominado ```.bash_history```. En ocasiones es posible visualizar contraseñas o información sensible que nos permita escalar privilegios.
+
+```bash
+┌─[user@user]─[/]
+└──╼ history                                                                            
+```
+
 ## Detección de unidades y recursos compartidos.
 
 Para obtener información sobre otros dispositivos del sistema como discos duros, unidades USB, etc, podemos usar la herramienta ```lsblk```. Si descubrimos algo es posible que podramos montar alguna de las unidades disponibles.
@@ -164,7 +173,29 @@ Ocasionalmente, veremos hashes de contraseñas directamente en el /etc/passwd ar
 
 ```bash
 ┌─[user@user]─[/]
-└──╼ cat /etc/passwd                                                                             
+└──╼ cat /etc/passwd
+root:x:0:0:root:/root:/bin/bash
+daemon:x:1:1:daemon:/usr/sbin:/usr/sbin/nologin
+bin:x:2:2:bin:/bin:/usr/sbin/nologin
+sys:x:3:3:sys:/dev:/usr/sbin/nologin
+sync:x:4:65534:sync:/bin:/bin/sync
+games:x:5:60:games:/usr/games:/usr/sbin/nologin
+man:x:6:12:man:/var/cache/man:/usr/sbin/nologin
+lp:x:7:7:lp:/var/spool/lpd:/usr/sbin/nologin
+mail:x:8:8:mail:/var/mail:/usr/sbin/nologin
+news:x:9:9:news:/var/spool/news:/usr/sbin/nologin
+<...SNIP...>
+dnsmasq:x:109:65534:dnsmasq,,,:/var/lib/misc:/bin/false
+sshd:x:110:65534::/var/run/sshd:/usr/sbin/nologin
+mrb3n:x:1000:1000:mrb3n,,,:/home/mrb3n:/bin/bash
+colord:x:111:118:colord colour management daemon,,,:/var/lib/colord:/bin/false
+backupsvc:x:1001:1001::/home/backupsvc:
+bob.jones:x:1002:1002::/home/bob.jones:
+cliff.moore:x:1003:1003::/home/cliff.moore:
+logger:x:1004:1004::/home/logger:
+shared:x:1005:1005::/home/shared:
+stacey.jenkins:x:1006:1006::/home/stacey.jenkins:
+sysadm:$6$vdH7vuQIv6anIBWg$Ysk.UZzI7WxYUBYt8WRIWF0EzWlksOElDE0HLYinee38QI1A.0HW7WZCrUhZ9wwDz13bPpkTjNuRoUGYhwFE11:1007:1007::/home/sysadm                                                                             
 ```
 
 ## Grupos
@@ -205,6 +236,22 @@ También es posible enumerar los directorios ocultos.
 ```bash
 ┌─[user@user]─[/]
 └──╼ find / -type d -name ".*" -ls 2>/dev/null                                                                          
+```
+
+## Detección de archivos escribibles
+
+Validar si existe algún archivo ejecutado por root que sea modificable por un usuario con privilegios menores.
+
+```bash
+┌─[user@user]─[/]
+└──╼ find / -path /proc -prune -o -type f -perm -o+w 2>/dev/null                                                                      
+```
+
+Para el caso de directorio sería de la siguiente forma:
+
+```bash
+┌─[user@user]─[/]
+└──╼ find / -path /proc -prune -o -type d -perm -o+w 2>/dev/null                                                                     
 ```
 
 ## Puertos abiertos en la máquina
@@ -486,11 +533,6 @@ user@linux:~/myapi/config$ mysql -udeveloper -p
 mysql -u developer -p
 Enter password: #J!:F9Zt2u
 ```
-
-## Historial
-
-El comando ```history``` en un shell de Linux como Bash (Bourne-Again SHell) muestra un historial de los comandos que has ejecutado previamente. Este historial se almacena en un archivo en tu directorio de inicio, generalmente denominado ```.bash_history```. En ocasiones es posible visualizar contraseñas o información sensible que nos permita escalar privilegios.
-
 
 # Windows
 
