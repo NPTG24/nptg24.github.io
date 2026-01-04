@@ -23,14 +23,14 @@ El usuario root en Linux es el usuario que posee mayor nivel de privilegios. De 
 
 De este modo, cuando tu, o cualquier programa, quiera llevar a cabo una acción que requiera permisos de superusuario, de alguna manera se les tendrá que conceder o denegar estos privilegios. Pero la pregunta es si soy un usuario común, ¿puedo ser root, sin necesidad de contraseña?. La respuesta es que si con ciertos pasos que veremos a continuación aprovechando las vulnerabilidades que dejan los usuarios administradores.
 
-# Linux
+## Linux
 
 Es importante destacar que existen herramientas que permiten identificar posibles vectores de escalada de privilegios. Algunos ejemplos de estos casos son:
 
 * [LinEnum](https://github.com/rebootuser/LinEnum).
 * [LinPEAS](https://github.com/peass-ng/PEASS-ng/tree/master/linPEAS).
 
-## Información del sistema
+### Información del sistema
 
 Conocer la distribución (Ubuntu, Debian, FreeBSD, Fedora, SUSE, Red Hat, CentOS, etc.) te dará una idea de los tipos de herramientas que pueden estar disponibles. Esto también identificaría la versión del sistema operativo, para la cual puede haber exploits públicos disponibles.
 
@@ -39,7 +39,7 @@ Conocer la distribución (Ubuntu, Debian, FreeBSD, Fedora, SUSE, Red Hat, CentOS
 └──╼ cat /etc/os-release
 ```
 
-## Información del kernel
+### Información del kernel
 
 Al igual que con la versión del sistema operativo, puede haber exploits públicos que apunten a una vulnerabilidad en una versión específica del kernel. Los exploits del kernel pueden provocar inestabilidad del sistema o incluso un bloqueo total. Tenga cuidado al ejecutarlos en cualquier sistema de producción y asegúrese de comprender completamente el exploit y las posibles ramificaciones antes de ejecutar uno.
 
@@ -49,14 +49,14 @@ Al igual que con la versión del sistema operativo, puede haber exploits públic
 Linux 3.2.0-23-generic #36-Ubuntu SMP Tue Apr 10 20:39:51 UTC 2012 x86_64 x86_64 x86_64 GNU/Linux
 ```
 
-## Información adicional sobre el host
+### Información adicional sobre el host
 
 ```bash
 ┌─[user@user]─[/]
 └──╼ lscpu
 ```
 
-## Usuarios con carpeta en el directorio home
+### Usuarios con carpeta en el directorio home
 
 Es necesario enumerar cada uno de estos directorios para ver si alguno de los usuarios del sistema está almacenando datos confidenciales o archivos que contengan contraseñas. También para tener claro usuarios potenciales para algún movimiento lateral. También es importante verificar las claves SSH de todos los usuarios, ya que podrían usarse para lograr persistencia en el sistema, potencialmente para escalar privilegios o para ayudar con el pivoteo y el reenvío de puertos a la máquina atacante.
 
@@ -65,7 +65,7 @@ Es necesario enumerar cada uno de estos directorios para ver si alguno de los us
 └──╼ ls -al /home
 ```
 
-## PATH
+### PATH
 
 A continuación, es útil revisar la variable PATH del usuario actual, ya que define los directorios donde el sistema busca los ejecutables cada vez que se ejecuta un comando. Por ejemplo, cuando se escribe `id`, el sistema localiza y ejecuta el binario correspondiente, que normalmente se encuentra en `/usr/bin/id`. Si la variable PATH está mal configurada (por ejemplo, incluye directorios inseguros o controlables por el usuario), puede ser aprovechada para ejecutar binarios maliciosos y escalar privilegios.
 
@@ -80,7 +80,7 @@ Ejemplo:
 En este caso, el sistema buscará los comandos en los directorios listados y los ejecutará en ese orden. Si un directorio inseguro aparece antes que los directorios estándar, podría ejecutarse un archivo malicioso con el mismo nombre que un comando legítimo.
 
 
-## Variables de entorno
+### Variables de entorno
 
 También podemos consultar todas las variables de entorno configuradas para nuestro usuario actual, podemos encontrar por ejemplo una contraseña.
 
@@ -119,7 +119,7 @@ _=/usr/bin/env
 
 En este caso se detectó la credencial ```An4lytics_ds20223#```.
 
-## Historial de bash
+### Historial de bash
 
 El comando ```history``` en un shell de Linux como Bash (Bourne-Again SHell) muestra un historial de los comandos que has ejecutado previamente. Este historial se almacena en un archivo en tu directorio de inicio, generalmente denominado ```.bash_history```. En ocasiones es posible visualizar contraseñas o información sensible que nos permita escalar privilegios.
 
@@ -128,7 +128,7 @@ El comando ```history``` en un shell de Linux como Bash (Bourne-Again SHell) mue
 └──╼ history                                                                            
 ```
 
-## Detección de unidades y recursos compartidos.
+### Detección de unidades y recursos compartidos.
 
 Para obtener información sobre otros dispositivos del sistema como discos duros, unidades USB, etc, podemos usar la herramienta ```lsblk```. Si descubrimos algo es posible que podramos montar alguna de las unidades disponibles.
 
@@ -157,7 +157,7 @@ Podemos detectar credenciales para unidades montadas de la siguiente forma:
 └──╼ cat /etc/fstab                                                                           
 ```
 
-## Información de trabajos de impresiones
+### Información de trabajos de impresiones
 
 Es posible encontrar información de impresoras conectadas al sistema y detectar trabajos de impresiones activas o en cola para obtener algún tipo de información confidencial.
 
@@ -166,7 +166,7 @@ Es posible encontrar información de impresoras conectadas al sistema y detectar
 └──╼ lpstat                                                                             
 ```
 
-## Posibles hashes en /etc/passwd
+### Posibles hashes en /etc/passwd
 
 Ocasionalmente, veremos hashes de contraseñas directamente en el /etc/passwd archivo. Este archivo es legible por todos los usuarios y, al igual que con los hashes en el /etc/shadow archivo, estos pueden estar sujetos a un ataque de descifrado de contraseñas, a veces este fallo se puede dar en dispositivos y enrutadores integrados.
 
@@ -197,7 +197,7 @@ stacey.jenkins:x:1006:1006::/home/stacey.jenkins:
 sysadm:$6$vdH7vuQIv6anIBWg$Ysk.UZzI7WxYUBYt8WRIWF0EzWlksOElDE0HLYinee38QI1A.0HW7WZCrUhZ9wwDz13bPpkTjNuRoUGYhwFE11:1007:1007::/home/sysadm                                                                             
 ```
 
-## Grupos
+### Grupos
 
 Cada usuario en los sistemas Linux está asignado a un grupo o grupos específicos y, por lo tanto, recibe privilegios especiales.
 
@@ -213,7 +213,7 @@ El archivo enumera todos los grupos del sistema. Luego podemos usar la herramien
 └──╼ getent group sudo                                                                             
 ```
 
-## Detección de archivos ocultos
+### Detección de archivos ocultos
 
 Muchas carpetas y archivos se mantienen ocultos en un sistema Linux para que no sean obvios y se evita la edición accidental.
 
@@ -237,7 +237,7 @@ También es posible enumerar los directorios ocultos.
 └──╼ find / -type d -name ".*" -ls 2>/dev/null                                                                          
 ```
 
-## Detección de archivos escribibles
+### Detección de archivos escribibles
 
 Validar si existe algún archivo ejecutado por root que sea modificable por un usuario con privilegios menores.
 
@@ -253,7 +253,7 @@ Para el caso de directorio sería de la siguiente forma:
 └──╼ find / -path /proc -prune -o -type d -perm -o+w 2>/dev/null                                                                     
 ```
 
-## Puertos abiertos en la máquina
+### Puertos abiertos en la máquina
 
 ```bash
 ┌─[user@user]─[/]
@@ -266,7 +266,7 @@ LISTEN    0         4096                 [::1]:631                 [::]:*
 
 En este caso hay una página web en la máquina la cual podremos visualizar por medio de [chisel](https://github.com/jpillora/chisel).
 
-## Sudo
+### Sudo
 
 Una manera de escalar privilegios es a través del siguiente comando:
 
@@ -276,7 +276,7 @@ Una manera de escalar privilegios es a través del siguiente comando:
 ```
 y ahí aparecerá un binario en el cuál podremos obtener acceso root siguiendo los pasos que nos indican en [GTFOBins](https://gtfobins.github.io/) en algunos casos.
 
-### Ejemplo
+#### Ejemplo
 
 ```bash
 ┌─[user@user]─[/]
@@ -345,7 +345,7 @@ En las competencias Capture The Flag (CTF) de seguridad informática, el tiempo 
 
 Una vez encontrado, con el comando ```cat``` y la ubicación del archivo root.txt, podremos visualizarlo.
 
-## SUID
+### SUID
 
 Otra manera es buscando en /usr/bin, algún binario que contenga un permiso cuyo carácter sea ```s``` en lugar de ```x```.
 
@@ -383,7 +383,7 @@ Ahora también podemos buscar todos los binarios SUID a través de ```find```, c
 /bin/umount
 ```
 
-### Ejemplo
+#### Ejemplo
 
 Una vez detectamos algunos binarios que nos sirva (en este caso ```/usr/bin/passwd```), procedemos a elevar privilegios, a través de openssl:
 
@@ -470,7 +470,7 @@ Contraseña: root
 root
 ```
 
-## Binarios
+### Binarios
 
 Otra forma de hacerlo es chequear que binarios contienen permisos de ejecución para un usuario:
 
@@ -495,7 +495,7 @@ Aquí podríamos escalar privilegios a través de ```Python```, siguiendo los pa
 root
 ```
 
-## Contraseñas en la configuración web
+### Contraseñas en la configuración web
 
 Se pueden encontrar credenciales válidas a través del directorio de la configuración de un servidor web:
 
@@ -533,9 +533,9 @@ mysql -u developer -p
 Enter password: #J!:F9Zt2u
 ```
 
-# Windows
+## Windows
 
-## Información del sistema
+### Información del sistema
 
 En el caso de Windows se podría realizar a través de ```systeminfo```, para así poder averiguar vulnerabilidades del sistema:
 
@@ -585,7 +585,7 @@ Network Card(s):           1 NIC(s) Installed.
 ```
 
 
-## Windows-Exploit-Suggester
+### Windows-Exploit-Suggester
 
 Otra forma es por medio de [windows-exploit-suggester.py](https://github.com/AonCyberLabs/Windows-Exploit-Suggester/), el cual funciona extrayendo la información del sistema. Por ejemplo en este caso lo realizamos en ```systeminfo.txt```, para luego continuar con los siguientes pasos:
 
@@ -783,7 +783,7 @@ Hyper-V Requirements:      A hypervisor has been detected. Features required for
 [*] done
 ```
 
-### Nota
+#### Nota
 
 Para poder ocupar ```windows-exploit-suggester.py```, es necesario instalar lo siguiente en python2:
 
@@ -823,7 +823,7 @@ Successfully installed xlrd-1.1.0
 ```
 Una vez realizado esto, deberías poder ocuparlo sin problemas.
 
-## Permisos de usuario
+### Permisos de usuario
 
 Se pueden ver que privilegios tiene el usuario a través del siguiente comando:
 
@@ -831,7 +831,7 @@ Se pueden ver que privilegios tiene el usuario a través del siguiente comando:
 C:\> whoami /priv
 ```
 
-## Local Group
+### Local Group
 
 A través de ver en que grupo se encuentra el usuario se pueden encontrar vías potenciales para escalar privilegios:
 
@@ -885,7 +885,7 @@ C:\> net user Test /add
 C:\> net user Test * /add
 ```
 
-## Añadir una cuenta al grupo de Administradores
+### Añadir una cuenta al grupo de Administradores
 
 El siguiente caso tiene como objetivo añadir un usuario local al grupo "Administrators" en una máquina con Windows.
 
