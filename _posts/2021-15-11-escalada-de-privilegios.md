@@ -6,16 +6,15 @@ title: Escalar privilegios
 subtitle: 'para obtener acceso a root o a NT authority system'
 description: >-
 image: >-
-  http://imgfz.com/i/pLYBOku.png
+  /images/privlogo.png
 optimized_image: >-
-  http://imgfz.com/i/pLYBOku.png
+  /images/privlogo.png
 category: ciberseguridad
 tags:
-  - escalada
-  - privilegios
-  - root
-  - NTauthoritysystem
+  - linux
+  - windows
   - hacking
+  - post-explotacion
 author: Felipe Canales Cayuqueo
 paginate: true
 ---
