@@ -335,12 +335,12 @@ En las competencias Capture The Flag (CTF) de seguridad informática, el tiempo 
 
 ```bash
 ┌─[user@user]─[/]
-└──╼ sudo find / -name "root.txt"
+└──╼ find / -name "root.txt"
 ```
 
 ```bash
 ┌─[user@user]─[/]
-└──╼ sudo find . -name "root.txt"
+└──╼ find . -name "root.txt"
 ```
 
 Una vez encontrado, con el comando ```cat``` y la ubicación del archivo root.txt, podremos visualizarlo.
@@ -533,6 +533,12 @@ mysql -u developer -p
 Enter password: #J!:F9Zt2u
 ```
 
+Otra forma de buscar contraseñas es a través del siguiente comando:
+
+```bash
+user@linux:~/myapi/config$ grep -RIl -i "password" . 2>/dev/null
+```
+
 ### Otros archivos de configuración
 
 En sistemas Linux, es habitual que muchos archivos de configuración sean legibles para usuarios sin privilegios, siempre que el administrador no haya aplicado restricciones adicionales. Estos archivos suelen ser especialmente valiosos, ya que describen cómo están configurados los servicios, lo que permite comprender su funcionamiento interno y detectar posibles formas de aprovechamiento. Además, no es raro que contengan información sensible, como claves, credenciales, rutas internas o referencias a archivos ubicados en directorios a los que el usuario no tiene acceso directo.
@@ -540,6 +546,13 @@ En sistemas Linux, es habitual que muchos archivos de configuración sean legibl
 ```bash
 ┌─[user@user]─[/]
 └──╼ find / -type f \( -name *.conf -o -name *.config \) -exec ls -l {} \; 2>/dev/null
+```
+
+También se podría realzar la siguiente búsqueda que tiene una función similar al anterior comando:
+
+```bash
+┌─[user@user]─[/]
+└──╼ find / ! -path "*/proc/*" -iname "*config*" -type f 2>/dev/null
 ```
 
 También es importante considerar los scripts .sh, ya que en algunos casos pueden contener configuraciones sensibles, incluyendo credenciales o información crítica.
