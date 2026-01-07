@@ -500,7 +500,7 @@ root
 Se pueden encontrar credenciales válidas a través del directorio de la configuración de un servidor web:
 
 ```bash
-user@linux:~/myapi/config$ grep -r -i password
+user@linux:~/myapi/config$ grep -r -i password 2>/dev/null
 grep -r -i password
 environments/production/database.json:        "password": "${process.env.DATABASE_PASSWORD || ''}",
 environments/development/database.json:        "password": "#J!:F9Zt2u"
@@ -533,7 +533,7 @@ mysql -u developer -p
 Enter password: #J!:F9Zt2u
 ```
 
-Otra forma de buscar contraseñas es a través del siguiente comando:
+Otra forma de buscar contraseñas es a través del siguiente comando (no muestra el contenido del archivo, solo el nombre del archivo que contiene la palabra "password"):
 
 ```bash
 user@linux:~/myapi/config$ grep -RIl -i "password" . 2>/dev/null
