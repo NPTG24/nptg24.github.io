@@ -87,6 +87,8 @@ Ejemplo:
 .:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
+> Para hacerlo con un directorio sería de la siguiente forma: PATH=/tmp:$PATH
+
 En este caso, el sistema buscará los comandos en los directorios listados y los ejecutará en ese orden. Si un directorio inseguro aparece antes que los directorios estándar, podría ejecutarse un archivo malicioso con el mismo nombre que un comando legítimo.
 
 
