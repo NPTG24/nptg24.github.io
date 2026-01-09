@@ -72,9 +72,19 @@ A continuación, es útil revisar la variable PATH del usuario actual, ya que de
 Ejemplo:
 
 ```bash
-┌─[user@user]─[/]
+┌─[user@user]─[/home/user]
 └──╼ echo $PATH
 /usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
+
+┌─[user@user]─[/home/user]
+└──╼ PATH=.:${PATH}
+
+┌─[user@user]─[/home/user]
+└──╼ export PATH
+
+┌─[user@user]─[/home/user]
+└──╼ echo $PATH
+.:/usr/local/sbin:/usr/local/bin:/usr/sbin:/usr/bin:/sbin:/bin
 ```
 
 En este caso, el sistema buscará los comandos en los directorios listados y los ejecutará en ese orden. Si un directorio inseguro aparece antes que los directorios estándar, podría ejecutarse un archivo malicioso con el mismo nombre que un comando legítimo.
