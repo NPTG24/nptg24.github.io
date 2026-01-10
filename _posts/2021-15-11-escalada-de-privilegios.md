@@ -737,9 +737,9 @@ user@user:/var/www/html$ ls -al
 total 16
 drwxrwxrwx  4 root   user 4096 Aug 15 07:47 .
 drwxr-xr-x  3 root   root   4096 Apr  2  2024 ..
--rw-rw-r--  1 user user    0 Aug 15 07:47 @id_rsa
+-rw-rw-r--  1 user   user    0 Aug 15 07:47 @id_rsa
 drwxrwxr-x 13 test   test   4096 Apr  2  2024 project_admin
-lrwxrwxrwx  1 user user   14 Aug 15 07:25 root.txt -> /root/root.txt
+lrwxrwxrwx  1 user   user   14 Aug 15 07:25 root.txt -> /root/root.txt
 drwxrwxr-x 12 test   test   4096 Apr  2  2024 usage_blog
 ```
 
@@ -751,9 +751,9 @@ user@user:/var/www/html$ ls -al
 total 16
 drwxrwxrwx  4 root   user 4096 Aug 15 07:48 .
 drwxr-xr-x  3 root   root   4096 Apr  2  2024 ..
-lrwxrwxrwx  1 user user   17 Aug 15 07:48 id_rsa -> /root/.ssh/id_rsa
+lrwxrwxrwx  1 user   user   17 Aug 15 07:48 id_rsa -> /root/.ssh/id_rsa
 drwxrwxr-x 13 test   test   4096 Apr  2  2024 project_admin
-lrwxrwxrwx  1 user user   14 Aug 15 07:25 root.txt -> /root/root.txt
+lrwxrwxrwx  1 user   user   14 Aug 15 07:25 root.txt -> /root/root.txt
 drwxrwxr-x 12 test   test   4096 Apr  2  2024 usage_blog
 ```
 
