@@ -409,7 +409,7 @@ Asimismo, es importante revisar los permisos Set-Group-ID (setgid), ya que, al i
 └──╼ find / -user root -perm -6000 -exec ls -ldb {} \; 2>/dev/null
 ```
 
-En el caso en que find no se encuentra disponible se puede aplicar el siguiente comando para encontrar los binarios vulnerables:
+En el caso de que ```find``` no se encuentra disponible se puede aplicar el siguiente comando para encontrar los binarios vulnerables:
 
 ```
 ┌─[user@user]─[/]
