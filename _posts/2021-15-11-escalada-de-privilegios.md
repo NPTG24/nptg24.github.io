@@ -418,7 +418,7 @@ En el caso de que ```find``` no se encuentra disponible se puede aplicar el sigu
 > $1 ~ /^-..s/ {print dir "/" $NF "  ->  " $0}
 ```
 
-Como recomendación muchas formas de explotación se encuentran disponibles en [GTFOBins](https://gtfobins.github.io/).
+> Como recomendación muchas formas de explotación se encuentran disponibles en [GTFOBins](https://gtfobins.github.io/).
 
 A continuación se presentan distintas formas de uso:
 
